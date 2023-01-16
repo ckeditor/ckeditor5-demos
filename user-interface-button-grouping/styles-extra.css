@@ -1,0 +1,24 @@
+/*
+ * Font and background color feature config
+ *
+ * - Tighter grid for big palette.
+ * - Zoom color or hover/focus.
+ */
+
+.ck.ck-color-ui-dropdown {
+	--ck-color-grid-tile-size: 20px;
+}
+
+.ck.ck-color-ui-dropdown .ck-color-grid {
+	grid-gap: 1px;
+}
+
+.ck.ck-color-ui-dropdown .ck-color-grid .ck-button {
+	border-radius: 0;
+}
+
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:hover:not(.ck-disabled),
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:focus:not(.ck-disabled) {
+	z-index: 1;
+	transform: scale(1.3);
+}

@@ -1,0 +1,112 @@
+/* Demo-specific styles. */
+
+.ck-content {
+	padding: 0;
+	font-family: "Times New Roman", Time, serif;
+}
+
+.ck.ck-content:not(.ck-style-panel *) {
+	min-height: 1px;
+	padding: 2cm 2.4cm;
+}
+
+
+#cke5-user-interface-document-demo {
+	position: relative;
+	border: 1px solid var(--ck-color-base-border);
+	border-radius: var(--ck-border-radius);
+
+	/* Set vertical boundaries for the document editor. */
+	max-height: 80vh;
+
+	/* This element is a flex container for easier rendering. */
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+#cke5-user-interface-document-demo-toolbar-container {
+	/* Make sure the toolbar container is always above the editable. */
+	z-index: 2;
+
+	/* Create the illusion of the toolbar floating over the editable. */
+	box-shadow: 0 2px 2px rgb(0 0 0 / 8%);
+
+	/* Use the CKEditor CSS variables to keep the UI consistent. */
+	border-bottom: 1px solid var(--ck-color-toolbar-border);
+
+	position: sticky;
+	top: var(--header-height);
+}
+
+/* Adjust the look of the toolbar inside of the container. */
+#cke5-user-interface-document-demo-toolbar-container .ck-toolbar {
+	border: 0;
+	border-radius: 0;
+}
+
+/* Make the editable container look like the inside of a native word processor app. */
+#cke5-user-interface-document-demo-content-container {
+	padding: clamp(1rem, calc(0.85rem + 0.74vw), 1.5rem);
+	background: #e3e8ed;
+
+	/* Make it possible to scroll the "page" of the edited content. */
+	overflow-y: scroll;
+}
+
+#cke5-user-interface-document-demo-content-container #cke5-user-interface-document-demo-content {
+	/* Set the dimensions of the "page". */
+	max-width: 21cm;
+	width: 100%;
+	min-height: 21cm;
+
+	/* Keep the "page" off the boundaries of the container. */
+	padding: 2cm 2.4cm;
+
+	border-color: transparent;
+	border-radius: var(--ck-border-radius);
+	background: white;
+
+	/* The "page" should cast a slight shadow (3D illusion). */
+	box-shadow: 0 0 5px rgb(0 0 0 / 7%);
+
+	/* Center the "page". */
+	margin: 0 auto;
+
+	/* Font size to "Times New Roman" */
+	font-family: "Times New Roman", Time, serif;
+}
+
+#cke5-user-interface-document-demo-content-container #cke5-user-interface-document-demo-content.ck-focused {
+	border: var(--ck-focus-ring);
+}
+
+@media screen and (max-width: 800px) {
+	#cke5-user-interface-document-demo-content-container #cke5-user-interface-document-demo-content {
+		padding: 0.5cm;
+	}
+}
+
+/*
+ * Font and background color feature config
+ *
+ * - Tighter grid for big palette.
+ * - Zoom color or hover/focus.
+ */
+
+.ck.ck-color-ui-dropdown {
+	--ck-color-grid-tile-size: 20px;
+}
+
+.ck.ck-color-ui-dropdown .ck-color-grid {
+	grid-gap: 1px;
+}
+
+.ck.ck-color-ui-dropdown .ck-color-grid .ck-button {
+	border-radius: 0;
+}
+
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:hover:not(.ck-disabled),
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:focus:not(.ck-disabled) {
+	z-index: 1;
+	transform: scale(1.3);
+}

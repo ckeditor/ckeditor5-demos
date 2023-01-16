@@ -1,0 +1,21 @@
+/* Editor UI-specific tweaks */
+
+#cke5-user-interface-bottom-toolbar-demo {
+	display: flex;
+	flex-direction: column;
+}
+
+#cke5-user-interface-bottom-toolbar-demo-content {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#cke5-user-interface-bottom-toolbar-demo-content:not(.ck-focused) {
+	border-color: var(--ck-color-base-border);
+}
+
+#cke5-user-interface-bottom-toolbar-demo-toolbar-container > .ck.ck-toolbar {
+	border-top-width: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}

@@ -1,0 +1,37 @@
+:root {
+	--ck-demo-mobile-border-size: 12px;
+	--ck-demo-mobile-bottom-border-size: 40px;
+	--ck-demo-phone-width: 443px;
+	/* width with borders! */
+	--ck-demo-phone-height: 948px;
+	/* height with borders! */
+	--ck-demo-phone-border-size: 10px;
+}
+
+/* Size of Iphone 12/12 Pro: 390 x 844 */
+.mobile-wrapper {
+	max-width: calc( var(--ck-demo-phone-width) - var(--ck-demo-mobile-border-size) - var(--ck-demo-mobile-border-size) );
+	height: calc( var(--ck-demo-phone-height) - var(--ck-demo-mobile-border-size) - var(--ck-demo-mobile-bottom-border-size) );
+	margin: auto;
+	border-color: black;
+	border-style: solid;
+	border-width: var(--ck-demo-mobile-border-size) var(--ck-demo-mobile-border-size) var(--ck-demo-mobile-bottom-border-size) var(--ck-demo-mobile-border-size);
+	border-radius: var(--ck-demo-phone-border-size);
+}
+
+.mobile-wrapper iframe {
+	border: 0;
+}
+
+@media screen and (max-width: 460px) {
+	.mobile-wrapper {
+		max-width: 100%;
+		width: 100%;
+		height: 100vh;
+	}
+
+	.mobile-wrapper iframe {
+		width: 100%;
+		height: calc(100vh - var(--ck-demo-mobile-border-size) - var(--ck-demo-mobile-bottom-border-size));
+	}
+}
