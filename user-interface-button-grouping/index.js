@@ -359,14 +359,6 @@ ClassicEditor.create( document.querySelector( '#cke5-user-interface-button-group
 		options: [ 10, 12, 14, 'default', 18, 20, 22 ],
 		supportAllValues: true
 	},
-	fontColor: {
-		columns: 12,
-		colors: REDUCED_MATERIAL_COLORS
-	},
-	fontBackgroundColor: {
-		columns: 12,
-		colors: REDUCED_MATERIAL_COLORS
-	},
 	heading: {
 		options: [
 			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
