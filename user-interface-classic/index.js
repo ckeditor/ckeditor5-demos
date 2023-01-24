@@ -17,7 +17,7 @@ import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices'
 /* You must provide a valid token URL in order to use the CKBox application.
 After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
-// import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
+import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
