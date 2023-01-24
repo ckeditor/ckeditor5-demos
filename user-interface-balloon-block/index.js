@@ -13,6 +13,10 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+/* You must provide a valid token URL in order to use the CKBox application.
+After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
@@ -41,6 +45,10 @@ BalloonEditor.create( document.querySelector( '#cke5-user-interface-balloon-bloc
 		Bold,
 		CKFinder,
 		CloudServices,
+		/* You must provide a valid token URL in order to use the CKBox application.
+		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+		// CKBox,
 		Essentials,
 		Heading,
 		Image,
@@ -69,6 +77,10 @@ BalloonEditor.create( document.querySelector( '#cke5-user-interface-balloon-bloc
 		'heading',
 		'|',
 		'uploadImage', 'insertTable', 'blockQuote', 'mediaEmbed',
+		/* You must provide a valid token URL in order to use the CKBox application.
+		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+		// 'uploadImage', 'insertTable', 'ckbox ,'blockQuote', 'mediaEmbed',
 		'|',
 		'bulletedList', 'numberedList', 'outdent', 'indent',
 	],
@@ -109,6 +121,12 @@ BalloonEditor.create( document.querySelector( '#cke5-user-interface-balloon-bloc
 			'mergeTableCells'
 		]
 	}
+	/* You must provide a valid token URL in order to use the CKBox application.
+	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+	// ckbox: {
+	// 	tokenUrl: 'https://your.token.url'
+	// } );
 } )
 	.then( editor => {
 		window.editor = editor;
