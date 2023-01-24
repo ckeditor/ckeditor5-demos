@@ -1,0 +1,53 @@
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Styles of the demo page ------------------------------------------------------ */
+.editor-wrapper {
+  max-width: 66rem;
+  margin: 0 auto 2rem auto;
+}
+
+.header-wrapper {
+  padding: 1rem 2rem;
+}
+
+/* ---- Styles specific to the headless editor demo ------------------------------------------------------ */
+.ck {
+  --ck-color-base-border: var(--color-shark-4);
+  --ck-border-radius: var(--space-3xs);
+}
+
+.ck.ck-content.ck-editor__editable_inline {
+  --ck-border-radius: var(--space-2xs);
+}
+
+.ck.ck-content.ck-editor__editable_inline:not(:focus) {
+  border-color: var(--ck-color-base-border);
+}
+
+.editor-toolbar {
+  background: var(--color-seal-1);
+  border-radius: var(--space-2xs);
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--space-3xs);
+  margin-bottom: var(--space-m);
+  padding: var(--space-xs);
+  position: sticky;
+  top: var(--header-height);
+  width: 100%;
+  border: 1px solid var(--color-shark-4);
+}
+
+.editor-toolbar .c-cta {
+  padding: revert;
+}

@@ -1,0 +1,52 @@
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Styles of the demo page ------------------------------------------------------ */
+.editor-wrapper {
+  max-width: 66rem;
+  margin: 0 auto 2rem auto;
+}
+
+.header-wrapper {
+  padding: 1rem 2rem;
+}
+
+/* ---- Inline editor demo styles ------------------------------------------------------------------- */
+#cke5-editor-types-demo-inline {
+  /*
+   * Here we unset min-height in each inline editor. By defualt it was 300px, so it looks ugly when in
+   * editor is only few lines of content like in Inline Editor so in that case we need to remove that
+   * min-height value.
+   */
+}
+#cke5-editor-types-demo-inline #inline-header,
+#cke5-editor-types-demo-inline #inline-main,
+#cke5-editor-types-demo-inline #inline-footer-first,
+#cke5-editor-types-demo-inline #inline-footer-second {
+  min-height: unset;
+}
+#cke5-editor-types-demo-inline #inline-header,
+#cke5-editor-types-demo-inline #inline-main {
+  margin-bottom: 20px;
+}
+#cke5-editor-types-demo-inline .demo-row {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+#cke5-editor-types-demo-inline .demo-row__half {
+  flex: 1 1 0;
+}
+#cke5-editor-types-demo-inline #inline-footer-first,
+#cke5-editor-types-demo-inline #inline-footer-second {
+  height: 100%;
+}

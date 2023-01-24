@@ -417,8 +417,7 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 	exportPdf: {
 		stylesheets: [
 			'EDITOR_STYLES',
-			'./styles.css',
-			'./styles-extra.css'
+			'./content.css'
 		],
 		fileName: 'export-pdf-demo.pdf',
 		appID: 'cke5-demos',
@@ -435,8 +434,7 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 	exportWord: {
 		stylesheets: [
 			'EDITOR_STYLES',
-			'./styles.css',
-			'./styles-extra.css'
+			'./content.css'
 		],
 		fileName: 'export-word-demo.docx',
 		appID: 'cke5-demos',

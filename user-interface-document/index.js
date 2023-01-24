@@ -295,7 +295,7 @@ const EMOJIS_ARRAY = [
 	{ character: '☀️', title: 'Sun' }
 ];
 
-DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-demo-content' ), {
+DecoupledEditor.create( document.querySelector( '#cke5-editor-types-demo-document-content' ), {
 	plugins: [
 		Alignment,
 		Autoformat,
@@ -437,8 +437,7 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 	exportPdf: {
 		stylesheets: [
 			'EDITOR_STYLES',
-			'./styles.css',
-			'./styles-extra.css'
+			'./content.css'
 		],
 		fileName: 'export-pdf-demo.pdf',
 		appID: 'cke5-demos',
@@ -454,7 +453,8 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 	},
 	exportWord: {
 		stylesheets: [
-			'EDITOR_STYLES'
+			'EDITOR_STYLES',
+			'./content.css'
 		],
 		fileName: 'export-word-demo.docx',
 		appID: 'cke5-demos',
@@ -477,7 +477,7 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 	.then( editor => {
 		window.editor = editor;
 
-		document.querySelector( '#cke5-user-interface-document-demo-toolbar-container' ).appendChild( editor.ui.view.toolbar.element );
+		document.querySelector( '#cke5-editor-types-demo-document-toolbar-container' ).appendChild( editor.ui.view.toolbar.element );
 	} ).catch( error => {
 		console.error( error.stack );
 	} );
