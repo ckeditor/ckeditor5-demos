@@ -6,6 +6,7 @@
 import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
@@ -34,6 +35,7 @@ const defaultConfig = {
 	plugins: [
 		Essentials,
 		UploadAdapter,
+		Alignment,
 		Autoformat,
 		Bold,
 		Italic,
@@ -102,6 +104,7 @@ const defaultConfig = {
 const headerConfig = {
 	plugins: [
 		Essentials,
+		Alignment,
 		Autoformat,
 		Bold,
 		Italic,
@@ -114,7 +117,9 @@ const headerConfig = {
 		'|',
 		'bold',
 		'italic',
-		'link'
+		'link',
+		'|',
+		'alignment'
 	],
 	heading: {
 		options: [
@@ -128,6 +133,9 @@ const headerConfig = {
 	link: {
 		addTargetToExternalLinks: true,
 		defaultProtocol: 'https://'
+	},
+	alignment: {
+		options: [ 'left', 'center', 'right' ]
 	}
 };
 
