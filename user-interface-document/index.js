@@ -20,7 +20,7 @@ import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 /* You must provide a valid token URL in order to use the CKBox application.
 After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import ExportPdf from '@ckeditor/ckeditor5-export-pdf/src/exportpdf';
@@ -309,7 +309,7 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 		CloudServices,
 		/* You must provide a valid token URL in order to use the CKBox application.
 		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 		// CKBox,
 		Essentials,
 		ExportPdf,
@@ -369,7 +369,7 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 			'link', 'uploadImage', 'insertTable', 'blockquote', 'mediaEmbed', 'pageBreak', 'specialCharacters',
 			/* You must provide a valid token URL in order to use the CKBox application.
 			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 			// 'link', 'uploadImage', 'insertTable', 'ckbox', 'blockquote', 'mediaEmbed', 'pageBreak', 'specialCharacters',
 			'|',
 			'numberedList', 'bulletedList',
@@ -487,7 +487,7 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 	}
 	/* You must provide a valid token URL in order to use the CKBox application.
 	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 	// ckbox: {
 	// 	tokenUrl: 'https://your.token.url'
 	// } );
