@@ -503,7 +503,7 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 		lang: 'auto',
 		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
 		autoStartup: false
-	}
+	},
 	/* You must provide a valid token URL in order to use the CKBox application.
 	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
