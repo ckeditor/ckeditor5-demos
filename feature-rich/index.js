@@ -314,7 +314,7 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 		AutoLink,
 		BlockQuote,
 		Bold,
-		/* You must provide a valid token URL in order to use the application.
+		/* You must provide a valid token URL in order to use the CKBox application.
 		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 		// CKBox,
@@ -685,7 +685,7 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 	},
 	/* You must provide a valid token URL in order to use the CKBox application.
 	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 	// ckbox: {
 	// 	tokenUrl: 'https://your.token.url'
 	// }
