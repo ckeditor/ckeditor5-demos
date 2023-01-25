@@ -427,7 +427,8 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 					'fontBackgroundColor',
 					'highlight',
 					'superscript',
-					'subscript', 'code',
+					'subscript',
+					'code',
 					'|',
 					'textPartLanguage',
 					'|'
