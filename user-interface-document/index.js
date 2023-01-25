@@ -357,36 +357,57 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 	toolbar: {
 		shouldNotGroupWhenFull: true,
 		items: [
-			'undo', 'redo',
+			'undo',
+			'redo',
 			'|',
-			'importWord', 'exportWord', 'exportPdf',
+			'importWord',
+			'exportWord',
+			'exportPdf',
 			'|',
-			'findAndReplace', 'selectAll', 'wproofreader',
+			'findAndReplace',
+			'selectAll',
+			'wproofreader',
 			'|',
-			'link', 'uploadImage',
+			'link',
+			'uploadImage',
 			/* You must provide a valid token URL in order to use the CKBox application.
 			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
 			// 'ckbox',
-			'insertTable', 'blockquote', 'mediaEmbed', 'pageBreak', 'specialCharacters',
+			'insertTable',
+			'blockquote',
+			'mediaEmbed',
+			'pageBreak',
+			'specialCharacters',
 			'|',
-			'numberedList', 'bulletedList',
+			'numberedList',
+			'bulletedList',
 			'|',
 			'outdent', 'indent',
 			'-',
 			'heading',
 			'|',
-			'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+			'fontfamily',
+			'fontsize',
+			'fontColor',
+			'fontBackgroundColor',
 			'|',
-			'bold', 'italic', 'underline',
+			'bold',
+			'italic',
+			'underline',
 			{
 				label: 'Basic styles',
 				icon: 'text',
-				items: [ 'strikethrough', 'superscript', 'subscript' ]
+				items: [ 'strikethrough',
+				'superscript',
+				'subscript' ]
 			},
 			'removeFormat',
 			'|',
-			'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify'
+			'alignment:left',
+			'alignment:right',
+			'alignment:center',
+			'alignment:justify'
 		]
 	},
 	heading: {

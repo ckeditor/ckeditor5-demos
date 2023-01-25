@@ -340,39 +340,73 @@ ClassicEditor.create( document.querySelector( '#cke5-source-code-demo' ), {
 		shouldNotGroupWhenFull: true,
 		items: [
 			// --- Document-wide tools ----------------------------------------------------------------------
-			'undo', 'redo', '|',
-			'sourceEditing', '|',
-			'importWord', 'exportWord', 'exportPdf', '|',
-			'findAndReplace', 'selectAll', 'wproofreader', '|',
+			'undo',
+			'redo',
+			'|',
+			'sourceEditing',
+			'|',
+			'importWord',
+			'exportWord',
+			'exportPdf',
+			'|',
+			'findAndReplace',
+			'selectAll',
+			'wproofreader',
+			'|',
 
 			// --- "Insertables" ----------------------------------------------------------------------------
-			'link', 'insertImage', 'insertTable',
+			'link',
+			'insertImage',
+			'insertTable',
 			/* You must provide a valid token URL in order to use the CKBox application.
 			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
 			// 'ckbox',
-			'blockQuote', 'mediaEmbed', 'codeBlock', 'htmlEmbed',
-			'pageBreak', 'horizontalLine',
-
+			'blockQuote',
+			'mediaEmbed',
+			'codeBlock',
+			'htmlEmbed',
+			'pageBreak',
+			'horizontalLine',
 			'-',
 
 			// --- Block-level formatting -------------------------------------------------------------------
-			'heading', 'style', '|',
+			'heading',
+			'style',
+			'|',
 
 			// --- Basic styles, font and inline formatting -------------------------------------------------------
-			'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+			'bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'superscript',
+			'subscript',
 			{
 				label: 'Basic styles',
 				icon: 'text',
-				items: [ 'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'code', '|', 'textPartLanguage', '|' ]
+				items: [ 'fontSize',
+				'fontFamily',
+				'fontColor',
+				'fontBackgroundColor',
+				'code',
+				'|',
+				'textPartLanguage',
+				'|' ]
 			}, 'removeFormat',
 			'|',
 
 			// --- Text alignment ---------------------------------------------------------------------------
-			'alignment', '|',
+			'alignment',
+			'|',
 
 			// --- Lists and indentation --------------------------------------------------------------------
-			'bulletedList', 'numberedList', 'todoList', '|', 'outdent', 'indent'
+			'bulletedList',
+			'numberedList',
+			'todoList',
+			'|',
+			'outdent',
+			'indent'
 		]
 	},
 	exportPdf: {
