@@ -9,10 +9,7 @@ import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapte
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-// You must provide a valid token URL in order to use the application.
-// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
-// import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
+import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
@@ -390,13 +387,13 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 
 			// --- "Insertables" ----------------------------------------------------------------------------
 
-			'link', 'insertImage', 'insertTable', 'blockQuote', 'mediaEmbed', 'codeBlock', 'pageBreak', 'horizontalLine', 'specialCharacters',
+			'link', 'insertImage',
+			/* You must provide a valid token URL in order to use the CKBox application.
+			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+			// 'ckbox',
+			'insertTable', 'blockQuote', 'mediaEmbed', 'codeBlock', 'pageBreak', 'horizontalLine', 'specialCharacters',
 
-			// You must provide a valid token URL in order to use the CKBox application.
-			// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-			// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
-
-			// 'link', 'insertImage', 'ckbox', 'insertTable', 'blockQuote', 'mediaEmbed', 'codeBlock', 'pageBreak', 'horizontalLine', 'specialCharacters',
 
 			'-',
 
@@ -686,12 +683,12 @@ ClassicEditor.create( document.querySelector( '#cke5-feature-rich-demo' ), {
 		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
 		autoStartup: false
 	},
-	// You must provide a valid token URL in order to use the application.
-	// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-	// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+	/* You must provide a valid token URL in order to use the CKBox application.
+	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
 	// ckbox: {
 	// 	tokenUrl: 'https://your.token.url'
-	// } );
+	// }
 } )
 	.then( editor => {
 		window.editor = editor;
