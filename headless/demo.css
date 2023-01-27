@@ -21,13 +21,22 @@ html {
 }
 
 /* ---- Styles specific to the headless editor demo ------------------------------------------------------ */
+.App {
+  --ck-demo-space-2xs: clamp(0.38rem, calc(0.34rem + 0.18vw), 0.5rem);
+  --ck-demo-space-xs: clamp(0.5rem, calc(0.43rem + 0.37vw), 0.75rem);
+  --ck-demo-space-s: clamp(0.63rem, calc(0.51rem + 0.55vw), 1rem);
+  --ck-demo-space-m: clamp(1.38rem, calc(1.19rem + 0.92vw), 2rem);
+  --ck-demo-headless-primary-color: hsl(263, 59%, 52%);
+  --ck-demo-headless-button-bg-color-on-hover: hsl(0, 0%, 93%) ;
+}
+
 .ck {
-  --ck-color-base-border: var(--color-shark-4);
-  --ck-border-radius: var(--space-3xs);
+  --ck-color-base-border: hsl(210, 22%, 91%);
+  --ck-border-radius: var(--ck-demo-space-2xs);
 }
 
 .ck.ck-content.ck-editor__editable_inline {
-  --ck-border-radius: var(--space-2xs);
+  --ck-border-radius: var(--ck-demo-space-xs);
 }
 
 .ck.ck-content.ck-editor__editable_inline:not(:focus) {
@@ -35,19 +44,41 @@ html {
 }
 
 .editor-toolbar {
-  background: var(--color-seal-1);
-  border-radius: var(--space-2xs);
-  display: flex;
-  flex-flow: row wrap;
-  gap: var(--space-3xs);
-  margin-bottom: var(--space-m);
-  padding: var(--space-xs);
   position: sticky;
   top: var(--header-height);
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--ck-demo-space-2xs);
   width: 100%;
-  border: 1px solid var(--color-shark-4);
+  margin-bottom: var(--ck-demo-space-m);
+  padding: var(--ck-demo-space-s);
+  background: white;
+  border: 1px solid var(--ck-color-base-border);
+  border-radius: var(--ck-demo-space-xs);
 }
 
-.editor-toolbar .c-cta {
-  padding: revert;
+.custom-editor-button {
+  display: inline-block;
+  background-color: transparent;
+  font-weight: 700;
+  color: var(--ck-demo-headless-primary-color);
+  border-radius: var(--ck-demo-space-2xs);
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid var(--ck-color-base-border);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.custom-editor-button--fill {
+  color: white;
+  background-color: var(--ck-demo-headless-primary-color);
+  border-color: var(--ck-demo-headless-primary-color);
+}
+.custom-editor-button--disabled {
+  opacity: 0.4;
+  color: black;
+  pointer-events: none;
+}
+.custom-editor-button:not(.custom-editor-button--disabled, .custom-editor-button--fill):hover {
+  background-color: var(--ck-demo-headless-button-bg-color-on-hover);
 }
