@@ -1,0 +1,76 @@
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Styles specific to the mobile editor demo (iframe) ------------------------------------------------------ */
+/* These are to allow rounded corners around the <iframe>. */
+body.mobile-support-iframe {
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Set minimal height for editor content to fit the whole space of smartphone placeholder */
+.ck.ck-editor .ck-content {
+  min-height: 810.5px;
+  /* This is the exact width of the <iframe> */
+}
+@media screen and (max-width: 800px) {
+  .ck.ck-editor .ck-content {
+    height: calc(100vh - 40px);
+  }
+}
+@media screen and (width: 395px) {
+  .ck.ck-editor .ck-content {
+    /* Match the radius of the frame */
+    --ck-border-radius: 0 0 38px 38px;
+  }
+}
+
+.ck.ck-editor .ck-content blockquote:not([class]),
+.ck.ck-editor .ck-content li,
+.ck.ck-editor .ck-content p {
+  max-width: 100%;
+}
+
+/* Set heading dropdown label width narrower width to fit Todo list in main toolbar */
+.ck.ck-editor .ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label {
+  width: 70px;
+}
+
+/* Set max-width for nested toolbar */
+.ck.ck-editor .ck.ck-toolbar-dropdown > .ck-dropdown__panel {
+  max-width: 90vw;
+}
+
+/* Set smaller heading sizes in editors content */
+.ck.ck-content h1 {
+  font-size: 1.6em;
+}
+
+.ck.ck-content h2 {
+  font-size: 1.45em;
+}
+
+.ck.ck-content h3 {
+  font-size: 1.3em;
+}
+
+.ck.ck-content h4 {
+  font-size: 1.22em;
+}
+
+.ck.ck-content h5 {
+  font-size: 1.06em;
+}
+
+.ck.ck-content h6 {
+  font-size: 1em;
+}

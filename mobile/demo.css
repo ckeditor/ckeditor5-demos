@@ -1,0 +1,87 @@
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Styles of the demo page ------------------------------------------------------ */
+.editor-wrapper {
+  max-width: 66rem;
+  margin: 0 auto 2rem auto;
+}
+
+.header-wrapper {
+  padding: 1rem 2rem;
+}
+
+/* ---- Styles specific to the mobile editor demo ------------------------------------------------------ */
+@media screen and (min-width: 800px) {
+  #mobile-wrapper {
+    --ck-demo-notch-height: 28px;
+    --ck-demo-notch-width: 180px;
+    --ck-demo-notch-border-radius: 15px;
+    --ck-demo-phone-border-size: 12px;
+    --ck-demo-phone-border-color: #000;
+    --ck-demo-phone-border-radius: 50px;
+    --ck-demo-phone-top-padding: calc(var(--ck-demo-notch-height) + 15px);
+    --ck-demo-phone-height: 898px;
+    --ck-demo-phone-width: 443px;
+    --ck-demo-iframe-border-radius: 40px;
+    /* Size of Iphone 12/12 Pro: 390 x 844 */
+    max-width: calc(var(--ck-demo-phone-width) - 2 * var(--ck-demo-phone-border-size));
+    height: calc(var(--ck-demo-phone-height) - 2 * var(--ck-demo-phone-border-size) + var(--ck-demo-phone-top-padding));
+    position: relative;
+    padding-top: var(--ck-demo-phone-top-padding);
+    margin: auto;
+    border: var(--ck-demo-phone-border-size) solid var(--ck-demo-phone-border-color);
+    border-radius: var(--ck-demo-phone-border-radius);
+  }
+  #mobile-wrapper::before {
+    content: "";
+    background: #000;
+    width: var(--ck-demo-notch-width);
+    height: var(--ck-demo-notch-height);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 var(--ck-demo-notch-border-radius) var(--ck-demo-notch-border-radius);
+  }
+  #mobile-wrapper::after {
+    content: "";
+    display: block;
+    background: var(--ck-demo-phone-border-color);
+    width: calc(var(--ck-demo-notch-width) + 2 * var(--ck-demo-notch-border-radius));
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: var(--ck-demo-notch-border-radius);
+    --mask: radial-gradient(
+    	var(--ck-demo-notch-border-radius) at var(--ck-demo-notch-border-radius) 100%,
+    	#0000 98%,
+    	var(--ck-demo-phone-border-color)) calc( -1 * var(--ck-demo-notch-border-radius));
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+  }
+  #mobile-wrapper iframe {
+    border-radius: 0 0 var(--ck-demo-iframe-border-radius);
+    border: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  #mobile-wrapper {
+    height: 100vh;
+  }
+  #mobile-wrapper iframe {
+    width: 100%;
+    border: 0;
+  }
+}
