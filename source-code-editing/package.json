@@ -13,6 +13,7 @@
 		"@ckeditor/ckeditor5-autoformat": ">=36.0.0",
 		"@ckeditor/ckeditor5-basic-styles": ">=36.0.0",
 		"@ckeditor/ckeditor5-block-quote": ">=36.0.0",
+		"@ckeditor/ckeditor5-ckbox": ">=36.0.0",
 		"@ckeditor/ckeditor5-ckfinder": ">=36.0.0",
 		"@ckeditor/ckeditor5-cloud-services": ">=36.0.0",
 		"@ckeditor/ckeditor5-code-block": ">=36.0.0",

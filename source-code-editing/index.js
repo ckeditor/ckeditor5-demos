@@ -15,6 +15,7 @@ import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64u
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import ExportPdf from '@ckeditor/ckeditor5-export-pdf/src/exportpdf';
 import ExportWord from '@ckeditor/ckeditor5-export-word/src/exportword';
@@ -280,6 +281,10 @@ ClassicEditor.create( document.querySelector( '#cke5-source-code-demo' ), {
 		CloudServices,
 		Code,
 		CodeBlock,
+		/* You must provide a valid token URL in order to use the CKBox application.
+		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+		// CKBox,
 		Essentials,
 		ExportPdf,
 		ExportWord,
@@ -335,35 +340,73 @@ ClassicEditor.create( document.querySelector( '#cke5-source-code-demo' ), {
 		shouldNotGroupWhenFull: true,
 		items: [
 			// --- Document-wide tools ----------------------------------------------------------------------
-			'undo', 'redo', '|',
-			'sourceEditing', '|',
-			'importWord', 'exportWord', 'exportPdf', '|',
-			'findAndReplace', 'selectAll', 'wproofreader', '|',
+			'undo',
+			'redo',
+			'|',
+			'sourceEditing',
+			'|',
+			'importWord',
+			'exportWord',
+			'exportPdf',
+			'|',
+			'findAndReplace',
+			'selectAll',
+			'wproofreader',
+			'|',
 
 			// --- "Insertables" ----------------------------------------------------------------------------
-			'link', 'insertImage', 'insertTable',
-			'blockQuote', 'mediaEmbed', 'codeBlock', 'htmlEmbed',
-			'pageBreak', 'horizontalLine',
-
+			'link',
+			'insertImage',
+			/* You must provide a valid token URL in order to use the CKBox application.
+			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
+			// 'ckbox',
+			'insertTable',
+			'blockQuote',
+			'mediaEmbed',
+			'codeBlock',
+			'htmlEmbed',
+			'pageBreak',
+			'horizontalLine',
 			'-',
 
 			// --- Block-level formatting -------------------------------------------------------------------
-			'heading', 'style', '|',
+			'heading',
+			'style',
+			'|',
 
 			// --- Basic styles, font and inline formatting -------------------------------------------------------
-			'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
+			'bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'superscript',
+			'subscript',
 			{
 				label: 'Basic styles',
 				icon: 'text',
-				items: [ 'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'code', '|', 'textPartLanguage', '|' ]
+				items: [ 'fontSize',
+				'fontFamily',
+				'fontColor',
+				'fontBackgroundColor',
+				'code',
+				'|',
+				'textPartLanguage',
+				'|' ]
 			}, 'removeFormat',
 			'|',
 
 			// --- Text alignment ---------------------------------------------------------------------------
-			'alignment', '|',
+			'alignment',
+			'|',
 
 			// --- Lists and indentation --------------------------------------------------------------------
-			'bulletedList', 'numberedList', 'todoList', '|', 'outdent', 'indent'
+			'bulletedList',
+			'numberedList',
+			'todoList',
+			'|',
+			'outdent',
+			'indent'
 		]
 	},
 	exportPdf: {
@@ -570,7 +613,13 @@ ClassicEditor.create( document.querySelector( '#cke5-source-code-demo' ), {
 		lang: 'auto',
 		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
 		autoStartup: false
-	}
+	},
+	/* You must provide a valid token URL in order to use the CKBox application.
+	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+	// ckbox: {
+	// 	tokenUrl: 'https://your.token.url'
+	// }
 } )
 	.then( editor => {
 		window.editor = editor;

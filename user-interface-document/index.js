@@ -18,6 +18,7 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import ExportPdf from '@ckeditor/ckeditor5-export-pdf/src/exportpdf';
 import ExportWord from '@ckeditor/ckeditor5-export-word/src/exportword';
@@ -303,6 +304,10 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 		Bold,
 		CKFinder,
 		CloudServices,
+		/* You must provide a valid token URL in order to use the CKBox application.
+		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+		// CKBox,
 		Essentials,
 		ExportPdf,
 		ExportWord,
@@ -352,31 +357,58 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 	toolbar: {
 		shouldNotGroupWhenFull: true,
 		items: [
-			'undo', 'redo',
+			'undo',
+			'redo',
 			'|',
-			'importWord', 'exportWord', 'exportPdf',
+			'importWord',
+			'exportWord',
+			'exportPdf',
 			'|',
-			'findAndReplace', 'selectAll', 'wproofreader',
+			'findAndReplace',
+			'selectAll',
+			'wproofreader',
 			'|',
-			'link', 'uploadImage', 'insertTable', 'blockquote', 'mediaEmbed', 'pageBreak', 'specialCharacters',
+			'link',
+			'uploadImage',
+			/* You must provide a valid token URL in order to use the CKBox application.
+			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+			// 'ckbox',
+			'insertTable',
+			'blockquote',
+			'mediaEmbed',
+			'pageBreak',
+			'specialCharacters',
 			'|',
-			'numberedList', 'bulletedList',
+			'numberedList',
+			'bulletedList',
 			'|',
-			'outdent', 'indent',
+			'outdent',
+			'indent',
 			'-',
 			'heading',
 			'|',
-			'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+			'fontfamily',
+			'fontsize',
+			'fontColor',
+			'fontBackgroundColor',
 			'|',
-			'bold', 'italic', 'underline',
+			'bold',
+			'italic',
+			'underline',
 			{
 				label: 'Basic styles',
 				icon: 'text',
-				items: [ 'strikethrough', 'superscript', 'subscript' ]
+				items: [ 'strikethrough',
+				'superscript',
+				'subscript' ]
 			},
 			'removeFormat',
 			'|',
-			'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify'
+			'alignment:left',
+			'alignment:right',
+			'alignment:center',
+			'alignment:justify'
 		]
 	},
 	heading: {
@@ -472,7 +504,13 @@ DecoupledEditor.create( document.querySelector( '#cke5-user-interface-document-d
 		lang: 'auto',
 		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
 		autoStartup: false
-	}
+	},
+	/* You must provide a valid token URL in order to use the CKBox application.
+	After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+	https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+	// ckbox: {
+	// 	tokenUrl: 'https://your.token.url'
+	// }
 } )
 	.then( editor => {
 		window.editor = editor;
