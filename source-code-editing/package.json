@@ -29,7 +29,7 @@
     "@ckeditor/ckeditor5-font": ">=36.0.0",
     "@ckeditor/ckeditor5-heading": ">=36.0.0",
     "@ckeditor/ckeditor5-horizontal-line": ">=36.0.0",
-      "@ckeditor/ckeditor5-html-embed": ">=36.0.0",
+    "@ckeditor/ckeditor5-html-embed": ">=36.0.0",
     "@ckeditor/ckeditor5-html-support": ">=36.0.0",
     "@ckeditor/ckeditor5-image": ">=36.0.0",
     "@ckeditor/ckeditor5-import-word": ">=36.0.0",
