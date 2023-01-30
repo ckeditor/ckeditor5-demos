@@ -78,7 +78,8 @@ html {
 }
 @media screen and (max-width: 800px) {
   #mobile-wrapper {
-    height: 100vh;
+    --ck-demo-iframe-height: 850px;
+    height: var(--ck-demo-iframe-height);
   }
   #mobile-wrapper iframe {
     width: 100%;
