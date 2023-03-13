@@ -27,6 +27,7 @@
     "@ckeditor/ckeditor5-list": ">=36.0.0",
     "@ckeditor/ckeditor5-markdown-gfm": ">=36.0.0",
     "@ckeditor/ckeditor5-paragraph": ">=36.0.0",
+    "@ckeditor/ckeditor5-paste-from-office": ">=36.0.0",
     "@ckeditor/ckeditor5-select-all": ">=36.0.0",
     "@ckeditor/ckeditor5-source-editing": ">=36.0.0",
     "@ckeditor/ckeditor5-special-characters": ">=36.0.0",
