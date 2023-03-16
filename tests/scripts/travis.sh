@@ -18,7 +18,7 @@ for DIR in $DEMOS_PATH/* ; do
 
         if [ ! $? -eq "0" ]; then
                 echo "Building failed: $DEMO_NAME"
-                $ERROR=1
+                ERROR=1
         fi
     fi
 done
@@ -27,7 +27,7 @@ echo "Samples building completed."
 
 # Start the server
 echo "Starting up the server."
-http-server -p 9001 -d $DEMOS_PATH > /dev/null &
+http-server -p 9001 -d $DEMOS_PATH &
 
 # Check if the server is alive
 for i in $(seq 1 60); do
@@ -49,7 +49,7 @@ cd $DEMOS_PATH/tests
 
 if [ ! $? -eq "0" ]; then
         echo "Some tests failed."
-        $ERROR=1
+        ERROR=1
 fi
 
 kill $PID
