@@ -12,6 +12,6 @@ before_install:
 - npm i -g http-server
 - npm i -g yarn
 install:
-- cd ./tests && yarn install
+- cd $DEMOS_PATH/tests && yarn install
 script:
-- ./tests/scripts/travis.sh
+- $DEMOS_PATH/tests/scripts/travis.sh
