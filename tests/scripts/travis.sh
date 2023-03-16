@@ -2,7 +2,7 @@
 
 # Set error variable
 ERROR=0
- 
+
 # Prepare the environment: install dependencies and build samples
 for DIR in $DEMOS_PATH/* ; do
     if [[ -d "$DIR" && ! "$DIR" = "$DEMOS_PATH/tests" ]]; then
