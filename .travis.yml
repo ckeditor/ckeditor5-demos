@@ -7,6 +7,9 @@ services:
 node_js:
 - lts/*
 cache: false
+branches:
+  only: 
+    - master
 before_install:
 - npm i -g http-server
 - npm i -g yarn
