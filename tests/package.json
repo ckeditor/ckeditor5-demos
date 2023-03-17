@@ -4,7 +4,8 @@
   "description": "This package contains E2E tests for the ckeditor5-demos repository.",
   "main": "index.js",
   "scripts": {
-    "cy:open": "./node_modules/.bin/cypress open"
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:test-demos": "./node_modules/.bin/cypress run --spec cypress/e2e/test_demos.cy.js --headless --browser chrome"
   },
   "author": "CKSource",
   "license": "ISC",

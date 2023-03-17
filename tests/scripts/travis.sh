@@ -16,7 +16,7 @@ for DIR in $DEMOS_PATH/* ; do
         echo "Building demo: $DEMO_NAME"
         webpack --mode development > /dev/null
 
-        if [ ! $? -eq "0" ]; then
+        if [ ! $? -eq 0 ]; then
                 echo "Building failed: $DEMO_NAME"
                 ERROR=1
         fi
@@ -34,7 +34,7 @@ for i in $(seq 1 60); do
     echo "Waiting for the server..."
     curl -I http://localhost:9001 --max-time 5 > /dev/null 2>&1
 
-    if [ $? = "0" ]; then
+    if [ $? = 0 ]; then
         break
     fi
 
@@ -45,9 +45,9 @@ PID=$!
 
 # Start tests
 cd $DEMOS_PATH/tests
-./node_modules/.bin/cypress run --spec cypress/e2e/test_demos.cy.js --headless --browser chrome
+yarn run cy:test-demos
 
-if [ ! $? -eq "0" ]; then
+if [ ! $? -eq 0 ]; then
         echo "Some tests failed."
         ERROR=1
 fi
