@@ -27,7 +27,7 @@ echo "Samples building completed."
 
 # Start the server
 echo "Starting up the server."
-http-server $DEMOS_PATH -p 9001 &
+http-server $DEMOS_PATH -p 9001 -s &
 
 # Check if the server is alive
 for i in $(seq 1 60); do

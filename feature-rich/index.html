@@ -155,8 +155,20 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 		</div>
 	</div>
 
+	<div id="inline-editor"></div>
+
+
 	<script src="https://cdn.ckbox.io/CKBox/1.2.1/ckbox.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/inline/ckeditor.js"></script>
 	<script src="./dist/main.js"></script>
+	<script>
+		InlineEditor
+			.create( document.querySelector( '#inline-editor' ) )
+			.catch( error => {
+				console.error( error );
+			} );
+	</script>
+	
 </body>
 
 </html>

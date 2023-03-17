@@ -37,7 +37,7 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 class HeadlessEditor extends DecoupledEditorBase { }
 
 HeadlessEditor.builtinPlugins = [
-	Alignment,
+	Alignmen,
 	Autoformat,
 	BlockQuote,
 	Bold,
