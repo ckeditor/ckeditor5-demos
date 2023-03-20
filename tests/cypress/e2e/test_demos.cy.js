@@ -24,14 +24,23 @@ describe( 'Test CKEditor 5 demo', () => {
       if ( demo == 'mobile' ) {
         cy.get( 'iframe' ).then( $iframe => {
           const doc = $iframe.contents();
-
+          
+          // Check if the editor initialized properly.
           doc.get( '.ck-editor__editable' );
         } )
         
         return;
       }
 
+      // Check if the editor initialized properly.
       cy.get( '.ck-editor__editable' );
+
+      // Check if images loaded properly.
+      if ( Cypress.$( 'img' ).length > 0 ) {
+        cy.get( 'img' ).each( $img => {
+          expect( $img[ 0 ].naturalWidth ).to.be.above( 0 );
+        } );
+      }
     } )
   } );
 } )
