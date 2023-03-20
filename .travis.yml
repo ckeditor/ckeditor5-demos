@@ -1,0 +1,20 @@
+dist: jammy
+addons:
+  chrome: stable
+language: node_js
+services:
+- xvfb
+node_js:
+- lts/*
+cache: false
+branches:
+  only: 
+    - master
+before_install:
+- npm i -g http-server
+- npm i -g yarn
+install:
+- export DEMOS_PATH=$TRAVIS_BUILD_DIR
+- cd $DEMOS_PATH/tests && yarn install
+script:
+- $DEMOS_PATH/tests/scripts/travis.sh
