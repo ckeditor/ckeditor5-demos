@@ -3,10 +3,10 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-import React, { useState, useEffect, StrictMode } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import HeadlessEditor from '.';
-import { createRoot } from 'react-dom/client';
+import React, { useState, useEffect, StrictMode } from "react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import HeadlessEditor from ".";
+import { createRoot } from "react-dom/client";
 
 function App() {
 	const [editor, setEditor] = useState(null);
