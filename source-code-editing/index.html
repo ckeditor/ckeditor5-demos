@@ -4,71 +4,89 @@ Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Source code editing and HTML support editor</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="demo.css" />
+		<link rel="stylesheet" href="content.css" />
+	</head>
 
-<head>
-	<meta charset="utf-8">
-	<title>Source code editing and HTML support editor</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="demo.css">
-	<link rel="stylesheet" href="content.css">
-</head>
-
-<body>
-	<div class="header-wrapper">
-		<h1>Source code editing and HTML support editor</h1>
-	</div>
-	<div class="editor-wrapper">
-		<div id="cke5-source-code-demo">
-			<article>
-				<h1>HTML playground</h1>
-				<p data-foo="bar">
-					A sample paragraph with a <strong>data attribute</strong>.
-				</p>
-				<hr>
-				<section>
-					<h2>Responsive column layout</h2>
-					<div class="columns" style="gap:10px">
-						<div class="column" style="border: 1px solid orange">
-							<figure class="image">
-								<img src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/html.png"/>
-								<figcaption><abbr title="HyperText Markup Language">HTML</abbr></figcaption>
-							</figure>
-						</div>
-						<div class="column" style="border: 1px dotted blue">
-							<figure class="image">
-								<img src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/css.png"/>
-								<figcaption><abbr title="Cascading Style Sheets">CSS</abbr></figcaption>
-							</figure>
-						</div>
-						<div class="column" style="border: 1px dashed olive">
-							<figure class="image">
-								<img src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/js.png"/>
-								<figcaption><abbr title="JavaScript">JS</abbr></figcaption>
-							</figure>
-						</div>
-					</div>
-				</section>
-				<hr>
-				<aside>
-					<h2>HTML-related features</h2>
-					<ul>
-						<li>
-							<a href="https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html">HTML Embed</a>
-						</li>
-						<li>
-							<a href="https://ckeditor.com/docs/ckeditor5/latest/features/style.html">Styles</a>
-						</li>
-						<li>
-							<a href="https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html">General HTML Support</a>
-						</li>
-					</ul>
-				</aside>
-			</article>
+	<body>
+		<div class="header-wrapper">
+			<h1>Source code editing and HTML support editor</h1>
 		</div>
-	</div>
+		<div class="editor-wrapper">
+			<div id="cke5-source-code-demo">
+				<article>
+					<h1>HTML playground</h1>
+					<p data-foo="bar">
+						This is a sample paragraph with a
+						<strong>
+							<code>data</code>
+							attribute
+						</strong>.
+					</p>
+					<details style="margin: 10px auto" id="details-example">
+						<summary>
+							<span style="color: #d32f2f"><strong>Spoiler alert</strong></span>
+							created with a
+							<code>details</code>
+							element!
+						</summary>
+						<p>
+							This demo uses elements such as
+							<code>abbr</code>,
+							<code>article</code>,
+							<code>section</code>,
+							<code>aside</code>, and
+							<code>details</code>.
+						</p>
+					</details>
+					<hr />
+					<section>
+						<h2>Responsive column layout</h2>
+						<div class="columns" style="gap: 10px">
+							<div class="column" style="border: 1px solid orange">
+								<figure class="image">
+									<img src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/html.png" />
+									<figcaption><abbr title="HyperText Markup Language">HTML</abbr></figcaption>
+								</figure>
+							</div>
+							<div class="column" style="border: 1px dotted blue">
+								<figure class="image">
+									<img src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/css.png" />
+									<figcaption><abbr title="Cascading Style Sheets">CSS</abbr></figcaption>
+								</figure>
+							</div>
+							<div class="column" style="border: 1px dashed olive">
+								<figure class="image">
+									<img src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/js.png" />
+									<figcaption><abbr title="JavaScript">JS</abbr></figcaption>
+								</figure>
+							</div>
+						</div>
+					</section>
+					<hr />
+					<aside>
+						<h2>HTML-related features</h2>
+						<ul>
+							<li>
+								<a href="https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html">HTML embed</a>
+							</li>
+							<li>
+								<a href="https://ckeditor.com/docs/ckeditor5/latest/features/style.html">Styles</a>
+							</li>
+							<li>
+								<a href="https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html">General HTML Support</a>
+							</li>
+						</ul>
+					</aside>
+				</article>
+			</div>
+		</div>
 
-	<script src="https://cdn.ckbox.io/CKBox/1.2.1/ckbox.js"></script>
-	<script src="./dist/main.js"></script>
-</body>
-
+		<script src="https://cdn.ckbox.io/CKBox/1.2.1/ckbox.js"></script>
+		<script src="./dist/main.js"></script>
+	</body>
 </html>

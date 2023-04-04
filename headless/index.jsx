@@ -9,7 +9,7 @@ import HeadlessEditor from '.';
 import { createRoot } from 'react-dom/client';
 
 function App() {
-	const [ editor, setEditor ] = useState( null );
+	const [editor, setEditor] = useState(null);
 
 	return (
 		<div className="App">
@@ -54,9 +54,10 @@ function App() {
 						<li>
 							Or your own design system 💪
 						</li>
-					</ul>"
-				onReady={ ( editor ) => {
-					setEditor( editor );
+					</ul>
+				"
+				onReady={(editor) => {
+					setEditor(editor);
 
 					window.editor = editor;
 				}}
@@ -65,7 +66,7 @@ function App() {
 	);
 }
 
-function EditorToolbar( { editor } ) {
+function EditorToolbar({ editor }) {
 	return (
 		<div className="editor-toolbar">
 			<EditorToolbarButton label="Paragraph" editor={editor} commandName="paragraph" />
@@ -88,68 +89,68 @@ function EditorToolbar( { editor } ) {
 	);
 }
 
-function EditorToolbarButton( { label, editor, commandName, commandValue = null } ) {
-	const command = editor ? editor.commands.get( commandName ) : null;
-	const [ isOn, setIsOn ] = useState( false );
-	const [ isEnabled, setIsEnabled ] = useState( true );
+function EditorToolbarButton({ label, editor, commandName, commandValue = null }) {
+	const command = editor ? editor.commands.get(commandName) : null;
+	const [isOn, setIsOn] = useState(false);
+	const [isEnabled, setIsEnabled] = useState(true);
 
-	useEffect( () => {
-		if ( !command ) {
+	useEffect(() => {
+		if (!command) {
 			return;
 		}
 
 		function handleValueChange() {
-			if ( typeof command.value === 'boolean') {
-				setIsOn( !!command.value );
+			if (typeof command.value === 'boolean') {
+				setIsOn(!!command.value);
 			} else {
-				setIsOn( commandValue === command.value );
+				setIsOn(commandValue === command.value);
 			}
 		}
 
 		function handleIsEnabledChange() {
-			setIsEnabled( command.isEnabled );
+			setIsEnabled(command.isEnabled);
 		}
 
-		command.on( 'change:value', handleValueChange );
-		command.on( 'change:isEnabled', handleIsEnabledChange );
+		command.on('change:value', handleValueChange);
+		command.on('change:isEnabled', handleIsEnabledChange);
 
 		handleValueChange();
 		handleIsEnabledChange();
 
 		return function cleanup() {
-			command.off( 'change:value', handleValueChange );
-			command.off( 'change:isEnabled', handleIsEnabledChange );
+			command.off('change:value', handleValueChange);
+			command.off('change:isEnabled', handleIsEnabledChange);
 		};
-	}, [ command ]);
+	}, [command]);
 
-	const classNames = [ 'custom-editor-button' ];
+	const classNames = ['custom-editor-button'];
 
-	if ( isEnabled ) {
-		classNames.push( isOn ? 'custom-editor-button--fill' : '' )
+	if (isEnabled) {
+		classNames.push(isOn ? 'custom-editor-button--fill' : '');
 	} else {
-		classNames.push( 'custom-editor-button--disabled')
+		classNames.push('custom-editor-button--disabled');
 	}
 
 	return (
 		<button
-			className={classNames.join( ' ' )}
+			className={classNames.join(' ')}
 			onClick={() => {
-				if ( commandValue ) {
-					editor.execute( commandName, { value: commandValue } );
+				if (commandValue) {
+					editor.execute(commandName, { value: commandValue });
 				} else {
-					editor.execute( commandName );
+					editor.execute(commandName);
 				}
 
 				editor.editing.view.focus();
 			}}
 		>
-			{ label }
+			{label}
 		</button>
 	);
 }
 
-const rootElement = document.getElementById( 'cke5-headless' );
-const root = createRoot( rootElement );
+const rootElement = document.getElementById('cke5-headless');
+const root = createRoot(rootElement);
 
 root.render(
 	<StrictMode>
