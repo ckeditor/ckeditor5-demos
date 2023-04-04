@@ -54,7 +54,7 @@ function App() {
 						<li>
 							Or your own design system 💪
 						</li>
-					</ul>;
+					</ul>
 				"
 				onReady={(editor) => {
 					setEditor(editor);
