@@ -28,7 +28,7 @@
     "@ckeditor/ckeditor5-list": "37.1.0",
     "@ckeditor/ckeditor5-paragraph": "37.1.0",
     "@ckeditor/ckeditor5-paste-from-office": "37.1.0",
-    "@ckeditor/ckeditor5-react": "^5.0.5",
+    "@ckeditor/ckeditor5-react": "5.0.5",
     "@ckeditor/ckeditor5-remove-format": "37.1.0",
     "@ckeditor/ckeditor5-table": "37.1.0",
     "@ckeditor/ckeditor5-theme-lark": "37.1.0",
