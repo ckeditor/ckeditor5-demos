@@ -30,10 +30,10 @@
   color: var(--ck-color-base-background);
 }
 .ck-mentions .mention__item .mention__item__full-name {
-  color: hsl(0deg, 0%, 45%);
+  color: hsl(0, 0%, 45%);
 }
 .ck-mentions .mention__item:hover:not(.ck-on) .mention__item__full-name {
-  color: hsl(0deg, 0%, 40%);
+  color: hsl(0, 0%, 40%);
 }
 
 /* ---- Basic CSS reset ------------------------------------------------------ */

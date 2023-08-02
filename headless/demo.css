@@ -60,6 +60,7 @@ html {
   background: white;
   border: 1px solid var(--ck-color-base-border);
   border-radius: var(--ck-demo-space-xs);
+  z-index: 1;
 }
 
 .custom-editor-button {
