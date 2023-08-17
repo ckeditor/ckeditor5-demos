@@ -520,7 +520,7 @@ DecoupledEditor.create(
       //   TableOfContents,
       //   Pagination,
     ],
-    // Licencse key needed for the above features ☝️
+    // License key needed for the above features ☝️
     // licenseKey:
     //  "your-license-KEY"
     toolbar: {
