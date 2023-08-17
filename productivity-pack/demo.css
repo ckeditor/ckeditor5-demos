@@ -1,0 +1,174 @@
+/* ---- Customizations to the color grid palettes (font and background color) ------------------------------------------------------ */
+.ck.ck-color-ui-dropdown {
+  --ck-color-grid-tile-size: 20px;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid {
+  grid-gap: 1px;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid .ck-button {
+  border-radius: 0;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:hover:not(.ck-disabled),
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:focus:not(.ck-disabled) {
+  z-index: 1;
+  transform: scale(1.3);
+}
+
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.ck.ck-content.ck-editor__editable_inline > :first-child {
+  margin-top: 0;
+}
+
+/* ---- Styles of the demo page ------------------------------------------------------ */
+.editor-wrapper {
+  max-width: 66rem;
+  margin: 0 auto 2rem auto;
+}
+
+.header-wrapper {
+  padding: 1rem 2rem;
+}
+
+/* ---- Document editor demo styles ------------------------------------------------------------------- */
+#cke5-productivity-pack-demo {
+  position: relative;
+  border: 1px solid var(--ck-color-base-border);
+  border-radius: var(--ck-border-radius);
+  /* Set vertical boundaries for the document editor. */
+  max-height: 80vh;
+  /* This element is a flex container for easier rendering. */
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.cke5-productivity-pack-demo__toolbar-container {
+  /* Make sure the toolbar container is always above the editable. */
+  z-index: 2;
+  /* Create the illusion of the toolbar floating over the editable. */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
+  /* Use the CKEditor CSS variables to keep the UI consistent. */
+  border-bottom: 1px solid var(--ck-color-toolbar-border);
+  position: sticky;
+  top: var(--header-height);
+}
+
+/* Adjust the look of the toolbar inside of the container. */
+.cke5-productivity-pack-demo__toolbar-container .ck-toolbar {
+  border: 0;
+  border-radius: 0;
+}
+
+/* Make the editable container look like the inside of a native word processor app. */
+.cke5-productivity-pack-demo__content-container {
+  padding: clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  background: var(--color-shark-4, #e3e8ed);
+  /* Make it possible to scroll the "page" of the edited content. */
+  overflow-y: scroll;
+}
+
+.cke5-productivity-pack-demo__content-container .cke5-productivity-pack-demo__content {
+  /* Set the dimensions of the "page". */
+  max-width: 21cm;
+  width: 100%;
+  min-height: 21cm;
+  /* Keep the "page" off the boundaries of the container. */
+  padding: 1.2cm 1cm;
+  border-color: transparent;
+  border-radius: var(--ck-border-radius);
+  background: white;
+  /* The "page" should cast a slight shadow (3D illusion). */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.07);
+  /* Center the "page". */
+  margin: 0 auto;
+}
+
+.cke5-productivity-pack-demo__content-container .cke5-productivity-pack-demo__content.ck-focused {
+  border: var(--ck-focus-ring);
+}
+
+@media screen and (max-width: 1100px) {
+  .cke5-productivity-pack-demo__content-container .cke5-productivity-pack-demo__content {
+    padding: 0.5cm;
+  }
+}
+@media screen and (max-width: 1100px) {
+  #cke5-productivity-pack-demo {
+    grid-template-columns: 1fr;
+  }
+}
+#cke5-productivity-pack-demo {
+  display: grid;
+  grid-template-columns: 1fr minmax(75%, 22cm);
+  grid-template-rows: auto 1fr;
+}
+
+.cke5-productivity-pack-demo__toolbar-container .ck.ck-toolbar {
+  border: 0;
+}
+
+.cke5-productivity-pack-demo__toolbar-container {
+  grid-column: 1/3;
+}
+
+.cke5-productivity-pack-demo__content-container {
+  grid-column: 2/3;
+}
+
+@media screen and (max-width: 1100px) {
+  .cke5-productivity-pack-demo__content-container {
+    grid-column: 1/3;
+  }
+  .cke5-productivity-pack-demo__outline {
+    display: none;
+  }
+  .cke5-productivity-pack-demo__outline [class*=-toggle] {
+    opacity: 0.5;
+    padding: var(--ck-spacing-small);
+  }
+  .cke5-productivity-pack-demo__outline [class*=-toggle]:hover {
+    opacity: 1;
+  }
+}
+.cke5-productivity-pack-demo__outline {
+  background: var(--color-shark-4, #e3e8ed);
+  max-height: 80vh;
+}
+
+#cke5-productivity-pack-demo {
+  --ck-document-outline-indent-level-2: 1.1em;
+  --ck-document-outline-indent-level-3: 2.2em;
+  --ck-document-outline-item-active-color: var(--color-tang-5, #743ccd);
+}
+
+#cke5-productivity-pack-demo .ck-document-outline__item {
+  line-height: 1.1em;
+  max-width: 27ch;
+}
+
+#cke5-productivity-pack-demo .ck-content .ck-widget.table-of-contents ol {
+  margin-bottom: var(--ck-spacing-tiny);
+}
+
+@media screen and (min-width: 1100px) {
+  #cke5-productivity-pack-demo.outline-collapsed {
+    grid-template-columns: 35px minmax(22cm, 100%);
+  }
+  .cke5-productivity-pack-demo__wrappper.outline-collapsed .ck-document-outline {
+    display: none;
+  }
+}
+.cke5-productivity-pack-demo__wrappper {
+  grid-template-columns: 1fr minmax(75%, 22cm);
+}
