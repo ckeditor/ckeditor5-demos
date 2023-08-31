@@ -114,7 +114,7 @@ html {
   grid-template-rows: auto 1fr;
 }
 
-.cke5-productivity-pack-demo__toolbar-container .ck.ck-toolbar {
+.cke5-productivity-pack-demo__toolbar-container .ck.ck-toolbar__items {
   border: 0;
 }
 

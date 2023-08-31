@@ -3,6 +3,12 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
+const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+
+// Put your Web Spell Checker license key here, for more info how to get the key see [LINK].
+const WEB_SPELL_CHECKER_LICENSE_KEY = '';
+
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -22,6 +28,7 @@ import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
@@ -32,6 +39,8 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
+// Productivity Pack features
+import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
 
 /**
  * Enrich the special characters plugin with emojis.
@@ -149,7 +158,7 @@ const EMOJIS_ARRAY = [
 	{ character: '☀️', title: 'Sun' }
 ];
 
-ClassicEditor.create( document.querySelector( '#cke5-markdown-demo' ), {
+ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
 	plugins: [
 		Autoformat,
 		BlockQuote,
@@ -168,6 +177,7 @@ ClassicEditor.create( document.querySelector( '#cke5-markdown-demo' ), {
 		Link,
 		List,
 		Markdown,
+		Mention,
 		Paragraph,
 		SourceEditing,
 		SpecialCharacters,
@@ -178,11 +188,14 @@ ClassicEditor.create( document.querySelector( '#cke5-markdown-demo' ), {
 		TableToolbar,
 		TextTransformation,
 		TodoList,
-		WProofreader
+		WProofreader,
+		// SlashCommand,
 	],
+	licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
 	language: 'en',
 	toolbar: [
-		'undo', 'redo',
+		'undo',
+		'redo',
 		'|',
 		'sourceEditing',
 		'|',
@@ -190,46 +203,90 @@ ClassicEditor.create( document.querySelector( '#cke5-markdown-demo' ), {
 		'|',
 		'heading',
 		'|',
-		'bold', 'italic', 'strikethrough', 'code',
+		'bold',
+		'italic',
+		'strikethrough',
+		'code',
 		'|',
-		'bulletedList', 'numberedList', 'todoList',
+		'bulletedList',
+		'numberedList',
+		'todoList',
 		'|',
-		'link', 'uploadImage', 'insertTable', 'blockQuote', 'codeBlock', 'horizontalLine', 'specialCharacters'
+		'link',
+		'uploadImage',
+		'insertTable',
+		'blockQuote',
+		'codeBlock',
+		'horizontalLine',
+		'specialCharacters',
 	],
 	codeBlock: {
 		languages: [
 			{ language: 'css', label: 'CSS' },
 			{ language: 'html', label: 'HTML' },
 			{ language: 'javascript', label: 'JavaScript' },
-			{ language: 'php', label: 'PHP' }
-		]
+			{ language: 'php', label: 'PHP' },
+		],
 	},
 	heading: {
 		options: [
 			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-			{ model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-			{ model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-		]
+			{
+				model: 'heading1',
+				view: 'h1',
+				title: 'Heading 1',
+				class: 'ck-heading_heading1',
+			},
+			{
+				model: 'heading2',
+				view: 'h2',
+				title: 'Heading 2',
+				class: 'ck-heading_heading2',
+			},
+			{
+				model: 'heading3',
+				view: 'h3',
+				title: 'Heading 3',
+				class: 'ck-heading_heading3',
+			},
+			{
+				model: 'heading4',
+				view: 'h4',
+				title: 'Heading 4',
+				class: 'ck-heading_heading4',
+			},
+			{
+				model: 'heading5',
+				view: 'h5',
+				title: 'Heading 5',
+				class: 'ck-heading_heading5',
+			},
+			{
+				model: 'heading6',
+				view: 'h6',
+				title: 'Heading 6',
+				class: 'ck-heading_heading6',
+			},
+		],
 	},
 	image: {
-		toolbar: [ 'imageTextAlternative' ]
+		toolbar: ['imageTextAlternative'],
 	},
 	table: {
-		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
 	},
 	wproofreader: {
-		// serviceId: 'your-service-ID', // WProofreader: required for the Cloud version only.
+		serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
 		lang: 'auto',
-		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-		autoStartup: false
-	}
-} )
-	.then( editor => {
+		srcUrl:
+			'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
+		autoStartup: false,
+		ignoreClasses: ['image-inline'],
+	},
+})
+	.then((editor) => {
 		window.editor = editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});

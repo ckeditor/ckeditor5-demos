@@ -45,8 +45,8 @@ html {
 #cke5-editor-types-demo-document {
   --ck-document-outline-indent-level-2: 1.1em;
   --ck-document-outline-indent-level-3: 2.2em;
-  --ck-document-outline-item-active-color: var(--color-tang-6);
-  --editor-background:var(--color-shark-4);
+  --ck-document-outline-item-active-color: var(--color-tang-6, #582aa2);
+  --editor-background:var(--color-shark-4, #e3e8ed);
   position: relative;
   border: 1px solid var(--ck-color-base-border);
   border-radius: var(--ck-border-radius);
@@ -102,12 +102,6 @@ html {
   border: var(--ck-focus-ring);
 }
 
-#cke5-editor-types-demo-document {
-  display: grid !important;
-  grid-template-columns: 1fr 22cm;
-  grid-template-rows: auto 1fr;
-}
-
 @media screen and (max-width: 1100px) {
   .cke5-editor-types-demo-document__content-container .cke5-editor-types-demo-document__content {
     padding: 0.5cm;
@@ -119,9 +113,11 @@ html {
   }
 }
 #cke5-editor-types-demo-document {
-  display: grid !important;
+  display: grid;
   grid-template-columns: 1fr minmax(75%, 22cm);
   grid-template-rows: auto 1fr;
+  /* Set horizontal boundaries for the document editor for the public repo */
+  max-width: 80vw;
 }
 
 .cke5-editor-types-demo-document__toolbar-container {

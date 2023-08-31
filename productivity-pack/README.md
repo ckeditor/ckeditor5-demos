@@ -1,10 +1,8 @@
-# Editor with Document user interface
+# Productivity Pack editor
 
-CKEditor comes with a variety of editor types and user interface configuration options you can choose from. See all of them in action.
+Test out all the features included in the Productivity Pack. You can find Table of Contents, Format Painter and Templates in the toolbar and Document Outline in the left sidebar.  Don’t forget to type <kbd>/</kbd> to display the Slash Commands dropdown!
 
-The Document editor provides a similar editing experience to some native word processors such as Microsoft Word, with the UI that resembles a paper document.
-
-See this demo live at [ckeditor.com](http://ckeditor.com/ckeditor-5/demo/editor-types.html#document) or read more about it in the [CKEditor 5 documentation](https://ckeditor.com/docs/ckeditor5/latest/examples/builds/document-editor.html).
+See this demo live at [ckeditor.com](https://ckeditor.com/productivity-pack/#b-demo-editor) or read more about each feature in CKEditor 5 documentation for [Slash Commands](https://ckeditor.com/docs/ckeditor5/latest/features/slash-commands.html), [Table of contents](https://ckeditor.com/docs/ckeditor5/latest/features/table-of-contents.html), [Document outline](https://ckeditor.com/docs/ckeditor5/latest/features/document-outline.html), [Templates](https://ckeditor.com/docs/ckeditor5/latest/features/template.html), [Format painter](https://ckeditor.com/docs/ckeditor5/latest/features/format-painter.html).
 
 ## Installation steps
 

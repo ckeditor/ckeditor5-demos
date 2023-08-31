@@ -3,6 +3,9 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
+const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+
 import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -24,11 +27,14 @@ import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+// Productivity Pack features
+import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
 
 const defaultConfig = {
 	plugins: [
@@ -50,53 +56,82 @@ const defaultConfig = {
 		Indent,
 		Link,
 		List,
+		Mention,
 		Paragraph,
 		PasteFromOffice,
 		PictureEditing,
 		Table,
 		TableToolbar,
-		TextTransformation
+		TextTransformation,
+		// SlashCommand,
 	],
+	licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
 	toolbar: [
-		'undo', 'redo',
+		'undo',
+		'redo',
 		'|',
 		'heading',
 		'|',
-		'bold', 'italic',
+		'bold',
+		'italic',
 		'|',
-		'link', 'uploadImage', 'insertTable', 'blockQuote',
+		'link',
+		'uploadImage',
+		'insertTable',
+		'blockQuote',
 		'|',
-		'bulletedList', 'numberedList',
+		'bulletedList',
+		'numberedList',
 		'|',
-		'outdent', 'indent',
+		'outdent',
+		'indent',
 	],
 	heading: {
 		options: [
 			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
-		]
+			{
+				model: 'heading1',
+				view: 'h1',
+				title: 'Heading 1',
+				class: 'ck-heading_heading1',
+			},
+			{
+				model: 'heading2',
+				view: 'h2',
+				title: 'Heading 2',
+				class: 'ck-heading_heading2',
+			},
+			{
+				model: 'heading3',
+				view: 'h3',
+				title: 'Heading 3',
+				class: 'ck-heading_heading3',
+			},
+			{
+				model: 'heading4',
+				view: 'h4',
+				title: 'Heading 4',
+				class: 'ck-heading_heading4',
+			},
+		],
 	},
 	image: {
 		toolbar: [
-			'imageStyle:inline', 'imageStyle:block', 'imageStyle:side',
+			'imageStyle:inline',
+			'imageStyle:block',
+			'imageStyle:side',
 			'|',
-			'toggleImageCaption', 'imageTextAlternative'
-		]
+			'toggleImageCaption',
+			'imageTextAlternative',
+		],
 	},
 	link: {
 		addTargetToExternalLinks: true,
-		defaultProtocol: 'https://'
+		defaultProtocol: 'https://',
 	},
 	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
-	}
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+	},
 };
 
 const headerConfig = {
