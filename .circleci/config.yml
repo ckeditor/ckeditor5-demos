@@ -4,6 +4,7 @@ jobs:
   test-demos:
     docker:
       - image: cimg/node:18.17.1
+        user: root
     steps:
       - checkout
       - run:
