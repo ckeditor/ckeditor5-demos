@@ -10,6 +10,6 @@
   "author": "CKSource",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.7.0"
+    "cypress": "^13.2.0"
   }
 }
