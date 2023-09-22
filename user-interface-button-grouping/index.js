@@ -3,6 +3,9 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
+const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -30,6 +33,7 @@ import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
@@ -43,6 +47,8 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+// Productivity Pack features
+import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
 
 const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Red 50', color: '#ffebee' },
@@ -283,113 +289,162 @@ const EMOJIS_ARRAY = [
 	{ character: '☀️', title: 'Sun' }
 ];
 
-ClassicEditor.create( document.querySelector( '#cke5-user-interface-button-grouping-demo' ), {
-	plugins: [
-		Autoformat,
-		BlockQuote,
-		Bold,
-		CKFinder,
-		CloudServices,
-		Code,
-		Essentials,
-		FontBackgroundColor,
-		FontColor,
-		FontFamily,
-		FontSize,
-		Heading,
-		HorizontalLine,
-		Image,
-		ImageUpload,
-		ImageCaption,
-		ImageStyle,
-		ImageToolbar,
-		ImageUpload,
-		Base64UploadAdapter,
-		Indent,
-		Italic,
-		Link,
-		List,
-		Paragraph,
-		PasteFromOffice,
-		PictureEditing,
-		RemoveFormat,
-		SpecialCharacters,
-		SpecialCharactersEmoji,
-		SpecialCharactersEssentials,
-		Strikethrough,
-		Subscript,
-		Superscript,
-		Table,
-		TableToolbar,
-		TextTransformation,
-		TodoList,
-		Underline,
-		UploadAdapter
-	],
-	toolbar: [
-		'undo', 'redo',
-		'|',
-		'heading',
-		'|',
-		'bold', 'italic', 'underline',
-		{
-			label: 'Basic styles',
-			icon: 'text',
-			items: [ 'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'strikethrough', 'superscript', 'subscript', 'code' ]
-		},
-		'removeFormat',
-		'|',
-		'link', 'insertTable',
-		{
-			label: 'Insert',
-			icon: 'plus',
-			items: [ 'uploadImage', 'blockQuote', 'specialCharacters', 'horizontalLine' ]
-		},
-		'|',
-		{
-			label: 'Lists',
-			icon: false,
-			items: [ 'bulletedList', 'numberedList', 'todoList' ]
-		}
-	],
-	fontFamily: {
-		supportAllValues: true
-	},
-	fontSize: {
-		options: [ 10, 12, 14, 'default', 18, 20, 22 ],
-		supportAllValues: true
-	},
-	heading: {
-		options: [
-			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
-		]
-	},
-	image: {
-		styles: [ 'alignCenter', 'alignLeft', 'alignRight' ],
+ClassicEditor.create(
+	document.querySelector('#cke5-user-interface-button-grouping-demo'),
+	{
+		plugins: [
+			Autoformat,
+			BlockQuote,
+			Bold,
+			CKFinder,
+			CloudServices,
+			Code,
+			Essentials,
+			FontBackgroundColor,
+			FontColor,
+			FontFamily,
+			FontSize,
+			Heading,
+			HorizontalLine,
+			Image,
+			ImageUpload,
+			ImageCaption,
+			ImageStyle,
+			ImageToolbar,
+			ImageUpload,
+			Base64UploadAdapter,
+			Indent,
+			Italic,
+			Link,
+			List,
+			Mention,
+			Paragraph,
+			PasteFromOffice,
+			PictureEditing,
+			RemoveFormat,
+			SpecialCharacters,
+			SpecialCharactersEmoji,
+			SpecialCharactersEssentials,
+			Strikethrough,
+			Subscript,
+			Superscript,
+			Table,
+			TableToolbar,
+			TextTransformation,
+			TodoList,
+			Underline,
+			UploadAdapter,
+			// SlashCommand,
+		],
+		licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
 		toolbar: [
-			'imageTextAlternative', 'toggleImageCaption',
+			'undo',
+			'redo',
 			'|',
-			'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', 'imageStyle:side'
-		]
-	},
-	link: {
-		addTargetToExternalLinks: true,
-		defaultProtocol: 'https://'
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			{
+				label: 'Basic styles',
+				icon: 'text',
+				items: [
+					'fontSize',
+					'fontFamily',
+					'fontColor',
+					'fontBackgroundColor',
+					'strikethrough',
+					'superscript',
+					'subscript',
+					'code',
+				],
+			},
+			'removeFormat',
+			'|',
+			'link',
+			'insertTable',
+			{
+				label: 'Insert',
+				icon: 'plus',
+				items: [
+					'uploadImage',
+					'blockQuote',
+					'specialCharacters',
+					'horizontalLine',
+				],
+			},
+			'|',
+			{
+				label: 'Lists',
+				icon: false,
+				items: ['bulletedList', 'numberedList', 'todoList'],
+			},
+		],
+		fontFamily: {
+			supportAllValues: true,
+		},
+		fontSize: {
+			options: [10, 12, 14, 'default', 18, 20, 22],
+			supportAllValues: true,
+		},
+		heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph',
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1',
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2',
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3',
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4',
+				},
+			],
+		},
+		image: {
+			styles: ['alignCenter', 'alignLeft', 'alignRight'],
+			toolbar: [
+				'imageTextAlternative',
+				'toggleImageCaption',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'imageStyle:side',
+			],
+		},
+		link: {
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
+		},
+		table: {
+			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+		},
 	}
-} )
-	.then( editor => {
+)
+	.then((editor) => {
 		window.editor = editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});
