@@ -42,11 +42,7 @@ html {
 }
 
 /* ---- Document editor demo styles ------------------------------------------------------------------- */
-#cke5-editor-types-demo-document {
-  --ck-document-outline-indent-level-2: 1.1em;
-  --ck-document-outline-indent-level-3: 2.2em;
-  --ck-document-outline-item-active-color: var(--color-tang-6, #582aa2);
-  --editor-background:var(--color-shark-4, #e3e8ed);
+#cke5-productivity-pack-demo {
   position: relative;
   border: 1px solid var(--ck-color-base-border);
   border-radius: var(--ck-border-radius);
@@ -57,7 +53,7 @@ html {
   flex-flow: column nowrap;
 }
 
-.cke5-editor-types-demo-document__toolbar-container {
+.cke5-productivity-pack-demo__toolbar-container {
   /* Make sure the toolbar container is always above the editable. */
   z-index: 2;
   /* Create the illusion of the toolbar floating over the editable. */
@@ -69,26 +65,26 @@ html {
 }
 
 /* Adjust the look of the toolbar inside of the container. */
-.cke5-editor-types-demo-document__toolbar-container .ck-toolbar {
+.cke5-productivity-pack-demo__toolbar-container .ck-toolbar {
   border: 0;
   border-radius: 0;
 }
 
 /* Make the editable container look like the inside of a native word processor app. */
-.cke5-editor-types-demo-document__content-container {
+.cke5-productivity-pack-demo__content-container {
   padding: clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
-  background: var(--editor-background);
+  background: var(--color-shark-4, #e3e8ed);
   /* Make it possible to scroll the "page" of the edited content. */
   overflow-y: scroll;
 }
 
-.cke5-editor-types-demo-document__content-container .cke5-editor-types-demo-document__content {
+.cke5-productivity-pack-demo__content-container .cke5-productivity-pack-demo__content {
   /* Set the dimensions of the "page". */
   max-width: 21cm;
   width: 100%;
   min-height: 21cm;
   /* Keep the "page" off the boundaries of the container. */
-  padding: 2cm 2.4cm;
+  padding: 1.2cm 1cm;
   border-color: transparent;
   border-radius: var(--ck-border-radius);
   background: white;
@@ -98,76 +94,81 @@ html {
   margin: 0 auto;
 }
 
-.cke5-editor-types-demo-document__content-container .cke5-editor-types-demo-document__content.ck-focused {
+.cke5-productivity-pack-demo__content-container .cke5-productivity-pack-demo__content.ck-focused {
   border: var(--ck-focus-ring);
 }
 
 @media screen and (max-width: 1100px) {
-  .cke5-editor-types-demo-document__content-container .cke5-editor-types-demo-document__content {
+  .cke5-productivity-pack-demo__content-container .cke5-productivity-pack-demo__content {
     padding: 0.5cm;
   }
 }
 @media screen and (max-width: 1100px) {
-  #cke5-editor-types-demo-document {
+  #cke5-productivity-pack-demo {
     grid-template-columns: 1fr;
   }
 }
-#cke5-editor-types-demo-document {
+#cke5-productivity-pack-demo {
   display: grid;
   grid-template-columns: 1fr minmax(75%, 22cm);
   grid-template-rows: auto 1fr;
-  /* Set horizontal boundaries for the document editor for the public repo */
-  max-width: 80vw;
 }
 
-.cke5-editor-types-demo-document__toolbar-container {
+.cke5-productivity-pack-demo__toolbar-container .ck.ck-toolbar__items {
+  border: 0;
+}
+
+.cke5-productivity-pack-demo__toolbar-container {
   grid-column: 1/3;
 }
 
+.cke5-productivity-pack-demo__content-container {
+  grid-column: 2/3;
+}
+
 @media screen and (max-width: 1100px) {
-  .cke5-editor-types-demo-document__content-container {
+  .cke5-productivity-pack-demo__content-container {
     grid-column: 1/3;
   }
-  .cke5-editor-types-demo-document__outline {
+  .cke5-productivity-pack-demo__outline {
     display: none;
   }
-  .cke5-editor-types-demo-document__outline [class*=-toggle] {
+  .cke5-productivity-pack-demo__outline [class*=-toggle] {
     opacity: 0.5;
     padding: var(--ck-spacing-small);
   }
-  .cke5-editor-types-demo-document__outline [class*=-toggle]:hover {
+  .cke5-productivity-pack-demo__outline [class*=-toggle]:hover {
     opacity: 1;
   }
 }
-.cke5-editor-types-demo-document__outline {
+.cke5-productivity-pack-demo__outline {
   background: var(--color-shark-4, #e3e8ed);
-  overflow-x: auto;
   max-height: 80vh;
 }
 
-#cke5-editor-types-demo-document {
+#cke5-productivity-pack-demo {
   --ck-document-outline-indent-level-2: 1.1em;
   --ck-document-outline-indent-level-3: 2.2em;
   --ck-document-outline-item-active-color: var(--color-tang-5, #743ccd);
 }
 
-#cke5-editor-types-demo-document .ck-document-outline__item {
+#cke5-productivity-pack-demo .ck-document-outline__item {
   line-height: 1.1em;
   max-width: 27ch;
 }
 
-#cke5-editor-types-demo-document .ck-content .ck-widget.table-of-contents ol {
+#cke5-productivity-pack-demo .ck-content .ck-widget.table-of-contents ol {
   margin-bottom: var(--ck-spacing-tiny);
 }
 
 @media screen and (min-width: 1100px) {
-  #cke5-editor-types-demo-document.outline-collapsed {
+  #cke5-productivity-pack-demo.outline-collapsed {
     grid-template-columns: 35px minmax(22cm, 100%);
   }
-  .cke5-editor-types-demo-document__wrapper.outline-collapsed .ck-document-outline {
+  .cke5-productivity-pack-demo__wrappper.outline-collapsed .ck-document-outline {
     display: none;
   }
 }
-.cke5-editor-types-demo-document__wrappper {
+.cke5-productivity-pack-demo__wrappper {
   grid-template-columns: 1fr minmax(75%, 22cm);
 }

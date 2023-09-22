@@ -3,6 +3,9 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
+const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+
 import BalloonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
 
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -26,85 +29,124 @@ import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+// Productivity Pack features
+import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
 
-BalloonEditor.create( document.querySelector( '#cke5-user-interface-balloon-demo' ), {
-	plugins: [
-		Autoformat,
-		BlockQuote,
-		Bold,
-		CKFinder,
-		CloudServices,
-		Essentials,
-		Heading,
-		Image,
-		ImageCaption,
-		ImageStyle,
-		ImageToolbar,
-		ImageUpload,
-		Base64UploadAdapter,
-		Indent,
-		IndentBlock,
-		Italic,
-		Link,
-		List,
-		MediaEmbed,
-		Paragraph,
-		PasteFromOffice,
-		PictureEditing,
-		Table,
-		TableToolbar,
-		TextTransformation,
-		UploadAdapter
-	],
-	toolbar: [
-		'undo', 'redo',
-		'|',
-		'heading',
-		'|',
-		'bold', 'italic',
-		'|',
-		'link', 'uploadImage', 'insertTable', 'blockQuote', 'mediaEmbed',
-		'|',
-		'bulletedList', 'numberedList', 'outdent', 'indent',
-	],
-	heading: {
-		options: [
-			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
-		]
-	},
-	image: {
+BalloonEditor.create(
+	document.querySelector('#cke5-user-interface-balloon-demo'),
+	{
+		plugins: [
+			Autoformat,
+			BlockQuote,
+			Bold,
+			CKFinder,
+			CloudServices,
+			Essentials,
+			Heading,
+			Image,
+			ImageCaption,
+			ImageStyle,
+			ImageToolbar,
+			ImageUpload,
+			Base64UploadAdapter,
+			Indent,
+			IndentBlock,
+			Italic,
+			Link,
+			List,
+			MediaEmbed,
+			Mention,
+			Paragraph,
+			PasteFromOffice,
+			PictureEditing,
+			Table,
+			TableToolbar,
+			TextTransformation,
+			UploadAdapter,
+			// SlashCommand,
+		],
+		licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
 		toolbar: [
-			'imageStyle:inline',
-			'imageStyle:block',
-			'imageStyle:side',
+			'undo',
+			'redo',
 			'|',
-			'toggleImageCaption',
-			'imageTextAlternative'
-		]
-	},
-	link: {
-		addTargetToExternalLinks: true,
-		defaultProtocol: 'https://'
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'|',
+			'link',
+			'uploadImage',
+			'insertTable',
+			'blockQuote',
+			'mediaEmbed',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'outdent',
+			'indent',
+		],
+		heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph',
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1',
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2',
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3',
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4',
+				},
+			],
+		},
+		image: {
+			toolbar: [
+				'imageStyle:inline',
+				'imageStyle:block',
+				'imageStyle:side',
+				'|',
+				'toggleImageCaption',
+				'imageTextAlternative',
+			],
+		},
+		link: {
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
+		},
+		table: {
+			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+		},
 	}
-} )
-	.then( editor => {
+)
+	.then((editor) => {
 		window.editor = editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});

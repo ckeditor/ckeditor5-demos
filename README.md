@@ -18,6 +18,7 @@ This includes:
 - [Editor with Classic user interface](user-interface-classic)
 - [Editor with Document user interface](user-interface-document)
 - [Editor with Inline user interface](user-interface-inline)
+- [Productivity Pack](productivity-pack)
 
 ## Usage
 
