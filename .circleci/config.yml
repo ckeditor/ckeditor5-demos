@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  test-demos:
+    docker:
+      - image: cimg/node:18.17.1
+        user: root
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            cd tests && yarn
+            npm i -g http-server
+      - run:
+          name: Install browser
+          command: |
+            apt-get update -y && apt-get install lsb-release libappindicator3-1 fonts-liberation libasound2 libdrm2 libgbm1 libnspr4 libnss3 libu2f-udev libvulkan1 xdg-utils xvfb
+            curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            dpkg -i google-chrome.deb
+            sed -i 's|HERE/chrome"|HERE/chrome" --no-sandbox|g' /opt/google/chrome/google-chrome
+      - run:
+          name: Test each demo
+          command: bash tests/scripts/build-and-test-demos.sh
+
+workflows:
+  commit-workflow:
+    jobs:
+      - test-demos
