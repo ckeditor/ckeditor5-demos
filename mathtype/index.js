@@ -23,6 +23,12 @@ import List from '@ckeditor/ckeditor5-list/src/list';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Table from '@ckeditor/ckeditor5-table/src/table';
+import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import MathType from '@wiris/mathtype-ckeditor5/src/plugin';
 
@@ -47,6 +53,12 @@ ClassicEditor.create(document.querySelector('#cke5-mathtype-demo'), {
 		Paragraph,
 		PasteFromOffice,
 		Strikethrough,
+		Table,
+		TableCaption,
+		TableCellProperties,
+		TableProperties,
+		TableToolbar,
+		TableColumnResize,
 		Underline,
 	],
 	toolbar: {
@@ -70,9 +82,21 @@ ClassicEditor.create(document.querySelector('#cke5-mathtype-demo'), {
 			'MathType',
 			'ChemType',
 			'|',
+			'insertTable',
 			'undo',
 			'redo',
 		],
+	},
+	table: {
+		contentToolbar: [
+			'tableColumn',
+			'tableRow',
+			'mergeTableCells',
+			'tableProperties',
+			'tableCellProperties',
+			'toggleTableCaption',
+		],
+		tableToolbar: ['bold', 'italic'],
 	},
 })
 	.then((editor) => {
