@@ -1,4 +1,4 @@
-# Enhanced Paste editor
+# Paste-from Office Enhanced editor
 
 Paste from Office Enhanced retains a wider range of formatting options compared to default paste available in the editor.
 
@@ -15,7 +15,7 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 2. Change the directory and install the dependencies:
 
 ```shell
-cd ckeditor5-demos/enhanced-paste && yarn
+cd ckeditor5-demos/paste-from-office-enhanced && yarn
 ```
 
 3. Start the demo:
