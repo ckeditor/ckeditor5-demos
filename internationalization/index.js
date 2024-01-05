@@ -93,9 +93,9 @@ const plugins = [
 
 window.editor = {};
 
-const germanEditorElement = document.querySelector( '#cke5-localized-de-demo' );
+const germanEditorElement = document.querySelector('#cke5-localized-de-demo');
 
-ClassicEditor.create( germanEditorElement, {
+ClassicEditor.create(germanEditorElement, {
 	language: 'de',
 	content: 'de',
 	plugins: plugins,
@@ -122,11 +122,7 @@ ClassicEditor.create( germanEditorElement, {
 		{
 			label: 'Einfügen',
 			icon: 'plus',
-			items: [
-				'blockQuote',
-				'mediaEmbed',
-				'horizontalLine'
-			]
+			items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
 		},
 		'|',
 		'alignment',
@@ -138,13 +134,17 @@ ClassicEditor.create( germanEditorElement, {
 	],
 	image: {
 		toolbar: [
-			'imageTextAlternative', 'toggleImageCaption',
+			'imageTextAlternative',
+			'toggleImageCaption',
 			'|',
-			'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', 'imageStyle:side'
+			'imageStyle:inline',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
+			'imageStyle:side',
 		],
 		insert: {
-			integrations: [ 'insertImageViaUrl' ]
-		}
+			integrations: ['url'],
+		},
 	},
 	table: {
 		contentToolbar: [
@@ -152,21 +152,22 @@ ClassicEditor.create( germanEditorElement, {
 			'tableRow',
 			'mergeTableCells',
 			'tableProperties',
-			'toggleTableCaption'
-		]
-	}
-} )
-	.then( editor => {
+			'toggleTableCaption',
+		],
+	},
+})
+	.then((editor) => {
 		window.editor.de = editor;
 
 		return editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});
 
-const arabicEditorElement = document.querySelector( '#cke5-localized-ar-demo' );
+const arabicEditorElement = document.querySelector('#cke5-localized-ar-demo');
 
-ClassicEditor.create( arabicEditorElement, {
+ClassicEditor.create(arabicEditorElement, {
 	language: 'ar',
 	content: 'ar',
 	plugins: plugins,
@@ -193,11 +194,7 @@ ClassicEditor.create( arabicEditorElement, {
 		{
 			label: 'إدراج',
 			icon: 'plus',
-			items: [
-				'blockQuote',
-				'mediaEmbed',
-				'horizontalLine'
-			]
+			items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
 		},
 		'|',
 		'alignment',
@@ -209,13 +206,17 @@ ClassicEditor.create( arabicEditorElement, {
 	],
 	image: {
 		toolbar: [
-			'imageTextAlternative', 'toggleImageCaption',
+			'imageTextAlternative',
+			'toggleImageCaption',
 			'|',
-			'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', 'imageStyle:side'
+			'imageStyle:inline',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
+			'imageStyle:side',
 		],
 		insert: {
-			integrations: [ 'insertImageViaUrl' ]
-		}
+			integrations: ['url'],
+		},
 	},
 	table: {
 		contentToolbar: [
@@ -223,21 +224,22 @@ ClassicEditor.create( arabicEditorElement, {
 			'tableRow',
 			'mergeTableCells',
 			'tableProperties',
-			'toggleTableCaption'
-		]
-	}
-} )
-	.then( editor => {
+			'toggleTableCaption',
+		],
+	},
+})
+	.then((editor) => {
 		window.editor.ar = editor;
 
 		return editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});
 
-const japaneseEditorElement = document.querySelector( '#cke5-localized-ja-demo' );
+const japaneseEditorElement = document.querySelector('#cke5-localized-ja-demo');
 
-ClassicEditor.create( japaneseEditorElement, {
+ClassicEditor.create(japaneseEditorElement, {
 	language: 'ja',
 	content: 'ja',
 	plugins: plugins,
@@ -264,11 +266,7 @@ ClassicEditor.create( japaneseEditorElement, {
 		{
 			label: '挿入',
 			icon: 'plus',
-			items: [
-				'blockQuote',
-				'mediaEmbed',
-				'horizontalLine'
-			]
+			items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
 		},
 		'|',
 		'alignment',
@@ -280,13 +278,17 @@ ClassicEditor.create( japaneseEditorElement, {
 	],
 	image: {
 		toolbar: [
-			'imageTextAlternative', 'toggleImageCaption',
+			'imageTextAlternative',
+			'toggleImageCaption',
 			'|',
-			'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', 'imageStyle:side'
+			'imageStyle:inline',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
+			'imageStyle:side',
 		],
 		insert: {
-			integrations: [ 'insertImageViaUrl' ]
-		}
+			integrations: ['url'],
+		},
 	},
 	table: {
 		contentToolbar: [
@@ -294,14 +296,15 @@ ClassicEditor.create( japaneseEditorElement, {
 			'tableRow',
 			'mergeTableCells',
 			'tableProperties',
-			'toggleTableCaption'
-		]
-	}
-} )
-	.then( editor => {
+			'toggleTableCaption',
+		],
+	},
+})
+	.then((editor) => {
 		window.editor.jp = editor;
 
 		return editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});

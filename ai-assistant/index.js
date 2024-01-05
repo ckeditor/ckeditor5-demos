@@ -246,7 +246,7 @@ AiAssistantDemoEditor.create(
 				},
 			},
 			insert: {
-				integrations: ['insertImageViaUrl'],
+				integrations: ['url'],
 			},
 		},
 		typing: {
