@@ -1,6 +1,6 @@
 # AI Assistant editor
 
-Add powerful AI content creation tools into CKEditor. Use pre-made prompts or custom queries to have AI write, rephrase, translate or summarize your text.
+Add powerful AI content creation tools into CKEditor. Use pre-made prompts or custom queries to have AI write, rephrase, translate, or summarize your text.
 
 This demo showcases most of the CKEditor features along with some premium addons: Export to PDF/Word, Import from Word.
 
