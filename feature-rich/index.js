@@ -365,21 +365,21 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Amber 900', color: '#ff6f00' },
 	{ label: 'Orange 900', color: '#e65100' },
 	{ label: 'Grey 900', color: '#212121' },
-	{ label: 'Blue grey 900', color: '#263238' }
+	{ label: 'Blue grey 900', color: '#263238' },
 ];
 
 /**
  * Enrich the special characters plugin with emojis.
  */
-function SpecialCharactersEmoji( editor ) {
-	if ( !editor.plugins.get( 'SpecialCharacters' ) ) {
+function SpecialCharactersEmoji(editor) {
+	if (!editor.plugins.get('SpecialCharacters')) {
 		return;
 	}
 
 	// Make sure Emojis are last on the list.
-	this.afterInit = function() {
-		editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', EMOJIS_ARRAY );
-	}
+	this.afterInit = function () {
+		editor.plugins.get('SpecialCharacters').addItems('Emoji', EMOJIS_ARRAY);
+	};
 }
 
 const EMOJIS_ARRAY = [
@@ -412,7 +412,10 @@ const EMOJIS_ARRAY = [
 	{ character: '😉', title: 'Winking Face' },
 	{ character: '😈', title: 'Smiling Face With Horns' },
 	{ character: '😇', title: 'Smiling Face with Halo' },
-	{ character: '😆', title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes' },
+	{
+		character: '😆',
+		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes',
+	},
 	{ character: '😅', title: 'Smiling Face with Open Mouth and Cold Sweat' },
 	{ character: '😄', title: 'Smiling Face with Open Mouth and Smiling Eyes' },
 	{ character: '😃', title: 'Smiling Face with Open Mouth' },
@@ -481,7 +484,7 @@ const EMOJIS_ARRAY = [
 	{ character: '♥️', title: 'Heart Suit' },
 	{ character: '☺️', title: 'Smiling Face' },
 	{ character: '☹️', title: 'Frowning Face' },
-	{ character: '☀️', title: 'Sun' }
+	{ character: '☀️', title: 'Sun' },
 ];
 
 ClassicEditor.create(document.querySelector('#cke5-feature-rich-demo'), {
@@ -776,7 +779,7 @@ ClassicEditor.create(document.querySelector('#cke5-feature-rich-demo'), {
 			'resizeImage',
 		],
 		insert: {
-			integrations: ['insertImageViaUrl'],
+			integrations: ['url'],
 		},
 	},
 	importWord: {
@@ -996,25 +999,25 @@ ClassicEditor.create(document.querySelector('#cke5-feature-rich-demo'), {
  * Customizes the way the list of user suggestions is displayed.
  * Each user has an @id, a name and an avatar.
  */
-function customMentionUserItemRenderer( item ) {
-	const itemElement = document.createElement( 'span' );
-	const avatar = document.createElement( 'img' );
-	const userNameElement = document.createElement( 'span' );
-	const fullNameElement = document.createElement( 'span' );
+function customMentionUserItemRenderer(item) {
+	const itemElement = document.createElement('span');
+	const avatar = document.createElement('img');
+	const userNameElement = document.createElement('span');
+	const fullNameElement = document.createElement('span');
 
-	itemElement.classList.add( 'mention__item' );
+	itemElement.classList.add('mention__item');
 
-	avatar.src = `/assets/images/avatars/${ item.avatar }.jpg`;
+	avatar.src = `/assets/images/avatars/${item.avatar}.jpg`;
 
-	userNameElement.classList.add( 'mention__item__user-name' );
+	userNameElement.classList.add('mention__item__user-name');
 	userNameElement.textContent = item.id;
 
-	fullNameElement.classList.add( 'mention__item__full-name' );
+	fullNameElement.classList.add('mention__item__full-name');
 	fullNameElement.textContent = item.name;
 
-	itemElement.appendChild( avatar );
-	itemElement.appendChild( userNameElement );
-	itemElement.appendChild( fullNameElement );
+	itemElement.appendChild(avatar);
+	itemElement.appendChild(userNameElement);
+	itemElement.appendChild(fullNameElement);
 
 	return itemElement;
 }

@@ -780,7 +780,7 @@ ClassicEditor.create(document.querySelector('#cke5-source-code-demo'), {
 			'resizeImage',
 		],
 		insert: {
-			integrations: ['insertImageViaUrl'],
+			integrations: ['url'],
 		},
 	},
 	importWord: {

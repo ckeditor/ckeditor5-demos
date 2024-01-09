@@ -39,12 +39,6 @@ body.mobile-support-iframe {
   }
 }
 
-.ck.ck-editor .ck-content blockquote:not([class]),
-.ck.ck-editor .ck-content li,
-.ck.ck-editor .ck-content p {
-  max-width: 100%;
-}
-
 /* Set heading dropdown label width narrower width to fit Todo list in main toolbar */
 .ck.ck-editor .ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label {
   width: 70px;

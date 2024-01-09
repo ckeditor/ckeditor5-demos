@@ -1,0 +1,15 @@
+.ck-sticky-panel__content_sticky {
+  top: var(--header-height) !important;
+}
+
+.ck[role=application] {
+  margin-inline: auto;
+  max-width: 21cm;
+}
+
+.ck-math-widget.ck-widget.ck-widget_selected img {
+  outline: 2px solid var(--color-tang-5);
+}
+.ck-math-widget.ck-widget img {
+  display: inherit;
+}
