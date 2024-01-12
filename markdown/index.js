@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -46,14 +46,14 @@ import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
  * Enrich the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji(editor) {
-	if ( !editor.plugins.get( 'SpecialCharacters' ) ) {
+	if (!editor.plugins.get('SpecialCharacters')) {
 		return;
 	}
 
 	// Make sure Emojis are last on the list.
 	this.afterInit = function () {
-		editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', EMOJIS_ARRAY );
-	}
+		editor.plugins.get('SpecialCharacters').addItems('Emoji', EMOJIS_ARRAY);
+	};
 }
 
 const EMOJIS_ARRAY = [
@@ -86,7 +86,10 @@ const EMOJIS_ARRAY = [
 	{ character: '😉', title: 'Winking Face' },
 	{ character: '😈', title: 'Smiling Face With Horns' },
 	{ character: '😇', title: 'Smiling Face with Halo' },
-	{ character: '😆', title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes' },
+	{
+		character: '😆',
+		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes',
+	},
 	{ character: '😅', title: 'Smiling Face with Open Mouth and Cold Sweat' },
 	{ character: '😄', title: 'Smiling Face with Open Mouth and Smiling Eyes' },
 	{ character: '😃', title: 'Smiling Face with Open Mouth' },
@@ -155,7 +158,7 @@ const EMOJIS_ARRAY = [
 	{ character: '♥️', title: 'Heart Suit' },
 	{ character: '☺️', title: 'Smiling Face' },
 	{ character: '☹️', title: 'Frowning Face' },
-	{ character: '☀️', title: 'Sun' }
+	{ character: '☀️', title: 'Sun' },
 ];
 
 ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {

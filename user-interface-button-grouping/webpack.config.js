@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -7,10 +7,10 @@
 
 /* eslint-env node */
 
-const path = require( 'path' );
-const webpack = require( 'webpack' );
-const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
-const TerserWebpackPlugin = require( 'terser-webpack-plugin' );
+const path = require('path');
+const webpack = require('webpack');
+const { bundler, styles } = require('@ckeditor/ckeditor5-dev-utils');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	devtool: 'source-map',
@@ -20,31 +20,31 @@ module.exports = {
 
 	optimization: {
 		minimizer: [
-			new TerserWebpackPlugin( {
+			new TerserWebpackPlugin({
 				sourceMap: true,
 				terserOptions: {
 					output: {
 						// Preserve CKEditor 5 license comments.
-						comments: /^!/
-					}
+						comments: /^!/,
+					},
 				},
-				extractComments: false
-			} )
-		]
+				extractComments: false,
+			}),
+		],
 	},
 
 	plugins: [
-		new webpack.BannerPlugin( {
+		new webpack.BannerPlugin({
 			banner: bundler.getLicenseBanner(),
-			raw: true
-		} )
+			raw: true,
+		}),
 	],
 
 	module: {
 		rules: [
 			{
 				test: /\.svg$/,
-				use: [ 'raw-loader' ]
+				use: ['raw-loader'],
 			},
 			{
 				test: /\.css$/,
@@ -54,34 +54,34 @@ module.exports = {
 						options: {
 							injectType: 'singletonStyleTag',
 							attributes: {
-								'data-cke': true
-							}
-						}
+								'data-cke': true,
+							},
+						},
 					},
 					{
-						loader: 'css-loader'
+						loader: 'css-loader',
 					},
 					{
 						loader: 'postcss-loader',
 						options: {
-							postcssOptions: styles.getPostCssConfig( {
+							postcssOptions: styles.getPostCssConfig({
 								themeImporter: {
-									themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
+									themePath: require.resolve('@ckeditor/ckeditor5-theme-lark'),
 								},
-								minify: true
-							} )
-						}
+								minify: true,
+							}),
+						},
 					},
-				]
-			}
-		]
+				],
+			},
+		],
 	},
 	devServer: {
 		static: {
-			directory: path.join( __dirname, '/' ),
+			directory: path.join(__dirname, '/'),
 			watch: true,
 		},
-		watchFiles: [ './index.js', './index.html' ],
+		watchFiles: ['./index.js', './index.html'],
 		compress: true,
 		hot: false,
 		port: 9090,

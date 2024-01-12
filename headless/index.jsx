@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -69,27 +69,83 @@ function App() {
 function EditorToolbar({ editor }) {
 	return (
 		<div className="editor-toolbar">
-			<EditorToolbarButton label="Paragraph" editor={editor} commandName="paragraph" />
-			<EditorToolbarButton label="H1" editor={editor} commandName="heading" commandValue="heading1" />
-			<EditorToolbarButton label="H2" editor={editor} commandName="heading" commandValue="heading2" />
-			<EditorToolbarButton label="H3" editor={editor} commandName="heading" commandValue="heading3" />
+			<EditorToolbarButton
+				label="Paragraph"
+				editor={editor}
+				commandName="paragraph"
+			/>
+			<EditorToolbarButton
+				label="H1"
+				editor={editor}
+				commandName="heading"
+				commandValue="heading1"
+			/>
+			<EditorToolbarButton
+				label="H2"
+				editor={editor}
+				commandName="heading"
+				commandValue="heading2"
+			/>
+			<EditorToolbarButton
+				label="H3"
+				editor={editor}
+				commandName="heading"
+				commandValue="heading3"
+			/>
 			<EditorToolbarButton label="Bold" editor={editor} commandName="bold" />
-			<EditorToolbarButton label="Italic" editor={editor} commandName="italic" />
-			<EditorToolbarButton label="Underline" editor={editor} commandName="underline" />
-			<EditorToolbarButton label="Strikethrough" editor={editor} commandName="strikethrough" />
+			<EditorToolbarButton
+				label="Italic"
+				editor={editor}
+				commandName="italic"
+			/>
+			<EditorToolbarButton
+				label="Underline"
+				editor={editor}
+				commandName="underline"
+			/>
+			<EditorToolbarButton
+				label="Strikethrough"
+				editor={editor}
+				commandName="strikethrough"
+			/>
 			<EditorToolbarButton label="Code" editor={editor} commandName="code" />
-			<EditorToolbarButton label="Code block" editor={editor} commandName="codeBlock" />
-			<EditorToolbarButton label="Block quote" editor={editor} commandName="blockQuote" />
-			<EditorToolbarButton label="Bullet list" editor={editor} commandName="bulletedList" />
-			<EditorToolbarButton label="Ordered list" editor={editor} commandName="numberedList" />
-			<EditorToolbarButton label="Remove format" editor={editor} commandName="removeFormat" />
+			<EditorToolbarButton
+				label="Code block"
+				editor={editor}
+				commandName="codeBlock"
+			/>
+			<EditorToolbarButton
+				label="Block quote"
+				editor={editor}
+				commandName="blockQuote"
+			/>
+			<EditorToolbarButton
+				label="Bullet list"
+				editor={editor}
+				commandName="bulletedList"
+			/>
+			<EditorToolbarButton
+				label="Ordered list"
+				editor={editor}
+				commandName="numberedList"
+			/>
+			<EditorToolbarButton
+				label="Remove format"
+				editor={editor}
+				commandName="removeFormat"
+			/>
 			<EditorToolbarButton label="Undo" editor={editor} commandName="undo" />
 			<EditorToolbarButton label="Redo" editor={editor} commandName="redo" />
 		</div>
 	);
 }
 
-function EditorToolbarButton({ label, editor, commandName, commandValue = null }) {
+function EditorToolbarButton({
+	label,
+	editor,
+	commandName,
+	commandValue = null,
+}) {
 	const command = editor ? editor.commands.get(commandName) : null;
 	const [isOn, setIsOn] = useState(false);
 	const [isEnabled, setIsEnabled] = useState(true);
