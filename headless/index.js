@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -34,7 +34,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 
-class HeadlessEditor extends DecoupledEditorBase { }
+class HeadlessEditor extends DecoupledEditorBase {}
 
 HeadlessEditor.builtinPlugins = [
 	Alignment,
@@ -64,7 +64,7 @@ HeadlessEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Underline
+	Underline,
 ];
 
 // Editor configuration.
@@ -74,8 +74,8 @@ HeadlessEditor.defaultConfig = {
 			{ language: 'css', label: 'CSS' },
 			{ language: 'html', label: 'HTML' },
 			{ language: 'javascript', label: 'JavaScript' },
-			{ language: 'php', label: 'PHP' }
-		]
+			{ language: 'php', label: 'PHP' },
+		],
 	},
 	image: {
 		resizeUnit: 'px',
@@ -85,17 +85,13 @@ HeadlessEditor.defaultConfig = {
 			'imageStyle:breakText',
 			'|',
 			'toggleImageCaption',
-			'imageTextAlternative'
-		]
+			'imageTextAlternative',
+		],
 	},
 	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
 	},
-	language: 'en'
+	language: 'en',
 };
 
 export default HeadlessEditor;

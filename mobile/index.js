@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -35,7 +35,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 
-ClassicEditor.create( document.querySelector( '#cke5-mobile-demo' ), {
+ClassicEditor.create(document.querySelector('#cke5-mobile-demo'), {
 	plugins: [
 		Alignment,
 		BlockQuote,
@@ -65,50 +65,75 @@ ClassicEditor.create( document.querySelector( '#cke5-mobile-demo' ), {
 		Superscript,
 		Table,
 		TodoList,
-		Underline
+		Underline,
 	],
 	toolbar: [
 		'heading',
 		'|',
-		'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent',
+		'bold',
+		'italic',
+		'link',
+		'bulletedList',
+		'numberedList',
+		'todoList',
+		'outdent',
+		'indent',
 		'|',
-		'imageUpload', 'blockQuote', 'insertTable',
+		'imageUpload',
+		'blockQuote',
+		'insertTable',
 		'|',
-		'undo', 'redo'
+		'undo',
+		'redo',
 	],
 	heading: {
 		options: [
 			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
-		]
+			{
+				model: 'heading1',
+				view: 'h1',
+				title: 'Heading 1',
+				class: 'ck-heading_heading1',
+			},
+			{
+				model: 'heading2',
+				view: 'h2',
+				title: 'Heading 2',
+				class: 'ck-heading_heading2',
+			},
+			{
+				model: 'heading3',
+				view: 'h3',
+				title: 'Heading 3',
+				class: 'ck-heading_heading3',
+			},
+		],
 	},
 	image: {
-		styles: [ 'alignCenter', 'alignLeft', 'alignRight' ] ,
+		styles: ['alignCenter', 'alignLeft', 'alignRight'],
 		toolbar: [
 			'imageTextAlternative',
 			'|',
-			'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', 'imageStyle:side'
-		]
+			'imageStyle:inline',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
+			'imageStyle:side',
+		],
 	},
 	list: {
 		properties: {
 			styles: true,
 			startIndex: true,
-			reversed: true
-		}
+			reversed: true,
+		},
 	},
 	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
-	}
-} )
-	.then( editor => {
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+	},
+})
+	.then((editor) => {
 		window.editor = editor;
-	} ).catch( error => {
-		console.error( error.stack );
-	} );
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});

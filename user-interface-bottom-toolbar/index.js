@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -99,7 +99,6 @@ export const TEMPLATE_DEFINITIONS = [
 	},
 ];
 
-
 class FormattingOptions extends Plugin {
 	/**
 	 * @inheritDoc
@@ -111,86 +110,93 @@ class FormattingOptions extends Plugin {
 	/**
 	 * @inheritDoc
 	 */
-	constructor( editor ) {
-		super( editor );
+	constructor(editor) {
+		super(editor);
 
-		editor.ui.componentFactory.add( 'formattingOptions', locale => {
+		editor.ui.componentFactory.add('formattingOptions', (locale) => {
 			const t = locale.t;
-			const buttonView = new DropdownButtonView( locale );
-			const panelView = new DropdownPanelView( locale );
-			const dropdownView = new DropdownView( locale, buttonView, panelView );
-			const toolbarView = this.toolbarView = dropdownView.toolbarView = new ToolbarView( locale );
+			const buttonView = new DropdownButtonView(locale);
+			const panelView = new DropdownPanelView(locale);
+			const dropdownView = new DropdownView(locale, buttonView, panelView);
+			const toolbarView =
+				(this.toolbarView =
+				dropdownView.toolbarView =
+					new ToolbarView(locale));
 
 			// Accessibility: Give the toolbar a human-readable ARIA label.
-			toolbarView.set( {
-				ariaLabel: t( 'Formatting options toolbar' )
-			} );
+			toolbarView.set({
+				ariaLabel: t('Formatting options toolbar'),
+			});
 
 			// Accessibility: Give the dropdown a human-readable ARIA label.
-			dropdownView.set( {
-				label: t( 'Formatting options' )
-			} );
+			dropdownView.set({
+				label: t('Formatting options'),
+			});
 
 			// Toolbars in dropdowns need specific styling, hence the class.
-			dropdownView.extendTemplate( {
+			dropdownView.extendTemplate({
 				attributes: {
-					class: [ 'ck-toolbar-dropdown' ]
-				}
-			} );
+					class: ['ck-toolbar-dropdown'],
+				},
+			});
 
 			// Accessibility: If the dropdown panel is already open, the arrow down key should focus the first child of the #panelView.
-			dropdownView.keystrokes.set( 'arrowdown', ( data, cancel ) => {
-				if ( dropdownView.isOpen ) {
+			dropdownView.keystrokes.set('arrowdown', (data, cancel) => {
+				if (dropdownView.isOpen) {
 					toolbarView.focus();
 					cancel();
 				}
-			} );
+			});
 
 			// Accessibility: If the dropdown panel is already open, the arrow up key should focus the last child of the #panelView.
-			dropdownView.keystrokes.set( 'arrowup', ( data, cancel ) => {
-				if ( dropdownView.isOpen ) {
+			dropdownView.keystrokes.set('arrowup', (data, cancel) => {
+				if (dropdownView.isOpen) {
 					toolbarView.focusLast();
 					cancel();
 				}
-			} );
+			});
 
 			// The formatting options should not close when the user clicked:
 			// * the dropdown or it contents,
 			// * any editing root,
 			// * any floating UI in the "body" collection
 			// It should close, for instance, when another (main) toolbar button was pressed, though.
-			dropdownView.on( 'render', () => {
-				clickOutsideHandler( {
+			dropdownView.on('render', () => {
+				clickOutsideHandler({
 					emitter: dropdownView,
 					activator: () => dropdownView.isOpen,
-					callback: () => { dropdownView.isOpen = false; },
+					callback: () => {
+						dropdownView.isOpen = false;
+					},
 					contextElements: [
 						dropdownView.element,
-						...[ ...editor.ui.getEditableElementsNames() ].map( name => editor.ui.getEditableElement( name ) ),
-						document.querySelector( '.ck-body-wrapper' )
-					]
-				} );
-			} );
+						...[...editor.ui.getEditableElementsNames()].map((name) =>
+							editor.ui.getEditableElement(name)
+						),
+						document.querySelector('.ck-body-wrapper'),
+					],
+				});
+			});
 
 			// The main button of the dropdown should be bound to the state of the dropdown.
-			buttonView.bind( 'isOn' ).to( dropdownView, 'isOpen' );
-			buttonView.bind( 'isEnabled' ).to( dropdownView );
+			buttonView.bind('isOn').to(dropdownView, 'isOpen');
+			buttonView.bind('isEnabled').to(dropdownView);
 
 			// Using the font color icon to visually represent the formatting.
-			buttonView.set( {
-				tooltip: t( 'Formatting options' ),
-				icon: fontColorIcon
-			} );
+			buttonView.set({
+				tooltip: t('Formatting options'),
+				icon: fontColorIcon,
+			});
 
-			dropdownView.panelView.children.add( toolbarView );
+			dropdownView.panelView.children.add(toolbarView);
 
 			toolbarView.fillFromConfig(
-				editor.config.get( 'formattingOptions' ),
+				editor.config.get('formattingOptions'),
 				editor.ui.componentFactory
 			);
 
 			return dropdownView;
-		} );
+		});
 	}
 }
 
@@ -205,14 +211,18 @@ class BottomToolbarCustomizations extends Plugin {
 	afterInit() {
 		const editor = this.editor;
 
-		editor.ui.on( 'ready', () => {
-			overrideDropdownPositionsToNorth( editor, editor.ui.view.toolbar );
-			overrideDropdownPositionsToNorth( editor, editor.plugins.get( 'FormattingOptions' ).toolbarView );
+		editor.ui.on('ready', () => {
+			overrideDropdownPositionsToNorth(editor, editor.ui.view.toolbar);
+			overrideDropdownPositionsToNorth(
+				editor,
+				editor.plugins.get('FormattingOptions').toolbarView
+			);
 
-			overrideTooltipPositions( editor.ui.view.toolbar );
-			overrideTooltipPositions( editor.plugins.get( 'FormattingOptions' ).toolbarView );
-		} );
-
+			overrideTooltipPositions(editor.ui.view.toolbar);
+			overrideTooltipPositions(
+				editor.plugins.get('FormattingOptions').toolbarView
+			);
+		});
 	}
 }
 
@@ -394,43 +404,67 @@ DecoupledEditor.create(
  * @param {module:core/editor/editor~Editor} editor
  * @param {module:ui/toolbar/toolbarview~ToolbarView} toolbarView
  */
-function overrideDropdownPositionsToNorth( editor, toolbarView ) {
+function overrideDropdownPositionsToNorth(editor, toolbarView) {
 	const {
-		south, north, southEast, southWest, northEast, northWest,
-		southMiddleEast, southMiddleWest, northMiddleEast, northMiddleWest
+		south,
+		north,
+		southEast,
+		southWest,
+		northEast,
+		northWest,
+		southMiddleEast,
+		southMiddleWest,
+		northMiddleEast,
+		northMiddleWest,
 	} = DropdownView.defaultPanelPositions;
 
 	let panelPositions;
 
-	if ( editor.locale.uiLanguageDirection !== 'rtl' ) {
+	if (editor.locale.uiLanguageDirection !== 'rtl') {
 		panelPositions = [
-			northEast, northWest, northMiddleEast, northMiddleWest, north,
-			southEast, southWest, southMiddleEast, southMiddleWest, south
+			northEast,
+			northWest,
+			northMiddleEast,
+			northMiddleWest,
+			north,
+			southEast,
+			southWest,
+			southMiddleEast,
+			southMiddleWest,
+			south,
 		];
 	} else {
 		panelPositions = [
-			northWest, northEast, northMiddleWest, northMiddleEast, north,
-			southWest, southEast, southMiddleWest, southMiddleEast, south
+			northWest,
+			northEast,
+			northMiddleWest,
+			northMiddleEast,
+			north,
+			southWest,
+			southEast,
+			southMiddleWest,
+			southMiddleEast,
+			south,
 		];
 	}
 
-	for ( const item of toolbarView.items ) {
-		if ( !( item instanceof DropdownView ) ) {
+	for (const item of toolbarView.items) {
+		if (!(item instanceof DropdownView)) {
 			continue;
 		}
 
-		item.on( 'change:isOpen', () => {
-			if ( !item.isOpen ) {
+		item.on('change:isOpen', () => {
+			if (!item.isOpen) {
 				return;
 			}
 
-			item.panelView.position = DropdownView._getOptimalPosition( {
+			item.panelView.position = DropdownView._getOptimalPosition({
 				element: item.panelView.element,
 				target: item.buttonView.element,
 				fitInViewport: true,
-				positions: panelPositions
-			} ).name;
-		} );
+				positions: panelPositions,
+			}).name;
+		});
 	}
 }
 
@@ -441,11 +475,11 @@ function overrideDropdownPositionsToNorth( editor, toolbarView ) {
  * @private
  * @param {module:ui/toolbar/toolbarview~ToolbarView} toolbarView
  */
-function overrideTooltipPositions( toolbarView ) {
-	for ( const item of toolbarView.items ) {
-		if ( item.buttonView ) {
+function overrideTooltipPositions(toolbarView) {
+	for (const item of toolbarView.items) {
+		if (item.buttonView) {
 			item.buttonView.tooltipPosition = 'n';
-		} else if ( item.tooltipPosition ) {
+		} else if (item.tooltipPosition) {
 			item.tooltipPosition = 'n';
 		}
 	}
