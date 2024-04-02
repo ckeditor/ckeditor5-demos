@@ -6,9 +6,6 @@
 // Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
 const PRODUCTIVITY_PACK_LICENSE_KEY = '';
 
-// Put your Web Spell Checker license key here, for more info how to get the key see [LINK].
-const WEB_SPELL_CHECKER_LICENSE_KEY = '';
-
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -38,7 +35,6 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
-import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
 // Productivity Pack features
 import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
 
@@ -191,7 +187,6 @@ ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
 		TableToolbar,
 		TextTransformation,
 		TodoList,
-		WProofreader,
 		// SlashCommand,
 	],
 	licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
@@ -201,8 +196,6 @@ ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
 		'redo',
 		'|',
 		'sourceEditing',
-		'|',
-		'wproofreader',
 		'|',
 		'heading',
 		'|',
@@ -277,14 +270,6 @@ ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
 	},
 	table: {
 		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
-	},
-	wproofreader: {
-		serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
-		lang: 'auto',
-		srcUrl:
-			'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-		autoStartup: false,
-		ignoreClasses: ['image-inline'],
 	},
 })
 	.then((editor) => {
