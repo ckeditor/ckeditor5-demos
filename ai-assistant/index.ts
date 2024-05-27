@@ -95,7 +95,9 @@ import {
 import 'ckeditor5/index.css';
 import 'ckeditor5-premium-features/index.css';
 
+// @ts-ignore
 import coreStylesheets from 'ckeditor5/index.css?url';
+// @ts-ignore
 import premiumStylesheets from 'ckeditor5-premium-features/index.css?url';
 
 ClassicEditor.create(
