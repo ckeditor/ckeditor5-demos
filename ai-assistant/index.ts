@@ -12,70 +12,74 @@ const AI_API_URL = '';
 /* You must provide a valid token URL in order to use the CKBox application.
 After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-const CKBOX_TOKEN_URL = '';
+const CKBOX_TOKEN_URL = 'https://api.ckbox.io/token/demo';
 
-// Editor creators
-import AiAssistantDemoEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import {
+	ClassicEditor,
+	Alignment,
+	AutoImage,
+	BlockQuote,
+	Bold,
+	CKBox,
+	Code,
+	CodeBlock,
+	CloudServices,
+	CloudServicesUploadAdapter,
+	List,
+	ListProperties,
+	EasyImage,
+	Essentials,
+	FindAndReplace,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+	GeneralHtmlSupport,
+	Heading,
+	Italic,
+	Image,
+	ImageCaption,
+	ImageResize,
+	ImageToolbar,
+	ImageUpload,
+	ImageInsert,
+	Link,
+	LinkImage,
+	AutoLink,
+	Mention,
+	Underline,
+	PictureEditing,
+	Paragraph,
+	PasteFromOffice,
+	RemoveFormat,
+	SpecialCharacters,
+	SpecialCharactersEssentials,
+	Strikethrough,
+	Subscript,
+	Superscript,
+	Table,
+	TableCaption,
+	TableCellProperties,
+	TableProperties,
+	TableToolbar,
+	TableColumnResize,
+} from 'ckeditor5';
 
-// Features
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
-import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
-import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import ExportPdf from '@ckeditor/ckeditor5-export-pdf/src/exportpdf';
-import ExportWord from '@ckeditor/ckeditor5-export-word/src/exportword';
-import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
-import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
-import AutoLink from '@ckeditor/ckeditor5-link/src/autolink';
-import Mention from '@ckeditor/ckeditor5-mention/src/mention';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import PasteFromOfficeEnhanced from '@ckeditor/ckeditor5-paste-from-office-enhanced/src/pastefromofficeenhanced';
-import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
-import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
-import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
-import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
-import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
-import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
+import {
+	ExportPdf,
+	ExportWord,
+	ImportWord,
+	AIAssistant,
+	OpenAITextAdapter,
+	SlashCommand,
+	PasteFromOfficeEnhanced,
+} from 'ckeditor5-premium-features';
 
-import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
-import { DocumentList, DocumentListProperties } from '@ckeditor/ckeditor5-list';
-import ImportWord from '@ckeditor/ckeditor5-import-word/src/importword';
+import 'ckeditor5/index.css';
+import 'ckeditor5-premium-features/index.css';
 
-import AIAssistant from '@ckeditor/ckeditor5-ai/src/aiassistant';
-import OpenAITextAdapter from '@ckeditor/ckeditor5-ai/src/adapters/openaitextadapter';
-
-AiAssistantDemoEditor.create(
-	document.querySelector('#cke5-ai-assistant-demo'),
+ClassicEditor.create(
+	document.querySelector('#cke5-ai-assistant-demo') as HTMLElement,
 	{
 		plugins: [
 			AIAssistant,
@@ -86,7 +90,7 @@ AiAssistantDemoEditor.create(
 			/* You must provide a valid token URL in order to use the CKBox application.
 			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-			// CKBox,
+			CKBox,
 			PictureEditing,
 			Code,
 			CodeBlock,
@@ -113,8 +117,8 @@ AiAssistantDemoEditor.create(
 			Link,
 			LinkImage,
 			AutoLink,
-			DocumentList,
-			DocumentListProperties,
+			List,
+			ListProperties,
 			Mention,
 			OpenAITextAdapter,
 			Paragraph,
@@ -134,7 +138,7 @@ AiAssistantDemoEditor.create(
 			TableToolbar,
 			TableColumnResize,
 			Underline,
-			UploadAdapter,
+			CloudServicesUploadAdapter,
 		],
 		toolbar: {
 			items: [
@@ -172,7 +176,7 @@ AiAssistantDemoEditor.create(
 				/* You must provide a valid token URL in order to use the CKBox application.
 				After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 				https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
-				// 'ckbox',
+				'ckbox',
 				'insertTable',
 				'codeBlock',
 				'specialCharacters',
@@ -240,22 +244,8 @@ AiAssistantDemoEditor.create(
 				'|',
 				'resizeImage',
 			],
-			upload: {
-				panel: {
-					items: ['insertImageViaUrl'],
-				},
-			},
 			insert: {
-				integrations: ['url'],
-			},
-		},
-		typing: {
-			transformations: {
-				extra: [
-					{ from: ':)', to: '🙂' },
-					{ from: ':+1:', to: '👍' },
-					{ from: ':tada:', to: '🎉' },
-				],
+				integrations: ['upload', 'assetManager', 'url'],
 			},
 		},
 		table: {
@@ -324,7 +314,7 @@ AiAssistantDemoEditor.create(
 				margin_bottom: '20mm',
 				margin_right: '12mm',
 				margin_left: '12mm',
-				page_orientation: 'portrait',
+				orientation: 'portrait',
 			},
 			tokenUrl: false,
 		},
@@ -332,15 +322,8 @@ AiAssistantDemoEditor.create(
 		ai: {
 			openAI: {
 				apiUrl: AI_API_URL,
-				authKey: LICENSE_KEY,
 			},
 		},
 		licenseKey: LICENSE_KEY,
 	}
-)
-	.then((editor) => {
-		window.editor = editor;
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+);
