@@ -98,188 +98,215 @@ const plugins = [
  * Localized CKEditor 5 demos (in German, Arabic and Japanese).
  */
 
-ClassicEditor.create(document.querySelector('#cke5-localized-de-demo') as HTMLElement, {
-	language: 'de',
-	plugins: plugins,
-	placeholder: 'Tippen Sie Ihren Inhalt hier oder fügen Sie ihn ein!',
-	toolbar: [
-		'undo',
-		'redo',
-		'|',
-		'findAndReplace',
-		'|',
-		'heading',
-		'|',
-		'bold',
-		'italic',
-		'underline',
-		'strikethrough',
-		'removeFormat',
-		'|',
-		'link',
-		'insertImage',
-		'insertTable',
-		'highlight',
-		'specialCharacters',
-		{
-			label: 'Einfügen',
-			icon: 'plus',
-			items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
-		},
-		'|',
-		'alignment',
-		'|',
-		'bulletedList',
-		'numberedList',
-		'outdent',
-		'indent',
-	],
-	image: {
+ClassicEditor.create(
+	document.querySelector('#cke5-localized-de-demo') as HTMLElement,
+	{
+		language: 'de',
+		plugins: plugins,
+		placeholder: 'Tippen Sie Ihren Inhalt hier oder fügen Sie ihn ein!',
 		toolbar: [
-			'imageTextAlternative',
-			'toggleImageCaption',
+			'undo',
+			'redo',
 			'|',
-			'imageStyle:inline',
-			'imageStyle:wrapText',
-			'imageStyle:breakText',
-			'imageStyle:side',
+			'findAndReplace',
+			'|',
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'removeFormat',
+			'|',
+			'link',
+			'insertImage',
+			'insertTable',
+			'highlight',
+			'specialCharacters',
+			{
+				label: 'Einfügen',
+				icon: 'plus',
+				items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
+			},
+			'|',
+			'alignment',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'outdent',
+			'indent',
 		],
-		insert: {
-			integrations: ['url'],
+		image: {
+			toolbar: [
+				'imageTextAlternative',
+				'toggleImageCaption',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'imageStyle:side',
+			],
+			insert: {
+				integrations: ['url'],
+			},
 		},
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells',
-			'tableProperties',
-			'toggleTableCaption',
-		],
-	},
-	translations: deTranslations,
+		table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells',
+				'tableProperties',
+				'toggleTableCaption',
+			],
+		},
+		translations: deTranslations,
+	}
+)
+.then((editor) => {
+	(window as any).editor = editor;
+})
+.catch((error) => {
+	console.error(error.stack);
 });
 
-ClassicEditor.create(document.querySelector('#cke5-localized-ar-demo') as HTMLElement, {
-	language: 'ar',
-	plugins: plugins,
-	placeholder: 'اكتب أو الصق المحتوى الخاص بك هنا!',
-	toolbar: [
-		'undo',
-		'redo',
-		'|',
-		'findAndReplace',
-		'|',
-		'heading',
-		'|',
-		'bold',
-		'italic',
-		'underline',
-		'strikethrough',
-		'removeFormat',
-		'|',
-		'link',
-		'insertImage',
-		'insertTable',
-		'highlight',
-		'specialCharacters',
-		{
-			label: 'إدراج',
-			icon: 'plus',
-			items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
-		},
-		'|',
-		'alignment',
-		'|',
-		'bulletedList',
-		'numberedList',
-		'outdent',
-		'indent',
-	],
-	image: {
+ClassicEditor.create(
+	document.querySelector('#cke5-localized-ar-demo') as HTMLElement,
+	{
+		language: 'ar',
+		plugins: plugins,
+		placeholder: 'اكتب أو الصق المحتوى الخاص بك هنا!',
 		toolbar: [
-			'imageTextAlternative',
-			'toggleImageCaption',
+			'undo',
+			'redo',
 			'|',
-			'imageStyle:inline',
-			'imageStyle:wrapText',
-			'imageStyle:breakText',
-			'imageStyle:side',
+			'findAndReplace',
+			'|',
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'removeFormat',
+			'|',
+			'link',
+			'insertImage',
+			'insertTable',
+			'highlight',
+			'specialCharacters',
+			{
+				label: 'إدراج',
+				icon: 'plus',
+				items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
+			},
+			'|',
+			'alignment',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'outdent',
+			'indent',
 		],
-		insert: {
-			integrations: ['url'],
+		image: {
+			toolbar: [
+				'imageTextAlternative',
+				'toggleImageCaption',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'imageStyle:side',
+			],
+			insert: {
+				integrations: ['url'],
+			},
 		},
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells',
-			'tableProperties',
-			'toggleTableCaption',
-		],
-	},
-	translations: arTranslations,
+		table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells',
+				'tableProperties',
+				'toggleTableCaption',
+			],
+		},
+		translations: arTranslations,
+	}
+)
+.then((editor) => {
+	(window as any).editor = editor;
+})
+.catch((error) => {
+	console.error(error.stack);
 });
 
-ClassicEditor.create(document.querySelector('#cke5-localized-ja-demo') as HTMLElement, {
-	language: 'ja',
-	plugins: plugins,
-	placeholder: 'こちらに内容を入力するか張り付けてください。',
-	toolbar: [
-		'undo',
-		'redo',
-		'|',
-		'findAndReplace',
-		'|',
-		'heading',
-		'|',
-		'bold',
-		'italic',
-		'underline',
-		'strikethrough',
-		'removeFormat',
-		'|',
-		'link',
-		'insertImage',
-		'insertTable',
-		'highlight',
-		'specialCharacters',
-		{
-			label: '挿入',
-			icon: 'plus',
-			items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
-		},
-		'|',
-		'alignment',
-		'|',
-		'bulletedList',
-		'numberedList',
-		'outdent',
-		'indent',
-	],
-	image: {
+ClassicEditor.create(
+	document.querySelector('#cke5-localized-ja-demo') as HTMLElement,
+	{
+		language: 'ja',
+		plugins: plugins,
+		placeholder: 'こちらに内容を入力するか張り付けてください。',
 		toolbar: [
-			'imageTextAlternative',
-			'toggleImageCaption',
+			'undo',
+			'redo',
 			'|',
-			'imageStyle:inline',
-			'imageStyle:wrapText',
-			'imageStyle:breakText',
-			'imageStyle:side',
+			'findAndReplace',
+			'|',
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'removeFormat',
+			'|',
+			'link',
+			'insertImage',
+			'insertTable',
+			'highlight',
+			'specialCharacters',
+			{
+				label: '挿入',
+				icon: 'plus',
+				items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
+			},
+			'|',
+			'alignment',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'outdent',
+			'indent',
 		],
-		insert: {
-			integrations: ['url'],
+		image: {
+			toolbar: [
+				'imageTextAlternative',
+				'toggleImageCaption',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'imageStyle:side',
+			],
+			insert: {
+				integrations: ['url'],
+			},
 		},
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells',
-			'tableProperties',
-			'toggleTableCaption',
-		],
-	},
-	translations: jaTranslations,
+		table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells',
+				'tableProperties',
+				'toggleTableCaption',
+			],
+		},
+		translations: jaTranslations,
+	}
+)
+.then((editor) => {
+	(window as any).editor = editor;
+})
+.catch((error) => {
+	console.error(error.stack);
 });

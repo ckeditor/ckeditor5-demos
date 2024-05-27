@@ -340,4 +340,10 @@ ClassicEditor.create(
 		},
 		licenseKey: LICENSE_KEY,
 	}
-);
+)
+.then((editor) => {
+	(window as any).editor = editor;
+})
+.catch((error) => {
+	console.error(error.stack);
+});
