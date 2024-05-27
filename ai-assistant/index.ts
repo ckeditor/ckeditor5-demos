@@ -95,6 +95,9 @@ import {
 import 'ckeditor5/index.css';
 import 'ckeditor5-premium-features/index.css';
 
+import coreStylesheets from 'ckeditor5/index.css?url';
+import premiumStylesheets from 'ckeditor5-premium-features/index.css?url';
+
 ClassicEditor.create(
 	document.querySelector('#cke5-ai-assistant-demo') as HTMLElement,
 	{
@@ -302,7 +305,7 @@ ClassicEditor.create(
 				editor.getData({
 					showSuggestionHighlights: true,
 				}),
-			stylesheets: ['EDITOR_STYLES'],
+			stylesheets: [coreStylesheets, premiumStylesheets],
 			converterOptions: {
 				format: 'A4',
 				margin_top: '20mm',
@@ -318,7 +321,7 @@ ClassicEditor.create(
 				editor.getData({
 					showSuggestionHighlights: true,
 				}),
-			stylesheets: ['EDITOR_STYLES'],
+			stylesheets: [coreStylesheets, premiumStylesheets],
 			converterOptions: {
 				format: 'A4',
 				margin_top: '20mm',
