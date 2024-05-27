@@ -3,16 +3,33 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// AI Assistant require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
 const LICENSE_KEY = '';
 
-// https://ckeditor.com/docs/ckeditor5/40.2.0/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
+
+// AI Assistant requires additional configuration.
+// See https://ckeditor.com/docs/ckeditor5/40.2.0/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
 const AI_API_URL = '';
 
-/* You must provide a valid token URL in order to use the CKBox application.
-After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-const CKBOX_TOKEN_URL = 'https://api.ckbox.io/token/demo';
+if (!AI_API_URL) {
+	alert(
+		'CKEditor AI Assistant included in this demo requires additional configuration.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
+
+// CKBox plugin requires a valid token URL in order to use the CKBox application.
+// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+const CKBOX_TOKEN_URL = '';
 
 import {
 	ClassicEditor,
@@ -87,10 +104,7 @@ ClassicEditor.create(
 			AutoImage,
 			BlockQuote,
 			Bold,
-			/* You must provide a valid token URL in order to use the CKBox application.
-			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-			CKBox,
+			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			PictureEditing,
 			Code,
 			CodeBlock,
@@ -173,9 +187,6 @@ ClassicEditor.create(
 				'blockQuote',
 				'|',
 				'insertImage',
-				/* You must provide a valid token URL in order to use the CKBox application.
-				After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-				https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
 				'ckbox',
 				'insertTable',
 				'codeBlock',
