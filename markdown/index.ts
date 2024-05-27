@@ -3,40 +3,55 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
-const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+const LICENSE_KEY = '';
 
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
 
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
-import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown';
-import Mention from '@ckeditor/ckeditor5-mention/src/mention';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
-import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
-import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
-// Productivity Pack features
-import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
+import {
+	ClassicEditor,
+	Essentials,
+	Autoformat,
+	BlockQuote,
+	Bold,
+	CloudServices,
+	Code,
+	CodeBlock,
+	Heading,
+	HorizontalLine,
+	Image,
+	ImageToolbar,
+	ImageUpload,
+	Base64UploadAdapter,
+	Italic,
+	Link,
+	List,
+	Markdown,
+	Mention,
+	Paragraph,
+	SourceEditing,
+	SpecialCharacters,
+	SpecialCharactersEssentials,
+	Strikethrough,
+	Table,
+	TableToolbar,
+	TextTransformation,
+	TodoList,
+} from 'ckeditor5';
+
+import {
+	SlashCommand
+} from 'ckeditor5-premium-features'
+
+import 'ckeditor5/index.css';
+import 'ckeditor5-premium-features/index.css';
 
 /**
  * Enrich the special characters plugin with emojis.
@@ -157,7 +172,7 @@ const EMOJIS_ARRAY = [
 	{ character: '☀️', title: 'Sun' },
 ];
 
-ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
+ClassicEditor.create(document.querySelector('#cke5-markdown-demo') as HTMLElement, {
 	plugins: [
 		Autoformat,
 		BlockQuote,
@@ -187,9 +202,9 @@ ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
 		TableToolbar,
 		TextTransformation,
 		TodoList,
-		// SlashCommand,
+		...(LICENSE_KEY ? [SlashCommand] : []),
 	],
-	licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
+	licenseKey: LICENSE_KEY,
 	language: 'en',
 	toolbar: [
 		'undo',
@@ -271,10 +286,4 @@ ClassicEditor.create(document.querySelector('#cke5-markdown-demo'), {
 	table: {
 		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
 	},
-})
-	.then((editor) => {
-		window.editor = editor;
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+});
