@@ -21,5 +21,5 @@ cd ckeditor5-demos/paste-from-office-enhanced && yarn
 3. Start the demo:
 
 ```shell
-yarn start
+yarn dev
 ```
