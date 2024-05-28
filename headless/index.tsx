@@ -4,9 +4,9 @@
  */
 
 import React, { useState, useEffect, StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import HeadlessEditor from '.';
-import { createRoot } from 'react-dom/client';
 
 function App() {
 	const [editor, setEditor] = useState(null);
@@ -59,7 +59,7 @@ function App() {
 				onReady={(editor) => {
 					setEditor(editor);
 
-					window.editor = editor;
+					(window as any).editor = editor;
 				}}
 			/>
 		</div>
@@ -140,12 +140,19 @@ function EditorToolbar({ editor }) {
 	);
 }
 
+type EditorToolbarButtonProps = {
+	label: string;
+	editor: HeadlessEditor;
+	commandName: string;
+	commandValue?: string;
+};
+
 function EditorToolbarButton({
 	label,
 	editor,
 	commandName,
-	commandValue = null,
-}) {
+	commandValue,
+}: EditorToolbarButtonProps) {
 	const command = editor ? editor.commands.get(commandName) : null;
 	const [isOn, setIsOn] = useState(false);
 	const [isEnabled, setIsEnabled] = useState(true);
@@ -156,15 +163,15 @@ function EditorToolbarButton({
 		}
 
 		function handleValueChange() {
-			if (typeof command.value === 'boolean') {
-				setIsOn(!!command.value);
+			if (typeof command!.value === 'boolean') {
+				setIsOn(!!command!.value);
 			} else {
-				setIsOn(commandValue === command.value);
+				setIsOn(commandValue === command!.value);
 			}
 		}
 
 		function handleIsEnabledChange() {
-			setIsEnabled(command.isEnabled);
+			setIsEnabled(command!.isEnabled);
 		}
 
 		command.on('change:value', handleValueChange);
