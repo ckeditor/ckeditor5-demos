@@ -1,5 +1,5 @@
 describe( 'Test CKEditor 5 demo', () => {
-  const demosNIMBuilt = [
+  const allDemos = [
     'ai-assistant',
     'feature-rich',
     'headless',
@@ -15,13 +15,14 @@ describe( 'Test CKEditor 5 demo', () => {
     'user-interface-bottom-toolbar',
     'user-interface-button-grouping',
     'user-interface-classic',
+    'user-interface-document',
     'user-interface-inline',
     'wproofreader',
   ];
 
-  demosNIMBuilt.forEach( demo => {
-    it( `Testing demo: ${ demo } (NIM built)`, () => {
-      const URL = `http://localhost:9002/${ demo }.html`;
+  allDemos.forEach( demo => {
+    it( `Testing demo: ${ demo }`, () => {
+      const URL = `http://localhost:9001/${ demo }.html`;
 
       cy.visit( URL );
 
@@ -47,26 +48,4 @@ describe( 'Test CKEditor 5 demo', () => {
       }
     } )
   } );
-
-  const demosLegacyBuilt = [
-    'user-interface-document',
-  ];
-
-  demosLegacyBuilt.forEach( demo => {
-    it( `Testing demo: ${ demo } (webpack legacy built)`, () => {
-      const URL = `http://localhost:9001/${ demo }/`;
-
-      cy.visit( URL );
-
-      // Check if the editor initialized properly.
-      cy.get( '.ck-editor__editable' );
-
-      // Check if images loaded properly.
-      if ( Cypress.$( 'img' ).length > 0 ) {
-        cy.get( 'img' ).each( $img => {
-          expect( $img[ 0 ].naturalWidth ).to.be.above( 0 );
-        } );
-      }
-    } )
-  } );
-} )
+} );

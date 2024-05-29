@@ -23,5 +23,5 @@ cd ckeditor5-demos/user-interface-document && yarn
 3. Start the demo:
 
 ```shell
-yarn start
+yarn dev
 ```
