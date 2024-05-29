@@ -1,6 +1,7 @@
 describe( 'Test CKEditor 5 demo', () => {
   const demosNIMBuilt = [
     'ai-assistant',
+    'feature-rich',
     'headless',
     'internationalization',
     'markdown',
@@ -44,7 +45,6 @@ describe( 'Test CKEditor 5 demo', () => {
   } );
 
   const demosLegacyBuilt = [
-    'feature-rich',
     'mathtype',
     'source-code-editing',
     'productivity-pack',
