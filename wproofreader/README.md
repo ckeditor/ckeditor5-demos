@@ -21,5 +21,5 @@ cd ckeditor5-demos/wproofreader && yarn
 3. Start the demo:
 
 ```shell
-yarn start
+yarn dev
 ```

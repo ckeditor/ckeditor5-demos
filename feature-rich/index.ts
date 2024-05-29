@@ -20,7 +20,7 @@ if (!LICENSE_KEY) {
 // https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
 const CKBOX_TOKEN_URL = '';
 
-// WProofreader plugins require a license key to work properly.
+// WProofreader plugin require a license key to work properly.
 // For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 

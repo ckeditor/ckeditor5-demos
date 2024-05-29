@@ -13,7 +13,8 @@ describe( 'Test CKEditor 5 demo', () => {
     'user-interface-bottom-toolbar',
     'user-interface-button-grouping',
     'user-interface-classic',
-    'user-interface-inline'
+    'user-interface-inline',
+    'wproofreader',
   ];
 
   demosNIMBuilt.forEach( demo => {
@@ -49,7 +50,6 @@ describe( 'Test CKEditor 5 demo', () => {
     'source-code-editing',
     'productivity-pack',
     'user-interface-document',
-    'wproofreader',
   ];
 
   demosLegacyBuilt.forEach( demo => {
