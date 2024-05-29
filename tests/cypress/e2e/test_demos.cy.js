@@ -8,6 +8,7 @@ describe( 'Test CKEditor 5 demo', () => {
     'mathtype',
     'mobile',
     'paste-from-office-enhanced',
+    'source-code-editing',
     'user-interface-balloon',
     'user-interface-balloon-block',
     'user-interface-bottom-toolbar',
@@ -47,7 +48,7 @@ describe( 'Test CKEditor 5 demo', () => {
   } );
 
   const demosLegacyBuilt = [
-    'source-code-editing',
+
     'productivity-pack',
     'user-interface-document',
   ];

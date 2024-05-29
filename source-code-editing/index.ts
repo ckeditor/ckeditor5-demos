@@ -3,82 +3,103 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
-const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+const LICENSE_KEY = '';
 
-/* You must provide a valid token URL in order to use the CKBox application.
-After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
+
+// CKBox plugin requires a valid token URL in order to use the CKBox application.
+// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
 const CKBOX_TOKEN_URL = '';
 
-// Put your Web Spell Checker license key here, for more info how to get the key see [LINK].
+// WProofreader plugin require a license key to work properly.
+// For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import {
+	ClassicEditor,
+	Alignment,
+	Autoformat,
+	AutoImage,
+	AutoLink,
+	BlockQuote,
+	Bold,
+	Base64UploadAdapter,
+	CloudServices,
+	Code,
+	CodeBlock,
+	CKBox,
+	Essentials,
+	FindAndReplace,
+	Font,
+	GeneralHtmlSupport,
+	Heading,
+	HorizontalLine,
+	HtmlEmbed,
+	Image,
+	ImageCaption,
+	ImageInsert,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	Indent,
+	IndentBlock,
+	Italic,
+	Link,
+	LinkImage,
+	List,
+	ListProperties,
+	MediaEmbed,
+	Mention,
+	PageBreak,
+	Paragraph,
+	PasteFromOffice,
+	PictureEditing,
+	RemoveFormat,
+	ShowBlocks,
+	SourceEditing,
+	Strikethrough,
+	Style,
+	Subscript,
+	Superscript,
+	Table,
+	TableCaption,
+	TableCellProperties,
+	TableColumnResize,
+	TableProperties,
+	TableToolbar,
+	TextPartLanguage,
+	TextTransformation,
+	TodoList,
+	Underline,
+} from 'ckeditor5';
 
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage';
-import AutoLink from '@ckeditor/ckeditor5-link/src/autolink';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
-import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
-import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import ExportPdf from '@ckeditor/ckeditor5-export-pdf/src/exportpdf';
-import ExportWord from '@ckeditor/ckeditor5-export-word/src/exportword';
-import ImportWord from '@ckeditor/ckeditor5-import-word/src/importword';
-import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
-import Font from '@ckeditor/ckeditor5-font/src/font';
-import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
-import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import Mention from '@ckeditor/ckeditor5-mention/src/mention';
-import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
-import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
-import { ShowBlocks } from '@ckeditor/ckeditor5-show-blocks';
-import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Style from '@ckeditor/ckeditor5-style/src/style';
-import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
-import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
-import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextPartLanguage from '@ckeditor/ckeditor5-language/src/textpartlanguage';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
+import {
+	ExportPdf,
+	ExportWord,
+	ImportWord,
+	Template,
+	SlashCommand,
+} from 'ckeditor5-premium-features';
+
 import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
-// Productivity Pack features
-import Template from '@ckeditor/ckeditor5-template/src/template';
-import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
+
+import 'ckeditor5/index.css';
+import 'ckeditor5-premium-features/index.css';
+
+// @ts-ignore
+import coreStylesheets from 'ckeditor5/index.css?url';
+// @ts-ignore
+import premiumStylesheets from 'ckeditor5-premium-features/index.css?url';
 
 const exportHorizontalSpace = '10mm';
 const exportVerticalSpace = '12mm';
@@ -497,396 +518,390 @@ function customMentionUserItemRenderer(item) {
 	return itemElement;
 }
 
-ClassicEditor.create(document.querySelector('#cke5-source-code-demo'), {
-	plugins: [
-		Alignment,
-		Autoformat,
-		AutoImage,
-		AutoLink,
-		BlockQuote,
-		Bold,
-		CloudServices,
-		Code,
-		CodeBlock,
-		/* You must provide a valid token URL in order to use the CKBox application.
-		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-		// CKBox,
-		Essentials,
-		ExportPdf,
-		ExportWord,
-		FindAndReplace,
-		Font,
-		GeneralHtmlSupport,
-		Heading,
-		HorizontalLine,
-		HtmlEmbed,
-		Image,
-		ImageCaption,
-		ImageInsert,
-		ImageResize,
-		ImageStyle,
-		ImageToolbar,
-		ImageUpload,
-		Base64UploadAdapter,
-		ImportWord,
-		Indent,
-		IndentBlock,
-		Italic,
-		Link,
-		LinkImage,
-		List,
-		ListProperties,
-		MediaEmbed,
-		Mention,
-		PageBreak,
-		Paragraph,
-		PasteFromOffice,
-		PictureEditing,
-		RemoveFormat,
-		ShowBlocks,
-		SourceEditing,
-		Strikethrough,
-		Style,
-		Subscript,
-		Superscript,
-		Table,
-		TableCaption,
-		TableCellProperties,
-		TableColumnResize,
-		TableProperties,
-		TableToolbar,
-		TextPartLanguage,
-		TextTransformation,
-		TodoList,
-		Underline,
-		UploadAdapter,
-		WProofreader,
-		// SlashCommand,
-		// Template,
-	],
-	licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
-	language: 'en',
-	toolbar: {
-		shouldNotGroupWhenFull: true,
-		items: [
-			// --- Document-wide tools ----------------------------------------------------------------------
-			'undo',
-			'redo',
-			'|',
-			'sourceEditing',
-			'showBlocks',
-			'|',
-			'importWord',
-			'exportWord',
-			'exportPdf',
-			'|',
-			'findAndReplace',
-			'selectAll',
-			'wproofreader',
-			'|',
-
-			// --- "Insertables" ----------------------------------------------------------------------------
-			// 'insertTemplate',
-			'link',
-			'insertImage',
-			/* You must provide a valid token URL in order to use the CKBox application.
-			After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-			https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint*/
-			// 'ckbox',
-			'insertTable',
-			'blockQuote',
-			'mediaEmbed',
-			'codeBlock',
-			'htmlEmbed',
-			'pageBreak',
-			'horizontalLine',
-			'-',
-
-			// --- Block-level formatting -------------------------------------------------------------------
-			'heading',
-			'style',
-			'|',
-
-			// --- Basic styles, font and inline formatting -------------------------------------------------------
-			'bold',
-			'italic',
-			'underline',
-			'strikethrough',
-			'superscript',
-			'subscript',
-			{
-				label: 'Basic styles',
-				icon: 'text',
-				items: [
-					'fontSize',
-					'fontFamily',
-					'fontColor',
-					'fontBackgroundColor',
-					'code',
-					'|',
-					'textPartLanguage',
-					'|',
-				],
-			},
-			'removeFormat',
-			'|',
-
-			// --- Text alignment ---------------------------------------------------------------------------
-			'alignment',
-			'|',
-
-			// --- Lists and indentation --------------------------------------------------------------------
-			'bulletedList',
-			'numberedList',
-			'todoList',
-			'|',
-			'outdent',
-			'indent',
+ClassicEditor.create(
+	document.querySelector('#cke5-source-code-demo') as HTMLElement,
+		{
+		plugins: [
+			Alignment,
+			Autoformat,
+			AutoImage,
+			AutoLink,
+			BlockQuote,
+			Bold,
+			CloudServices,
+			Code,
+			CodeBlock,
+			...(CKBOX_TOKEN_URL ? [CKBox] : []),
+			Essentials,
+			FindAndReplace,
+			Font,
+			GeneralHtmlSupport,
+			Heading,
+			HorizontalLine,
+			HtmlEmbed,
+			Image,
+			ImageCaption,
+			ImageInsert,
+			ImageResize,
+			ImageStyle,
+			ImageToolbar,
+			ImageUpload,
+			Base64UploadAdapter,
+			Indent,
+			IndentBlock,
+			Italic,
+			Link,
+			LinkImage,
+			List,
+			ListProperties,
+			MediaEmbed,
+			Mention,
+			PageBreak,
+			Paragraph,
+			PasteFromOffice,
+			PictureEditing,
+			RemoveFormat,
+			ShowBlocks,
+			SourceEditing,
+			Strikethrough,
+			Style,
+			Subscript,
+			Superscript,
+			Table,
+			TableCaption,
+			TableCellProperties,
+			TableColumnResize,
+			TableProperties,
+			TableToolbar,
+			TextPartLanguage,
+			TextTransformation,
+			TodoList,
+			Underline,
+			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
+			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
+			...(LICENSE_KEY ? [
+				ExportPdf,
+				ExportWord,
+				ImportWord,
+				SlashCommand,
+				Template,
+			] : []),
 		],
-	},
-	exportPdf: {
-		stylesheets: ['EDITOR_STYLES', './content.css'],
-		fileName: 'export-pdf-demo.pdf',
-		appID: 'cke5-demos',
-		converterOptions: {
-			format: 'Tabloid',
-			margin_top: exportVerticalSpace,
-			margin_bottom: exportVerticalSpace,
-			margin_right: exportHorizontalSpace,
-			margin_left: exportHorizontalSpace,
-			page_orientation: 'portrait',
+		licenseKey: LICENSE_KEY,
+		language: 'en',
+		toolbar: {
+			shouldNotGroupWhenFull: true,
+			items: [
+				// --- Document-wide tools ----------------------------------------------------------------------
+				'undo',
+				'redo',
+				'|',
+				'sourceEditing',
+				'showBlocks',
+				'|',
+				'importWord',
+				'exportWord',
+				'exportPdf',
+				'|',
+				'findAndReplace',
+				'selectAll',
+				'wproofreader',
+				'|',
+
+				// --- "Insertables" ----------------------------------------------------------------------------
+				// 'insertTemplate',
+				'link',
+				'insertImage',
+				'ckbox',
+				'insertTable',
+				'blockQuote',
+				'mediaEmbed',
+				'codeBlock',
+				'htmlEmbed',
+				'pageBreak',
+				'horizontalLine',
+				'-',
+
+				// --- Block-level formatting -------------------------------------------------------------------
+				'heading',
+				'style',
+				'|',
+
+				// --- Basic styles, font and inline formatting -------------------------------------------------------
+				'bold',
+				'italic',
+				'underline',
+				'strikethrough',
+				'superscript',
+				'subscript',
+				{
+					label: 'Basic styles',
+					icon: 'text',
+					items: [
+						'fontSize',
+						'fontFamily',
+						'fontColor',
+						'fontBackgroundColor',
+						'code',
+						'|',
+						'textPartLanguage',
+						'|',
+					],
+				},
+				'removeFormat',
+				'|',
+
+				// --- Text alignment ---------------------------------------------------------------------------
+				'alignment',
+				'|',
+
+				// --- Lists and indentation --------------------------------------------------------------------
+				'bulletedList',
+				'numberedList',
+				'todoList',
+				'|',
+				'outdent',
+				'indent',
+			],
 		},
-		tokenUrl: false,
-	},
-	exportWord: {
-		stylesheets: ['EDITOR_STYLES', './content.css'],
-		fileName: 'export-word-demo.docx',
-		appID: 'cke5-demos',
-		converterOptions: {
-			format: 'A4',
-			margin_top: exportVerticalSpace,
-			margin_bottom: exportVerticalSpace,
-			margin_right: exportHorizontalSpace,
-			margin_left: exportHorizontalSpace,
+		exportPdf: {
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			fileName: 'export-pdf-demo.pdf',
+			appID: 'cke5-demos',
+			converterOptions: {
+				format: 'Tabloid',
+				margin_top: exportVerticalSpace,
+				margin_bottom: exportVerticalSpace,
+				margin_right: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace,
+				page_orientation: 'portrait',
+			},
+			tokenUrl: false,
 		},
-		tokenUrl: false,
-	},
-	fontFamily: {
-		supportAllValues: true,
-	},
-	fontSize: {
-		options: [10, 12, 14, 'default', 18, 20, 22],
-		supportAllValues: true,
-	},
-	fontColor: {
-		columns: 12,
-		colors: REDUCED_MATERIAL_COLORS,
-	},
-	fontBackgroundColor: {
-		columns: 12,
-		colors: REDUCED_MATERIAL_COLORS,
-	},
-	heading: {
-		options: [
-			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{
-				model: 'heading1',
-				view: 'h1',
-				title: 'Heading 1',
-				class: 'ck-heading_heading1',
+		exportWord: {
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			fileName: 'export-word-demo.docx',
+			converterOptions: {
+				format: 'A4',
+				margin_top: exportVerticalSpace,
+				margin_bottom: exportVerticalSpace,
+				margin_right: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace,
 			},
-			{
-				model: 'heading2',
-				view: 'h2',
-				title: 'Heading 2',
-				class: 'ck-heading_heading2',
+			tokenUrl: false,
+		},
+		fontFamily: {
+			supportAllValues: true,
+		},
+		fontSize: {
+			options: [10, 12, 14, 'default', 18, 20, 22],
+			supportAllValues: true,
+		},
+		fontColor: {
+			columns: 12,
+			colors: REDUCED_MATERIAL_COLORS,
+		},
+		fontBackgroundColor: {
+			columns: 12,
+			colors: REDUCED_MATERIAL_COLORS,
+		},
+		heading: {
+			options: [
+				{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1',
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2',
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3',
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4',
+				},
+				{
+					model: 'heading5',
+					view: 'h5',
+					title: 'Heading 5',
+					class: 'ck-heading_heading5',
+				},
+				{
+					model: 'heading6',
+					view: 'h6',
+					title: 'Heading 6',
+					class: 'ck-heading_heading6',
+				},
+			],
+		},
+		htmlEmbed: {
+			showPreviews: true,
+		},
+		htmlSupport: {
+			allow: [
+				// Enables all HTML features.
+				{
+					name: /.*/,
+					attributes: true,
+					classes: true,
+					styles: true,
+				},
+			],
+			disallow: [
+				{
+					attributes: [
+						{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
+					],
+				},
+			],
+		},
+		image: {
+			resizeOptions: [
+				{
+					name: 'resizeImage:original',
+					label: 'Default image width',
+					value: null,
+				},
+				{
+					name: 'resizeImage:50',
+					label: '50% page width',
+					value: '50',
+				},
+				{
+					name: 'resizeImage:75',
+					label: '75% page width',
+					value: '75',
+				},
+			],
+			toolbar: [
+				'imageTextAlternative',
+				'toggleImageCaption',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'imageStyle:side',
+				'|',
+				'resizeImage',
+			],
+			insert: {
+				integrations: ['url'],
 			},
-			{
-				model: 'heading3',
-				view: 'h3',
-				title: 'Heading 3',
-				class: 'ck-heading_heading3',
-			},
-			{
-				model: 'heading4',
-				view: 'h4',
-				title: 'Heading 4',
-				class: 'ck-heading_heading4',
-			},
-			{
-				model: 'heading5',
-				view: 'h5',
-				title: 'Heading 5',
-				class: 'ck-heading_heading5',
-			},
-			{
-				model: 'heading6',
-				view: 'h6',
-				title: 'Heading 6',
-				class: 'ck-heading_heading6',
-			},
-		],
-	},
-	htmlEmbed: {
-		showPreviews: true,
-	},
-	htmlSupport: {
-		allow: [
-			// Enables all HTML features.
-			{
-				name: /.*/,
-				attributes: true,
-				classes: true,
+		},
+		list: {
+			properties: {
 				styles: true,
+				startIndex: true,
+				reversed: true,
 			},
-		],
-		disallow: [
-			{
-				attributes: [
-					{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
-				],
-			},
-		],
-	},
-	image: {
-		styles: ['alignCenter', 'alignLeft', 'alignRight'],
-		resizeOptions: [
-			{
-				name: 'resizeImage:original',
-				label: 'Default image width',
-				value: null,
-			},
-			{
-				name: 'resizeImage:50',
-				label: '50% page width',
-				value: '50',
-			},
-			{
-				name: 'resizeImage:75',
-				label: '75% page width',
-				value: '75',
-			},
-		],
-		toolbar: [
-			'imageTextAlternative',
-			'toggleImageCaption',
-			'|',
-			'imageStyle:inline',
-			'imageStyle:wrapText',
-			'imageStyle:breakText',
-			'imageStyle:side',
-			'|',
-			'resizeImage',
-		],
-		insert: {
-			integrations: ['url'],
 		},
-	},
-	importWord: {
-		tokenUrl: false,
-		defaultStyles: true,
-	},
-	list: {
-		properties: {
-			styles: true,
-			startIndex: true,
-			reversed: true,
-		},
-	},
-	link: {
-		decorators: {
-			toggleDownloadable: {
-				mode: 'manual',
-				label: 'Downloadable',
-				attributes: {
-					download: 'file',
+		link: {
+			decorators: {
+				toggleDownloadable: {
+					mode: 'manual',
+					label: 'Downloadable',
+					attributes: {
+						download: 'file',
+					},
 				},
 			},
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
 		},
-		addTargetToExternalLinks: true,
-		defaultProtocol: 'https://',
-	},
-	mention: {
-		feeds: MENTION_FEEDS,
-	},
-	placeholder: 'Type or paste your content here!',
-	style: {
-		definitions: [
-			{
-				name: 'Title',
-				element: 'h1',
-				classes: ['document-title'],
-			},
-			{
-				name: 'Subtitle',
-				element: 'h2',
-				classes: ['document-subtitle'],
-			},
-			{
-				name: 'Callout',
-				element: 'p',
-				classes: ['callout'],
-			},
-			{
-				name: 'Side quote',
-				element: 'blockquote',
-				classes: ['side-quote'],
-			},
-			{
-				name: 'Needs clarification',
-				element: 'span',
-				classes: ['needs-clarification'],
-			},
-			{
-				name: 'Wide spacing',
-				element: 'span',
-				classes: ['wide-spacing'],
-			},
-			{
-				name: 'Small caps',
-				element: 'span',
-				classes: ['small-caps'],
-			},
-			{
-				name: 'Code (dark)',
-				element: 'pre',
-				classes: ['stylish-code', 'stylish-code-dark'],
-			},
-			{
-				name: 'Code (bright)',
-				element: 'pre',
-				classes: ['stylish-code', 'stylish-code-bright'],
-			},
-		],
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells',
-			'tableProperties',
-			'tableCellProperties',
-			'toggleTableCaption',
-		],
-	},
-	wproofreader: {
-		serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
-		lang: 'auto',
-		srcUrl:
-			'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-		autoStartup: false,
-	},
-	ckbox: {
-		tokenUrl: CKBOX_TOKEN_URL,
-	},
-	template: {
-		definitions: TEMPLATE_DEFINITIONS,
-	},
+		mention: {
+			feeds: MENTION_FEEDS,
+		},
+		placeholder: 'Type or paste your content here!',
+		style: {
+			definitions: [
+				{
+					name: 'Title',
+					element: 'h1',
+					classes: ['document-title'],
+				},
+				{
+					name: 'Subtitle',
+					element: 'h2',
+					classes: ['document-subtitle'],
+				},
+				{
+					name: 'Callout',
+					element: 'p',
+					classes: ['callout'],
+				},
+				{
+					name: 'Side quote',
+					element: 'blockquote',
+					classes: ['side-quote'],
+				},
+				{
+					name: 'Needs clarification',
+					element: 'span',
+					classes: ['needs-clarification'],
+				},
+				{
+					name: 'Wide spacing',
+					element: 'span',
+					classes: ['wide-spacing'],
+				},
+				{
+					name: 'Small caps',
+					element: 'span',
+					classes: ['small-caps'],
+				},
+				{
+					name: 'Code (dark)',
+					element: 'pre',
+					classes: ['stylish-code', 'stylish-code-dark'],
+				},
+				{
+					name: 'Code (bright)',
+					element: 'pre',
+					classes: ['stylish-code', 'stylish-code-bright'],
+				},
+			],
+		},
+		table: {
+			contentToolbar: [
+				'tableColumn',
+				'tableRow',
+				'mergeTableCells',
+				'tableProperties',
+				'tableCellProperties',
+				'toggleTableCaption',
+			],
+		},
+		/* @ts-ignore */
+		wproofreader: {
+			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
+			lang: 'auto',
+			srcUrl:
+				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
+			autoStartup: false,
+		},
+		ckbox: {
+			tokenUrl: CKBOX_TOKEN_URL,
+		},
+		template: {
+			definitions: TEMPLATE_DEFINITIONS,
+		},
+	}
+)
+.then((editor) => {
+	(window as any).editor = editor;
 })
-	.then((editor) => {
-		window.editor = editor;
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+.catch((error) => {
+	console.error(error.stack);
+});
