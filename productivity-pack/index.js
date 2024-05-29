@@ -18,7 +18,7 @@ const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
 
 // Features
-import AdjacentListsSupport from '@ckeditor/ckeditor5-list/src/documentlist/adjacentlistssupport.js';
+import AdjacentListsSupport from '@ckeditor/ckeditor5-list/src/list/adjacentlistssupport';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';

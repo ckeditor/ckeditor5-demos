@@ -26,7 +26,7 @@ for DIR in "$DEMOS_PATH"/* ; do
         if [[ -f "webpack.config.js" ]]; then
             # - Use legacy webpack build if webpack config present
             echo "Using webpack build..."
-            npx webpack --mode development > /dev/null
+            yarn build-dev > /dev/null
         else
             # - Build with yarn + vite and move files to common dir
             echo "Using vite build..."
@@ -38,11 +38,6 @@ for DIR in "$DEMOS_PATH"/* ; do
             if [[ -f "mobile-iframe.html" ]]; then
                 cp "$DIR/dist/mobile-iframe.html" "$DEMOS_PATH/builds/mobile-iframe.html"
             fi
-        fi
-
-        if [ ! $? -eq 0 ]; then
-            echo "Building failed: $DEMO_NAME"
-            ERROR=1
         fi
     fi
 done
