@@ -37,7 +37,7 @@ echo "Samples building completed."
 
 # Start the server
 echo "Starting up the server."
-http-server $DEMOS_PATH -p 9001 -s &
+http-server "$DEMOS_PATH/builds/" -p 9001 -s &
 
 # Start tests
 cd "$DEMOS_PATH"/tests || exit
