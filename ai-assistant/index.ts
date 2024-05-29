@@ -16,7 +16,7 @@ if (!LICENSE_KEY) {
 }
 
 // AI Assistant requires additional configuration.
-// See https://ckeditor.com/docs/ckeditor5/40.2.0/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
+// See https://ckeditor.com/docs/ckeditor5/latest/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
 const AI_API_URL = '';
 
 if (!AI_API_URL) {

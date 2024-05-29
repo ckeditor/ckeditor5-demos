@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Put your Web Spell Checker license key here, for more info how to get the key see https://ckeditor.com/docs/ckeditor5/40.2.0/features/spelling-and-grammar-checking.html.
+// Put your Web Spell Checker license key here, for more info how to get the key see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
