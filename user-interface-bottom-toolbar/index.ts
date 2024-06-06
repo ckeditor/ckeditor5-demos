@@ -375,7 +375,6 @@ DecoupledEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 		},
 		link: {

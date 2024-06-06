@@ -144,7 +144,6 @@ ClassicEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 			insert: {
 				integrations: ['url'],
@@ -215,7 +214,6 @@ ClassicEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 			insert: {
 				integrations: ['url'],
@@ -286,7 +284,6 @@ ClassicEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 			insert: {
 				integrations: ['url'],

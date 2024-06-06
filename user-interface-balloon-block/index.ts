@@ -145,7 +145,6 @@ BalloonEditor.create(
 			toolbar: [
 				'imageStyle:inline',
 				'imageStyle:block',
-				'imageStyle:side',
 				'|',
 				'toggleImageCaption',
 				'imageTextAlternative',
