@@ -47,6 +47,7 @@ import {
 	FontFamily,
 	FontSize,
 	Heading,
+	HorizontalLine,
 	Image,
 	ImageCaption,
 	ImageResize,
@@ -85,6 +86,8 @@ import {
 	DocumentOutline,
 	FormatPainter,
 	SlashCommand,
+	MultiLevelList,
+	CaseChange,
 } from 'ckeditor5-premium-features';
 
 // import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
@@ -631,6 +634,7 @@ DecoupledEditor.create(
 			FontFamily,
 			FontSize,
 			Heading,
+			HorizontalLine,
 			Image,
 			ImageCaption,
 			ImageResize,
@@ -669,72 +673,91 @@ DecoupledEditor.create(
 			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
 			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
 			...(LICENSE_KEY ? [
+				CaseChange,
+				DocumentOutline,
 				ExportPdf,
 				ExportWord,
-				ImportWord,
-				SlashCommand,
-				Template,
 				FormatPainter,
-				DocumentOutline,
+				ImportWord,
+				MultiLevelList,
+				SlashCommand,
 				TableOfContents,
+				Template,
 			] : []),
 		],
 		licenseKey: LICENSE_KEY,
 		toolbar: {
 			shouldNotGroupWhenFull: true,
 			items: [
+				// --- Document-wide tools ----------------------------------------------------------------------
 				'undo',
 				'redo',
 				'|',
-				// 'insertTemplate',
-				// 'tableOfContents',
-				// '|',
-				// 'formatPainter',
-				// '|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
 				'|',
+				'formatPainter',
+				'caseChange',
 				'findAndReplace',
 				'selectAll',
 				'wproofreader',
 				'|',
+				'insertTemplate',
+				'tableOfContents',
+				'|',
+
+				// --- "Insertables" ----------------------------------------------------------------------------
+
 				'link',
-				'uploadImage',
-				// 'ckbox',
+				'insertImage',
+				'ckbox',
 				'insertTable',
-				'blockquote',
+				'blockQuote',
 				'mediaEmbed',
 				'pageBreak',
+				'horizontalLine',
 				'specialCharacters',
-				'|',
-				'numberedList',
-				'bulletedList',
-				'|',
-				'outdent',
-				'indent',
 				'-',
+
+				// --- Block-level formatting -------------------------------------------------------------------
 				'heading',
 				'|',
-				'fontfamily',
-				'fontsize',
+
+				// --- Font formatting -------------------------------------------------------------------
+				'fontSize',
+				'fontFamily',
 				'fontColor',
 				'fontBackgroundColor',
 				'|',
+
+				// --- Basic styles and inline formatting -------------------------------------------------------
 				'bold',
 				'italic',
 				'underline',
 				{
 					label: 'Basic styles',
 					icon: 'text',
-					items: ['strikethrough', 'superscript', 'subscript'],
+					items: [
+						'strikethrough',
+						'superscript',
+						'subscript',
+					],
 				},
 				'removeFormat',
 				'|',
-				'alignment:left',
-				'alignment:right',
-				'alignment:center',
-				'alignment:justify',
+
+				// --- Text alignment ---------------------------------------------------------------------------
+				'alignment',
+				'|',
+
+				// --- Lists and indentation --------------------------------------------------------------------
+				'bulletedList',
+				'numberedList',
+				'multilevelList',
+				'|',
+				'outdent',
+				'indent',
 			],
 		},
 		heading: {
@@ -869,14 +892,18 @@ DecoupledEditor.create(
 		template: {
 			definitions: TEMPLATE_DEFINITIONS,
 		},
+		menuBar: {
+			isVisible: true
+		}
 	}
 )
 	.then((editor) => {
 		(window as any).editor = editor;
 
-		document
-			.querySelector('.cke5-editor-types-demo-document__toolbar-container')!
-			.appendChild(editor.ui.view.toolbar.element!);
+		const toolbarContainer = document.querySelector('.cke5-editor-types-demo-document__toolbar-container')!;
+
+		toolbarContainer.appendChild(editor.ui.view.menuBarView.element!);
+		toolbarContainer.appendChild(editor.ui.view.toolbar.element!);
 	})
 	.catch((error) => {
 		console.error(error.stack);
