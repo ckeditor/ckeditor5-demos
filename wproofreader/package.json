@@ -16,7 +16,6 @@
 	},
 	"devDependencies": {
 		"ckeditor5": "nightly",
-		"@webspellchecker/wproofreader-ckeditor5": "2.3.1",
 		"vite": "^5.0.0"
 	}
 }

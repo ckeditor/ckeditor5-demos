@@ -49,8 +49,8 @@ import {
 	SlashCommand
 } from 'ckeditor5-premium-features';
 
-import 'ckeditor5/index.css';
-import 'ckeditor5-premium-features/index.css';
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 const defaultConfig: EditorConfig = {
 	plugins: [

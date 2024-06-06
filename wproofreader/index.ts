@@ -39,9 +39,9 @@ import {
 	TodoList,
 } from 'ckeditor5';
 
-import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
+// import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
 
-import 'ckeditor5/index.css';
+import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
 	document.querySelector('#cke5-spellchecker-demo') as HTMLElement,

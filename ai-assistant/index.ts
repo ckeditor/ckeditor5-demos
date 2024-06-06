@@ -92,13 +92,13 @@ import {
 	PasteFromOfficeEnhanced,
 } from 'ckeditor5-premium-features';
 
-import 'ckeditor5/index.css';
-import 'ckeditor5-premium-features/index.css';
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 // @ts-ignore
-import coreStylesheets from 'ckeditor5/index.css?url';
+import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
 // @ts-ignore
-import premiumStylesheets from 'ckeditor5-premium-features/index.css?url';
+import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
 
 ClassicEditor.create(
 	document.querySelector('#cke5-ai-assistant-demo') as HTMLElement,

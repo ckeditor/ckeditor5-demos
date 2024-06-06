@@ -50,7 +50,7 @@ import deTranslations from 'ckeditor5/translations/de.js';
 import arTranslations from 'ckeditor5/translations/ar.js';
 import jaTranslations from 'ckeditor5/translations/ja.js';
 
-import 'ckeditor5/index.css';
+import 'ckeditor5/ckeditor5.css';
 
 const plugins = [
 	Alignment,

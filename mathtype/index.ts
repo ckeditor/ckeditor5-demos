@@ -34,7 +34,7 @@ import {
 
 import MathType from '@wiris/mathtype-ckeditor5/src/plugin';
 
-import 'ckeditor5/index.css';
+import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
 	document.querySelector('#cke5-mathtype-demo') as HTMLElement,

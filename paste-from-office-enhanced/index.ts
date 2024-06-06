@@ -58,8 +58,8 @@ import {
 	PasteFromOfficeEnhanced
 } from 'ckeditor5-premium-features';
 
-import 'ckeditor5/index.css';
-import 'ckeditor5-premium-features/index.css';
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Red 50', color: '#ffebee' },
