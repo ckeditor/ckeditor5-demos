@@ -87,14 +87,16 @@ import {
 } from 'ckeditor5';
 
 import {
+	CaseChange,
 	ExportPdf,
 	ExportWord,
-	ImportWord,
-	Template,
-	TableOfContents,
 	FormatPainter,
+	ImportWord,
+	MultiLevelList,
 	SlashCommand,
-	TemplateDefinition,
+	TableOfContents,
+	Template,
+	TemplateDefinition
 } from 'ckeditor5-premium-features';
 
 import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
@@ -575,13 +577,15 @@ ClassicEditor.create(
 			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
 			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
 			...(LICENSE_KEY ? [
+				CaseChange,
 				ExportPdf,
 				ExportWord,
-				ImportWord,
-				SlashCommand,
-				Template,
 				FormatPainter,
+				ImportWord,
+				MultiLevelList,
+				SlashCommand,
 				TableOfContents,
+				Template
 			] : []),
 		],
 		licenseKey: LICENSE_KEY,
@@ -596,15 +600,15 @@ ClassicEditor.create(
 				'exportWord',
 				'exportPdf',
 				'|',
+				'formatPainter',
+				'caseChange',
 				'findAndReplace',
 				'selectAll',
 				'wproofreader',
 				'|',
-				// 'insertTemplate',
-				// 'tableOfContents',
-				// '|',
-				// 'formatPainter',
-				// '|',
+				'insertTemplate',
+				'tableOfContents',
+				'|',
 
 				// --- "Insertables" ----------------------------------------------------------------------------
 
@@ -657,6 +661,7 @@ ClassicEditor.create(
 				// --- Lists and indentation --------------------------------------------------------------------
 				'bulletedList',
 				'numberedList',
+				'multilevelList',
 				'todoList',
 				'|',
 				'outdent',
@@ -1002,6 +1007,9 @@ ClassicEditor.create(
 		template: {
 			definitions: TEMPLATE_DEFINITIONS,
 		},
+		menuBar: {
+			isVisible: true
+		}
 	}
 )
 .then((editor) => {
