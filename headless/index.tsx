@@ -6,7 +6,7 @@
 import React, { useState, useEffect, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import HeadlessEditor from '.';
+import HeadlessEditor from './index.ts';
 
 function App() {
 	const [editor, setEditor] = useState(null);
