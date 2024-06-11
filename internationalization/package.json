@@ -15,7 +15,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"ckeditor5": "nightly",
+		"ckeditor5": "alpha",
 		"vite": "^5.0.0"
 	}
 }

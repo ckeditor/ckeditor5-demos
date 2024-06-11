@@ -25,23 +25,28 @@ const CKBOX_TOKEN_URL = '';
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 import {
-	DecoupledEditor,
-	AdjacentListsSupport,
+	ClassicEditor,
 	Alignment,
 	Autoformat,
+	AutoImage,
+	AutoLink,
+	BlockQuote,
 	Bold,
-	CKBox,
+	Base64UploadAdapter,
 	CloudServices,
-	EasyImage,
+	Code,
+	CodeBlock,
+	CKBox,
 	Essentials,
 	FindAndReplace,
-	FontBackgroundColor,
-	FontColor,
-	FontFamily,
-	FontSize,
+	Font,
+	GeneralHtmlSupport,
 	Heading,
+	HorizontalLine,
+	HtmlEmbed,
 	Image,
 	ImageCaption,
+	ImageInsert,
 	ImageResize,
 	ImageStyle,
 	ImageToolbar,
@@ -50,6 +55,7 @@ import {
 	IndentBlock,
 	Italic,
 	Link,
+	LinkImage,
 	List,
 	ListProperties,
 	MediaEmbed,
@@ -59,13 +65,21 @@ import {
 	PasteFromOffice,
 	PictureEditing,
 	RemoveFormat,
+	ShowBlocks,
+	SourceEditing,
+	Strikethrough,
+	Style,
+	Subscript,
+	Superscript,
 	Table,
 	TableCaption,
 	TableCellProperties,
 	TableColumnResize,
 	TableProperties,
 	TableToolbar,
+	TextPartLanguage,
 	TextTransformation,
+	TodoList,
 	Underline,
 } from 'ckeditor5';
 
@@ -73,11 +87,7 @@ import {
 	ExportPdf,
 	ExportWord,
 	ImportWord,
-	Pagination,
 	Template,
-	TableOfContents,
-	DocumentOutline,
-	FormatPainter,
 	SlashCommand,
 } from 'ckeditor5-premium-features';
 
@@ -86,10 +96,11 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-// @ts-ignore
 import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
-// @ts-ignore
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
+
+const exportHorizontalSpace = '10mm';
+const exportVerticalSpace = '12mm';
 
 const TEMPLATE_DEFINITIONS = [
 	{
@@ -373,146 +384,172 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' },
 ];
 
-const exportHorizontalSpace = '10mm';
-const exportVerticalSpace = '12mm';
-
-const DOCUMENT_OUTLINE_ICON = `<svg viewBox='0 0 20 20' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 9.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 8H3.5a.5.5 0 0 0-.5.5V9a.5.5 0 0 0 .5.5H5Z'/><path d='M5.5 12a.5.5 0 0 1-.5.5H3.5A.5.5 0 0 1 3 12v-.5a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5v.5Z'/><path d='M5 6.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 5H3.5a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5H5Z'/><path clip-rule='evenodd' d='M2 19a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2Zm6-1.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H8v15Zm-1.5-15H2a.5.5 0 0 0-.5.5v14a.5.5 0 0 0 .5.5h4.5v-15Z'/></svg>`;
-const COLLAPSE_OUTLINE_ICON = `<svg viewBox='0 0 20 20' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M11.463 5.187a.888.888 0 1 1 1.254 1.255L9.16 10l3.557 3.557a.888.888 0 1 1-1.254 1.255L7.26 10.61a.888.888 0 0 1 .16-1.382l4.043-4.042z'/></svg>`;
-
-function bttnCreator(config) {
-	return config.parent.appendChild(
-		bttnUpdater(config, document.createElement(config.node))
-	);
-}
-function bttnUpdater(config, btn) {
-	elementAttributter(btn, config.attributes);
-
-	if (config.icon) {
-		const existingIcon = btn.querySelector('svg');
-		if (existingIcon) {
-			existingIcon.remove();
-		}
-		btn.innerHTML = config.icon + btn.innerHTML;
-	}
-	if (config.label) {
-		let label = document.getElementById(config.label.attributes.id);
-		if (!label) {
-			label = document.createElement(config.label.node);
-			btn.appendChild(label);
-		}
-		label!.textContent = config.label.text;
-		elementAttributter(label, config.label.attributes);
-	}
-	return btn;
-
-	function elementAttributter(element, attributes) {
-		Object.keys(attributes).forEach((attrKey) => {
-			element.setAttribute(attrKey, attributes[attrKey]);
-		});
-	}
-}
-
-// A custom simplified plugin to allow toggling the visibility of the outline.
-function DocumentOutlineToggler(editor) {
-	const documentOutlineContainer = editor.config.get(
-		'documentOutline.container'
-	);
-
-	const demoContainer = documentOutlineContainer.closest(
-		'#cke5-productivity-pack-demo'
-	);
-
-	const outlineButtonDataClosed = {
-		attributes: {
-			'data-cke-tooltip-text': 'Show document outline',
-		},
-		icon: DOCUMENT_OUTLINE_ICON,
-		label: {
-			attributes: {
-				class: 'ck ck-button__label',
-				id: 'ck-editor__aria-label_outline',
-			},
-			text: 'Show document outline',
-		},
-		parent: documentOutlineContainer,
-	};
-
-	const outlineButtonData = {
-		node: 'button',
-		attributes: {
-			'aria-labelled-by': 'ck-editor__aria-label_outline',
-			class: 'ck ck-button ck-document-outline-toggle ck-off',
-			'data-cke-tooltip-position': 'se',
-			'data-cke-tooltip-text': 'Hide document outline',
-			tabindex: '-1',
-			type: 'button',
-		},
-		icon: COLLAPSE_OUTLINE_ICON,
-		label: {
-			node: 'span',
-			attributes: {
-				class: 'ck ck-button__label',
-				id: 'ck-editor__aria-label_outline',
-			},
-			text: 'Hide document outline',
-		},
-		parent: documentOutlineContainer,
-	};
-
-	if (!outlineButtonData.parent.querySelector(outlineButtonData.node)) {
-		const outlineSwitcher = bttnCreator(outlineButtonData);
-		outlineSwitcher.addEventListener('click', outlineToggle);
-	}
-
-	function outlineToggle(element) {
-		// Toggle a CSS class on the demo container to manage the visibility of the outline.
-		demoContainer.classList.toggle('outline-collapsed');
-		const target = element.srcElement.closest(outlineButtonData.node);
-
-		// Change the look of the button to reflect the state of the outline.
-		if (demoContainer.classList.contains('outline-collapsed')) {
-			bttnUpdater(outlineButtonDataClosed, target);
-		} else {
-			bttnUpdater(outlineButtonData, target);
-		}
-
-		// Keep the focus in the editor whenever the button is clicked.
-		editor.editing.view.focus();
-	}
-}
-
-DecoupledEditor.create(
-	document.querySelector('.cke5-productivity-pack-demo__content') as HTMLElement,
+const MENTION_FEEDS = [
 	{
-		extraPlugins: [DocumentOutlineToggler], // Plugin for Document Outline toggling
-		documentOutline: {
-			container: document.querySelector(`[class*='__outline']`) as HTMLElement,
-		},
+		marker: '@',
+		feed: [
+			{ id: '@cflores', avatar: 'm_1', name: 'Charles Flores' },
+			{ id: '@gjackson', avatar: 'm_2', name: 'Gerald Jackson' },
+			{ id: '@wreed', avatar: 'm_3', name: 'Wayne Reed' },
+			{ id: '@lgarcia', avatar: 'm_4', name: 'Louis Garcia' },
+			{ id: '@rwilson', avatar: 'm_5', name: 'Roy Wilson' },
+			{ id: '@mnelson', avatar: 'm_6', name: 'Matthew Nelson' },
+			{ id: '@rwilliams', avatar: 'm_7', name: 'Randy Williams' },
+			{ id: '@ajohnson', avatar: 'm_8', name: 'Albert Johnson' },
+			{ id: '@sroberts', avatar: 'm_9', name: 'Steve Roberts' },
+			{ id: '@kevans', avatar: 'm_10', name: 'Kevin Evans' },
+			{ id: '@vxiques', avatar: 'm_11', name: 'Vincent Xiques' },
+			{ id: '@jzaldivar', avatar: 'm_12', name: 'Jack Zaldivar' },
+			{ id: '@tfoxworth', avatar: 'm_13', name: 'Thomas Foxworth' },
+			{ id: '@phendrix', avatar: 'm_14', name: 'Peter Hendrix' },
+			{ id: '@pthaxton', avatar: 'm_15', name: 'Philip Thaxton' },
+			{ id: '@mwilson', avatar: 'w_1', name: 'Mildred Wilson' },
+			{ id: '@mnelson', avatar: 'w_2', name: 'Melissa Nelson' },
+			{ id: '@kallen', avatar: 'w_3', name: 'Kathleen Allen' },
+			{ id: '@myoung', avatar: 'w_4', name: 'Mary Young' },
+			{ id: '@arogers', avatar: 'w_5', name: 'Ashley Rogers' },
+			{ id: '@dgriffin', avatar: 'w_6', name: 'Debra Griffin' },
+			{ id: '@dwilliams', avatar: 'w_7', name: 'Denise Williams' },
+			{ id: '@ajames', avatar: 'w_8', name: 'Amy James' },
+			{ id: '@randerson', avatar: 'w_9', name: 'Ruby Anderson' },
+			{ id: '@wlee', avatar: 'w_10', name: 'Wanda Lee' },
+			{ id: '@yquick', avatar: 'w_11', name: 'Yasmin Quick' },
+			{ id: '@bzappaterra', avatar: 'w_12', name: 'Beatrice Zappaterra' },
+			{ id: '@zquigley', avatar: 'w_13', name: 'Zoe Quigley' },
+			{ id: '@pfabozzi', avatar: 'w_14', name: 'Patrizia Fabozzi' },
+			{ id: '@vquimby', avatar: 'w_15', name: 'Victoria Quimby' },
+		],
+		minimumCharacters: 1,
+		itemRenderer: customMentionUserItemRenderer,
+	},
+	{
+		marker: '#',
+		feed: [
+			'#american',
+			'#asian',
+			'#baking',
+			'#breakfast',
+			'#cake',
+			'#caribbean',
+			'#chinese',
+			'#chocolate',
+			'#cooking',
+			'#dairy',
+			'#delicious',
+			'#delish',
+			'#dessert',
+			'#desserts',
+			'#dinner',
+			'#eat',
+			'#eating',
+			'#eggs',
+			'#fish',
+			'#food',
+			'#foodie',
+			'#foods',
+			'#french',
+			'#fresh',
+			'#fusion',
+			'#glutenfree',
+			'#greek',
+			'#grilling',
+			'#halal',
+			'#homemade',
+			'#hot',
+			'#hungry',
+			'#icecream',
+			'#indian',
+			'#italian',
+			'#japanese',
+			'#keto',
+			'#korean',
+			'#lactosefree',
+			'#lunch',
+			'#meat',
+			'#mediterranean',
+			'#mexican',
+			'#moroccan',
+			'#nom',
+			'#nomnom',
+			'#paleo',
+			'#poultry',
+			'#snack',
+			'#spanish',
+			'#sugarfree',
+			'#sweet',
+			'#sweettooth',
+			'#tasty',
+			'#thai',
+			'#vegan',
+			'#vegetarian',
+			'#vietnamese',
+			'#yum',
+			'#yummy',
+		],
+	},
+];
+
+/*
+ * Customizes the way the list of user suggestions is displayed.
+ * Each user has an @id, a name and an avatar.
+ */
+function customMentionUserItemRenderer(item) {
+	const itemElement = document.createElement('span');
+	const avatar = document.createElement('img');
+	const userNameElement = document.createElement('span');
+	const fullNameElement = document.createElement('span');
+
+	itemElement.classList.add('mention__item');
+
+	avatar.src = `./assets/images/avatars/${item.avatar}.jpg`;
+
+	userNameElement.classList.add('mention__item__user-name');
+	userNameElement.textContent = item.id;
+
+	fullNameElement.classList.add('mention__item__full-name');
+	fullNameElement.textContent = item.name;
+
+	itemElement.appendChild(avatar);
+	itemElement.appendChild(userNameElement);
+	itemElement.appendChild(fullNameElement);
+
+	return itemElement;
+}
+
+ClassicEditor.create(
+	document.querySelector('#cke5-source-code-demo'),
+		{
 		plugins: [
-			AdjacentListsSupport,
 			Alignment,
 			Autoformat,
+			AutoImage,
+			AutoLink,
+			BlockQuote,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			CloudServices,
-			EasyImage,
+			Code,
+			CodeBlock,
+			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			Essentials,
 			FindAndReplace,
-			FontBackgroundColor,
-			FontColor,
-			FontFamily,
-			FontSize,
+			Font,
+			GeneralHtmlSupport,
 			Heading,
+			HorizontalLine,
+			HtmlEmbed,
 			Image,
 			ImageCaption,
+			ImageInsert,
 			ImageResize,
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
+			Base64UploadAdapter,
 			Indent,
 			IndentBlock,
 			Italic,
 			Link,
+			LinkImage,
 			List,
 			ListProperties,
 			MediaEmbed,
@@ -522,13 +559,21 @@ DecoupledEditor.create(
 			PasteFromOffice,
 			PictureEditing,
 			RemoveFormat,
+			ShowBlocks,
+			SourceEditing,
+			Strikethrough,
+			Style,
+			Subscript,
+			Superscript,
 			Table,
 			TableCaption,
 			TableCellProperties,
 			TableColumnResize,
 			TableProperties,
 			TableToolbar,
+			TextPartLanguage,
 			TextTransformation,
+			TodoList,
 			Underline,
 			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
 			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
@@ -538,29 +583,20 @@ DecoupledEditor.create(
 				ImportWord,
 				SlashCommand,
 				Template,
-				FormatPainter,
-				TableOfContents,
-				DocumentOutline,
-				Pagination,
 			] : []),
 		],
 		licenseKey: LICENSE_KEY,
+		language: 'en',
 		toolbar: {
 			shouldNotGroupWhenFull: true,
 			items: [
+				// --- Document-wide tools ----------------------------------------------------------------------
 				'undo',
 				'redo',
 				'|',
-				// 'previousPage',
-				// 'nextPage',
-				// 'pageNavigation',
-				// 'pageBreak',
-				// '|',
-				// 'insertTemplate',
-				// 'tableOfContents',
-				// '|',
-				// 'formatPainter',
-				// '|',
+				'sourceEditing',
+				'showBlocks',
+				'|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
@@ -569,80 +605,88 @@ DecoupledEditor.create(
 				'selectAll',
 				'wproofreader',
 				'|',
+
+				// --- "Insertables" ----------------------------------------------------------------------------
+				// 'insertTemplate',
 				'link',
-				'uploadImage',
+				'insertImage',
 				'ckbox',
 				'insertTable',
-				'|',
-				'numberedList',
-				'bulletedList',
-				'outdent',
-				'indent',
-
+				'blockQuote',
+				'mediaEmbed',
+				'codeBlock',
+				'htmlEmbed',
+				'pageBreak',
+				'horizontalLine',
 				'-',
 
+				// --- Block-level formatting -------------------------------------------------------------------
 				'heading',
+				'style',
 				'|',
-				'fontfamily',
-				'fontsize',
-				'fontColor',
-				'fontBackgroundColor',
-				'|',
+
+				// --- Basic styles, font and inline formatting -------------------------------------------------------
 				'bold',
 				'italic',
 				'underline',
-				'removeFormat',
-				'|',
+				'strikethrough',
+				'superscript',
+				'subscript',
 				{
-					label: 'Alignment',
-					icon: 'alignLeft',
+					label: 'Basic styles',
+					icon: 'text',
 					items: [
-						'alignment:left',
-						'alignment:right',
-						'alignment:center',
-						'alignment:justify',
+						'fontSize',
+						'fontFamily',
+						'fontColor',
+						'fontBackgroundColor',
+						'code',
+						'|',
+						'textPartLanguage',
+						'|',
 					],
 				},
+				'removeFormat',
+				'|',
+
+				// --- Text alignment ---------------------------------------------------------------------------
+				'alignment',
+				'|',
+
+				// --- Lists and indentation --------------------------------------------------------------------
+				'bulletedList',
+				'numberedList',
+				'todoList',
+				'|',
+				'outdent',
+				'indent',
 			],
 		},
-		heading: {
-			options: [
-				{
-					model: 'paragraph',
-					title: 'Paragraph',
-					class: 'ck-heading_paragraph',
-				},
-				{
-					model: 'heading1',
-					view: 'h2',
-					title: 'Heading 1',
-					class: 'ck-heading_heading1',
-				},
-				{
-					model: 'heading2',
-					view: 'h3',
-					title: 'Heading 2',
-					class: 'ck-heading_heading2',
-				},
-				{
-					model: 'heading3',
-					view: 'h4',
-					title: 'Heading 3',
-					class: 'ck-heading_heading3',
-				},
-				{
-					model: 'heading4',
-					view: 'h5',
-					title: 'Heading 4',
-					class: 'ck-heading_heading4',
-				},
-				{
-					model: 'heading5',
-					view: 'h6',
-					title: 'Heading 5',
-					class: 'ck-heading_heading5',
-				},
-			],
+		exportPdf: {
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			fileName: 'export-pdf-demo.pdf',
+			appID: 'cke5-demos',
+			converterOptions: {
+				format: 'Tabloid',
+				margin_top: exportVerticalSpace,
+				margin_bottom: exportVerticalSpace,
+				margin_right: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace,
+				page_orientation: 'portrait',
+			},
+			tokenUrl: false,
+		},
+		exportWord: {
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			fileName: 'export-word-demo.docx',
+			converterOptions: {
+				format: 'A4',
+				margin_top: exportVerticalSpace,
+				margin_bottom: exportVerticalSpace,
+				margin_right: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace,
+			},
+			tokenUrl: false,
 		},
 		fontFamily: {
 			supportAllValues: true,
@@ -659,7 +703,86 @@ DecoupledEditor.create(
 			columns: 12,
 			colors: REDUCED_MATERIAL_COLORS,
 		},
+		heading: {
+			options: [
+				{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1',
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2',
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3',
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4',
+				},
+				{
+					model: 'heading5',
+					view: 'h5',
+					title: 'Heading 5',
+					class: 'ck-heading_heading5',
+				},
+				{
+					model: 'heading6',
+					view: 'h6',
+					title: 'Heading 6',
+					class: 'ck-heading_heading6',
+				},
+			],
+		},
+		htmlEmbed: {
+			showPreviews: true,
+		},
+		htmlSupport: {
+			allow: [
+				// Enables all HTML features.
+				{
+					name: /.*/,
+					attributes: true,
+					classes: true,
+					styles: true,
+				},
+			],
+			disallow: [
+				{
+					attributes: [
+						{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
+					],
+				},
+			],
+		},
 		image: {
+			resizeOptions: [
+				{
+					name: 'resizeImage:original',
+					label: 'Default image width',
+					value: null,
+				},
+				{
+					name: 'resizeImage:50',
+					label: '50% page width',
+					value: '50',
+				},
+				{
+					name: 'resizeImage:75',
+					label: '75% page width',
+					value: '75',
+				},
+			],
 			toolbar: [
 				'imageTextAlternative',
 				'toggleImageCaption',
@@ -667,11 +790,12 @@ DecoupledEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
+				'|',
+				'resizeImage',
 			],
-		},
-		link: {
-			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
+			insert: {
+				integrations: ['url'],
+			},
 		},
 		list: {
 			properties: {
@@ -679,6 +803,72 @@ DecoupledEditor.create(
 				startIndex: true,
 				reversed: true,
 			},
+		},
+		link: {
+			decorators: {
+				toggleDownloadable: {
+					mode: 'manual',
+					label: 'Downloadable',
+					attributes: {
+						download: 'file',
+					},
+				},
+			},
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
+		},
+		mention: {
+			feeds: MENTION_FEEDS,
+		},
+		placeholder: 'Type or paste your content here!',
+		style: {
+			definitions: [
+				{
+					name: 'Title',
+					element: 'h1',
+					classes: ['document-title'],
+				},
+				{
+					name: 'Subtitle',
+					element: 'h2',
+					classes: ['document-subtitle'],
+				},
+				{
+					name: 'Callout',
+					element: 'p',
+					classes: ['callout'],
+				},
+				{
+					name: 'Side quote',
+					element: 'blockquote',
+					classes: ['side-quote'],
+				},
+				{
+					name: 'Needs clarification',
+					element: 'span',
+					classes: ['needs-clarification'],
+				},
+				{
+					name: 'Wide spacing',
+					element: 'span',
+					classes: ['wide-spacing'],
+				},
+				{
+					name: 'Small caps',
+					element: 'span',
+					classes: ['small-caps'],
+				},
+				{
+					name: 'Code (dark)',
+					element: 'pre',
+					classes: ['stylish-code', 'stylish-code-dark'],
+				},
+				{
+					name: 'Code (bright)',
+					element: 'pre',
+					classes: ['stylish-code', 'stylish-code-bright'],
+				},
+			],
 		},
 		table: {
 			contentToolbar: [
@@ -690,50 +880,12 @@ DecoupledEditor.create(
 				'toggleTableCaption',
 			],
 		},
-		exportPdf: {
-			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
-			fileName: 'export-pdf-demo.pdf',
-			appID: 'cke5-demos',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait',
-			},
-			tokenUrl: false,
-		},
-		exportWord: {
-			stylesheets: [coreStylesheets, premiumStylesheets],
-			fileName: 'export-word-demo.docx',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-			},
-			tokenUrl: false,
-		},
-		pagination: {
-			// A4
-			pageWidth: '21cm',
-			pageHeight: '29.7cm',
-			pageMargins: {
-				top: exportVerticalSpace,
-				bottom: exportVerticalSpace,
-				right: exportHorizontalSpace,
-				left: exportHorizontalSpace,
-			},
-		},
-		/* @ts-ignore */
 		wproofreader: {
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
 			lang: 'auto',
 			srcUrl:
 				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-			ignoreClasses: ['image-inline'],
+			autoStartup: false,
 		},
 		ckbox: {
 			tokenUrl: CKBOX_TOKEN_URL,
@@ -744,16 +896,8 @@ DecoupledEditor.create(
 	}
 )
 .then((editor) => {
-	document
-		.querySelector(`[class$='__toolbar-container']`)!
-		.appendChild(editor.ui.view.toolbar.element!);
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);
 });
-
-// --------- Just exports ------------------------------------------------------------------------
-
-export default {
-	DecoupledEditor,
-};

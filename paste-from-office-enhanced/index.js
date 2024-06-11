@@ -185,7 +185,7 @@ const REDUCED_MATERIAL_COLORS = [
 ];
 
 ClassicEditor.create(
-	document.querySelector('#cke5-paste-from-office-enhanced-demo') as HTMLElement,
+	document.querySelector('#cke5-paste-from-office-enhanced-demo'),
 	{
 		plugins: [
 			Alignment,
@@ -352,7 +352,7 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

@@ -82,8 +82,6 @@ import {
 	TableToolbar,
 	TextTransformation,
 	WordCount,
-	MentionFeed,
-	MentionFeedObjectItem,
 } from 'ckeditor5';
 
 import {
@@ -96,7 +94,6 @@ import {
 	SlashCommand,
 	TableOfContents,
 	Template,
-	TemplateDefinition
 } from 'ckeditor5-premium-features';
 
 // import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
@@ -104,15 +101,13 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-// @ts-ignore
 import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
-// @ts-ignore
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
 
 const exportHorizontalSpace = '10mm';
 const exportVerticalSpace = '12mm';
 
-const TEMPLATE_DEFINITIONS: TemplateDefinition[] = [
+const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'Signature (multi-line)',
 		data: `<p style='margin-left:2em;'><span'><strong>I hereby verify that the aforementioned report has undergone thorough factual verification and reflects the most current information.</strong></span></p>
@@ -514,7 +509,7 @@ const EMOJIS_ARRAY = [
 ];
 
 ClassicEditor.create(
-	document.querySelector('#cke5-feature-rich-demo') as HTMLElement,
+	document.querySelector('#cke5-feature-rich-demo'),
 	{
 		plugins: [
 			Alignment,
@@ -861,7 +856,7 @@ ClassicEditor.create(
 						{ id: '@zquigley', avatar: 'w_13', name: 'Zoe Quigley' },
 						{ id: '@pfabozzi', avatar: 'w_14', name: 'Patrizia Fabozzi' },
 						{ id: '@vquimby', avatar: 'w_15', name: 'Victoria Quimby' },
-					] as CustomMentionFeedItem[],
+					],
 					minimumCharacters: 1,
 					itemRenderer: customMentionUserItemRenderer,
 				},
@@ -992,7 +987,6 @@ ClassicEditor.create(
 				'toggleTableCaption',
 			],
 		},
-		/* @ts-ignore */
 		wproofreader: {
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
 			lang: 'auto',
@@ -1013,7 +1007,7 @@ ClassicEditor.create(
 )
 .then((editor) => {
 	document
-		.querySelector('.ck.ck-editor__main')!
+		.querySelector('.ck.ck-editor__main')
 		.appendChild(editor.plugins.get('WordCount').wordCountContainer);
 })
 .catch((error) => {
@@ -1046,9 +1040,3 @@ function customMentionUserItemRenderer(item) {
 
 	return itemElement;
 }
-
-type CustomMentionFeedItem = MentionFeedObjectItem & {
-	id: string;
-	name: string;
-	avatar: string;
-};

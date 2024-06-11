@@ -37,7 +37,7 @@ import MathType from '@wiris/mathtype-ckeditor5/src/plugin';
 import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-mathtype-demo') as HTMLElement,
+	document.querySelector('#cke5-mathtype-demo'),
 	{
 		plugins: [
 			CloudServices,
@@ -108,7 +108,7 @@ ClassicEditor.create(
 }
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

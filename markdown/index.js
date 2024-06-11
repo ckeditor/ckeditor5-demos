@@ -173,7 +173,7 @@ const EMOJIS_ARRAY = [
 ];
 
 ClassicEditor.create(
-	document.querySelector('#cke5-markdown-demo') as HTMLElement,
+	document.querySelector('#cke5-markdown-demo'),
 	{
 		plugins: [
 			Autoformat,
@@ -291,7 +291,7 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

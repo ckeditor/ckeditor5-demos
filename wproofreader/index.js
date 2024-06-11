@@ -44,7 +44,7 @@ import {
 import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-spellchecker-demo') as HTMLElement,
+	document.querySelector('#cke5-spellchecker-demo'),
 	{
 		plugins: [
 			CloudServices,
@@ -106,7 +106,6 @@ ClassicEditor.create(
 				'tableCellProperties',
 			],
 		},
-		/* @ts-ignore */
 		wproofreader: {
 			autoSearch: true,
 			enableGrammar: true,
@@ -118,7 +117,7 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

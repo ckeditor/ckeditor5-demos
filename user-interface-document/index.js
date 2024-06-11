@@ -25,37 +25,39 @@ const CKBOX_TOKEN_URL = '';
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 import {
-	ClassicEditor,
+	DecoupledEditor,
 	Alignment,
 	Autoformat,
-	AutoImage,
-	AutoLink,
-	BlockQuote,
 	Bold,
+	Italic,
+	Strikethrough,
+	Subscript,
+	Superscript,
+	Underline,
+	BlockQuote,
 	Base64UploadAdapter,
+	CKFinder,
+	CKFinderUploadAdapter,
 	CloudServices,
-	Code,
-	CodeBlock,
 	CKBox,
 	Essentials,
 	FindAndReplace,
-	Font,
-	GeneralHtmlSupport,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
 	Heading,
 	HorizontalLine,
-	HtmlEmbed,
 	Image,
 	ImageCaption,
-	ImageInsert,
 	ImageResize,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	PictureEditing,
 	Indent,
 	IndentBlock,
-	Italic,
 	Link,
-	LinkImage,
 	List,
 	ListProperties,
 	MediaEmbed,
@@ -63,24 +65,16 @@ import {
 	PageBreak,
 	Paragraph,
 	PasteFromOffice,
-	PictureEditing,
 	RemoveFormat,
-	ShowBlocks,
-	SourceEditing,
-	Strikethrough,
-	Style,
-	Subscript,
-	Superscript,
+	SpecialCharacters,
+	SpecialCharactersEssentials,
 	Table,
 	TableCaption,
 	TableCellProperties,
 	TableColumnResize,
 	TableProperties,
 	TableToolbar,
-	TextPartLanguage,
 	TextTransformation,
-	TodoList,
-	Underline,
 } from 'ckeditor5';
 
 import {
@@ -88,7 +82,12 @@ import {
 	ExportWord,
 	ImportWord,
 	Template,
+	TableOfContents,
+	DocumentOutline,
+	FormatPainter,
 	SlashCommand,
+	MultiLevelList,
+	CaseChange,
 } from 'ckeditor5-premium-features';
 
 // import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
@@ -96,13 +95,8 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-// @ts-ignore
 import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
-// @ts-ignore
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
-
-const exportHorizontalSpace = '10mm';
-const exportVerticalSpace = '12mm';
 
 const TEMPLATE_DEFINITIONS = [
 	{
@@ -386,172 +380,271 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' },
 ];
 
-const MENTION_FEEDS = [
-	{
-		marker: '@',
-		feed: [
-			{ id: '@cflores', avatar: 'm_1', name: 'Charles Flores' },
-			{ id: '@gjackson', avatar: 'm_2', name: 'Gerald Jackson' },
-			{ id: '@wreed', avatar: 'm_3', name: 'Wayne Reed' },
-			{ id: '@lgarcia', avatar: 'm_4', name: 'Louis Garcia' },
-			{ id: '@rwilson', avatar: 'm_5', name: 'Roy Wilson' },
-			{ id: '@mnelson', avatar: 'm_6', name: 'Matthew Nelson' },
-			{ id: '@rwilliams', avatar: 'm_7', name: 'Randy Williams' },
-			{ id: '@ajohnson', avatar: 'm_8', name: 'Albert Johnson' },
-			{ id: '@sroberts', avatar: 'm_9', name: 'Steve Roberts' },
-			{ id: '@kevans', avatar: 'm_10', name: 'Kevin Evans' },
-			{ id: '@vxiques', avatar: 'm_11', name: 'Vincent Xiques' },
-			{ id: '@jzaldivar', avatar: 'm_12', name: 'Jack Zaldivar' },
-			{ id: '@tfoxworth', avatar: 'm_13', name: 'Thomas Foxworth' },
-			{ id: '@phendrix', avatar: 'm_14', name: 'Peter Hendrix' },
-			{ id: '@pthaxton', avatar: 'm_15', name: 'Philip Thaxton' },
-			{ id: '@mwilson', avatar: 'w_1', name: 'Mildred Wilson' },
-			{ id: '@mnelson', avatar: 'w_2', name: 'Melissa Nelson' },
-			{ id: '@kallen', avatar: 'w_3', name: 'Kathleen Allen' },
-			{ id: '@myoung', avatar: 'w_4', name: 'Mary Young' },
-			{ id: '@arogers', avatar: 'w_5', name: 'Ashley Rogers' },
-			{ id: '@dgriffin', avatar: 'w_6', name: 'Debra Griffin' },
-			{ id: '@dwilliams', avatar: 'w_7', name: 'Denise Williams' },
-			{ id: '@ajames', avatar: 'w_8', name: 'Amy James' },
-			{ id: '@randerson', avatar: 'w_9', name: 'Ruby Anderson' },
-			{ id: '@wlee', avatar: 'w_10', name: 'Wanda Lee' },
-			{ id: '@yquick', avatar: 'w_11', name: 'Yasmin Quick' },
-			{ id: '@bzappaterra', avatar: 'w_12', name: 'Beatrice Zappaterra' },
-			{ id: '@zquigley', avatar: 'w_13', name: 'Zoe Quigley' },
-			{ id: '@pfabozzi', avatar: 'w_14', name: 'Patrizia Fabozzi' },
-			{ id: '@vquimby', avatar: 'w_15', name: 'Victoria Quimby' },
-		],
-		minimumCharacters: 1,
-		itemRenderer: customMentionUserItemRenderer,
-	},
-	{
-		marker: '#',
-		feed: [
-			'#american',
-			'#asian',
-			'#baking',
-			'#breakfast',
-			'#cake',
-			'#caribbean',
-			'#chinese',
-			'#chocolate',
-			'#cooking',
-			'#dairy',
-			'#delicious',
-			'#delish',
-			'#dessert',
-			'#desserts',
-			'#dinner',
-			'#eat',
-			'#eating',
-			'#eggs',
-			'#fish',
-			'#food',
-			'#foodie',
-			'#foods',
-			'#french',
-			'#fresh',
-			'#fusion',
-			'#glutenfree',
-			'#greek',
-			'#grilling',
-			'#halal',
-			'#homemade',
-			'#hot',
-			'#hungry',
-			'#icecream',
-			'#indian',
-			'#italian',
-			'#japanese',
-			'#keto',
-			'#korean',
-			'#lactosefree',
-			'#lunch',
-			'#meat',
-			'#mediterranean',
-			'#mexican',
-			'#moroccan',
-			'#nom',
-			'#nomnom',
-			'#paleo',
-			'#poultry',
-			'#snack',
-			'#spanish',
-			'#sugarfree',
-			'#sweet',
-			'#sweettooth',
-			'#tasty',
-			'#thai',
-			'#vegan',
-			'#vegetarian',
-			'#vietnamese',
-			'#yum',
-			'#yummy',
-		],
-	},
-];
-
-/*
- * Customizes the way the list of user suggestions is displayed.
- * Each user has an @id, a name and an avatar.
+/**
+ * Enrich the special characters plugin with emojis.
  */
-function customMentionUserItemRenderer(item) {
-	const itemElement = document.createElement('span');
-	const avatar = document.createElement('img');
-	const userNameElement = document.createElement('span');
-	const fullNameElement = document.createElement('span');
+function SpecialCharactersEmoji(editor) {
+	if (!editor.plugins.get('SpecialCharacters')) {
+		return;
+	}
 
-	itemElement.classList.add('mention__item');
-
-	avatar.src = `./assets/images/avatars/${item.avatar}.jpg`;
-
-	userNameElement.classList.add('mention__item__user-name');
-	userNameElement.textContent = item.id;
-
-	fullNameElement.classList.add('mention__item__full-name');
-	fullNameElement.textContent = item.name;
-
-	itemElement.appendChild(avatar);
-	itemElement.appendChild(userNameElement);
-	itemElement.appendChild(fullNameElement);
-
-	return itemElement;
+	// Make sure Emojis are last on the list.
+	this.afterInit = function () {
+		editor.plugins.get('SpecialCharacters').addItems('Emoji', EMOJIS_ARRAY);
+	};
 }
 
-ClassicEditor.create(
-	document.querySelector('#cke5-source-code-demo') as HTMLElement,
-		{
+const EMOJIS_ARRAY = [
+	{ character: '🙈', title: 'See-No-Evil Monkey' },
+	{ character: '🙄', title: 'Face With Rolling Eyes' },
+	{ character: '🙃', title: 'Upside Down Face' },
+	{ character: '🙂', title: 'Slightly Smiling Face' },
+	{ character: '😴', title: 'Sleeping Face' },
+	{ character: '😳', title: 'Flushed Face' },
+	{ character: '😱', title: 'Face Screaming in Fear' },
+	{ character: '😭', title: 'Loudly Crying Face' },
+	{ character: '😬', title: 'Grimacing Face' },
+	{ character: '😩', title: 'Weary Face' },
+	{ character: '😢', title: 'Crying Face' },
+	{ character: '😡', title: 'Pouting Face' },
+	{ character: '😞', title: 'Disappointed Face' },
+	{ character: '😜', title: 'Face with Stuck-Out Tongue and Winking Eye' },
+	{ character: '😚', title: 'Kissing Face With Closed Eyes' },
+	{ character: '😘', title: 'Face Throwing a Kiss' },
+	{ character: '😔', title: 'Pensive Face' },
+	{ character: '😒', title: 'Unamused Face' },
+	{ character: '😑', title: 'Expressionless Face' },
+	{ character: '😐', title: 'Neutral Face' },
+	{ character: '😏', title: 'Smirking Face' },
+	{ character: '😎', title: 'Smiling Face with Sunglasses' },
+	{ character: '😍', title: 'Smiling Face with Heart-Eyes' },
+	{ character: '😌', title: 'Relieved Face' },
+	{ character: '😋', title: 'Face Savoring Delicious Food' },
+	{ character: '😊', title: 'Smiling Face with Smiling Eyes' },
+	{ character: '😉', title: 'Winking Face' },
+	{ character: '😈', title: 'Smiling Face With Horns' },
+	{ character: '😇', title: 'Smiling Face with Halo' },
+	{
+		character: '😆',
+		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes',
+	},
+	{ character: '😅', title: 'Smiling Face with Open Mouth and Cold Sweat' },
+	{ character: '😄', title: 'Smiling Face with Open Mouth and Smiling Eyes' },
+	{ character: '😃', title: 'Smiling Face with Open Mouth' },
+	{ character: '😂', title: 'Face with Tears of Joy' },
+	{ character: '😁', title: 'Grinning Face with Smiling Eyes' },
+	{ character: '😀', title: 'Grinning Face' },
+	{ character: '🥺', title: 'Pleading Face' },
+	{ character: '🥵', title: 'Hot Face' },
+	{ character: '🥴', title: 'Woozy Face' },
+	{ character: '🥳', title: 'Partying Face' },
+	{ character: '🥰', title: 'Smiling Face with Hearts' },
+	{ character: '🤭', title: 'Face with Hand Over Mouth' },
+	{ character: '🤪', title: 'Zany Face' },
+	{ character: '🤩', title: 'Grinning Face with Star Eyes' },
+	{ character: '🤦', title: 'Face Palm' },
+	{ character: '🤤', title: 'Drooling Face' },
+	{ character: '🤣', title: 'Rolling on the Floor Laughing' },
+	{ character: '🤔', title: 'Thinking Face' },
+	{ character: '🤞', title: 'Crossed Fingers' },
+	{ character: '🙏', title: 'Person with Folded Hands' },
+	{ character: '🙌', title: 'Person Raising Both Hands in Celebration' },
+	{ character: '🙋', title: 'Happy Person Raising One Hand' },
+	{ character: '🤷', title: 'Shrug' },
+	{ character: '🤗', title: 'Hugging Face' },
+	{ character: '🖤', title: 'Black Heart' },
+	{ character: '🔥', title: 'Fire' },
+	{ character: '💰', title: 'Money Bag' },
+	{ character: '💯', title: 'Hundred Points Symbol' },
+	{ character: '💪', title: 'Flexed Biceps' },
+	{ character: '💩', title: 'Pile of Poo' },
+	{ character: '💥', title: 'Collision' },
+	{ character: '💞', title: 'Revolving Hearts' },
+	{ character: '💜', title: 'Purple Heart' },
+	{ character: '💚', title: 'Green Heart' },
+	{ character: '💙', title: 'Blue Heart' },
+	{ character: '💗', title: 'Growing Heart' },
+	{ character: '💖', title: 'Sparkling Heart' },
+	{ character: '💕', title: 'Two Hearts' },
+	{ character: '💔', title: 'Broken Heart' },
+	{ character: '💓', title: 'Beating Heart' },
+	{ character: '💐', title: 'Bouquet' },
+	{ character: '💋', title: 'Kiss Mark' },
+	{ character: '💀', title: 'Skull' },
+	{ character: '👑', title: 'Crown' },
+	{ character: '👏', title: 'Clapping Hands Sign' },
+	{ character: '👍', title: 'Thumbs Up Sign' },
+	{ character: '👌', title: 'OK Hand Sign' },
+	{ character: '👉', title: 'Backhand Index Pointing Right' },
+	{ character: '👈', title: 'Backhand Index Pointing Left' },
+	{ character: '👇', title: 'Backhand Index Pointing Down' },
+	{ character: '👀', title: 'Eyes' },
+	{ character: '🎶', title: 'Multiple Musical Notes' },
+	{ character: '🎊', title: 'Confetti Ball' },
+	{ character: '🎉', title: 'Party Popper' },
+	{ character: '🎈', title: 'Balloon' },
+	{ character: '🎂', title: 'Birthday Cake' },
+	{ character: '🎁', title: 'Wrapped Gift' },
+	{ character: '🌹', title: 'Rose' },
+	{ character: '🌸', title: 'Cherry Blossom' },
+	{ character: '🌞', title: 'Sun with Face' },
+	{ character: '❤️', title: 'Red Heart' },
+	{ character: '❣️', title: 'Heavy Heart Exclamation Mark Ornament' },
+	{ character: '✨', title: 'Sparkles' },
+	{ character: '✌️', title: 'Victory Hand' },
+	{ character: '✅', title: 'Check Mark Button' },
+	{ character: '♥️', title: 'Heart Suit' },
+	{ character: '☺️', title: 'Smiling Face' },
+	{ character: '☹️', title: 'Frowning Face' },
+	{ character: '☀️', title: 'Sun' },
+];
+
+const exportHorizontalSpace = '10mm';
+const exportVerticalSpace = '12mm';
+
+const DOCUMENT_OUTLINE_ICON = `<svg viewBox='0 0 20 20' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 9.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 8H3.5a.5.5 0 0 0-.5.5V9a.5.5 0 0 0 .5.5H5Z'/><path d='M5.5 12a.5.5 0 0 1-.5.5H3.5A.5.5 0 0 1 3 12v-.5a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5v.5Z'/><path d='M5 6.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 5H3.5a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5H5Z'/><path clip-rule='evenodd' d='M2 19a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2Zm6-1.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H8v15Zm-1.5-15H2a.5.5 0 0 0-.5.5v14a.5.5 0 0 0 .5.5h4.5v-15Z'/></svg>`;
+const COLLAPSE_OUTLINE_ICON = `<svg viewBox='0 0 20 20' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M11.463 5.187a.888.888 0 1 1 1.254 1.255L9.16 10l3.557 3.557a.888.888 0 1 1-1.254 1.255L7.26 10.61a.888.888 0 0 1 .16-1.382l4.043-4.042z'/></svg>`;
+
+function bttnCreator(config) {
+	return config.parent.appendChild(
+		bttnUpdater(config, document.createElement(config.node))
+	);
+}
+function bttnUpdater(config, btn) {
+	elementAttributter(btn, config.attributes);
+
+	if (config.icon) {
+		const existingIcon = btn.querySelector('svg');
+		if (existingIcon) {
+			existingIcon.remove();
+		}
+		btn.innerHTML = config.icon + btn.innerHTML;
+	}
+	if (config.label) {
+		let label = document.getElementById(config.label.attributes.id);
+		if (!label) {
+			label = document.createElement(config.label.node);
+			btn.appendChild(label);
+		}
+		label.textContent = config.label.text;
+		elementAttributter(label, config.label.attributes);
+	}
+	return btn;
+
+	function elementAttributter(element, attributes) {
+		Object.keys(attributes).forEach((attrKey) => {
+			element.setAttribute(attrKey, attributes[attrKey]);
+		});
+	}
+}
+
+// A custom simplified plugin to allow toggling the visibility of the outline.
+function DocumentOutlineToggler(editor) {
+	const documentOutlineContainer = editor.config.get(
+		'documentOutline.container'
+	);
+
+	const demoContainer = documentOutlineContainer.closest(
+		'#cke5-editor-types-demo-document'
+	);
+
+	const outlineButtonDataClosed = {
+		attributes: {
+			'data-cke-tooltip-text': 'Show document outline',
+		},
+		icon: DOCUMENT_OUTLINE_ICON,
+		label: {
+			attributes: {
+				class: 'ck ck-button__label',
+				id: 'ck-editor__aria-label_outline',
+			},
+			text: 'Show document outline',
+		},
+		parent: documentOutlineContainer,
+	};
+
+	const outlineButtonData = {
+		node: 'button',
+		attributes: {
+			'aria-labelled-by': 'ck-editor__aria-label_outline',
+			class: 'ck ck-button ck-document-outline-toggle ck-off',
+			'data-cke-tooltip-position': 'se',
+			'data-cke-tooltip-text': 'Hide document outline',
+			tabindex: '-1',
+			type: 'button',
+		},
+		icon: COLLAPSE_OUTLINE_ICON,
+		label: {
+			node: 'span',
+			attributes: {
+				class: 'ck ck-button__label',
+				id: 'ck-editor__aria-label_outline',
+			},
+			text: 'Hide document outline',
+		},
+		parent: documentOutlineContainer,
+	};
+
+	if (!outlineButtonData.parent.querySelector(outlineButtonData.node)) {
+		const outlineSwitcher = bttnCreator(outlineButtonData);
+		outlineSwitcher.addEventListener('click', outlineToggle);
+	}
+
+	function outlineToggle(element) {
+		// Toggle a CSS class on the demo container to manage the visibility of the outline.
+		demoContainer.classList.toggle('outline-collapsed');
+		const target = element.srcElement.closest(outlineButtonData.node);
+
+		// Change the look of the button to reflect the state of the outline.
+		if (demoContainer.classList.contains('outline-collapsed')) {
+			bttnUpdater(outlineButtonDataClosed, target);
+		} else {
+			bttnUpdater(outlineButtonData, target);
+		}
+
+		// Keep the focus in the editor whenever the button is clicked.
+		editor.editing.view.focus();
+	}
+}
+
+DecoupledEditor.create(
+	document.querySelector('.cke5-editor-types-demo-document__content'),
+	{
+		extraPlugins: [DocumentOutlineToggler], // Plugin for Document Outline toggling
+		documentOutline: {
+			container: document.querySelector(`[class*='__outline']`),
+		},
 		plugins: [
 			Alignment,
 			Autoformat,
-			AutoImage,
-			AutoLink,
 			BlockQuote,
 			Bold,
-			CloudServices,
-			Code,
-			CodeBlock,
+			CKFinder,
+			CKFinderUploadAdapter,
 			...(CKBOX_TOKEN_URL ? [CKBox] : []),
+			CloudServices,
 			Essentials,
+			ExportPdf,
+			ExportWord,
 			FindAndReplace,
-			Font,
-			GeneralHtmlSupport,
+			FontBackgroundColor,
+			FontColor,
+			FontFamily,
+			FontSize,
 			Heading,
 			HorizontalLine,
-			HtmlEmbed,
 			Image,
 			ImageCaption,
-			ImageInsert,
 			ImageResize,
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
 			Base64UploadAdapter,
+			ImportWord,
 			Indent,
 			IndentBlock,
 			Italic,
 			Link,
-			LinkImage,
 			List,
 			ListProperties,
 			MediaEmbed,
@@ -561,10 +654,10 @@ ClassicEditor.create(
 			PasteFromOffice,
 			PictureEditing,
 			RemoveFormat,
-			ShowBlocks,
-			SourceEditing,
+			SpecialCharacters,
+			SpecialCharactersEssentials,
+			SpecialCharactersEmoji,
 			Strikethrough,
-			Style,
 			Subscript,
 			Superscript,
 			Table,
@@ -573,22 +666,24 @@ ClassicEditor.create(
 			TableColumnResize,
 			TableProperties,
 			TableToolbar,
-			TextPartLanguage,
 			TextTransformation,
-			TodoList,
 			Underline,
 			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
 			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
 			...(LICENSE_KEY ? [
+				CaseChange,
+				DocumentOutline,
 				ExportPdf,
 				ExportWord,
+				FormatPainter,
 				ImportWord,
+				MultiLevelList,
 				SlashCommand,
+				TableOfContents,
 				Template,
 			] : []),
 		],
 		licenseKey: LICENSE_KEY,
-		language: 'en',
 		toolbar: {
 			shouldNotGroupWhenFull: true,
 			items: [
@@ -596,56 +691,55 @@ ClassicEditor.create(
 				'undo',
 				'redo',
 				'|',
-				'sourceEditing',
-				'showBlocks',
-				'|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
 				'|',
+				'formatPainter',
+				'caseChange',
 				'findAndReplace',
 				'selectAll',
 				'wproofreader',
 				'|',
+				'insertTemplate',
+				'tableOfContents',
+				'|',
 
 				// --- "Insertables" ----------------------------------------------------------------------------
-				// 'insertTemplate',
+
 				'link',
 				'insertImage',
 				'ckbox',
 				'insertTable',
 				'blockQuote',
 				'mediaEmbed',
-				'codeBlock',
-				'htmlEmbed',
 				'pageBreak',
 				'horizontalLine',
+				'specialCharacters',
 				'-',
 
 				// --- Block-level formatting -------------------------------------------------------------------
 				'heading',
-				'style',
 				'|',
 
-				// --- Basic styles, font and inline formatting -------------------------------------------------------
+				// --- Font formatting -------------------------------------------------------------------
+				'fontSize',
+				'fontFamily',
+				'fontColor',
+				'fontBackgroundColor',
+				'|',
+
+				// --- Basic styles and inline formatting -------------------------------------------------------
 				'bold',
 				'italic',
 				'underline',
-				'strikethrough',
-				'superscript',
-				'subscript',
 				{
 					label: 'Basic styles',
 					icon: 'text',
 					items: [
-						'fontSize',
-						'fontFamily',
-						'fontColor',
-						'fontBackgroundColor',
-						'code',
-						'|',
-						'textPartLanguage',
-						'|',
+						'strikethrough',
+						'superscript',
+						'subscript',
 					],
 				},
 				'removeFormat',
@@ -658,56 +752,19 @@ ClassicEditor.create(
 				// --- Lists and indentation --------------------------------------------------------------------
 				'bulletedList',
 				'numberedList',
-				'todoList',
+				'multilevelList',
 				'|',
 				'outdent',
 				'indent',
 			],
 		},
-		exportPdf: {
-			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
-			fileName: 'export-pdf-demo.pdf',
-			appID: 'cke5-demos',
-			converterOptions: {
-				format: 'Tabloid',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait',
-			},
-			tokenUrl: false,
-		},
-		exportWord: {
-			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
-			fileName: 'export-word-demo.docx',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-			},
-			tokenUrl: false,
-		},
-		fontFamily: {
-			supportAllValues: true,
-		},
-		fontSize: {
-			options: [10, 12, 14, 'default', 18, 20, 22],
-			supportAllValues: true,
-		},
-		fontColor: {
-			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
-		},
-		fontBackgroundColor: {
-			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
-		},
 		heading: {
 			options: [
-				{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph',
+				},
 				{
 					model: 'heading1',
 					view: 'h1',
@@ -746,45 +803,22 @@ ClassicEditor.create(
 				},
 			],
 		},
-		htmlEmbed: {
-			showPreviews: true,
+		fontFamily: {
+			supportAllValues: true,
 		},
-		htmlSupport: {
-			allow: [
-				// Enables all HTML features.
-				{
-					name: /.*/,
-					attributes: true,
-					classes: true,
-					styles: true,
-				},
-			],
-			disallow: [
-				{
-					attributes: [
-						{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
-					],
-				},
-			],
+		fontSize: {
+			options: [10, 12, 14, 'default', 18, 20, 22],
+			supportAllValues: true,
+		},
+		fontColor: {
+			columns: 12,
+			colors: REDUCED_MATERIAL_COLORS,
+		},
+		fontBackgroundColor: {
+			columns: 12,
+			colors: REDUCED_MATERIAL_COLORS,
 		},
 		image: {
-			resizeOptions: [
-				{
-					name: 'resizeImage:original',
-					label: 'Default image width',
-					value: null,
-				},
-				{
-					name: 'resizeImage:50',
-					label: '50% page width',
-					value: '50',
-				},
-				{
-					name: 'resizeImage:75',
-					label: '75% page width',
-					value: '75',
-				},
-			],
 			toolbar: [
 				'imageTextAlternative',
 				'toggleImageCaption',
@@ -792,12 +826,11 @@ ClassicEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'|',
-				'resizeImage',
 			],
-			insert: {
-				integrations: ['url'],
-			},
+		},
+		link: {
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
 		},
 		list: {
 			properties: {
@@ -805,72 +838,6 @@ ClassicEditor.create(
 				startIndex: true,
 				reversed: true,
 			},
-		},
-		link: {
-			decorators: {
-				toggleDownloadable: {
-					mode: 'manual',
-					label: 'Downloadable',
-					attributes: {
-						download: 'file',
-					},
-				},
-			},
-			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
-		},
-		mention: {
-			feeds: MENTION_FEEDS,
-		},
-		placeholder: 'Type or paste your content here!',
-		style: {
-			definitions: [
-				{
-					name: 'Title',
-					element: 'h1',
-					classes: ['document-title'],
-				},
-				{
-					name: 'Subtitle',
-					element: 'h2',
-					classes: ['document-subtitle'],
-				},
-				{
-					name: 'Callout',
-					element: 'p',
-					classes: ['callout'],
-				},
-				{
-					name: 'Side quote',
-					element: 'blockquote',
-					classes: ['side-quote'],
-				},
-				{
-					name: 'Needs clarification',
-					element: 'span',
-					classes: ['needs-clarification'],
-				},
-				{
-					name: 'Wide spacing',
-					element: 'span',
-					classes: ['wide-spacing'],
-				},
-				{
-					name: 'Small caps',
-					element: 'span',
-					classes: ['small-caps'],
-				},
-				{
-					name: 'Code (dark)',
-					element: 'pre',
-					classes: ['stylish-code', 'stylish-code-dark'],
-				},
-				{
-					name: 'Code (bright)',
-					element: 'pre',
-					classes: ['stylish-code', 'stylish-code-bright'],
-				},
-			],
 		},
 		table: {
 			contentToolbar: [
@@ -882,13 +849,38 @@ ClassicEditor.create(
 				'toggleTableCaption',
 			],
 		},
-		/* @ts-ignore */
+		exportPdf: {
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			fileName: 'export-pdf-demo.pdf',
+			appID: 'cke5-demos',
+			converterOptions: {
+				format: 'A4',
+				margin_top: exportVerticalSpace,
+				margin_bottom: exportVerticalSpace,
+				margin_right: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace,
+				page_orientation: 'portrait',
+			},
+			tokenUrl: false,
+		},
+		exportWord: {
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			fileName: 'export-word-demo.docx',
+			converterOptions: {
+				format: 'A4',
+				margin_top: exportVerticalSpace,
+				margin_bottom: exportVerticalSpace,
+				margin_right: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace,
+			},
+			tokenUrl: false,
+		},
 		wproofreader: {
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
 			lang: 'auto',
 			srcUrl:
 				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-			autoStartup: false,
+			ignoreClasses: ['image-inline'],
 		},
 		ckbox: {
 			tokenUrl: CKBOX_TOKEN_URL,
@@ -896,11 +888,19 @@ ClassicEditor.create(
 		template: {
 			definitions: TEMPLATE_DEFINITIONS,
 		},
+		menuBar: {
+			isVisible: true
+		}
 	}
 )
-.then((editor) => {
-	(window as any).editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then((editor) => {
+		window.editor = editor;
+
+		const toolbarContainer = document.querySelector('.cke5-editor-types-demo-document__toolbar-container');
+
+		toolbarContainer.appendChild(editor.ui.view.menuBarView.element);
+		toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+	})
+	.catch((error) => {
+		console.error(error.stack);
+	});

@@ -15,20 +15,28 @@ if (!LICENSE_KEY) {
 	);
 }
 
+// CKBox plugin requires a valid token URL in order to use the CKBox application.
+// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+const CKBOX_TOKEN_URL = '';
+
 import {
-	BalloonEditor,
+	ClassicEditor,
 	Autoformat,
 	Bold,
 	Italic,
+	Underline,
 	BlockQuote,
 	Base64UploadAdapter,
 	CKFinder,
 	CKFinderUploadAdapter,
 	CloudServices,
+	CKBox,
 	Essentials,
 	Heading,
 	Image,
 	ImageCaption,
+	ImageResize,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
@@ -42,9 +50,9 @@ import {
 	Paragraph,
 	PasteFromOffice,
 	Table,
+	TableColumnResize,
 	TableToolbar,
 	TextTransformation,
-	BlockToolbar,
 } from 'ckeditor5';
 
 import {
@@ -54,21 +62,22 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-BalloonEditor.create(
-	document.querySelector('#cke5-user-interface-balloon-block-demo') as HTMLElement,
+ClassicEditor.create(
+	document.querySelector('#cke5-user-interface-classic-demo'),
 	{
 		plugins: [
 			Autoformat,
 			BlockQuote,
-			BlockToolbar,
 			Bold,
 			CKFinder,
 			CKFinderUploadAdapter,
 			CloudServices,
+			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			Essentials,
 			Heading,
 			Image,
 			ImageCaption,
+			ImageResize,
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
@@ -84,30 +93,36 @@ BalloonEditor.create(
 			PasteFromOffice,
 			PictureEditing,
 			Table,
+			TableColumnResize,
 			TableToolbar,
 			TextTransformation,
+			Underline,
 			...(LICENSE_KEY ? [SlashCommand] : []),
 		],
 		licenseKey: LICENSE_KEY,
-		blockToolbar: [
+		toolbar: [
 			'undo',
 			'redo',
 			'|',
 			'heading',
 			'|',
+			'bold',
+			'italic',
+			'underline',
+			'|',
+			'link',
 			'uploadImage',
+			'ckbox',
 			'insertTable',
 			'blockQuote',
 			'mediaEmbed',
 			'|',
 			'bulletedList',
 			'numberedList',
+			'|',
 			'outdent',
 			'indent',
 		],
-		toolbar: {
-			items: ['bold', 'italic', 'link'],
-		},
 		heading: {
 			options: [
 				{
@@ -142,12 +157,32 @@ BalloonEditor.create(
 			],
 		},
 		image: {
+			resizeOptions: [
+				{
+					name: 'resizeImage:original',
+					label: 'Default image width',
+					value: null,
+				},
+				{
+					name: 'resizeImage:50',
+					label: '50% page width',
+					value: '50',
+				},
+				{
+					name: 'resizeImage:75',
+					label: '75% page width',
+					value: '75',
+				},
+			],
 			toolbar: [
-				'imageStyle:inline',
-				'imageStyle:block',
-				'|',
-				'toggleImageCaption',
 				'imageTextAlternative',
+				'toggleImageCaption',
+				'|',
+				'imageStyle:inline',
+				'imageStyle:wrapText',
+				'imageStyle:breakText',
+				'|',
+				'resizeImage',
 			],
 		},
 		link: {
@@ -157,10 +192,13 @@ BalloonEditor.create(
 		table: {
 			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
 		},
+		ckbox: {
+			tokenUrl: CKBOX_TOKEN_URL,
+		},
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

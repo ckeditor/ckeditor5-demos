@@ -44,6 +44,7 @@ import {
 	Table,
 	TableToolbar,
 	TextTransformation,
+	BlockToolbar,
 } from 'ckeditor5';
 
 import {
@@ -54,11 +55,12 @@ import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 BalloonEditor.create(
-	document.querySelector('#cke5-user-interface-balloon-demo') as HTMLElement,
+	document.querySelector('#cke5-user-interface-balloon-block-demo'),
 	{
 		plugins: [
 			Autoformat,
 			BlockQuote,
+			BlockToolbar,
 			Bold,
 			CKFinder,
 			CKFinderUploadAdapter,
@@ -87,16 +89,12 @@ BalloonEditor.create(
 			...(LICENSE_KEY ? [SlashCommand] : []),
 		],
 		licenseKey: LICENSE_KEY,
-		toolbar: [
+		blockToolbar: [
 			'undo',
 			'redo',
 			'|',
 			'heading',
 			'|',
-			'bold',
-			'italic',
-			'|',
-			'link',
 			'uploadImage',
 			'insertTable',
 			'blockQuote',
@@ -107,6 +105,9 @@ BalloonEditor.create(
 			'outdent',
 			'indent',
 		],
+		toolbar: {
+			items: ['bold', 'italic', 'link'],
+		},
 		heading: {
 			options: [
 				{
@@ -159,7 +160,7 @@ BalloonEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

@@ -185,7 +185,7 @@ const EMOJIS_ARRAY = [
 ];
 
 ClassicEditor.create(
-	document.querySelector('#cke5-user-interface-button-grouping-demo') as HTMLElement,
+	document.querySelector('#cke5-user-interface-button-grouping-demo'),
 	{
 		plugins: [
 			Autoformat,
@@ -336,7 +336,7 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

@@ -99,7 +99,7 @@ const plugins = [
  */
 
 ClassicEditor.create(
-	document.querySelector('#cke5-localized-de-demo') as HTMLElement,
+	document.querySelector('#cke5-localized-de-demo'),
 	{
 		language: 'de',
 		plugins: plugins,
@@ -162,14 +162,14 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);
 });
 
 ClassicEditor.create(
-	document.querySelector('#cke5-localized-ar-demo') as HTMLElement,
+	document.querySelector('#cke5-localized-ar-demo'),
 	{
 		language: 'ar',
 		plugins: plugins,
@@ -232,14 +232,14 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);
 });
 
 ClassicEditor.create(
-	document.querySelector('#cke5-localized-ja-demo') as HTMLElement,
+	document.querySelector('#cke5-localized-ja-demo'),
 	{
 		language: 'ja',
 		plugins: plugins,
@@ -302,7 +302,7 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

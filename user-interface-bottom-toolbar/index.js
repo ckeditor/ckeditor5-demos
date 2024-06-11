@@ -71,8 +71,6 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-type PanelPosition = DropdownPanelView['position'];
-
 export const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'New client contact',
@@ -114,7 +112,7 @@ export const TEMPLATE_DEFINITIONS = [
 ];
 
 class FormattingOptions extends Plugin {
-	public toolbarView: ToolbarView;
+	toolbarView;
 
 	/**
 	 * @inheritDoc
@@ -224,8 +222,8 @@ class BottomToolbarCustomizations extends Plugin {
 
 		editor.ui.on('ready', () => {
 			// Even though it's not in typings, toolbar object is there (probably dynamically added at some point).
-			const editorToolbar = (editor.ui.view as any).toolbar;
-			const formattingToolbar = (editor.plugins.get('FormattingOptions') as FormattingOptions).toolbarView;
+			const editorToolbar = editor.ui.view.toolbar;
+			const formattingToolbar = editor.plugins.get('FormattingOptions').toolbarView;
 
 			overrideDropdownPositionsToNorth(editor, editorToolbar);
 			overrideDropdownPositionsToNorth(editor, formattingToolbar);
@@ -237,7 +235,7 @@ class BottomToolbarCustomizations extends Plugin {
 }
 
 DecoupledEditor.create(
-	document.querySelector('#cke5-user-interface-bottom-toolbar-demo-content') as HTMLElement,
+	document.querySelector('#cke5-user-interface-bottom-toolbar-demo-content'),
 	{
 		plugins: [
 			Alignment,
@@ -387,16 +385,16 @@ DecoupledEditor.create(
 		template: {
 			definitions: TEMPLATE_DEFINITIONS,
 		},
-	} as (EditorConfig & {formattingOptions: string[]})
+	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 
 	document
 		.querySelector(
 			'#cke5-user-interface-bottom-toolbar-demo-toolbar-container'
-		)!
-		.appendChild(editor.ui.view.toolbar.element!);
+		)
+		.appendChild(editor.ui.view.toolbar.element);
 })
 .catch((error) => {
 	console.error(error.stack);
@@ -465,11 +463,11 @@ function overrideDropdownPositionsToNorth(editor, toolbarView) {
 			}
 
 			item.panelView.position = getOptimalPosition({
-				element: item.panelView.element!,
-				target: item.buttonView.element!,
+				element: item.panelView.element,
+				target: item.buttonView.element,
 				fitInViewport: true,
 				positions: panelPositions,
-			})!.name as PanelPosition;
+			}).name;
 		});
 	}
 }

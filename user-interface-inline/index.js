@@ -52,7 +52,7 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-const defaultConfig: EditorConfig = {
+const defaultConfig = {
 	plugins: [
 		Essentials,
 		Autoformat,
@@ -150,7 +150,7 @@ const defaultConfig: EditorConfig = {
 	},
 };
 
-const headerConfig: EditorConfig = {
+const headerConfig = {
 	plugins: [Essentials, Autoformat, Bold, Italic, Heading, Link, Paragraph],
 	toolbar: ['heading', '|', 'bold', 'italic', 'link'],
 	heading: {
@@ -207,7 +207,7 @@ inlineElementsIds.forEach((id) => {
 		id === 'inline-header' ? headerConfig : defaultConfig
 	)
 		.then((editor) => {
-			(window as any).editor = editor;
+			window.editor = editor;
 		})
 		.catch((error) => {
 			console.error(error.stack);

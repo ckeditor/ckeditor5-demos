@@ -15,28 +15,20 @@ if (!LICENSE_KEY) {
 	);
 }
 
-// CKBox plugin requires a valid token URL in order to use the CKBox application.
-// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
-const CKBOX_TOKEN_URL = '';
-
 import {
-	ClassicEditor,
+	BalloonEditor,
 	Autoformat,
 	Bold,
 	Italic,
-	Underline,
 	BlockQuote,
 	Base64UploadAdapter,
 	CKFinder,
 	CKFinderUploadAdapter,
 	CloudServices,
-	CKBox,
 	Essentials,
 	Heading,
 	Image,
 	ImageCaption,
-	ImageResize,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
@@ -50,7 +42,6 @@ import {
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableColumnResize,
 	TableToolbar,
 	TextTransformation,
 } from 'ckeditor5';
@@ -62,8 +53,8 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-ClassicEditor.create(
-	document.querySelector('#cke5-user-interface-classic-demo') as HTMLElement,
+BalloonEditor.create(
+	document.querySelector('#cke5-user-interface-balloon-demo'),
 	{
 		plugins: [
 			Autoformat,
@@ -72,12 +63,10 @@ ClassicEditor.create(
 			CKFinder,
 			CKFinderUploadAdapter,
 			CloudServices,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			Essentials,
 			Heading,
 			Image,
 			ImageCaption,
-			ImageResize,
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
@@ -93,10 +82,8 @@ ClassicEditor.create(
 			PasteFromOffice,
 			PictureEditing,
 			Table,
-			TableColumnResize,
 			TableToolbar,
 			TextTransformation,
-			Underline,
 			...(LICENSE_KEY ? [SlashCommand] : []),
 		],
 		licenseKey: LICENSE_KEY,
@@ -108,18 +95,15 @@ ClassicEditor.create(
 			'|',
 			'bold',
 			'italic',
-			'underline',
 			'|',
 			'link',
 			'uploadImage',
-			'ckbox',
 			'insertTable',
 			'blockQuote',
 			'mediaEmbed',
 			'|',
 			'bulletedList',
 			'numberedList',
-			'|',
 			'outdent',
 			'indent',
 		],
@@ -157,32 +141,12 @@ ClassicEditor.create(
 			],
 		},
 		image: {
-			resizeOptions: [
-				{
-					name: 'resizeImage:original',
-					label: 'Default image width',
-					value: null,
-				},
-				{
-					name: 'resizeImage:50',
-					label: '50% page width',
-					value: '50',
-				},
-				{
-					name: 'resizeImage:75',
-					label: '75% page width',
-					value: '75',
-				},
-			],
 			toolbar: [
-				'imageTextAlternative',
-				'toggleImageCaption',
-				'|',
 				'imageStyle:inline',
-				'imageStyle:wrapText',
-				'imageStyle:breakText',
+				'imageStyle:block',
 				'|',
-				'resizeImage',
+				'toggleImageCaption',
+				'imageTextAlternative',
 			],
 		},
 		link: {
@@ -192,13 +156,10 @@ ClassicEditor.create(
 		table: {
 			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
 		},
-		ckbox: {
-			tokenUrl: CKBOX_TOKEN_URL,
-		},
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);

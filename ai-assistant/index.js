@@ -95,13 +95,11 @@ import {
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-// @ts-ignore
 import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
-// @ts-ignore
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-ai-assistant-demo') as HTMLElement,
+	document.querySelector('#cke5-ai-assistant-demo'),
 	{
 		plugins: [
 			AIAssistant,
@@ -344,7 +342,7 @@ ClassicEditor.create(
 	}
 )
 .then((editor) => {
-	(window as any).editor = editor;
+	window.editor = editor;
 })
 .catch((error) => {
 	console.error(error.stack);
