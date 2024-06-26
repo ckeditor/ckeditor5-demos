@@ -1,10 +1,14 @@
 describe( 'Test CKEditor 5 demo', () => {
-  const defaultDemos = [ 
+  const allDemos = [
+    'ai-assistant',
     'feature-rich',
     'headless',
     'internationalization',
     'markdown',
+    'mathtype',
     'mobile',
+    'paste-from-office-enhanced',
+    'productivity-pack',
     'source-code-editing',
     'user-interface-balloon',
     'user-interface-balloon-block',
@@ -12,23 +16,24 @@ describe( 'Test CKEditor 5 demo', () => {
     'user-interface-button-grouping',
     'user-interface-classic',
     'user-interface-document',
-    'user-interface-inline'
-  ]
+    'user-interface-inline',
+    'wproofreader',
+  ];
 
-  defaultDemos.forEach( demo => {
+  allDemos.forEach( demo => {
     it( `Testing demo: ${ demo }`, () => {
-      const URL = `http://localhost:9001/${ demo }/`;
+      const URL = `http://localhost:9001/${ demo }.html`;
 
       cy.visit( URL );
 
       if ( demo == 'mobile' ) {
         cy.get( 'iframe' ).then( $iframe => {
           const doc = $iframe.contents();
-          
+
           // Check if the editor initialized properly.
           doc.get( '.ck-editor__editable' );
         } )
-        
+
         return;
       }
 
@@ -43,4 +48,4 @@ describe( 'Test CKEditor 5 demo', () => {
       }
     } )
   } );
-} )
+} );

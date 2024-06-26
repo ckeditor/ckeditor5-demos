@@ -3,47 +3,63 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Paste from Office enhanced require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features
-const PASTE_FROM_OFFICE_ENHANCED_LICENSE_KEY = '';
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+const LICENSE_KEY = '';
+
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
 
 // Editor creators
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import {
+	ClassicEditor,
+	Alignment,
+	Autoformat,
+	Bold,
+	CloudServices,
+	EasyImage,
+	Essentials,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+	GeneralHtmlSupport,
+	Heading,
+	Image,
+	ImageCaption,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	Base64UploadAdapter,
+	Indent,
+	IndentBlock,
+	Italic,
+	Link,
+	List,
+	MediaEmbed,
+	PasteFromOffice,
+	Paragraph,
+	Strikethrough,
+	Table,
+	TableCaption,
+	TableCellProperties,
+	TableProperties,
+	TableToolbar,
+	Underline,
+} from 'ckeditor5';
 
-// Features
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
-import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import PasteFromOfficeEnhanced from '@ckeditor/ckeditor5-paste-from-office-enhanced/src/pastefromofficeenhanced';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
-import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import {
+	PasteFromOfficeEnhanced
+} from 'ckeditor5-premium-features';
+
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Red 50', color: '#ffebee' },
@@ -190,6 +206,7 @@ ClassicEditor.create(
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
+			Base64UploadAdapter,
 			Indent,
 			IndentBlock,
 			Italic,
@@ -246,7 +263,7 @@ ClassicEditor.create(
 				'indent',
 			],
 		},
-		licenseKey: PASTE_FROM_OFFICE_ENHANCED_LICENSE_KEY,
+		licenseKey: LICENSE_KEY,
 		heading: {
 			options: [
 				{
@@ -312,7 +329,6 @@ ClassicEditor.create(
 			],
 		},
 		image: {
-			styles: ['alignCenter', 'alignLeft', 'alignRight'],
 			toolbar: [
 				'imageTextAlternative',
 				'toggleImageCaption',
@@ -320,7 +336,6 @@ ClassicEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 		},
 		link: {
@@ -336,9 +351,9 @@ ClassicEditor.create(
 		},
 	}
 )
-	.then((editor) => {
-		window.editor = editor;
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+.then((editor) => {
+	window.editor = editor;
+})
+.catch((error) => {
+	console.error(error.stack);
+});

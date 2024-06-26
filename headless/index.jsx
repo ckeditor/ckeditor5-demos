@@ -4,9 +4,9 @@
  */
 
 import React, { useState, useEffect, StrictMode } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import HeadlessEditor from '.';
 import { createRoot } from 'react-dom/client';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import HeadlessEditor from './index.js';
 
 function App() {
 	const [editor, setEditor] = useState(null);
@@ -144,7 +144,7 @@ function EditorToolbarButton({
 	label,
 	editor,
 	commandName,
-	commandValue = null,
+	commandValue,
 }) {
 	const command = editor ? editor.commands.get(commandName) : null;
 	const [isOn, setIsOn] = useState(false);

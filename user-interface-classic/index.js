@@ -3,49 +3,64 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
-const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+const LICENSE_KEY = '';
 
-/* You must provide a valid token URL in order to use the CKBox application.
-After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
+
+// CKBox plugin requires a valid token URL in order to use the CKBox application.
+// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
 const CKBOX_TOKEN_URL = '';
 
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import {
+	ClassicEditor,
+	Autoformat,
+	Bold,
+	Italic,
+	Underline,
+	BlockQuote,
+	Base64UploadAdapter,
+	CKFinder,
+	CKFinderUploadAdapter,
+	CloudServices,
+	CKBox,
+	Essentials,
+	Heading,
+	Image,
+	ImageCaption,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	PictureEditing,
+	Indent,
+	IndentBlock,
+	Link,
+	List,
+	MediaEmbed,
+	Mention,
+	Paragraph,
+	PasteFromOffice,
+	Table,
+	TableColumnResize,
+	TableToolbar,
+	TextTransformation,
+} from 'ckeditor5';
 
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import Mention from '@ckeditor/ckeditor5-mention/src/mention';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-// Productivity Pack features
-import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
+import {
+	SlashCommand
+} from 'ckeditor5-premium-features';
+
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 ClassicEditor.create(
 	document.querySelector('#cke5-user-interface-classic-demo'),
@@ -55,11 +70,9 @@ ClassicEditor.create(
 			BlockQuote,
 			Bold,
 			CKFinder,
+			CKFinderUploadAdapter,
 			CloudServices,
-			/* You must provide a valid token URL in order to use the CKBox application.
-		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-			// CKBox,
+			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			Essentials,
 			Heading,
 			Image,
@@ -84,10 +97,9 @@ ClassicEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
-			UploadAdapter,
-			// SlashCommand,
+			...(LICENSE_KEY ? [SlashCommand] : []),
 		],
-		licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
+		licenseKey: LICENSE_KEY,
 		toolbar: [
 			'undo',
 			'redo',
@@ -100,10 +112,7 @@ ClassicEditor.create(
 			'|',
 			'link',
 			'uploadImage',
-			/* You must provide a valid token URL in order to use the CKBox application.
-		After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-		https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
-			// 'ckbox',
+			'ckbox',
 			'insertTable',
 			'blockQuote',
 			'mediaEmbed',
@@ -148,7 +157,6 @@ ClassicEditor.create(
 			],
 		},
 		image: {
-			styles: ['alignCenter', 'alignLeft', 'alignRight'],
 			resizeOptions: [
 				{
 					name: 'resizeImage:original',
@@ -173,7 +181,6 @@ ClassicEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 				'|',
 				'resizeImage',
 			],
@@ -190,9 +197,9 @@ ClassicEditor.create(
 		},
 	}
 )
-	.then((editor) => {
-		window.editor = editor;
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+.then((editor) => {
+	window.editor = editor;
+})
+.catch((error) => {
+	console.error(error.stack);
+});

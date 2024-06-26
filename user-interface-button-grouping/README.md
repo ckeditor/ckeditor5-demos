@@ -23,5 +23,5 @@ cd ckeditor5-demos/user-interface-button-grouping && yarn
 3. Start the demo:
 
 ```shell
-yarn start
+yarn dev
 ```

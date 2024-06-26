@@ -3,61 +3,73 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
-const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+const LICENSE_KEY = '';
 
-import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
 
-// Framework
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import fontColorIcon from '@ckeditor/ckeditor5-font/theme/icons/font-color.svg';
-import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
-import DropdownButtonView from '@ckeditor/ckeditor5-ui/src/dropdown/button/dropdownbuttonview';
-import DropdownPanelView from '@ckeditor/ckeditor5-ui/src/dropdown/dropdownpanelview';
-import DropdownView from '@ckeditor/ckeditor5-ui/src/dropdown/dropdownview';
-import ToolbarView from '@ckeditor/ckeditor5-ui/src/toolbar/toolbarview';
+import {
+	DecoupledEditor,
+	Plugin,
+	clickOutsideHandler,
+	DropdownButtonView,
+	DropdownPanelView,
+	DropdownView,
+	ToolbarView,
+	Alignment,
+	Autoformat,
+	Bold,
+	Italic,
+	Strikethrough,
+	Subscript,
+	Superscript,
+	Underline,
+	BlockQuote,
+	CloudServices,
+	Essentials,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+	getOptimalPosition,
+	Heading,
+	HorizontalLine,
+	Image,
+	ImageCaption,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	Base64UploadAdapter,
+	Indent,
+	IndentBlock,
+	Link,
+	List,
+	MediaEmbed,
+	Mention,
+	Paragraph,
+	PasteFromOffice,
+	RemoveFormat,
+	Table,
+	TableColumnResize,
+	TableToolbar,
+	EditorConfig,
+} from 'ckeditor5';
 
-// Features
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
-import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import Mention from '@ckeditor/ckeditor5-mention/src/mention';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-// Productivity Pack features
-import Template from '@ckeditor/ckeditor5-template/src/template';
-import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
+import {
+	Template,
+	SlashCommand
+} from 'ckeditor5-premium-features';
+
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 export const TEMPLATE_DEFINITIONS = [
 	{
@@ -100,6 +112,8 @@ export const TEMPLATE_DEFINITIONS = [
 ];
 
 class FormattingOptions extends Plugin {
+	toolbarView;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -126,11 +140,6 @@ class FormattingOptions extends Plugin {
 			// Accessibility: Give the toolbar a human-readable ARIA label.
 			toolbarView.set({
 				ariaLabel: t('Formatting options toolbar'),
-			});
-
-			// Accessibility: Give the dropdown a human-readable ARIA label.
-			dropdownView.set({
-				label: t('Formatting options'),
 			});
 
 			// Toolbars in dropdowns need specific styling, hence the class.
@@ -185,7 +194,7 @@ class FormattingOptions extends Plugin {
 			// Using the font color icon to visually represent the formatting.
 			buttonView.set({
 				tooltip: t('Formatting options'),
-				icon: fontColorIcon,
+				icon: editor.plugins.get('FontColor').icon,
 			});
 
 			dropdownView.panelView.children.add(toolbarView);
@@ -212,16 +221,15 @@ class BottomToolbarCustomizations extends Plugin {
 		const editor = this.editor;
 
 		editor.ui.on('ready', () => {
-			overrideDropdownPositionsToNorth(editor, editor.ui.view.toolbar);
-			overrideDropdownPositionsToNorth(
-				editor,
-				editor.plugins.get('FormattingOptions').toolbarView
-			);
+			// Even though it's not in typings, toolbar object is there (probably dynamically added at some point).
+			const editorToolbar = editor.ui.view.toolbar;
+			const formattingToolbar = editor.plugins.get('FormattingOptions').toolbarView;
 
-			overrideTooltipPositions(editor.ui.view.toolbar);
-			overrideTooltipPositions(
-				editor.plugins.get('FormattingOptions').toolbarView
-			);
+			overrideDropdownPositionsToNorth(editor, editorToolbar);
+			overrideDropdownPositionsToNorth(editor, formattingToolbar);
+
+			overrideTooltipPositions(editorToolbar);
+			overrideTooltipPositions(formattingToolbar);
 		});
 	}
 }
@@ -268,11 +276,9 @@ DecoupledEditor.create(
 			TableColumnResize,
 			TableToolbar,
 			Underline,
-			UploadAdapter,
-			// SlashCommand,
-			// Template,
+			...(LICENSE_KEY ? [SlashCommand, Template] : [])
 		],
-		licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
+		licenseKey: LICENSE_KEY,
 		toolbar: [
 			'formattingOptions',
 			'|',
@@ -360,7 +366,6 @@ DecoupledEditor.create(
 			supportAllValues: true,
 		},
 		image: {
-			styles: ['alignCenter', 'alignLeft', 'alignRight'],
 			toolbar: [
 				'imageTextAlternative',
 				'toggleImageCaption',
@@ -368,7 +373,6 @@ DecoupledEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 		},
 		link: {
@@ -383,18 +387,18 @@ DecoupledEditor.create(
 		},
 	}
 )
-	.then((editor) => {
-		window.editor = editor;
+.then((editor) => {
+	window.editor = editor;
 
-		document
-			.querySelector(
-				'#cke5-user-interface-bottom-toolbar-demo-toolbar-container'
-			)
-			.appendChild(editor.ui.view.toolbar.element);
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+	document
+		.querySelector(
+			'#cke5-user-interface-bottom-toolbar-demo-toolbar-container'
+		)
+		.appendChild(editor.ui.view.toolbar.element);
+})
+.catch((error) => {
+	console.error(error.stack);
+});
 
 /**
  * Force all toolbar dropdown panels to use northern positions rather than southern (editor default).
@@ -458,7 +462,7 @@ function overrideDropdownPositionsToNorth(editor, toolbarView) {
 				return;
 			}
 
-			item.panelView.position = DropdownView._getOptimalPosition({
+			item.panelView.position = getOptimalPosition({
 				element: item.panelView.element,
 				target: item.buttonView.element,
 				fitInViewport: true,

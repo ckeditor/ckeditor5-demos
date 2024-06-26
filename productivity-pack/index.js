@@ -3,76 +3,91 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// Productivity features require license key to work properly, you can get a trial license key: https://orders.ckeditor.com/trial/premium-features?feature=pagination
-const PRODUCTIVITY_PACK_LICENSE_KEY = '';
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+const LICENSE_KEY = '';
 
-/* You must provide a valid token URL in order to use the CKBox application.
-After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint */
+if (!LICENSE_KEY) {
+	alert(
+		'CKEditor Commercial Features included in this demo require a license key.\n' +
+		'Check the index.ts file for more information.'
+	);
+}
+
+// CKBox plugin requires a valid token URL in order to use the CKBox application.
+// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
 const CKBOX_TOKEN_URL = '';
 
-// Put your Web Spell Checker license key here, for more info how to get the key see [LINK].
+// WProofreader plugin require a license key to work properly.
+// For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
-// Editor creators
-import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
+import {
+	DecoupledEditor,
+	AdjacentListsSupport,
+	Alignment,
+	Autoformat,
+	Bold,
+	CKBox,
+	CloudServices,
+	EasyImage,
+	Essentials,
+	FindAndReplace,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+	Heading,
+	Image,
+	ImageCaption,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	Indent,
+	IndentBlock,
+	Italic,
+	Link,
+	List,
+	ListProperties,
+	MediaEmbed,
+	Mention,
+	PageBreak,
+	Paragraph,
+	PasteFromOffice,
+	PictureEditing,
+	RemoveFormat,
+	Table,
+	TableCaption,
+	TableCellProperties,
+	TableColumnResize,
+	TableProperties,
+	TableToolbar,
+	TextTransformation,
+	Underline,
+} from 'ckeditor5';
 
-// Features
-import AdjacentListsSupport from '@ckeditor/ckeditor5-list/src/documentlist/adjacentlistssupport.js';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import ExportPdf from '@ckeditor/ckeditor5-export-pdf/src/exportpdf';
-import ExportWord from '@ckeditor/ckeditor5-export-word/src/exportword';
-import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
-import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
-import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
-import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
-import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import ImportWord from '@ckeditor/ckeditor5-import-word/src/importword';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Link from '@ckeditor/ckeditor5-link/src/link';
-import DocumentList from '@ckeditor/ckeditor5-list/src/documentlist';
-import DocumentListProperties from '@ckeditor/ckeditor5-list/src/documentlistproperties';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import Mention from '@ckeditor/ckeditor5-mention/src/mention';
-import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
-import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
-import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
-// Productivity Pack features
-import Template from '@ckeditor/ckeditor5-template/src/template';
-import TableOfContents from '@ckeditor/ckeditor5-document-outline/src/tableofcontents';
-import DocumentOutline from '@ckeditor/ckeditor5-document-outline/src/documentoutline';
-import FormatPainter from '@ckeditor/ckeditor5-format-painter/src/formatpainter';
-import SlashCommand from '@ckeditor/ckeditor5-slash-command/src/slashcommand';
+import {
+	ExportPdf,
+	ExportWord,
+	ImportWord,
+	Pagination,
+	Template,
+	TableOfContents,
+	DocumentOutline,
+	FormatPainter,
+	SlashCommand,
+} from 'ckeditor5-premium-features';
 
-//pagination demo extra plugin
-import Pagination from '@ckeditor/ckeditor5-pagination/src/pagination';
+// import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
+
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
+
+import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
+import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
 
 const TEMPLATE_DEFINITIONS = [
 	{
@@ -467,7 +482,7 @@ function DocumentOutlineToggler(editor) {
 DecoupledEditor.create(
 	document.querySelector('.cke5-productivity-pack-demo__content'),
 	{
-		// extraPlugins: [DocumentOutlineToggler], // Plugin for Document Outline toggling
+		extraPlugins: [DocumentOutlineToggler], // Plugin for Document Outline toggling
 		documentOutline: {
 			container: document.querySelector(`[class*='__outline']`),
 		},
@@ -476,12 +491,10 @@ DecoupledEditor.create(
 			Alignment,
 			Autoformat,
 			Bold,
-			// CKBox,
+			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			CloudServices,
 			EasyImage,
 			Essentials,
-			ExportPdf,
-			ExportWord,
 			FindAndReplace,
 			FontBackgroundColor,
 			FontColor,
@@ -494,13 +507,12 @@ DecoupledEditor.create(
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
-			ImportWord,
 			Indent,
 			IndentBlock,
 			Italic,
 			Link,
-			DocumentList,
-			DocumentListProperties,
+			List,
+			ListProperties,
 			MediaEmbed,
 			Mention,
 			PageBreak,
@@ -516,32 +528,37 @@ DecoupledEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
-			UploadAdapter,
-			WProofreader,
-			// SlashCommand,
-			// Template,
-			// FormatPainter,
-			// TableOfContents,
-			// DocumentOutline,
-			// Pagination,
+			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
+			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
+			...(LICENSE_KEY ? [
+				ExportPdf,
+				ExportWord,
+				ImportWord,
+				SlashCommand,
+				Template,
+				FormatPainter,
+				TableOfContents,
+				DocumentOutline,
+				Pagination,
+			] : []),
 		],
-		licenseKey: PRODUCTIVITY_PACK_LICENSE_KEY,
+		licenseKey: LICENSE_KEY,
 		toolbar: {
 			shouldNotGroupWhenFull: true,
 			items: [
 				'undo',
 				'redo',
 				'|',
-				// 'previousPage',
-				// 'nextPage',
-				// 'pageNavigation',
-				// 'pageBreak',
-				// '|',
-				// 'insertTemplate',
-				// 'tableOfContents',
-				// '|',
-				// 'formatPainter',
-				// '|',
+				'previousPage',
+				'nextPage',
+				'pageNavigation',
+				'pageBreak',
+				'|',
+				'insertTemplate',
+				'tableOfContents',
+				'|',
+				'formatPainter',
+				'|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
@@ -552,7 +569,7 @@ DecoupledEditor.create(
 				'|',
 				'link',
 				'uploadImage',
-				// 'ckbox',
+				'ckbox',
 				'insertTable',
 				'|',
 				'numberedList',
@@ -641,7 +658,6 @@ DecoupledEditor.create(
 			colors: REDUCED_MATERIAL_COLORS,
 		},
 		image: {
-			styles: ['alignCenter', 'alignLeft', 'alignRight'],
 			toolbar: [
 				'imageTextAlternative',
 				'toggleImageCaption',
@@ -649,7 +665,6 @@ DecoupledEditor.create(
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-				'imageStyle:side',
 			],
 		},
 		link: {
@@ -674,7 +689,7 @@ DecoupledEditor.create(
 			],
 		},
 		exportPdf: {
-			stylesheets: ['EDITOR_STYLES', './content.css'],
+			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
@@ -688,9 +703,8 @@ DecoupledEditor.create(
 			tokenUrl: false,
 		},
 		exportWord: {
-			stylesheets: ['EDITOR_STYLES'],
+			stylesheets: [coreStylesheets, premiumStylesheets],
 			fileName: 'export-word-demo.docx',
-			appID: 'cke5-demos',
 			converterOptions: {
 				format: 'A4',
 				margin_top: exportVerticalSpace,
@@ -726,14 +740,14 @@ DecoupledEditor.create(
 		},
 	}
 )
-	.then((editor) => {
-		document
-			.querySelector(`[class$='__toolbar-container']`)
-			.appendChild(editor.ui.view.toolbar.element);
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+.then((editor) => {
+	document
+		.querySelector(`[class$='__toolbar-container']`)
+		.appendChild(editor.ui.view.toolbar.element);
+})
+.catch((error) => {
+	console.error(error.stack);
+});
 
 // --------- Just exports ------------------------------------------------------------------------
 
