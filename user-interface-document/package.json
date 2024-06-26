@@ -15,8 +15,8 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"ckeditor5": "alpha",
-		"ckeditor5-premium-features": "alpha",
+		"ckeditor5": "^42.0.0",
+		"ckeditor5-premium-features": "^42.0.0",
 		"vite": "^5.0.0"
 	}
 }
