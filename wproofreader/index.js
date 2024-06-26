@@ -39,11 +39,11 @@ import {
 	TodoList,
 } from 'ckeditor5';
 
-// import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
+import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
 
-// import '@webspellchecker/wproofreader-ckeditor5/index.css';
+import '@webspellchecker/wproofreader-ckeditor5/index.css';
 
 ClassicEditor.create(
 	document.querySelector('#cke5-spellchecker-demo'),
@@ -70,8 +70,7 @@ ClassicEditor.create(
 			TableToolbar,
 			TextTransformation,
 			TodoList,
-			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
-			// WProofreader,
+			WProofreader,
 		],
 		toolbar: {
 			items: [
