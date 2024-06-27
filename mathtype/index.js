@@ -32,7 +32,7 @@ import {
 	Underline,
 } from 'ckeditor5';
 
-// import MathType from '@wiris/mathtype-ckeditor5/src/plugin';
+import MathType from '@wiris/mathtype-ckeditor5/dist/index.js';
 
 import 'ckeditor5/ckeditor5.css';
 
@@ -41,8 +41,7 @@ ClassicEditor.create(
 	{
 		plugins: [
 			CloudServices,
-			// @TODO MathType needs to be migrated to NIM compatible package first to work here.
-			// MathType,
+			MathType,
 			Essentials,
 			Alignment,
 			Autoformat,

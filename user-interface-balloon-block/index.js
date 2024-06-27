@@ -11,7 +11,7 @@ const LICENSE_KEY = '';
 if (!LICENSE_KEY) {
 	alert(
 		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.ts file for more information.'
+		'Check the index.js file for more information.'
 	);
 }
 
