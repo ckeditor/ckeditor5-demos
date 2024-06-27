@@ -81,7 +81,7 @@ import {
 	SlashCommand,
 } from 'ckeditor5-premium-features';
 
-// import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
+import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
@@ -528,8 +528,7 @@ DecoupledEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
-			// @TODO WProofreader needs to be migrated to NIM compatible package first to work here.
-			// ...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
+			...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
 			...(LICENSE_KEY ? [
 				ExportPdf,
 				ExportWord,
