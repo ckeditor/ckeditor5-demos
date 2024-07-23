@@ -1,0 +1,57 @@
+/* ---- Cross-editor content styles. --------------------------------------------------------------- */
+.ck.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable) {
+  /* Make sure all content containers have some min height to make them easier to locate. */
+  min-height: 300px;
+  padding: 1em 1.5em;
+}
+
+/* Make sure all content containers are distinguishable on a web page even of not focused. */
+.ck.ck-content:not(:focus) {
+  border: 1px solid var(--ck-color-base-border);
+}
+
+/* Fix for editor styles overflowing into comment reply fields */
+.ck-comment__input .ck.ck-content {
+  min-height: unset;
+  border: 0;
+  padding: 0;
+}
+
+/* Font sizes and vertical rhythm for common elements (headings, lists, paragraphs, etc.) */
+.ck-content h1 {
+  font-size: 2.3em;
+}
+.ck-content h2 {
+  font-size: 1.84em;
+}
+.ck-content h3 {
+  font-size: 1.48em;
+}
+.ck-content h4 {
+  font-size: 1.22em;
+}
+.ck-content h5 {
+  font-size: 1.06em;
+}
+.ck-content h6 {
+  font-size: 1em;
+}
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6 {
+  line-height: 1.2em;
+  padding-top: 0.8em;
+  margin-bottom: 0.4em;
+}
+.ck-content blockquote,
+.ck-content ol,
+.ck-content p,
+.ck-content ul {
+  font-size: 1em;
+  line-height: 1.6em;
+  padding-top: 0.2em;
+  margin-bottom: var(--ck-spacing-large);
+}

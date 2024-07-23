@@ -46,7 +46,7 @@ html {
   --ck-document-outline-indent-level-2: 1.1em;
   --ck-document-outline-indent-level-3: 2.2em;
   --ck-document-outline-item-active-color: var(--color-tang-6);
-  --editor-background:var(--color-shark-4);
+  --editor-background:#e3e8ed;
   position: relative;
   border: 1px solid var(--ck-color-base-border);
   border-radius: var(--ck-border-radius);
@@ -144,7 +144,7 @@ html {
   }
 }
 .cke5-editor-types-demo-document__outline {
-  background: var(--color-shark-4, #e3e8ed);
+  background: var(--editor-background);
   overflow-x: auto;
   max-height: 80vh;
 }
