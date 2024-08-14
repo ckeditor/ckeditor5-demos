@@ -569,7 +569,6 @@ DecoupledEditor.create(
 				'exportWord',
 				'exportPdf',
 				'|',
-				'|',
 				'insertTemplate',
 				'tableOfContents',
 				'|',
