@@ -91,6 +91,7 @@ import {
 	FormatPainter,
 	ImportWord,
 	MultiLevelList,
+	MergeFields,
 	SlashCommand,
 	TableOfContents,
 	Template,
@@ -113,10 +114,9 @@ const TEMPLATE_DEFINITIONS = [
 		data: `<p style='margin-left:2em;'><span'><strong>I hereby verify that the aforementioned report has undergone thorough factual verification and reflects the most current information.</strong></span></p>
 			<p style='margin-left:22em;'><br>
 			<span'>Signature: __________&nbsp;&nbsp;</span><br>
-			<span'>Name:&nbsp;</span><br>
-			<span'>Title:&nbsp;</span><br>
+			<span'>Name:&nbsp; {{authorTitle}} {{authorName}} {{authorSurname}}</span><br>
 			<span'>Date:</span></p>`,
-		description: 'Author signature with statement',
+		description: 'Author signature with merge fields',
 		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.833.5H1.611a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.89.89 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z'/><path fill='#fff' d='M4.722 17.167c0 .859.697 1.555 1.556 1.555h8.889c.859 0 1.555-.696 1.555-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.584-2.262a1.556 1.556 0 0 0-1.025-.385H6.278c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M16.161 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.931 2.564Z'/><path fill='#C9FE43' d='M16.546 8.525a.917.917 0 0 1 1.402 1.18l-4.132 4.908-1.402-1.18 4.132-4.908Zm-4.494 6.76.384-1.594 1.122.944-1.506.65Z'/><path stroke='#6C34C9' stroke-linecap='round' stroke-linejoin='round' stroke-width='.55' d='m11.666 15.837 1.96-.953c.126-.061.188-.092.246-.13.051-.033.1-.07.145-.112.05-.047.096-.1.186-.207l3.766-4.474a1.037 1.037 0 1 0-1.586-1.335l-3.767 4.473c-.09.107-.135.16-.172.218a1.091 1.091 0 0 0-.087.162c-.027.063-.046.13-.085.264l-.606 2.094Zm0 0 .584-2.019c.042-.144.063-.217.106-.253a.183.183 0 0 1 .136-.04c.056.005.114.053.229.15l.896.755c.115.097.172.145.188.2a.184.184 0 0 1-.018.14c-.028.049-.096.082-.23.148l-1.89.92Z'/><path stroke='#6C34C9' stroke-linecap='round' stroke-linejoin='round' stroke-width='.444' d='m6.5 16.945.903-1.162a.569.569 0 0 1 .989.17l.062.188a.46.46 0 0 0 .797.142v0a.46.46 0 0 1 .72 0l.282.353a.823.823 0 0 0 .642.309h.938'/><rect width='4.889' height='.667' x='6.5' y='6.278' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.5' y='8.056' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.5' y='9.833' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.5' y='11.611' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.722 .5)'/></clipPath></defs></svg>`,
 	},
 	{
@@ -389,6 +389,86 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' },
 ];
 
+const MERGE_FIELDS_DEFINITIONS = [
+	{
+		groupId: 'authorInformation',
+		groupLabel: 'Author information',
+		definitions: [
+			{
+				id: 'authorTitle',
+				label: 'Title',
+				defaultValue: 'Mr./Mrs.'
+			},
+			{
+				id: 'authorName',
+				label: 'Name',
+				defaultValue: 'John'
+			},
+			{
+				id: 'authorSurname',
+				label: 'Surname',
+				defaultvalue: 'Doe'
+			}
+		]
+	}
+];
+
+const MERGE_FIELDS_DATASETS = [
+	{
+		id: '78900',
+		label: 'David Lee',
+		values: {
+			authorTitle: "Mr.",
+			authorName: "David",
+			authorSurname: "Lee"
+		}
+	},
+	{
+		id: '78901',
+		label: 'Kate Smith',
+		values: {
+			authorTitle: "Mrs.",
+			authorName: "Kate",
+			authorSurname: "Smith"
+		}
+	},
+	{
+		id: '78902',
+		label: 'John Azar',
+		values: {
+			authorTitle: "Mr.",
+			authorName: "John",
+			authorSurname: "Azar"
+		}
+	},
+	{
+        id: '98765',
+        label: 'Emily Johnson',
+        values: {
+            authorTitle: "Dr.",
+            authorName: "Emily",
+            authorSurname: "Johnson"
+        }
+    },
+	{
+        id: '43210',
+        label: 'David Brown',
+        values: {
+            authorTitle: "Mr.",
+            authorName: "David",
+            authorSurname: "Brown"
+        }
+    },
+	{
+        id: '54321',
+        label: 'Sarah Miller',
+        values: {
+            authorName: "Sarah",
+            authorSurname: "Miller"
+        }
+    }
+]
+
 /**
  * Enrich the special characters plugin with emojis.
  */
@@ -577,6 +657,7 @@ ClassicEditor.create(
 				FormatPainter,
 				ImportWord,
 				MultiLevelList,
+				MergeFields,
 				SlashCommand,
 				TableOfContents,
 				Template
@@ -593,6 +674,8 @@ ClassicEditor.create(
 				'importWord',
 				'exportWord',
 				'exportPdf',
+				'|',
+				'insertMergeField', 'previewMergeFields',
 				'|',
 				'formatPainter',
 				'caseChange',
@@ -925,6 +1008,10 @@ ClassicEditor.create(
 					],
 				},
 			],
+		},
+		mergeFields: {
+			definitions: MERGE_FIELDS_DEFINITIONS,
+			dataSets: MERGE_FIELDS_DATASETS
 		},
 		placeholder: 'Type or paste your content here!',
 		style: {
