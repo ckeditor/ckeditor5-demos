@@ -73,6 +73,7 @@ import {
 	ExportPdf,
 	ExportWord,
 	ImportWord,
+	MergeFields,
 	Pagination,
 	Template,
 	TableOfContents,
@@ -377,6 +378,77 @@ const exportVerticalSpace = '12mm';
 const DOCUMENT_OUTLINE_ICON = `<svg viewBox='0 0 20 20' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 9.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 8H3.5a.5.5 0 0 0-.5.5V9a.5.5 0 0 0 .5.5H5Z'/><path d='M5.5 12a.5.5 0 0 1-.5.5H3.5A.5.5 0 0 1 3 12v-.5a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5v.5Z'/><path d='M5 6.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 5H3.5a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5H5Z'/><path clip-rule='evenodd' d='M2 19a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2Zm6-1.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H8v15Zm-1.5-15H2a.5.5 0 0 0-.5.5v14a.5.5 0 0 0 .5.5h4.5v-15Z'/></svg>`;
 const COLLAPSE_OUTLINE_ICON = `<svg viewBox='0 0 20 20' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M11.463 5.187a.888.888 0 1 1 1.254 1.255L9.16 10l3.557 3.557a.888.888 0 1 1-1.254 1.255L7.26 10.61a.888.888 0 0 1 .16-1.382l4.043-4.042z'/></svg>`;
 
+const MERGE_FIELDS_DEFINITIONS = [
+	{
+		id: 'fiscalYear',
+		label: 'Fiscal year',
+		defaultValue: new Date().getFullYear()
+	},
+	{
+		groupId: 'financial Highlights',
+		groupLabel: 'Financial highlights',
+		definitions: [
+			{
+				id: 'revenueAmount',
+				label: 'Revenue ($M)',
+				defaultValue: '1'
+			},
+			{
+				id: 'revenueChange',
+				label: 'Revenue % change',
+				defaultValue: '15'
+			},
+			{
+				id: 'netProfitAmount',
+				label: 'Net profit ($M)',
+				defaultValue: '1'
+			},
+			{
+				id: 'netProfitChange',
+				label: 'Net profit % change',
+				defaultValue: '10'
+			},
+			{
+				id: 'cashFlow',
+				label: 'Cash flow ($M)',
+				defaultValue: '1.5'
+			},
+			{
+				id: 'roi',
+				label: 'ROI (%)',
+				defaultValue: '0'
+			}
+		]
+	}
+];
+
+const MERGE_FIELDS_DATASETS = [
+	{
+		id: '2331',
+		label: 'Data for 2022',
+		values: {
+			fiscalYear: '2022',
+			revenueAmount: '8.7',
+			revenueChange: '10',
+			netProfitAmount: '1.7',
+			netProfitChange: '5',
+			roi: '10'
+		}
+	},
+	{
+		id: '2332',
+		label: 'Data for 2023',
+		values: {
+			fiscalYear: '2023',
+			revenueAmount: '10',
+			revenueChange: '15%',
+			netProfitAmount: '2',
+			netProfitChange: '20',
+			roi: '15'
+		}
+	}
+];
+
 function bttnCreator(config) {
 	return config.parent.appendChild(
 		bttnUpdater(config, document.createElement(config.node))
@@ -533,6 +605,7 @@ DecoupledEditor.create(
 				ExportPdf,
 				ExportWord,
 				ImportWord,
+				MergeFields,
 				SlashCommand,
 				Template,
 				FormatPainter,
@@ -561,6 +634,8 @@ DecoupledEditor.create(
 				'importWord',
 				'exportWord',
 				'exportPdf',
+				'|',
+				'insertMergeField', 'previewMergeFields',
 				'|',
 				'findAndReplace',
 				'selectAll',
@@ -712,6 +787,10 @@ DecoupledEditor.create(
 				margin_left: exportHorizontalSpace,
 			},
 			tokenUrl: false,
+		},
+		mergeFields: {
+			definitions: MERGE_FIELDS_DEFINITIONS,
+			dataSets: MERGE_FIELDS_DATASETS
 		},
 		pagination: {
 			// A4
