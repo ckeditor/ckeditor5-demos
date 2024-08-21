@@ -70,7 +70,6 @@ HeadlessEditor.builtinPlugins = [
 	Underline,
 ];
 
-// Editor configuration.
 HeadlessEditor.defaultConfig = {
 	codeBlock: {
 		languages: [

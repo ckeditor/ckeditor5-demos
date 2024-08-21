@@ -3,20 +3,23 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+/**
+ * CKEditor 5 requires a license key. If you have a commercial license key, you can use it here.
+ * You can also get a trial license key from https://ckeditor.com/pricing/.
+ *
+ * Otherwise, you use the "GPL" license key and remove the plugins imported from the "ckeditor5-premium-features" package.
+ */
 const LICENSE_KEY = '';
 
 if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+	alert( 'CKEditor 5 requires a license key. Check the index.js file for more information.' );
 }
 
-// AI Assistant requires additional configuration.
-// See https://ckeditor.com/docs/ckeditor5/latest/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
+/**
+ * AI Assistant requires additional configuration.
+ * 
+ * See https://ckeditor.com/docs/ckeditor5/latest/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
+ */
 const AI_API_URL = '';
 
 if (!AI_API_URL) {
@@ -26,9 +29,12 @@ if (!AI_API_URL) {
 	);
 }
 
-// CKBox plugin requires a valid token URL in order to use the CKBox application.
-// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+/**
+ * CKBox plugin requires a valid token URL in order to use the CKBox application.
+ * 
+ * After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+ * https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+ */
 const CKBOX_TOKEN_URL = '';
 
 import {
@@ -332,7 +338,6 @@ ClassicEditor.create(
 			},
 			tokenUrl: false,
 		},
-		// AI configuration will land here:
 		ai: {
 			openAI: {
 				apiUrl: AI_API_URL,

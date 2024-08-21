@@ -3,16 +3,16 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
+/**
+ * CKEditor 5 requires a license key. If you have a commercial license key, you can use it here.
+ * You can also get a trial license key from https://ckeditor.com/pricing/.
+ *
+ * Otherwise, you use the "GPL" license key and remove the plugins imported from the "ckeditor5-premium-features" package.
+ */
 const LICENSE_KEY = '';
 
 if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+	alert( 'CKEditor 5 requires a license key. Check the index.js file for more information.' );
 }
 
 import {
@@ -54,7 +54,7 @@ import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 /**
- * Enrich the special characters plugin with emojis.
+ * Populate the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji(editor) {
 	if (!editor.plugins.get('SpecialCharacters')) {

@@ -3,8 +3,11 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// WProofreader plugin require a license key to work properly.
-// For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
+/**
+ * WProofreader plugin require a license key to work properly.
+ *
+ * For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
+ */
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 if (!WEB_SPELL_CHECKER_LICENSE_KEY) {
@@ -42,7 +45,6 @@ import {
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
-
 import '@webspellchecker/wproofreader-ckeditor5/index.css';
 
 ClassicEditor.create(
