@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Set error variable
-PROJECT_DIR=$(pwd)
-
 echo "Creating builds directory..."
 mkdir -p builds/assets
 
@@ -29,8 +26,6 @@ for DIR in */dist; do
     # Remove the "dist" directory from the demo.
     rm -rf "$DIR"
 done
-
-cd "$PROJECT_DIR" || exit
 
 echo "Starting the server..."
 yarn run start &
