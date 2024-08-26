@@ -4,7 +4,6 @@
 PROJECT_DIR=$(pwd)
 
 echo "Creating builds directory..."
-mkdir -p builds
 mkdir -p builds/assets
 
 echo "Installing dependencies..."
