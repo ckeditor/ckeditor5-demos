@@ -1,18 +1,14 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+ * CKEditor 5 requires a license key.
+ * 
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://ckeditor.com/pricing/.
  */
+const LICENSE_KEY = 'GPL';
 
-/**
- * CKEditor 5 requires a license key. If you have a commercial license key, you can use it here.
- * You can also get a trial license key from https://ckeditor.com/pricing/.
- *
- * Otherwise, you use the "GPL" license key and remove the plugins imported from the "ckeditor5-premium-features" package.
- */
-const LICENSE_KEY = '';
-
-if (!LICENSE_KEY) {
-	alert( 'CKEditor 5 requires a license key. Check the index.js file for more information.' );
+if (LICENSE_KEY === 'GPL') {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
 /**
@@ -23,10 +19,7 @@ if (!LICENSE_KEY) {
 const AI_API_URL = '';
 
 if (!AI_API_URL) {
-	alert(
-		'CKEditor AI Assistant included in this demo requires additional configuration.\n' +
-		'Check the index.js file for more information.'
-	);
+	alert( 'AI Assistant requires additional configuration. Check the index.js file for more information.' );
 }
 
 /**
@@ -89,10 +82,10 @@ import {
 } from 'ckeditor5';
 
 import {
+	AIAssistant,
 	ExportPdf,
 	ExportWord,
 	ImportWord,
-	AIAssistant,
 	OpenAITextAdapter,
 	SlashCommand,
 	PasteFromOfficeEnhanced,
@@ -108,21 +101,16 @@ ClassicEditor.create(
 	document.querySelector('#cke5-ai-assistant-demo'),
 	{
 		plugins: [
-			AIAssistant,
 			Alignment,
 			AutoImage,
 			BlockQuote,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			PictureEditing,
 			Code,
 			CodeBlock,
 			CloudServices,
 			EasyImage,
 			Essentials,
-			ExportPdf,
-			ExportWord,
-			ImportWord,
 			FindAndReplace,
 			FontBackgroundColor,
 			FontColor,
@@ -143,12 +131,9 @@ ClassicEditor.create(
 			List,
 			ListProperties,
 			Mention,
-			OpenAITextAdapter,
 			Paragraph,
 			PasteFromOffice,
-			PasteFromOfficeEnhanced,
 			RemoveFormat,
-			SlashCommand,
 			SpecialCharacters,
 			SpecialCharactersEssentials,
 			Strikethrough,
@@ -162,6 +147,26 @@ ClassicEditor.create(
 			TableColumnResize,
 			Underline,
 			CloudServicesUploadAdapter,
+
+			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
+			...( CKBOX_TOKEN_URL ? [
+				CKBox,
+			] : [] ),
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
+				ExportPdf,
+				ExportWord,
+				ImportWord,
+				OpenAITextAdapter,
+				PasteFromOfficeEnhanced,
+				SlashCommand,
+
+				// Include AI Assistant only if the AI_API_URL is provided.
+				...( AI_API_URL ? [
+					AIAssistant,
+				] : [] ),
+			] : [] ),
 		],
 		toolbar: {
 			items: [

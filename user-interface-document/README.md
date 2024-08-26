@@ -20,7 +20,9 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/user-interface-document && yarn
 ```
 
-3. Start the demo:
+3. Open the `user-interface-document/index.js` file and add update the values of the `LICENSE_KEY`, `CKBOX_TOKEN_URL`, and `WEB_SPELL_CHECKER_LICENSE_KEY` variables. Without this, the CKBox, spell checker, and other premium features will not be enabled.
+
+4. Start the demo:
 
 ```shell
 yarn dev

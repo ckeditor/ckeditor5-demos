@@ -1,18 +1,15 @@
-/**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
 
 /**
- * CKEditor 5 requires a license key. If you have a commercial license key, you can use it here.
- * You can also get a trial license key from https://ckeditor.com/pricing/.
- *
- * Otherwise, you use the "GPL" license key and remove the plugins imported from the "ckeditor5-premium-features" package.
+ * CKEditor 5 requires a license key.
+ * 
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://ckeditor.com/pricing/.
  */
-const LICENSE_KEY = '';
+const LICENSE_KEY = 'GPL';
 
-if (!LICENSE_KEY) {
-	alert( 'CKEditor 5 requires a license key. Check the index.js file for more information.' );
+if (LICENSE_KEY === 'GPL') {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
 /**
@@ -497,7 +494,6 @@ DecoupledEditor.create(
 			Alignment,
 			Autoformat,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			CloudServices,
 			EasyImage,
 			Essentials,
@@ -534,8 +530,14 @@ DecoupledEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
-			...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
-			...(LICENSE_KEY ? [
+
+			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
+			...( CKBOX_TOKEN_URL ? [
+				CKBox,
+			] : [] ),
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
 				ExportPdf,
 				ExportWord,
 				ImportWord,
@@ -545,7 +547,12 @@ DecoupledEditor.create(
 				TableOfContents,
 				DocumentOutline,
 				Pagination,
-			] : []),
+			] : [] ),
+
+			// Include WebSpellChecker plugin only if the WEB_SPELL_CHECKER_LICENSE_KEY is provided.
+			...( WEB_SPELL_CHECKER_LICENSE_KEY ? [
+				WProofreader,
+			] : [] ),
 		],
 		licenseKey: LICENSE_KEY,
 		toolbar: {

@@ -1,7 +1,3 @@
-/**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
 
 /**
  * WProofreader plugin require a license key to work properly.
@@ -51,6 +47,7 @@ ClassicEditor.create(
 	document.querySelector('#cke5-spellchecker-demo'),
 	{
 		plugins: [
+			// Open-source plugins
 			CloudServices,
 			Essentials,
 			Autoformat,
@@ -72,6 +69,8 @@ ClassicEditor.create(
 			TableToolbar,
 			TextTransformation,
 			TodoList,
+
+			// Include WebSpellChecker plugin only if the WEB_SPELL_CHECKER_LICENSE_KEY is provided.
 			WProofreader,
 		],
 		toolbar: {

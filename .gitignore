@@ -1,1 +1,6 @@
 builds
+dist
+node_modules
+package-lock.json
+yarn.lock
+cypress/screenshots

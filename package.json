@@ -1,0 +1,20 @@
+{
+  "name": "ckeditor5-demos-e2e-tests",
+  "private": true,
+  "version": "0.1.0",
+  "author": "CKSource (http://cksource.com/)",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "start": "http-server ./builds --port 9001 --silent -c-1",
+    "cy:open": "cypress open",
+    "cy:test-demos": "cypress run --spec cypress/e2e/test_demos.cy.js --headless --browser chrome"
+  },
+  "devDependencies": {
+    "cypress": "^13.2.0",
+    "http-server": "^14.1.1"
+  },
+  "workspaces": [
+    "*"
+  ]
+}
