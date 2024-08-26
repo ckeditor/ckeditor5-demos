@@ -3,6 +3,9 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+// CKEditor Commercial Features require a license key to work properly.
+// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
+// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
 const LICENSE_KEY = '';
 
 if (!LICENSE_KEY) {
