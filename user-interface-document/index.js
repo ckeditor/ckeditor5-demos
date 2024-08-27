@@ -1,4 +1,3 @@
-
 /**
  * CKEditor 5 requires a license key.
  * 
@@ -39,8 +38,6 @@ import {
 	Underline,
 	BlockQuote,
 	Base64UploadAdapter,
-	CKFinder,
-	CKFinderUploadAdapter,
 	CloudServices,
 	CKBox,
 	Essentials,
@@ -386,7 +383,7 @@ const REDUCED_MATERIAL_COLORS = [
 ];
 
 /**
- * Enrich the special characters plugin with emojis.
+ * Populate the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji(editor) {
 	if (!editor.plugins.get('SpecialCharacters')) {
@@ -624,8 +621,6 @@ DecoupledEditor.create(
 			Autoformat,
 			BlockQuote,
 			Bold,
-			CKFinder,
-			CKFinderUploadAdapter,
 			CloudServices,
 			Essentials,
 			ExportPdf,

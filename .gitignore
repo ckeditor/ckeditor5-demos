@@ -1,6 +1,14 @@
-builds
-dist
-node_modules
+# Files associated with specific development environments.
+.DS_Store
+.idea
+.vscode
+
+# Lockfiles.
 package-lock.json
 yarn.lock
+
+# Dependencies and build directories.
+**/node_modules
+**/dist
+**/builds
 cypress/screenshots

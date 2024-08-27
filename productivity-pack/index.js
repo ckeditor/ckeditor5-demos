@@ -1,4 +1,3 @@
-
 /**
  * CKEditor 5 requires a license key.
  * 
@@ -29,7 +28,6 @@ const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 import {
 	DecoupledEditor,
-	AdjacentListsSupport,
 	Alignment,
 	Autoformat,
 	Bold,
@@ -45,10 +43,12 @@ import {
 	Heading,
 	Image,
 	ImageCaption,
+	ImageInsert,
 	ImageResize,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	Base64UploadAdapter,
 	Indent,
 	IndentBlock,
 	Italic,
@@ -73,9 +73,11 @@ import {
 } from 'ckeditor5';
 
 import {
+	CaseChange,
 	ExportPdf,
 	ExportWord,
 	ImportWord,
+	MultiLevelList,
 	Pagination,
 	Template,
 	TableOfContents,
@@ -490,7 +492,6 @@ DecoupledEditor.create(
 			container: document.querySelector(`[class*='__outline']`),
 		},
 		plugins: [
-			AdjacentListsSupport,
 			Alignment,
 			Autoformat,
 			Bold,
@@ -505,10 +506,12 @@ DecoupledEditor.create(
 			Heading,
 			Image,
 			ImageCaption,
+			ImageInsert,
 			ImageResize,
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
+			Base64UploadAdapter,
 			Indent,
 			IndentBlock,
 			Italic,
@@ -538,9 +541,11 @@ DecoupledEditor.create(
 
 			// Include premium features only if the license key is not GPL.
 			...( LICENSE_KEY !== 'GPL' ? [
+				CaseChange,
 				ExportPdf,
 				ExportWord,
 				ImportWord,
+				MultiLevelList,
 				SlashCommand,
 				Template,
 				FormatPainter,
@@ -566,28 +571,23 @@ DecoupledEditor.create(
 				'pageNavigation',
 				'pageBreak',
 				'|',
-				'insertTemplate',
-				'tableOfContents',
-				'|',
 				'formatPainter',
+				'caseChange',
+				'findAndReplace',
+				'selectAll',
+				'wproofreader',
 				'|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
 				'|',
-				'findAndReplace',
-				'selectAll',
-				'wproofreader',
+				'insertTemplate',
+				'tableOfContents',
 				'|',
 				'link',
-				'uploadImage',
+				'insertImage',
 				'ckbox',
 				'insertTable',
-				'|',
-				'numberedList',
-				'bulletedList',
-				'outdent',
-				'indent',
 
 				'-',
 
@@ -613,6 +613,13 @@ DecoupledEditor.create(
 						'alignment:justify',
 					],
 				},
+				'|',
+				'numberedList',
+				'bulletedList',
+				'multilevelList',
+				'|',
+				'outdent',
+				'indent',
 			],
 		},
 		heading: {
