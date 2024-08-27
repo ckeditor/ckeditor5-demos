@@ -20,7 +20,9 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/user-interface-classic-with-menu-bar && yarn
 ```
 
-3. Start the demo:
+3. Open the `user-interface-classic-with-menu-bar/index.js` file and update the values of the `LICENSE_KEY` and `CKBOX_TOKEN_URL` variables. Without this, the CKBox and premium features will not be enabled.
+
+4. Start the demo:
 
 ```shell
 yarn dev

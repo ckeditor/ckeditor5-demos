@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { CKEditor } from '@ckeditor/ckeditor5-react';

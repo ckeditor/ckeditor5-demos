@@ -20,7 +20,7 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/user-interface-classic && yarn
 ```
 
-3. Open the `user-interface-classic/index.js` file and add update the values of the `LICENSE_KEY` variable. Without this, the premium features will not be enabled.
+3. Open the `user-interface-classic/index.js` file and update the values of the `LICENSE_KEY` variable. Without this, the premium features will not be enabled.
 
 4. Start the demo:
 

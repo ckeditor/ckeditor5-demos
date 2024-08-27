@@ -1,23 +1,22 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+ * CKEditor 5 requires a license key.
+ * 
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://ckeditor.com/pricing/.
  */
+const LICENSE_KEY = 'GPL';
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
-const LICENSE_KEY = '';
-
-if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+if ( LICENSE_KEY === 'GPL' ) {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
-// CKBox plugin requires a valid token URL in order to use the CKBox application.
-// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+/**
+ * CKBox plugin requires a valid token URL in order to use the CKBox application.
+ * 
+ * After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+ * https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+ */
 const CKBOX_TOKEN_URL = '';
 
 import {
@@ -201,7 +200,7 @@ const REDUCED_MATERIAL_COLORS = [
 ];
 
 /**
- * Enrich the special characters plugin with emojis.
+ * Populate the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji(editor) {
 	if (!editor.plugins.get('SpecialCharacters')) {
@@ -327,7 +326,6 @@ ClassicEditor.create(
 			Autoformat,
 			BlockQuote,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			CloudServices,
 			Essentials,
 			FindAndReplace,
@@ -366,7 +364,15 @@ ClassicEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
-			...(LICENSE_KEY ? [
+
+
+			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
+			...( CKBOX_TOKEN_URL ? [
+				CKBox,
+			] : [] ),
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
 				CaseChange,
 				FormatPainter,
 				SlashCommand,

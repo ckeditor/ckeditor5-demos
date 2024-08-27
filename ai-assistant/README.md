@@ -20,7 +20,7 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/ai-assistant && yarn
 ```
 
-3. Open the `ai-assistant/index.js` file and add update the values of the `LICENSE_KEY`, `AI_API_URL`, and `CKBOX_TOKEN_URL` variables. Without this, the CKBox, AIAssistant and other premium features will not be enabled.
+3. Open the `ai-assistant/index.js` file and update the values of the `LICENSE_KEY`, `AI_API_URL`, and `CKBOX_TOKEN_URL` variables. Without this, the CKBox, AIAssistant and other premium features will not be enabled.
 
 4. Start the demo:
 

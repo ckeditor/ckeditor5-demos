@@ -1,4 +1,3 @@
-
 /**
  * CKEditor 5 requires a license key.
  * 

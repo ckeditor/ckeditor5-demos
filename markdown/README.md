@@ -20,7 +20,7 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/markdown && yarn
 ```
 
-3. Open the `markdown/index.js` file and add update the value of the `LICENSE_KEY` variables. Without this, the premium features will not be enabled.
+3. Open the `markdown/index.js` file and update the value of the `LICENSE_KEY` variables. Without this, the premium features will not be enabled.
 
 4. Start the demo:
 

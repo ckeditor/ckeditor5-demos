@@ -1,4 +1,3 @@
-
 /**
  * WProofreader plugin require a license key to work properly.
  *

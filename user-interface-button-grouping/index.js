@@ -1,4 +1,3 @@
-
 /**
  * CKEditor 5 requires a license key.
  * 
@@ -61,7 +60,7 @@ import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 /**
- * Enrich the special characters plugin with emojis.
+ * Populate the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji(editor) {
 	if (!editor.plugins.get('SpecialCharacters')) {

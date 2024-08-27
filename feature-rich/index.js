@@ -392,7 +392,7 @@ const REDUCED_MATERIAL_COLORS = [
 ];
 
 /**
- * Enrich the special characters plugin with emojis.
+ * Populate the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji(editor) {
 	if (!editor.plugins.get('SpecialCharacters')) {

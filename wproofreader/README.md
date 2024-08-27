@@ -18,7 +18,7 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/wproofreader && yarn
 ```
 
-3. Open the `wproofreader/index.js` file and add update the values of the `WEB_SPELL_CHECKER_LICENSE_KEY` variable. Without this, the spell checker will not be enabled.
+3. Open the `wproofreader/index.js` file and update the values of the `WEB_SPELL_CHECKER_LICENSE_KEY` variable. Without this, the spell checker will not be enabled.
 
 4. Start the demo:
 
