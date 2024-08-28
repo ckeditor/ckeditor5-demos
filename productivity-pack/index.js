@@ -6,7 +6,7 @@
 // CKEditor Commercial Features require a license key to work properly.
 // * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
 // * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
-const LICENSE_KEY = '';
+const LICENSE_KEY = 'eXJtTmhtU1U4ck5XR3dLYWpCRGNsWThuNFlNME1JK3gzVzBVckJPbU5WazRKdUk1T1V6K3I1UisrelU1Unc9PS1NakF5TkRBNU1EUT0=';
 
 if (!LICENSE_KEY) {
 	alert(
@@ -26,7 +26,6 @@ const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 import {
 	DecoupledEditor,
-	AdjacentListsSupport,
 	Alignment,
 	Autoformat,
 	Bold,
@@ -42,10 +41,12 @@ import {
 	Heading,
 	Image,
 	ImageCaption,
+	ImageInsert,
 	ImageResize,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	Base64UploadAdapter,
 	Indent,
 	IndentBlock,
 	Italic,
@@ -70,10 +71,12 @@ import {
 } from 'ckeditor5';
 
 import {
+	CaseChange,
 	ExportPdf,
 	ExportWord,
 	ImportWord,
 	MergeFields,
+	MultiLevelList,
 	Pagination,
 	Template,
 	TableOfContents,
@@ -559,7 +562,6 @@ DecoupledEditor.create(
 			container: document.querySelector(`[class*='__outline']`),
 		},
 		plugins: [
-			AdjacentListsSupport,
 			Alignment,
 			Autoformat,
 			Bold,
@@ -575,10 +577,12 @@ DecoupledEditor.create(
 			Heading,
 			Image,
 			ImageCaption,
+			ImageInsert,
 			ImageResize,
 			ImageStyle,
 			ImageToolbar,
 			ImageUpload,
+			Base64UploadAdapter,
 			Indent,
 			IndentBlock,
 			Italic,
@@ -602,10 +606,12 @@ DecoupledEditor.create(
 			Underline,
 			...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
 			...(LICENSE_KEY ? [
+				CaseChange,
 				ExportPdf,
 				ExportWord,
 				ImportWord,
 				MergeFields,
+				MultiLevelList,
 				SlashCommand,
 				Template,
 				FormatPainter,
@@ -626,10 +632,11 @@ DecoupledEditor.create(
 				'pageNavigation',
 				'pageBreak',
 				'|',
-				'insertTemplate',
-				'tableOfContents',
-				'|',
 				'formatPainter',
+				'caseChange',
+				'findAndReplace',
+				'selectAll',
+				'wproofreader',
 				'|',
 				'importWord',
 				'exportWord',
@@ -640,16 +647,13 @@ DecoupledEditor.create(
 				'findAndReplace',
 				'selectAll',
 				'wproofreader',
+				'insertTemplate',
+				'tableOfContents',
 				'|',
 				'link',
-				'uploadImage',
+				'insertImage',
 				'ckbox',
 				'insertTable',
-				'|',
-				'numberedList',
-				'bulletedList',
-				'outdent',
-				'indent',
 
 				'-',
 
@@ -675,6 +679,13 @@ DecoupledEditor.create(
 						'alignment:justify',
 					],
 				},
+				'|',
+				'numberedList',
+				'bulletedList',
+				'multilevelList',
+				'|',
+				'outdent',
+				'indent',
 			],
 		},
 		heading: {
