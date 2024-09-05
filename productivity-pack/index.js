@@ -75,13 +75,14 @@ import {
 	ExportPdf,
 	ExportWord,
 	ImportWord,
+	MergeFields,
 	MultiLevelList,
 	Pagination,
 	Template,
 	TableOfContents,
 	DocumentOutline,
 	FormatPainter,
-	SlashCommand,
+	SlashCommand
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -374,6 +375,133 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' },
 ];
 
+const MERGE_FIELDS_DEFINITIONS = [
+	{
+		id: 'fiscalYear',
+		label: 'Fiscal year',
+		defaultValue: new Date().getFullYear()
+	},
+	{
+		groupId: 'financialHighlights',
+		groupLabel: 'Financial highlights',
+		definitions: [
+			{
+				id: 'revenueAmount',
+				label: 'Revenue ($M)',
+				defaultValue: '1',
+				type: 'block'
+			},
+			{
+				id: 'revenueChange',
+				label: 'Revenue % change',
+				defaultValue: '15'
+			},
+			{
+				id: 'netProfitAmount',
+				label: 'Net profit ($M)',
+				defaultValue: '1'
+			},
+			{
+				id: 'netProfitChange',
+				label: 'Net profit % change',
+				defaultValue: '10'
+			},
+			{
+				id: 'cashFlow',
+				label: 'Cash flow ($M)',
+				defaultValue: '1.5'
+			},
+			{
+				id: 'roi',
+				label: 'ROI (%)',
+				defaultValue: '0'
+			}
+		]
+	},
+	{
+		groupId: 'expensesAnalysis',
+		groupLabel: 'Expenses analysis',
+		definitions: [
+			{
+				id: 'expensesBreakdownTable',
+				label: 'Expenses breakdown table',
+				type: 'block'
+			}
+		]
+	}
+];
+
+const MERGE_FIELDS_DATASETS = [
+	{
+		id: '2331',
+		label: 'Data for 2022',
+		values: {
+			fiscalYear: '2022',
+			revenueAmount: '8.7',
+			revenueChange: '10',
+			netProfitAmount: '1.7',
+			netProfitChange: '5',
+			roi: '10',
+			expensesBreakdownTable: ' ' +
+				'<figure class="table" style="width: 66%">' +
+					'<table class="ck-table-resized">' +
+						'<colgroup>' +
+							'<col style="width: 38.76%" />' +
+							'<col style="width: 18.07%" />' +
+							'<col style="width: 23.33%" />' +
+							'<col style="width: 19.84%" />' +
+						'</colgroup>' +
+						'<tbody>' +
+							'<tr>' +
+								'<th>Expense Category</th>' +
+								'<th>FY 2022 ($M)</th>' +
+								'<th>FY 2023 ($M)</th>' +
+								'<th>Change (%)</th>' +
+							'</tr>' +
+							'<tr>' +
+								'<td>Product Development</td>' +
+								'<td>2.2</td>' +
+								'<td>2.4</td>' +
+								'<td>9</td>' +
+							'</tr>' +
+							'<tr>' +
+								'<td>Marketing and Sales</td>' +
+								'<td>1.8</td>' +
+								'<td>2</td>' +
+								'<td>11</td>' +
+							'</tr>' +
+							'<tr>' +
+								'<td>Administrative Costs</td>' +
+								'<td>1.6</td>' +
+								'<td>1.6</td>' +
+								'<td>0</td>' +
+							'</tr>' +
+							'<tr>' +
+								'<td>Total</td>' +
+								'<td>5.6</td>' +
+								'<td>6</td>' +
+								'<td>7.15</td>' +
+							'</tr>' +
+						'</tbody>' +
+					'</table>' +
+					'<figcaption>Table 2: Expense Breakdown</figcaption>' +
+				'</figure>'
+		}
+	},
+	{
+		id: '2332',
+		label: 'Data for 2023',
+		values: {
+			fiscalYear: '2023',
+			revenueAmount: '10',
+			revenueChange: '15%',
+			netProfitAmount: '2',
+			netProfitChange: '20',
+			roi: '15'
+		}
+	}
+];
+
 const exportHorizontalSpace = '10mm';
 const exportVerticalSpace = '12mm';
 
@@ -538,6 +666,7 @@ DecoupledEditor.create(
 				ExportPdf,
 				ExportWord,
 				ImportWord,
+				MergeFields,
 				MultiLevelList,
 				SlashCommand,
 				Template,
@@ -568,6 +697,8 @@ DecoupledEditor.create(
 				'importWord',
 				'exportWord',
 				'exportPdf',
+				'|',
+				'insertMergeField', 'previewMergeFields',
 				'|',
 				'insertTemplate',
 				'tableOfContents',
@@ -720,6 +851,12 @@ DecoupledEditor.create(
 				margin_left: exportHorizontalSpace,
 			},
 			tokenUrl: false,
+		},
+		mergeFields: {
+			definitions: MERGE_FIELDS_DEFINITIONS,
+			dataSets: MERGE_FIELDS_DATASETS,
+			previewHtmlValues: true,
+			sanitizeHtml: html => ( { html, hasChanged: false } )
 		},
 		pagination: {
 			// A4
