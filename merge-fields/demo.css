@@ -24,3 +24,14 @@
   .header-wrapper {
 	padding: 1rem 2rem;
   }
+
+  body, html {
+	font-weight: 400;
+	line-height: 1.6;
+	font-family: "Source Sans Pro",system-ui,Roboto,"Helvetica Neue","Helvetica",Arial,sans-serif;
+	font-size: 17px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-print-color-adjust: exact;
+	overflow-x: hidden;
+}

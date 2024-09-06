@@ -61,7 +61,6 @@ import {
 	ListProperties,
 	MediaEmbed,
 	Mention,
-	PageBreak,
 	Paragraph,
 	PasteFromOffice,
 	PictureEditing,
@@ -89,7 +88,6 @@ import {
 	ExportWord,
 	ImportWord,
 	MergeFields,
-	Pagination,
 	Template,
 	SlashCommand,
 	MultiLevelList
@@ -105,21 +103,38 @@ import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-fea
 
 const TEMPLATE_DEFINITIONS = [
 	{
+		title: 'Reservation confirmation',
+		data: `
+			<p style="text-align: center;">
+					<img
+						src="assets/images/serenity-springs.png"
+						alt="Serenity Springs Resort logo." />
+			</p>
+			<p>{{guestTitle}} {{guestLastName}},</p>
+			<p>This email confirms your reservation at Serenity Springs Resort for a relaxing stay at
+				{{roomType}}. We will be delighted to welcome you on {{arrivalDate}}!</p>
+			<p><i>Sincerely,<br />
+					The Team at Serenity Springs Resort<br />
+					P.S. Treat yourself to a massage during your stay! Mention this email for {{discount}} off
+					your first spa treatment.
+				</i></p>
+		`,
+		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
+		description: 'Reservation confirmation with basic information',
+	},
+	{
 		title: 'Reservation reminder',
 		data: `
 		<p style="text-align: center;">
 			<img
-				src=" https://ckeditor.com/assets/images/ckdemo/merge-fields/serenity-springs.png" 
+				src="assets/images/serenity-springs.png"
 				alt="Serenity Springs Resort logo." />
 		</p>
 		<p>Dear {{guestName}},</p>
 
 		<p>We’re excited to welcome you to Serenity Springs Resort in just two days! Your relaxing getaway is just around the corner.</p>
 
-		<p><b>Reservation Details:</b><br />
-		Check-In Date: {{arrivalDate}}<br />
-		Reservation Number: {{reservationNumber}}<br />
-		Number of Guests: : {{numberOfGuests}}</p>
+		{{reservationDetails}}
 
 		<p>If you have any special requests or need assistance before your arrival, please don’t hesitate to contact us. We want to ensure your stay is as comfortable and enjoyable as possible.</p>
 
@@ -138,7 +153,7 @@ const TEMPLATE_DEFINITIONS = [
 		data: `
 			<p style="text-align: center;">
 				<img
-					src=" https://ckeditor.com/assets/images/ckdemo/merge-fields/serenity-springs.png" 
+					src="assets/images/serenity-springs.png"
 					alt="Serenity Springs Resort logo." />
 			</p>
 			<p>{{guestTitle}} {{guestLastName}},</p>
@@ -148,6 +163,7 @@ const TEMPLATE_DEFINITIONS = [
 			<li><b>Complimentary {{complimentaryDuration}} Massage:</b> Relax and let your stress melt away.</li>
 			<li><b>{{discount}}  Off Any Spa Package:</b> Indulge in our full range of treatments, from facials to body wraps.</li>
 			</ul>
+			{{additionalValueProposition}}
 			<p><b>Reminder:</b> Our spa is popular, so we recommend booking your treatments in advance to secure your preferred time.</p>
 			<p>To book your spa experience, simply call us at {{resortPhone}}. We look forward to pampering you during your stay!</p>
 
@@ -165,7 +181,7 @@ const TEMPLATE_DEFINITIONS = [
 		data: `
 			<p style="text-align: center;">
 				<img
-					src=" https://ckeditor.com/assets/images/ckdemo/merge-fields/serenity-springs.png" 
+					src="assets/images/serenity-springs.png"
 					alt="Serenity Springs Resort logo." />
 			</p>
 			<p>Dear {{guestName}},</p>
@@ -368,6 +384,17 @@ const MERGE_FIELDS_DEFINITIONS = [
 				id: 'complimentaryDuration',
 				label: 'Complimentary duration',
 				defaultValue: '60 min'
+			},
+			{
+				id: 'reservationDetails',
+				label: 'Reservation details',
+				defaultValue: '<p>Reservation details',
+				type: 'block'
+			},
+			{
+				id: 'additionalValueProposition',
+				label: 'SPA recommendations box',
+				type: 'block'
 			}
 
 		]
@@ -407,7 +434,38 @@ const MERGE_FIELDS_DATASETS = [
 			discount: '20%',
 			complimentaryDuration: '15min',
 			feedbackSurvey: '<a href="https://ckeditor.com">quick survey</a>',
-			resortPhone: '555-232-2334-23'
+			resortPhone: '555-232-2334-23',
+			reservationDetails: '' +
+				'<p><b>Reservation Details:</b><br />' +
+				'Check-In Date: ' + new Date(2024, 7, 22).toLocaleDateString() + '<br />' +
+				'Reservation Number: Y2JKH5G1Z<br />' +
+				'Number of Guests: 2</p>',
+			additionalValueProposition: ' ' +
+				'<div class="avp">' +
+					'<div class="avp-header">' +
+						'<img class="avp-header__left-edge" src="../assets/img/left-edge.svg" alt="" />' +
+						'<h3 class="avp-header__text">SPA offers hand-picked for you ' +
+						'<strong class="avp-header__text--discount">with a special 10% discount</strong></h3>' +
+						'<img class="avp-header__right-edge" src="../assets/img/right-edge.svg" alt="" />' +
+					'</div>' +
+					'<div class="avp-content">' +
+						'<div class="avp-offer">' +
+							'<img class="avp-offer__left-blob" src="../assets/img/left-blob.svg" alt="" />' +
+							'<h4 class="avp-offer__header">Signature Relaxation Package</h4>' +
+							'<p>Luxurious day of pampering: massage, facial, body wrap.</p>' +
+						'</div>' +
+						'<div class="avp-offer">' +
+							'<h4 class="avp-offer__header">Couples\' Retreat</h4>' +
+							'<p>Relaxing escape for two: massage, bath, scrub.</p>' +
+						'</div>' +
+						'<div class="avp-offer">' +
+							'<img class="avp-offer__right-blob" src="../assets/img/right-blob.svg" alt="" />' +
+							'<img class="avp-offer__dots" src="../assets/img/dots.svg" alt="" />' +
+							'<h4 class="avp-offer__header">Anti-Aging Treatment</h4>' +
+							'<p>Combat aging: facial, massage, body wrap.</p>' +
+						'</div>' +
+					'</div>' +
+				'</div>'
 		}
 	},
 	{
@@ -425,7 +483,38 @@ const MERGE_FIELDS_DATASETS = [
 			discount: '30%',
 			complimentaryDuration: '30min',
 			feedbackSurvey: '<a href="https://ckeditor.com/docs/ckeditor5/latest/features/merge-fields.html">quick survey</a>',
-			resortPhone: '555-232-2334-23'
+			resortPhone: '555-232-2334-23',
+			reservationDetails: '' +
+				'<p><b>Reservation Details:</b><br />' +
+				'Check-In Date: ' + new Date(2024, 4, 12).toLocaleDateString() + '<br />' +
+				'Reservation Number: GRJKCCG23<br />' +
+				'Number of Guests: 3</p>',
+			additionalValueProposition: '' +
+				'<div class="avp">' +
+					'<div class="avp-header">' +
+						'<img class="avp-header__left-edge" src="../assets/img/left-edge.svg" alt="" />' +
+						'<h3 class="avp-header__text">SPA offers hand-picked for you ' +
+						'<strong class="avp-header__text--discount">with a special 20% discount</strong></h3>' +
+						'<img class="avp-header__right-edge" src="../assets/img/right-edge.svg" alt="" />' +
+					'</div>' +
+					'<div class="avp-content">' +
+						'<div class="avp-offer">' +
+							'<img class="avp-offer__left-blob" src="../assets/img/left-blob.svg" alt="" />' +
+							'<h4 class="avp-offer__header">Harmony Found: Thai Massage and Foot Reflexology</h4>' +
+							'<p>Blissful Thai massage & foot reflexology.</p>' +
+						'</div>' +
+						'<div class="avp-offer">' +
+							'<h4 class="avp-offer__header">Twin Tranquility: Couples\' Thai Massage</h4>' +
+							'<p>Relaxing massage for two.</p>' +
+						'</div>' +
+						'<div class="avp-offer">' +
+							'<img class="avp-offer__right-blob" src="../assets/img/right-blob.svg" alt="" />' +
+							'<img class="avp-offer__dots" src="../assets/img/dots.svg" alt="" />' +
+							'<h4 class="avp-offer__header">Serenity Through Scent: Aromatherapy Massage</h4>' +
+							'<p>Aromatic massage for peace.</p>' +
+						'</div>' +
+					'</div>' +
+				'</div>'
 		}
 	}
 ];
@@ -471,7 +560,6 @@ ClassicEditor.create(
 			MediaEmbed,
 			Mention,
 			MultiLevelList,
-			PageBreak,
 			Paragraph,
 			PasteFromOffice,
 			PictureEditing,
@@ -499,15 +587,20 @@ ClassicEditor.create(
 				ImportWord,
 				MergeFields,
 				SlashCommand,
-				Template,
-				Pagination,
+				Template
 			] : []),
 		],
 		licenseKey: LICENSE_KEY,
+		menuBar: {
+			isVisible: true
+		},
 		toolbar: {
 			shouldNotGroupWhenFull: true,
 			items: [
 				// --- Document-wide tools ----------------------------------------------------------------------
+				'undo',
+				'redo',
+				'|',
 				'insertMergeField',
 				'previewMergeFields',
 				'|',
@@ -517,23 +610,7 @@ ClassicEditor.create(
 				'|',
 				'insertTemplate',
 				'|',
-				'formatPainter',
-				'caseChange',
-				'findAndReplace',
-				'wproofreader',
-				'|',
-				'link',
-				'insertImage',
-				'ckbox',
-				'insertTable',
-				'blockQuote',
-				'mediaEmbed',
-				'codeBlock',
-				'horizontalLine',
-				'specialCharacters',
-				'-',
 				'heading',
-				'style',
 				'|',
 
 				'bold',
@@ -565,9 +642,7 @@ ClassicEditor.create(
 				'|',
 				'outdent',
 				'indent',
-				'|',
-				'undo',
-				'redo',
+				'|'
 			],
 		},
 		heading: {
@@ -707,19 +782,10 @@ ClassicEditor.create(
 		},
 		mergeFields: {
 			previewHtmlValues: true,
+			previewHtmlValues: true,
+			sanitizeHtml: html => ( { html, hasChanged: false } ),
 			definitions: MERGE_FIELDS_DEFINITIONS,
 			dataSets: MERGE_FIELDS_DATASETS
-		},
-		pagination: {
-			// A4
-			pageWidth: '21cm',
-			pageHeight: '29.7cm',
-			pageMargins: {
-				top: exportVerticalSpace,
-				bottom: exportVerticalSpace,
-				right: exportHorizontalSpace,
-				left: exportHorizontalSpace,
-			},
 		},
 		style: {
 			definitions: [

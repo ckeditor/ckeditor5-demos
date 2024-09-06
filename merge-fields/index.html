@@ -23,18 +23,25 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 			<div class="cke5-merge-fields-demo__content-container">
 				<div class="cke5-merge-fields-demo__content">
 					<p style="text-align: center;">
-							<img
-								src=" https://ckeditor.com/assets/images/ckdemo/merge-fields/serenity-springs.png" 
-								alt="Serenity Springs Resort logo." />
+						<img
+							src="assets/images/serenity-springs.png"
+							alt="Serenity Springs Resort logo." />
 					</p>
 					<p>{{guestTitle}} {{guestLastName}},</p>
-					<p>This email confirms your reservation at Serenity Springs Resort for a relaxing stay at
-						{{roomType}}. We will be delighted to welcome you on {{arrivalDate}}!</p>
-					<p><i>Sincerely,<br />
-							The Team at Serenity Springs Resort<br />
-							P.S. Treat yourself to a massage during your stay! Mention this email for {{discount}} off
-							your first spa treatment.
-						</i></p>
+					<p>Your upcoming stay at Serenity Springs Resort is the perfect opportunity to unwind and rejuvenate. To make your visit even more special, we’re pleased to offer you exclusive perks for our luxurious spa services.</p>
+					<p><b>Spa Highlights:</b></p>
+					<ul>
+					<li><b>Complimentary {{complimentaryDuration}} Massage:</b> Relax and let your stress melt away.</li>
+					<li><b>{{discount}}  Off Any Spa Package:</b> Indulge in our full range of treatments, from facials to body wraps.</li>
+					</ul>
+					{{additionalValueProposition}}
+					<p><b>Reminder:</b> Our spa is popular, so we recommend booking your treatments in advance to secure your preferred time.</p>
+					<p>To book your spa experience, simply call us at {{resortPhone}}. We look forward to pampering you during your stay!</p>
+		
+					<p>
+						<i>Warm regards,<br />
+						The Serenity Springs Resort Team</i>
+					</p>
 				</div>
 			</div>
 		</div>
