@@ -37,14 +37,12 @@ import {
 	CKBox,
 	CloudServices,
 	Clipboard,
-	EasyImage,
 	Essentials,
 	FindAndReplace,
 	FontBackgroundColor,
 	FontColor,
 	FontFamily,
 	FontSize,
-	GeneralHtmlSupport,
 	Heading,
 	HorizontalLine,
 	Image,
@@ -67,9 +65,6 @@ import {
 	RemoveFormat,
 	SpecialCharacters,
 	Strikethrough,
-	Style,
-	Subscript,
-	Superscript,
 	Table,
 	TableCaption,
 	TableCellProperties,
@@ -78,7 +73,7 @@ import {
 	TableToolbar,
 	TextTransformation,
 	TodoList,
-	Underline
+	Underline,
 } from 'ckeditor5';
 
 import {
@@ -105,18 +100,18 @@ const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'Reservation confirmation',
 		data: `
-			<p style="text-align: center;">
-					<img
-						src="assets/images/serenity-springs.png"
-						alt="Serenity Springs Resort logo." />
-			</p>
+			<figure class="image image_resized" style="width:50%;">
+				<img
+					src="assets/images/serenity-springs.png"
+					alt="Serenity Springs Resort logo." />
+			</figure>
 			<p>{{guestTitle}} {{guestLastName}},</p>
 			<p>This email confirms your reservation at Serenity Springs Resort for a relaxing stay at
 				{{roomType}}. We will be delighted to welcome you on {{arrivalDate}}!</p>
 			<p><i>Sincerely,<br />
 					The Team at Serenity Springs Resort<br />
 					P.S. Treat yourself to a massage during your stay! Mention this email for {{discount}} off
-					your first spa treatment.
+					your first Spa treatment.
 				</i></p>
 		`,
 		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
@@ -125,47 +120,47 @@ const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'Reservation reminder',
 		data: `
-		<p style="text-align: center;">
-			<img
-				src="assets/images/serenity-springs.png"
-				alt="Serenity Springs Resort logo." />
-		</p>
-		<p>Dear {{guestName}},</p>
+			<figure class="image image_resized" style="width:50%;">
+				<img
+					src="assets/images/serenity-springs.png"
+					alt="Serenity Springs Resort logo." />
+			</figure>
+			<p>Dear {{guestName}},</p>
 
-		<p>We’re excited to welcome you to Serenity Springs Resort in just two days! Your relaxing getaway is just around the corner.</p>
+			<p>We’re excited to welcome you to Serenity Springs Resort in just two days! Your relaxing getaway is just around the corner.</p>
 
-		{{reservationDetails}}
+			{{reservationDetails}}
 
-		<p>If you have any special requests or need assistance before your arrival, please don’t hesitate to contact us. We want to ensure your stay is as comfortable and enjoyable as possible.</p>
+			<p>If you have any special requests or need assistance before your arrival, please don’t hesitate to contact us. We want to ensure your stay is as comfortable and enjoyable as possible.</p>
 
-		<p>We look forward to your arrival!</p>
+			<p>We look forward to your arrival!</p>
 
-		<p>
-				<i>Warm regards,<br />
-				The Serenity Springs Resort Team</i>
-			</p>
-		`,
+			<p>
+					<i>Warm regards,<br />
+					The Serenity Springs Resort Team</i>
+				</p>
+			`,
 		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
 		description: 'Detailed reservation information',
 	},
 	{
 		title: 'Spa booking reminder',
 		data: `
-			<p style="text-align: center;">
+			<figure class="image image_resized" style="width:50%;">
 				<img
 					src="assets/images/serenity-springs.png"
 					alt="Serenity Springs Resort logo." />
-			</p>
+			</figure>
 			<p>{{guestTitle}} {{guestLastName}},</p>
-			<p>Your upcoming stay at Serenity Springs Resort is the perfect opportunity to unwind and rejuvenate. To make your visit even more special, we’re pleased to offer you exclusive perks for our luxurious spa services.</p>
-			<p><b>Spa Highlights:</b></p>
+			<p>Your upcoming stay at Serenity Springs Resort is the perfect opportunity to unwind and rejuvenate. To make your visit even more special, we’re pleased to offer you exclusive perks for our luxurious Spa services.</p>
+			<p><strong>Spa Highlights:</strong></p>
 			<ul>
-			<li><b>Complimentary {{complimentaryDuration}} Massage:</b> Relax and let your stress melt away.</li>
-			<li><b>{{discount}}  Off Any Spa Package:</b> Indulge in our full range of treatments, from facials to body wraps.</li>
+			<li><strong>Complimentary {{complimentaryDuration}} Massage:</strong> Relax and let your stress melt away.</li>
+			<li><strong>{{discount}}  Off Any Spa Package:</strong> Indulge in our full range of treatments, from facials to body wraps.</li>
 			</ul>
 			{{additionalValueProposition}}
-			<p><b>Reminder:</b> Our spa is popular, so we recommend booking your treatments in advance to secure your preferred time.</p>
-			<p>To book your spa experience, simply call us at {{resortPhone}}. We look forward to pampering you during your stay!</p>
+			<p><strong>Reminder:</strong> Our Spa is popular, so we recommend booking your treatments in advance to secure your preferred time.</p>
+			<p>To book your Spa experience, simply call us at {{resortPhone}}. We look forward to pampering you during your stay!</p>
 
 			<p>
 				<i>Warm regards,<br />
@@ -173,19 +168,19 @@ const TEMPLATE_DEFINITIONS = [
 			</p>
 		`,
 		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
-		description: 'Information about booked SPA session',
+		description: 'Information about booked Spa session',
 	},
 	{
 		title: 'Feedback request',
 		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
 		data: `
-			<p style="text-align: center;">
+			<figure class="image image_resized" style="width:50%;">
 				<img
 					src="assets/images/serenity-springs.png"
 					alt="Serenity Springs Resort logo." />
-			</p>
+			</figure>
 			<p>Dear {{guestName}},</p>
-			<p>We hope you enjoyed your recent {{numberOfNights}}nights stay at Serenity Springs Resort. Your comfort and satisfaction are our top priorities, and we’d love to hear about your experience.</p>
+			<p>We hope you enjoyed your recent {{numberOfNights}} nights stay at Serenity Springs Resort. Your comfort and satisfaction are our top priorities, and we’d love to hear about your experience.</p>
 			<p>Please take a few minutes to share your thoughts by completing our {{feedbackSurvey}}. Your feedback helps us continue to provide the best possible service to our guests.</p>
 			<p>Thank you for choosing Serenity Springs Resort. We look forward to welcoming you back soon!</p>
 			<p>
@@ -196,133 +191,6 @@ const TEMPLATE_DEFINITIONS = [
 		description: 'Document letterhead with logo',
 	},
 ];
-
-const REDUCED_MATERIAL_COLORS = [
-	{ label: 'Red 50', color: '#ffebee' },
-	{ label: 'Purple 50', color: '#f3e5f5' },
-	{ label: 'Indigo 50', color: '#e8eaf6' },
-	{ label: 'Blue 50', color: '#e3f2fd' },
-	{ label: 'Cyan 50', color: '#e0f7fa' },
-	{ label: 'Teal 50', color: '#e0f2f1' },
-	{ label: 'Light green 50', color: '#f1f8e9' },
-	{ label: 'Lime 50', color: '#f9fbe7' },
-	{ label: 'Amber 50', color: '#fff8e1' },
-	{ label: 'Orange 50', color: '#fff3e0' },
-	{ label: 'Grey 50', color: '#fafafa' },
-	{ label: 'Blue grey 50', color: '#eceff1' },
-	{ label: 'Red 100', color: '#ffcdd2' },
-	{ label: 'Purple 100', color: '#e1bee7' },
-	{ label: 'Indigo 100', color: '#c5cae9' },
-	{ label: 'Blue 100', color: '#bbdefb' },
-	{ label: 'Cyan 100', color: '#b2ebf2' },
-	{ label: 'Teal 100', color: '#b2dfdb' },
-	{ label: 'Light green 100', color: '#dcedc8' },
-	{ label: 'Lime 100', color: '#f0f4c3' },
-	{ label: 'Amber 100', color: '#ffecb3' },
-	{ label: 'Orange 100', color: '#ffe0b2' },
-	{ label: 'Grey 100', color: '#f5f5f5' },
-	{ label: 'Blue grey 100', color: '#cfd8dc' },
-	{ label: 'Red 200', color: '#ef9a9a' },
-	{ label: 'Purple 200', color: '#ce93d8' },
-	{ label: 'Indigo 200', color: '#9fa8da' },
-	{ label: 'Blue 200', color: '#90caf9' },
-	{ label: 'Cyan 200', color: '#80deea' },
-	{ label: 'Teal 200', color: '#80cbc4' },
-	{ label: 'Light green 200', color: '#c5e1a5' },
-	{ label: 'Lime 200', color: '#e6ee9c' },
-	{ label: 'Amber 200', color: '#ffe082' },
-	{ label: 'Orange 200', color: '#ffcc80' },
-	{ label: 'Grey 200', color: '#eeeeee' },
-	{ label: 'Blue grey 200', color: '#b0bec5' },
-	{ label: 'Red 300', color: '#e57373' },
-	{ label: 'Purple 300', color: '#ba68c8' },
-	{ label: 'Indigo 300', color: '#7986cb' },
-	{ label: 'Blue 300', color: '#64b5f6' },
-	{ label: 'Cyan 300', color: '#4dd0e1' },
-	{ label: 'Teal 300', color: '#4db6ac' },
-	{ label: 'Light green 300', color: '#aed581' },
-	{ label: 'Lime 300', color: '#dce775' },
-	{ label: 'Amber 300', color: '#ffd54f' },
-	{ label: 'Orange 300', color: '#ffb74d' },
-	{ label: 'Grey 300', color: '#e0e0e0' },
-	{ label: 'Blue grey 300', color: '#90a4ae' },
-	{ label: 'Red 400', color: '#ef5350' },
-	{ label: 'Purple 400', color: '#ab47bc' },
-	{ label: 'Indigo 400', color: '#5c6bc0' },
-	{ label: 'Blue 400', color: '#42a5f5' },
-	{ label: 'Cyan 400', color: '#26c6da' },
-	{ label: 'Teal 400', color: '#26a69a' },
-	{ label: 'Light green 400', color: '#9ccc65' },
-	{ label: 'Lime 400', color: '#d4e157' },
-	{ label: 'Amber 400', color: '#ffca28' },
-	{ label: 'Orange 400', color: '#ffa726' },
-	{ label: 'Grey 400', color: '#bdbdbd' },
-	{ label: 'Blue grey 400', color: '#78909c' },
-	{ label: 'Red 500', color: '#f44336' },
-	{ label: 'Purple 500', color: '#9c27b0' },
-	{ label: 'Indigo 500', color: '#3f51b5' },
-	{ label: 'Blue 500', color: '#2196f3' },
-	{ label: 'Cyan 500', color: '#00bcd4' },
-	{ label: 'Teal 500', color: '#009688' },
-	{ label: 'Light green 500', color: '#8bc34a' },
-	{ label: 'Lime 500', color: '#cddc39' },
-	{ label: 'Amber 500', color: '#ffc107' },
-	{ label: 'Orange 500', color: '#ff9800' },
-	{ label: 'Grey 500', color: '#9e9e9e' },
-	{ label: 'Blue grey 500', color: '#607d8b' },
-	{ label: 'Red 600', color: '#e53935' },
-	{ label: 'Purple 600', color: '#8e24aa' },
-	{ label: 'Indigo 600', color: '#3949ab' },
-	{ label: 'Blue 600', color: '#1e88e5' },
-	{ label: 'Cyan 600', color: '#00acc1' },
-	{ label: 'Teal 600', color: '#00897b' },
-	{ label: 'Light green 600', color: '#7cb342' },
-	{ label: 'Lime 600', color: '#c0ca33' },
-	{ label: 'Amber 600', color: '#ffb300' },
-	{ label: 'Orange 600', color: '#fb8c00' },
-	{ label: 'Grey 600', color: '#757575' },
-	{ label: 'Blue grey 600', color: '#546e7a' },
-	{ label: 'Red 700', color: '#d32f2f' },
-	{ label: 'Purple 700', color: '#7b1fa2' },
-	{ label: 'Indigo 700', color: '#303f9f' },
-	{ label: 'Blue 700', color: '#1976d2' },
-	{ label: 'Cyan 700', color: '#0097a7' },
-	{ label: 'Teal 700', color: '#00796b' },
-	{ label: 'Light green 700', color: '#689f38' },
-	{ label: 'Lime 700', color: '#afb42b' },
-	{ label: 'Amber 700', color: '#ffa000' },
-	{ label: 'Orange 700', color: '#f57c00' },
-	{ label: 'Grey 700', color: '#616161' },
-	{ label: 'Blue grey 700', color: '#455a64' },
-	{ label: 'Red 800', color: '#c62828' },
-	{ label: 'Purple 800', color: '#6a1b9a' },
-	{ label: 'Indigo 800', color: '#283593' },
-	{ label: 'Blue 800', color: '#1565c0' },
-	{ label: 'Cyan 800', color: '#00838f' },
-	{ label: 'Teal 800', color: '#00695c' },
-	{ label: 'Light green 800', color: '#558b2f' },
-	{ label: 'Lime 800', color: '#9e9d24' },
-	{ label: 'Amber 800', color: '#ff8f00' },
-	{ label: 'Orange 800', color: '#ef6c00' },
-	{ label: 'Grey 800', color: '#424242' },
-	{ label: 'Blue grey 800', color: '#37474f' },
-	{ label: 'Red 900', color: '#b71c1c' },
-	{ label: 'Purple 900', color: '#4a148c' },
-	{ label: 'Indigo 900', color: '#1a237e' },
-	{ label: 'Blue 900', color: '#0d47a1' },
-	{ label: 'Cyan 900', color: '#006064' },
-	{ label: 'Teal 900', color: '#004d40' },
-	{ label: 'Light green 900', color: '#33691e' },
-	{ label: 'Lime 900', color: '#827717' },
-	{ label: 'Amber 900', color: '#ff6f00' },
-	{ label: 'Orange 900', color: '#e65100' },
-	{ label: 'Grey 900', color: '#212121' },
-	{ label: 'Blue grey 900', color: '#263238' },
-];
-
-const exportHorizontalSpace = '10mm';
-const exportVerticalSpace = '12mm';
-
 
 const MERGE_FIELDS_DEFINITIONS = [
 	{
@@ -388,12 +256,70 @@ const MERGE_FIELDS_DEFINITIONS = [
 			{
 				id: 'reservationDetails',
 				label: 'Reservation details',
-				defaultValue: '<p>Reservation details',
+				defaultValue: `
+					<p style="text-align:center;"><strong>Reservation Details</strong></p>
+					<figure class="table">
+						<table>
+							<tbody>
+								<tr>
+									<th style="padding:5px 10px;">
+										Check-In Date
+									</th>
+									<td style="padding:5px 10px;text-align:center;">
+										01/01/2000
+									</td>
+								</tr>
+								<tr>
+									<th style="padding:5px 10px;">
+										Reservation Number
+									</th>
+									<td style="padding:5px 10px;text-align:center;">
+										XXXXXXXX
+									</td>
+								</tr>
+								<tr>
+									<th style="padding:5px 10px;">
+										Number of Guests
+									</th>
+									<td style="padding:5px 10px;text-align:center;">
+										0
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</figure>`,
 				type: 'block'
 			},
 			{
 				id: 'additionalValueProposition',
-				label: 'SPA recommendations box',
+				label: 'Spa recommendations box',
+				defaultValue: `
+					<div class="avp">
+						<div class="avp-header">
+							<img class="avp-header__left-edge" src="assets/images/left-edge.svg" alt="" />
+							<h3 class="avp-header__text">Spa offers hand-picked for you 
+								<strong class="avp-header__text--discount">with a special X% discount</strong>
+							</h3>
+							<img class="avp-header__right-edge" src="assets/images/right-edge.svg" alt="" />
+						</div>
+						<div class="avp-content">
+							<div class="avp-offer">
+								<img class="avp-offer__left-blob" src="assets/images/left-blob.svg" alt="" />
+								<h4 class="avp-offer__header">Spa Offer #1</h4>
+								<p>Description of the offer.</p>
+							</div>
+							<div class="avp-offer">
+								<h4 class="avp-offer__header">Spa Offer #2</h4>
+								<p>Description of the offer.</p>
+							</div>
+							<div class="avp-offer">
+								<img class="avp-offer__right-blob" src="assets/images/right-blob.svg" alt="" />
+								<img class="avp-offer__dots" src="assets/images/dots.svg" alt="" />
+								<h4 class="avp-offer__header">Spa Offer #3</h4>
+								<p>Description of the offer.</p>
+							</div>
+						</div>
+					</div>`,
 				type: 'block'
 			}
 
@@ -427,45 +353,73 @@ const MERGE_FIELDS_DATASETS = [
 			guestName: 'David',
 			guestLastName: 'Lee',
 			reservationNumber: 'Y2JKH5G1Z',
-			arrivalDate: new Date(2024, 7, 22).toLocaleDateString(),
+			arrivalDate: new Date(2024,7,22).toLocaleDateString(),
 			numberOfGuests: '2',
 			numberOfNights: '6',
 			roomType: 'Double Room',
 			discount: '20%',
-			complimentaryDuration: '15min',
+			complimentaryDuration: '15 min',
 			feedbackSurvey: '<a href="https://ckeditor.com">quick survey</a>',
 			resortPhone: '555-232-2334-23',
-			reservationDetails: '' +
-				'<p><b>Reservation Details:</b><br />' +
-				'Check-In Date: ' + new Date(2024, 7, 22).toLocaleDateString() + '<br />' +
-				'Reservation Number: Y2JKH5G1Z<br />' +
-				'Number of Guests: 2</p>',
-			additionalValueProposition: ' ' +
-				'<div class="avp">' +
-					'<div class="avp-header">' +
-						'<img class="avp-header__left-edge" src="../assets/img/left-edge.svg" alt="" />' +
-						'<h3 class="avp-header__text">SPA offers hand-picked for you ' +
-						'<strong class="avp-header__text--discount">with a special 10% discount</strong></h3>' +
-						'<img class="avp-header__right-edge" src="../assets/img/right-edge.svg" alt="" />' +
-					'</div>' +
-					'<div class="avp-content">' +
-						'<div class="avp-offer">' +
-							'<img class="avp-offer__left-blob" src="../assets/img/left-blob.svg" alt="" />' +
-							'<h4 class="avp-offer__header">Signature Relaxation Package</h4>' +
-							'<p>Luxurious day of pampering: massage, facial, body wrap.</p>' +
-						'</div>' +
-						'<div class="avp-offer">' +
-							'<h4 class="avp-offer__header">Couples\' Retreat</h4>' +
-							'<p>Relaxing escape for two: massage, bath, scrub.</p>' +
-						'</div>' +
-						'<div class="avp-offer">' +
-							'<img class="avp-offer__right-blob" src="../assets/img/right-blob.svg" alt="" />' +
-							'<img class="avp-offer__dots" src="../assets/img/dots.svg" alt="" />' +
-							'<h4 class="avp-offer__header">Anti-Aging Treatment</h4>' +
-							'<p>Combat aging: facial, massage, body wrap.</p>' +
-						'</div>' +
-					'</div>' +
-				'</div>'
+			reservationDetails: `
+				<p style="text-align:center;"><strong>Reservation Details</strong></p>
+				<figure class="table">
+					<table>
+						<tbody>
+							<tr>
+								<th style="padding:5px 10px;">
+									Check-In Date
+								</th>
+								<td style="padding:5px 10px;text-align:center;">
+									${new Date(2024, 7, 22).toLocaleDateString()}
+								</td>
+							</tr>
+							<tr>
+								<th style="padding:5px 10px;">
+									Reservation Number
+								</th>
+								<td style="padding:5px 10px;text-align:center;">
+									Y2JKH5G1Z
+								</td>
+							</tr>
+							<tr>
+								<th style="padding:5px 10px;">
+									Number of Guests
+								</th>
+								<td style="padding:5px 10px;text-align:center;">
+									2
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</figure>`,
+			additionalValueProposition: `
+				<div class="avp">
+					<div class="avp-header">
+						<img class="avp-header__left-edge" src="assets/images/left-edge.svg" alt="" />
+						<h3 class="avp-header__text">Spa offers hand-picked for you 
+							<strong class="avp-header__text--discount">with a special 10% discount</strong>
+						</h3>
+						<img class="avp-header__right-edge" src="assets/images/right-edge.svg" alt="" />
+					</div>
+					<div class="avp-content">
+						<div class="avp-offer">
+							<img class="avp-offer__left-blob" src="assets/images/left-blob.svg" alt="" />
+							<h4 class="avp-offer__header">Signature Relaxation Package</h4>
+							<p>Luxurious day of pampering: massage, facial, body wrap.</p>
+						</div>
+						<div class="avp-offer">
+							<h4 class="avp-offer__header">Couples' Retreat</h4>
+							<p>Relaxing escape for two: massage, bath, scrub.</p>
+						</div>
+						<div class="avp-offer">
+							<img class="avp-offer__right-blob" src="assets/images/images/right-blob.svg" alt="" />
+							<img class="avp-offer__dots" src="assets/images/images/dots.svg" alt="" />
+							<h4 class="avp-offer__header">Anti-Aging Treatment</h4>
+							<p>Combat aging: facial, massage, body wrap.</p>
+						</div>
+					</div>
+				</div>`
 		}
 	},
 	{
@@ -481,44 +435,74 @@ const MERGE_FIELDS_DATASETS = [
 			numberOfNights: '10',
 			roomType: 'Apartment',
 			discount: '30%',
-			complimentaryDuration: '30min',
+			complimentaryDuration: '30 min',
 			feedbackSurvey: '<a href="https://ckeditor.com/docs/ckeditor5/latest/features/merge-fields.html">quick survey</a>',
 			resortPhone: '555-232-2334-23',
-			reservationDetails: '' +
-				'<p><b>Reservation Details:</b><br />' +
-				'Check-In Date: ' + new Date(2024, 4, 12).toLocaleDateString() + '<br />' +
-				'Reservation Number: GRJKCCG23<br />' +
-				'Number of Guests: 3</p>',
-			additionalValueProposition: '' +
-				'<div class="avp">' +
-					'<div class="avp-header">' +
-						'<img class="avp-header__left-edge" src="../assets/img/left-edge.svg" alt="" />' +
-						'<h3 class="avp-header__text">SPA offers hand-picked for you ' +
-						'<strong class="avp-header__text--discount">with a special 20% discount</strong></h3>' +
-						'<img class="avp-header__right-edge" src="../assets/img/right-edge.svg" alt="" />' +
-					'</div>' +
-					'<div class="avp-content">' +
-						'<div class="avp-offer">' +
-							'<img class="avp-offer__left-blob" src="../assets/img/left-blob.svg" alt="" />' +
-							'<h4 class="avp-offer__header">Harmony Found: Thai Massage and Foot Reflexology</h4>' +
-							'<p>Blissful Thai massage & foot reflexology.</p>' +
-						'</div>' +
-						'<div class="avp-offer">' +
-							'<h4 class="avp-offer__header">Twin Tranquility: Couples\' Thai Massage</h4>' +
-							'<p>Relaxing massage for two.</p>' +
-						'</div>' +
-						'<div class="avp-offer">' +
-							'<img class="avp-offer__right-blob" src="../assets/img/right-blob.svg" alt="" />' +
-							'<img class="avp-offer__dots" src="../assets/img/dots.svg" alt="" />' +
-							'<h4 class="avp-offer__header">Serenity Through Scent: Aromatherapy Massage</h4>' +
-							'<p>Aromatic massage for peace.</p>' +
-						'</div>' +
-					'</div>' +
-				'</div>'
+			reservationDetails: `
+				<p style="text-align:center;"><strong>Reservation Details</strong></p>
+				<figure class="table">
+					<table>
+						<tbody>
+							<tr>
+								<th style="padding:5px 10px;">
+									Check-In Date
+								</th>
+								<td style="padding:5px 10px;text-align:center;">
+									${new Date(2024, 4, 12).toLocaleDateString()}
+								</td>
+							</tr>
+							<tr>
+								<th style="padding:5px 10px;">
+									Reservation Number
+								</th>
+								<td style="padding:5px 10px;text-align:center;">
+									GRJKCCG23
+								</td>
+							</tr>
+							<tr>
+								<th style="padding:5px 10px;">
+									Number of Guests
+								</th>
+								<td style="padding:5px 10px;text-align:center;">
+									3
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</figure>`,
+			additionalValueProposition: `
+				<div class="avp">
+					<div class="avp-header">
+						<img class="avp-header__left-edge" src="assets/images/left-edge.svg" alt="" />
+						<h3 class="avp-header__text">Spa offers hand-picked for you 
+							<strong class="avp-header__text--discount">with a special 20% discount</strong>
+						</h3>
+						<img class="avp-header__right-edge" src="assets/images/right-edge.svg" alt="" />
+					</div>
+					<div class="avp-content">
+						<div class="avp-offer">
+							<img class="avp-offer__left-blob" src="assets/images/left-blob.svg" alt="" />
+							<h4 class="avp-offer__header">Harmony Found: Thai Massage and Foot Reflexology</h4>
+							<p>Blissful Thai massage & foot reflexology.</p>
+						</div>
+						<div class="avp-offer">
+							<h4 class="avp-offer__header">Twin Tranquility: Couples' Thai Massage</h4>
+							<p>Relaxing massage for two.</p>
+						</div>
+						<div class="avp-offer">
+							<img class="avp-offer__right-blob" src="assets/images/right-blob.svg" alt="" />
+							<img class="avp-offer__dots" src="assets/images/dots.svg" alt="" />
+							<h4 class="avp-offer__header">Serenity Through Scent: Aromatherapy Massage</h4>
+							<p>Aromatic massage for peace.</p>
+						</div>
+					</div>
+				</div>`
 		}
 	}
 ];
 
+const exportHorizontalSpace = '10mm';
+const exportVerticalSpace = '12mm';
 
 ClassicEditor.create(
 	document.querySelector('.cke5-merge-fields-demo__content'),
@@ -535,14 +519,12 @@ ClassicEditor.create(
 			Clipboard,
 			Code,
 			CodeBlock,
-			EasyImage,
 			Essentials,
 			FindAndReplace,
 			FontBackgroundColor,
 			FontColor,
 			FontFamily,
 			FontSize,
-			GeneralHtmlSupport,
 			Heading,
 			HorizontalLine,
 			Image,
@@ -559,16 +541,12 @@ ClassicEditor.create(
 			ListProperties,
 			MediaEmbed,
 			Mention,
-			MultiLevelList,
 			Paragraph,
 			PasteFromOffice,
 			PictureEditing,
 			RemoveFormat,
 			SpecialCharacters,
 			Strikethrough,
-			Style,
-			Subscript,
-			Superscript,
 			Table,
 			TableCaption,
 			TableCellProperties,
@@ -587,7 +565,7 @@ ClassicEditor.create(
 				ImportWord,
 				MergeFields,
 				SlashCommand,
-				Template
+				Template,
 			] : []),
 		],
 		licenseKey: LICENSE_KEY,
@@ -597,7 +575,6 @@ ClassicEditor.create(
 		toolbar: {
 			shouldNotGroupWhenFull: true,
 			items: [
-				// --- Document-wide tools ----------------------------------------------------------------------
 				'undo',
 				'redo',
 				'|',
@@ -612,37 +589,34 @@ ClassicEditor.create(
 				'|',
 				'heading',
 				'|',
-
-				'bold',
-				'italic',
-				'underline',
-				'strikethrough',
 				{
-					label: 'Basic styles',
+					label: 'Font styles',
 					icon: 'text',
 					items: [
 						'fontSize',
 						'fontFamily',
 						'fontColor',
 						'fontBackgroundColor',
-						// 'highlight',
-						'superscript',
-						'subscript',
-						'code',
+
 					],
 				},
 				'removeFormat',
+				'|',
+				'bold',
+				'italic',
+				'underline',
+				'|',
+				'link',
+				'insertImage',
+				'insertTable',
 				'|',
 				'alignment',
 				'|',
 				'bulletedList',
 				'numberedList',
-				'multilevelList',
-				'todoList',
 				'|',
 				'outdent',
 				'indent',
-				'|'
 			],
 		},
 		heading: {
@@ -691,23 +665,17 @@ ClassicEditor.create(
 			options: [10, 12, 14, 'default', 18, 20, 22],
 			supportAllValues: true,
 		},
-		fontColor: {
-			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
-		},
-		fontBackgroundColor: {
-			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
-		},
 		image: {
 			toolbar: [
-				'imageTextAlternative',
 				'toggleImageCaption',
+				'imageTextAlternative',
 				'|',
 				'imageStyle:inline',
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
-			],
+				'|',
+				'resizeImage',
+			]
 		},
 		link: {
 			addTargetToExternalLinks: true,
@@ -731,7 +699,7 @@ ClassicEditor.create(
 			],
 		},
 		exportPdf: {
-			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			stylesheets: [coreStylesheets,premiumStylesheets,'./content.css'],
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
@@ -745,7 +713,7 @@ ClassicEditor.create(
 			tokenUrl: false,
 		},
 		exportWord: {
-			stylesheets: [coreStylesheets, premiumStylesheets],
+			stylesheets: [coreStylesheets,premiumStylesheets],
 			fileName: 'export-word-demo.docx',
 			converterOptions: {
 				format: 'A4',
@@ -756,85 +724,11 @@ ClassicEditor.create(
 			},
 			tokenUrl: false,
 		},
-		htmlSupport: {
-			allow: [
-				// Enables all HTML features.
-				{
-					name: /.*/,
-					attributes: true,
-					classes: true,
-					styles: true,
-				},
-			],
-			disallow: [
-				{
-					attributes: [
-						{ key: /^on(.*)/i, value: true },
-						{
-							key: /.*/,
-							value: /(\b)(on\S+)(\s*)=|javascript:|(<\s*)(\/*)script/i,
-						},
-						{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
-					],
-				},
-				{ name: 'script' },
-			],
-		},
 		mergeFields: {
 			previewHtmlValues: true,
-			previewHtmlValues: true,
-			sanitizeHtml: html => ( { html, hasChanged: false } ),
+			sanitizeHtml: html => ({ html,hasChanged: false }),
 			definitions: MERGE_FIELDS_DEFINITIONS,
 			dataSets: MERGE_FIELDS_DATASETS
-		},
-		style: {
-			definitions: [
-				{
-					name: 'Title',
-					element: 'h1',
-					classes: ['document-title'],
-				},
-				{
-					name: 'Subtitle',
-					element: 'h2',
-					classes: ['document-subtitle'],
-				},
-				{
-					name: 'Callout',
-					element: 'p',
-					classes: ['callout'],
-				},
-				{
-					name: 'Side quote',
-					element: 'blockquote',
-					classes: ['side-quote'],
-				},
-				{
-					name: 'Needs clarification',
-					element: 'span',
-					classes: ['needs-clarification'],
-				},
-				{
-					name: 'Wide spacing',
-					element: 'span',
-					classes: ['wide-spacing'],
-				},
-				{
-					name: 'Small caps',
-					element: 'span',
-					classes: ['small-caps'],
-				},
-				{
-					name: 'Code (dark)',
-					element: 'pre',
-					classes: ['stylish-code', 'stylish-code-dark'],
-				},
-				{
-					name: 'Code (bright)',
-					element: 'pre',
-					classes: ['stylish-code', 'stylish-code-bright'],
-				},
-			],
 		},
 		wproofreader: {
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,

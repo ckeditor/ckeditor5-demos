@@ -15,9 +15,9 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@webspellchecker/wproofreader-ckeditor5": "^3.0.0",
 		"ckeditor5": "^43.0.0",
 		"ckeditor5-premium-features": "^43.0.0",
-		"@webspellchecker/wproofreader-ckeditor5": "^3.0.0",
 		"vite": "^5.0.0"
 	}
 }
