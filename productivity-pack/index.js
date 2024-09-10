@@ -417,17 +417,6 @@ const MERGE_FIELDS_DEFINITIONS = [
 				defaultValue: '0'
 			}
 		]
-	},
-	{
-		groupId: 'expensesAnalysis',
-		groupLabel: 'Expenses analysis',
-		definitions: [
-			{
-				id: 'expensesBreakdownTable',
-				label: 'Expenses breakdown table',
-				type: 'block'
-			}
-		]
 	}
 ];
 
@@ -442,50 +431,6 @@ const MERGE_FIELDS_DATASETS = [
 			netProfitAmount: '1.7',
 			netProfitChange: '5',
 			roi: '10',
-			expensesBreakdownTable: ' ' +
-				'<figure class="table" style="width: 66%">' +
-					'<table class="ck-table-resized">' +
-						'<colgroup>' +
-							'<col style="width: 38.76%" />' +
-							'<col style="width: 18.07%" />' +
-							'<col style="width: 23.33%" />' +
-							'<col style="width: 19.84%" />' +
-						'</colgroup>' +
-						'<tbody>' +
-							'<tr>' +
-								'<th>Expense Category</th>' +
-								'<th>FY 2022 ($M)</th>' +
-								'<th>FY 2023 ($M)</th>' +
-								'<th>Change (%)</th>' +
-							'</tr>' +
-							'<tr>' +
-								'<td>Product Development</td>' +
-								'<td>2.2</td>' +
-								'<td>2.4</td>' +
-								'<td>9</td>' +
-							'</tr>' +
-							'<tr>' +
-								'<td>Marketing and Sales</td>' +
-								'<td>1.8</td>' +
-								'<td>2</td>' +
-								'<td>11</td>' +
-							'</tr>' +
-							'<tr>' +
-								'<td>Administrative Costs</td>' +
-								'<td>1.6</td>' +
-								'<td>1.6</td>' +
-								'<td>0</td>' +
-							'</tr>' +
-							'<tr>' +
-								'<td>Total</td>' +
-								'<td>5.6</td>' +
-								'<td>6</td>' +
-								'<td>7.15</td>' +
-							'</tr>' +
-						'</tbody>' +
-					'</table>' +
-					'<figcaption>Table 2: Expense Breakdown</figcaption>' +
-				'</figure>'
 		}
 	},
 	{
@@ -494,7 +439,7 @@ const MERGE_FIELDS_DATASETS = [
 		values: {
 			fiscalYear: '2023',
 			revenueAmount: '10',
-			revenueChange: '15%',
+			revenueChange: '15',
 			netProfitAmount: '2',
 			netProfitChange: '20',
 			roi: '15'
@@ -694,11 +639,11 @@ DecoupledEditor.create(
 				'selectAll',
 				'wproofreader',
 				'|',
+				'insertMergeField', 'previewMergeFields',
+				'|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
-				'|',
-				'insertMergeField', 'previewMergeFields',
 				'|',
 				'insertTemplate',
 				'tableOfContents',
