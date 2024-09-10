@@ -396,6 +396,11 @@ const MERGE_FIELDS_DEFINITIONS = [
 		groupLabel: 'Author information',
 		definitions: [
 			{
+				id: 'coolEmoji',
+				label: 'Cool emoji',
+				defaultValue: '🥳'
+			},
+			{
 				id: 'authorTitle',
 				label: 'Title',
 				defaultValue: 'Mr./Mrs.'
@@ -419,6 +424,7 @@ const MERGE_FIELDS_DATASETS = [
 		id: '78900',
 		label: 'David Lee',
 		values: {
+			coolEmoji: '🎉',
 			authorTitle: "Mr.",
 			authorName: "David",
 			authorSurname: "Lee"
@@ -428,6 +434,7 @@ const MERGE_FIELDS_DATASETS = [
 		id: '78901',
 		label: 'Kate Smith',
 		values: {
+			coolEmoji: '😎',
 			authorTitle: "Mrs.",
 			authorName: "Kate",
 			authorSurname: "Smith"
@@ -437,37 +444,41 @@ const MERGE_FIELDS_DATASETS = [
 		id: '78902',
 		label: 'John Azar',
 		values: {
+			coolEmoji: '🔥',
 			authorTitle: "Mr.",
 			authorName: "John",
 			authorSurname: "Azar"
 		}
 	},
 	{
-        id: '98765',
-        label: 'Emily Johnson',
-        values: {
-            authorTitle: "Dr.",
-            authorName: "Emily",
-            authorSurname: "Johnson"
-        }
-    },
+		id: '98765',
+		label: 'Emily Johnson',
+		values: {
+			coolEmoji: '💫',
+			authorTitle: "Dr.",
+			authorName: "Emily",
+			authorSurname: "Johnson"
+		}
+	},
 	{
-        id: '43210',
-        label: 'David Brown',
-        values: {
-            authorTitle: "Mr.",
-            authorName: "David",
-            authorSurname: "Brown"
-        }
-    },
+		id: '43210',
+		label: 'David Brown',
+		values: {
+			coolEmoji: '🌟',
+			authorTitle: "Mr.",
+			authorName: "David",
+			authorSurname: "Brown"
+		}
+	},
 	{
-        id: '54321',
-        label: 'Sarah Miller',
-        values: {
-            authorName: "Sarah",
-            authorSurname: "Miller"
-        }
-    }
+		id: '54321',
+		label: 'Sarah Miller',
+		values: {
+			coolEmoji: '⭐️',
+			authorName: "Sarah",
+			authorSurname: "Miller"
+		}
+	}
 ];
 
 /**
@@ -672,11 +683,11 @@ ClassicEditor.create(
 				'undo',
 				'redo',
 				'|',
+				'insertMergeField','previewMergeFields',
+				'|',
 				'importWord',
 				'exportWord',
 				'exportPdf',
-				'|',
-				'insertMergeField', 'previewMergeFields',
 				'|',
 				'formatPainter',
 				'caseChange',
