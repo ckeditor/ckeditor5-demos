@@ -377,9 +377,48 @@ const REDUCED_MATERIAL_COLORS = [
 
 const MERGE_FIELDS_DEFINITIONS = [
 	{
-		id: 'fiscalYear',
-		label: 'Fiscal year',
-		defaultValue: new Date().getFullYear()
+		id: 'financialSummary',
+		label: 'Financial summary',
+		defaultValue: `
+						<figure class="table">
+							<table>
+								<tbody>
+									<tr>
+										<th>&nbsp;</th>
+										<th>FY 2022</th>
+										<th>FY 2023</th>
+										<th>Change (%)</th>
+									</tr>
+									<tr>
+										<td>Revenue ($M)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+									<tr>
+										<td>Net Profit ($M)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+									<tr>
+										<td>Cash Flow ($M)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+									<tr>
+										<td>ROI (%)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+								</tbody>
+							</table>
+							<figcaption>Table 1: Financial Summary</figcaption>
+						</figure>
+		`,
+		type: 'block'
 	},
 	{
 		groupId: 'financialHighlights',
@@ -388,28 +427,28 @@ const MERGE_FIELDS_DEFINITIONS = [
 			{
 				id: 'revenueAmount',
 				label: 'Revenue ($M)',
-				defaultValue: '1',
+				defaultValue: '0.00',
 				type: 'block'
 			},
 			{
 				id: 'revenueChange',
 				label: 'Revenue % change',
-				defaultValue: '15'
+				defaultValue: '0.00'
 			},
 			{
 				id: 'netProfitAmount',
 				label: 'Net profit ($M)',
-				defaultValue: '1'
+				defaultValue: '0.00'
 			},
 			{
 				id: 'netProfitChange',
 				label: 'Net profit % change',
-				defaultValue: '10'
+				defaultValue: '0.00'
 			},
 			{
 				id: 'cashFlow',
 				label: 'Cash flow ($M)',
-				defaultValue: '1.5'
+				defaultValue: '0.00'
 			},
 			{
 				id: 'roi',
@@ -423,26 +462,103 @@ const MERGE_FIELDS_DEFINITIONS = [
 const MERGE_FIELDS_DATASETS = [
 	{
 		id: '2331',
-		label: 'Data for 2022',
+		label: 'Forecast #1',
 		values: {
-			fiscalYear: '2022',
-			revenueAmount: '8.7',
-			revenueChange: '10',
-			netProfitAmount: '1.7',
-			netProfitChange: '5',
-			roi: '10',
-		}
-	},
-	{
-		id: '2332',
-		label: 'Data for 2023',
-		values: {
-			fiscalYear: '2023',
 			revenueAmount: '10',
 			revenueChange: '15',
 			netProfitAmount: '2',
 			netProfitChange: '20',
-			roi: '15'
+			roi: '15',
+			financialSummary: `
+						<figure class="table">
+							<table>
+								<tbody>
+									<tr>
+										<th>&nbsp;</th>
+										<th>FY 2022</th>
+										<th>FY 2023</th>
+										<th>Change (%)</th>
+									</tr>
+									<tr>
+										<td>Revenue ($M)</td>
+										<td>8.7</td>
+										<td>10</td>
+										<td>15</td>
+									</tr>
+									<tr>
+										<td>Net Profit ($M)</td>
+										<td>1.7</td>
+										<td>2</td>
+										<td>20</td>
+									</tr>
+									<tr>
+										<td>Cash Flow ($M)</td>
+										<td>1.5</td>
+										<td>2.2</td>
+										<td>47</td>
+									</tr>
+									<tr>
+										<td>ROI (%)</td>
+										<td>10</td>
+										<td>15</td>
+										<td>50</td>
+									</tr>
+								</tbody>
+							</table>
+							<figcaption>Table 1: Financial Summary</figcaption>
+						</figure>
+		`
+		}
+	},
+	{
+		id: '2332',
+		label: 'Forecast #2',
+		values: {
+			revenueAmount: '9.57',
+			revenueChange: '10',
+			netProfitAmount: '1.87',
+			netProfitChange: '10',
+			roi: '12',
+			financialSummary: `
+						<figure class="table">
+							<table>
+								<tbody>
+									<tr>
+										<th>&nbsp;</th>
+										<th>FY 2022</th>
+										<th>FY 2023</th>
+										<th>Change (%)</th>
+									</tr>
+									<tr>
+										<td>Revenue ($M)</td>
+										<td>8.7</td>
+										<td>9.57</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>Net Profit ($M)</td>
+										<td>1.7</td>
+										<td>1.87</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>Cash Flow ($M)</td>
+										<td>1.5</td>
+										<td>2.2</td>
+										<td>47</td>
+									</tr>
+									<tr>
+										<td>ROI (%)</td>
+										<td>10</td>
+										<td>12</td>
+										<td>20</td>
+									</tr>
+								</tbody>
+							</table>
+							<figcaption>Table 1: Financial Summary</figcaption>
+						</figure>
+		`,
+
 		}
 	}
 ];
