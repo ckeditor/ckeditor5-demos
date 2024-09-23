@@ -1,19 +1,19 @@
 /**
  * CKEditor 5 requires a license key.
- * 
+ *
  * The "GPL" license key used below only allows you to use the open-source features.
  * To use the premium features, replace it with your commercial license key.
  * If you don't have one, you can get a trial license key from https://ckeditor.com/pricing/.
  */
 const LICENSE_KEY = 'GPL';
 
-if (LICENSE_KEY === 'GPL') {
+if ( LICENSE_KEY === 'GPL' ) {
 	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
 /**
  * CKBox plugin requires a valid token URL in order to use the CKBox application.
- * 
+ *
  * After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
  * https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
  */
@@ -83,7 +83,7 @@ import {
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	WordCount,
+	WordCount
 } from 'ckeditor5';
 
 import {
@@ -95,7 +95,7 @@ import {
 	MultiLevelList,
 	SlashCommand,
 	TableOfContents,
-	Template,
+	Template
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -112,14 +112,16 @@ const exportVerticalSpace = '12mm';
 const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'Signature (multi-line)',
-		data: `<p style='margin-left:2em;'><span'><strong>I hereby verify that the aforementioned report has undergone thorough factual verification and reflects the most current information.</strong></span></p>
+		// eslint-disable-next-line max-len
+		data: `<p style='margin-left:2em;'><span><strong>I hereby verify that the aforementioned report has undergone thorough factual verification and reflects the most current information.</strong></span></p>
 			<p style='margin-left:22em;'><br>
-			<span'>Signature: __________&nbsp;&nbsp;</span><br>
-			<span'>Name:&nbsp;</span><br>
-			<span'>Title:&nbsp;</span><br>
-			<span'>Date:</span></p>`,
+			<span>Signature: __________&nbsp;&nbsp;</span><br>
+			<span>Name:&nbsp;</span><br>
+			<span>Title:&nbsp;</span><br>
+			<span>Date:</span></p>`,
 		description: 'Author signature with statement',
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.833.5H1.611a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.89.89 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z'/><path fill='#fff' d='M4.722 17.167c0 .859.697 1.555 1.556 1.555h8.889c.859 0 1.555-.696 1.555-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.584-2.262a1.556 1.556 0 0 0-1.025-.385H6.278c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M16.161 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.931 2.564Z'/><path fill='#C9FE43' d='M16.546 8.525a.917.917 0 0 1 1.402 1.18l-4.132 4.908-1.402-1.18 4.132-4.908Zm-4.494 6.76.384-1.594 1.122.944-1.506.65Z'/><path stroke='#6C34C9' stroke-linecap='round' stroke-linejoin='round' stroke-width='.55' d='m11.666 15.837 1.96-.953c.126-.061.188-.092.246-.13.051-.033.1-.07.145-.112.05-.047.096-.1.186-.207l3.766-4.474a1.037 1.037 0 1 0-1.586-1.335l-3.767 4.473c-.09.107-.135.16-.172.218a1.091 1.091 0 0 0-.087.162c-.027.063-.046.13-.085.264l-.606 2.094Zm0 0 .584-2.019c.042-.144.063-.217.106-.253a.183.183 0 0 1 .136-.04c.056.005.114.053.229.15l.896.755c.115.097.172.145.188.2a.184.184 0 0 1-.018.14c-.028.049-.096.082-.23.148l-1.89.92Z'/><path stroke='#6C34C9' stroke-linecap='round' stroke-linejoin='round' stroke-width='.444' d='m6.5 16.945.903-1.162a.569.569 0 0 1 .989.17l.062.188a.46.46 0 0 0 .797.142v0a.46.46 0 0 1 .72 0l.282.353a.823.823 0 0 0 .642.309h.938'/><rect width='4.889' height='.667' x='6.5' y='6.278' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.5' y='8.056' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.5' y='9.833' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.5' y='11.611' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.722 .5)'/></clipPath></defs></svg>`,
+		// eslint-disable-next-line max-len
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M19.833.5H1.611a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.89.89 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z\'/><path fill=\'#fff\' d=\'M4.722 17.167c0 .859.697 1.555 1.556 1.555h8.889c.859 0 1.555-.696 1.555-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.584-2.262a1.556 1.556 0 0 0-1.025-.385H6.278c-.86 0-1.556.697-1.556 1.556v12.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M16.161 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.931 2.564Z\'/><path fill=\'#C9FE43\' d=\'M16.546 8.525a.917.917 0 0 1 1.402 1.18l-4.132 4.908-1.402-1.18 4.132-4.908Zm-4.494 6.76.384-1.594 1.122.944-1.506.65Z\'/><path stroke=\'#6C34C9\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'.55\' d=\'m11.666 15.837 1.96-.953c.126-.061.188-.092.246-.13.051-.033.1-.07.145-.112.05-.047.096-.1.186-.207l3.766-4.474a1.037 1.037 0 1 0-1.586-1.335l-3.767 4.473c-.09.107-.135.16-.172.218a1.091 1.091 0 0 0-.087.162c-.027.063-.046.13-.085.264l-.606 2.094Zm0 0 .584-2.019c.042-.144.063-.217.106-.253a.183.183 0 0 1 .136-.04c.056.005.114.053.229.15l.896.755c.115.097.172.145.188.2a.184.184 0 0 1-.018.14c-.028.049-.096.082-.23.148l-1.89.92Z\'/><path stroke=\'#6C34C9\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'.444\' d=\'m6.5 16.945.903-1.162a.569.569 0 0 1 .989.17l.062.188a.46.46 0 0 0 .797.142v0a.46.46 0 0 1 .72 0l.282.353a.823.823 0 0 0 .642.309h.938\'/><rect width=\'4.889\' height=\'.667\' x=\'6.5\' y=\'6.278\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'6.667\' height=\'.667\' x=\'6.5\' y=\'8.056\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.5\' y=\'9.833\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.5\' y=\'11.611\' fill=\'#743CCD\' rx=\'.333\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.722 .5)\'/></clipPath></defs></svg>'
 	},
 	{
 		title: 'Projections table',
@@ -162,8 +164,9 @@ const TEMPLATE_DEFINITIONS = [
 				Financial Projections
 			</figcaption>
 		</figure>`,
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M20.055.5H1.833a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.889.889 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z'/><path fill='#fff' d='M4.5 18.278h12.889a.89.89 0 0 0 .889-.89V4.057a.889.889 0 0 0-.89-.89H4.5a.889.889 0 0 0-.889.89V17.39c0 .49.398.889.889.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M17.389 17.944H4.499a.556.556 0 0 1-.555-.555V4.056c0-.307.249-.556.556-.556h12.889c.307 0 .555.249.555.556v13.333a.555.555 0 0 1-.555.555Z'/><path fill='#E8DFF7' d='M8.944 4.056H8.5v13.333h.444V4.056Z'/><path fill='#E8DFF7' d='M17.389 9.389v-.445H4.499v.445h12.89Zm0 2.667v-.445H4.499v.445h12.89Zm0 2.666v-.444H4.499v.444h12.89Z'/><path fill='#E8DFF7' d='M13.389 4.056h-.445v13.333h.445V4.056Z'/><path fill='#E8DFF7' d='M17.389 6.722v-.444H4.499v.444h12.89Z'/><path fill='#743CCD' d='M8.5 4.056h-4v2.222h4V4.056Z'/><path fill='#743CCD' d='M8.5 4.056h-4v2.222h4V4.056Z'/><path fill='#DFFE8F' d='M12.944 4.056h-4v2.222h4V4.056Z'/><path fill='#E8DFF7' d='M17.389 4.056h-4v2.222h4V4.056Z'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.944 .5)'/></clipPath></defs></svg>`,
-		description: 'Table for annual financial projections',
+		// eslint-disable-next-line max-len
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M20.055.5H1.833a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.889.889 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z\'/><path fill=\'#fff\' d=\'M4.5 18.278h12.889a.89.89 0 0 0 .889-.89V4.057a.889.889 0 0 0-.89-.89H4.5a.889.889 0 0 0-.889.89V17.39c0 .49.398.889.889.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M17.389 17.944H4.499a.556.556 0 0 1-.555-.555V4.056c0-.307.249-.556.556-.556h12.889c.307 0 .555.249.555.556v13.333a.555.555 0 0 1-.555.555Z\'/><path fill=\'#E8DFF7\' d=\'M8.944 4.056H8.5v13.333h.444V4.056Z\'/><path fill=\'#E8DFF7\' d=\'M17.389 9.389v-.445H4.499v.445h12.89Zm0 2.667v-.445H4.499v.445h12.89Zm0 2.666v-.444H4.499v.444h12.89Z\'/><path fill=\'#E8DFF7\' d=\'M13.389 4.056h-.445v13.333h.445V4.056Z\'/><path fill=\'#E8DFF7\' d=\'M17.389 6.722v-.444H4.499v.444h12.89Z\'/><path fill=\'#743CCD\' d=\'M8.5 4.056h-4v2.222h4V4.056Z\'/><path fill=\'#743CCD\' d=\'M8.5 4.056h-4v2.222h4V4.056Z\'/><path fill=\'#DFFE8F\' d=\'M12.944 4.056h-4v2.222h4V4.056Z\'/><path fill=\'#E8DFF7\' d=\'M17.389 4.056h-4v2.222h4V4.056Z\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.944 .5)\'/></clipPath></defs></svg>',
+		description: 'Table for annual financial projections'
 	},
 	{
 		title: 'Balance Sheet',
@@ -171,61 +174,61 @@ const TEMPLATE_DEFINITIONS = [
 						<table style=';'>
 							<tbody>
 								<tr>
-									<td><span'><strong>Group</strong></span></td>
-									<td><span'><strong>Description</strong></span></td>
-									<td><span'><strong>Current Year ($)</strong></span></td>
-									<td><span'><strong>Previous Year ($)</strong></span></td>
+									<td><span><strong>Group</strong></span></td>
+									<td><span><strong>Description</strong></span></td>
+									<td><span><strong>Current Year ($)</strong></span></td>
+									<td><span><strong>Previous Year ($)</strong></span></td>
 								</tr>
 								<tr>
-									<td rowspan='3'><span'><strong>Assets</strong></span></td>
-									<td><span'>Current Assets</span></td>
-									<td><span'>9.4</span></td>
-									<td><span'>8.9</span></td>
+									<td rowspan='3'><span><strong>Assets</strong></span></td>
+									<td><span>Current Assets</span></td>
+									<td><span>9.4</span></td>
+									<td><span>8.9</span></td>
 								</tr>
 								<tr>
-									<td><span'>Non-Current Assets</span></td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td><span'>Total Assets</span></td>
+									<td><span>Non-Current Assets</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td rowspan='3'><span'><strong>Liabilities</strong></span></td>
-									<td><span'>Current Liabilities</span></td>
+									<td><span>Total Assets</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td><span'>Non-Current Liabilities</span></td>
+									<td rowspan='3'><span><strong>Liabilities</strong></span></td>
+									<td><span>Current Liabilities</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td><span'>Total Liabilities</span></td>
+									<td><span>Non-Current Liabilities</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td rowspan='4'><span'><strong>Equity</strong></span></td>
-									<td><span'>Share Capital</span></td>
+									<td><span>Total Liabilities</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td><span'>Retained Earnings</span></td>
+									<td rowspan='4'><span><strong>Equity</strong></span></td>
+									<td><span>Share Capital</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td><span'>Total Equity</span></td>
+									<td><span>Retained Earnings</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td><span'>Total Liabilities and Equity</span></td>
+									<td><span>Total Equity</span></td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td><span>Total Liabilities and Equity</span></td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>
@@ -235,12 +238,14 @@ const TEMPLATE_DEFINITIONS = [
 							Balance sheet
 						</figcaption>
 					</figure>`,
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M20.055.5H1.833a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.889.889 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z'/><path fill='#fff' d='M4.5 18.278h12.889a.89.89 0 0 0 .889-.89V4.057a.889.889 0 0 0-.89-.89H4.5a.889.889 0 0 0-.889.89V17.39c0 .49.398.889.889.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M17.389 17.944H4.499a.556.556 0 0 1-.555-.555V4.056c0-.307.249-.556.556-.556h12.889c.307 0 .555.249.555.556v13.333a.555.555 0 0 1-.555.555Z'/><path fill='#E8DFF7' d='M8.944 4.056H8.5v13.333h.444V4.056Z'/><path fill='#E8DFF7' d='M17.389 9.389v-.445H4.499v.445h12.89Zm0 2.667v-.445H4.499v.445h12.89Zm0 2.666v-.444H4.499v.444h12.89Z'/><path fill='#E8DFF7' d='M13.389 4.056h-.445v13.333h.445V4.056Z'/><path fill='#E8DFF7' d='M17.389 6.722v-.444H4.499v.444h12.89Z'/><path fill='#743CCD' d='M8.5 4.056h-4v2.222h4V4.056Z'/><path fill='#743CCD' d='M8.5 4.056h-4v2.222h4V4.056Z'/><path fill='#DFFE8F' d='M12.944 4.056h-4v2.222h4V4.056Z'/><path fill='#E8DFF7' d='M17.389 4.056h-4v2.222h4V4.056Z'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.944 .5)'/></clipPath></defs></svg>`,
-		description: 'Simple balance sheet table',
+		// eslint-disable-next-line max-len
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M20.055.5H1.833a.889.889 0 0 0-.889.889V19.61a.89.89 0 0 0 .89.889h18.221a.889.889 0 0 0 .89-.889V1.39a.889.889 0 0 0-.89-.889Z\'/><path fill=\'#fff\' d=\'M4.5 18.278h12.889a.89.89 0 0 0 .889-.89V4.057a.889.889 0 0 0-.89-.89H4.5a.889.889 0 0 0-.889.89V17.39c0 .49.398.889.889.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M17.389 17.944H4.499a.556.556 0 0 1-.555-.555V4.056c0-.307.249-.556.556-.556h12.889c.307 0 .555.249.555.556v13.333a.555.555 0 0 1-.555.555Z\'/><path fill=\'#E8DFF7\' d=\'M8.944 4.056H8.5v13.333h.444V4.056Z\'/><path fill=\'#E8DFF7\' d=\'M17.389 9.389v-.445H4.499v.445h12.89Zm0 2.667v-.445H4.499v.445h12.89Zm0 2.666v-.444H4.499v.444h12.89Z\'/><path fill=\'#E8DFF7\' d=\'M13.389 4.056h-.445v13.333h.445V4.056Z\'/><path fill=\'#E8DFF7\' d=\'M17.389 6.722v-.444H4.499v.444h12.89Z\'/><path fill=\'#743CCD\' d=\'M8.5 4.056h-4v2.222h4V4.056Z\'/><path fill=\'#743CCD\' d=\'M8.5 4.056h-4v2.222h4V4.056Z\'/><path fill=\'#DFFE8F\' d=\'M12.944 4.056h-4v2.222h4V4.056Z\'/><path fill=\'#E8DFF7\' d=\'M17.389 4.056h-4v2.222h4V4.056Z\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.944 .5)\'/></clipPath></defs></svg>',
+		description: 'Simple balance sheet table'
 	},
 	{
 		title: 'Company Letterhead',
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
+		// eslint-disable-next-line max-len
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z\'/><path fill=\'#fff\' d=\'M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'8.944\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'6.667\' height=\'.667\' x=\'6.278\' y=\'10.722\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'12.5\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'14.278\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'7.111\' height=\'.667\' x=\'6.278\' y=\'16.055\' fill=\'#743CCD\' rx=\'.333\'/><circle cx=\'7.611\' cy=\'6.278\' r=\'1.333\' fill=\'#C9FE43\'/><rect width=\'4\' height=\'.667\' x=\'9.833\' y=\'6.278\' fill=\'#743CCD\' rx=\'.333\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.5 .5)\'/></clipPath></defs></svg>',
 		data: `<table style='border-width:0'>
 							<colgroup>
 								<col style='width:30%;'>
@@ -256,16 +261,22 @@ const TEMPLATE_DEFINITIONS = [
 										</figure>
 									</td>
 									<td>
-										<span><a href='mailto:info@matataventures.co'><span style='background-color:transparent;color:#1155cc;'><u>info@matataventures.co</u></span></a><br>
-										<span'>1 Bonnyville Dr. Spryfield B3P 1H8</span><br>
-										<span'>+1-613-555-0133</span></span>
+										<span>
+											<a href='mailto:info@matataventures.co'>
+											<span style='background-color:transparent;color:#1155cc;'>
+											<u>info@matataventures.co</u>
+											</span>
+											</a>
+											<br>
+										<span>1 Bonnyville Dr. Spryfield B3P 1H8</span><br>
+										<span>+1-613-555-0133</span></span>
 										<div></div>
 									</td>
 								</tr>
 							</tbody>
 						</table>`,
-		description: 'Document letterhead with logo',
-	},
+		description: 'Document letterhead with logo'
+	}
 ];
 
 const REDUCED_MATERIAL_COLORS = [
@@ -388,22 +399,8 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Amber 900', color: '#ff6f00' },
 	{ label: 'Orange 900', color: '#e65100' },
 	{ label: 'Grey 900', color: '#212121' },
-	{ label: 'Blue grey 900', color: '#263238' },
+	{ label: 'Blue grey 900', color: '#263238' }
 ];
-
-/**
- * Populate the special characters plugin with emojis.
- */
-function SpecialCharactersEmoji(editor) {
-	if (!editor.plugins.get('SpecialCharacters')) {
-		return;
-	}
-
-	// Make sure Emojis are last on the list.
-	this.afterInit = function () {
-		editor.plugins.get('SpecialCharacters').addItems('Emoji', EMOJIS_ARRAY);
-	};
-}
 
 const EMOJIS_ARRAY = [
 	{ character: '🙈', title: 'See-No-Evil Monkey' },
@@ -437,7 +434,7 @@ const EMOJIS_ARRAY = [
 	{ character: '😇', title: 'Smiling Face with Halo' },
 	{
 		character: '😆',
-		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes',
+		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes'
 	},
 	{ character: '😅', title: 'Smiling Face with Open Mouth and Cold Sweat' },
 	{ character: '😄', title: 'Smiling Face with Open Mouth and Smiling Eyes' },
@@ -507,11 +504,25 @@ const EMOJIS_ARRAY = [
 	{ character: '♥️', title: 'Heart Suit' },
 	{ character: '☺️', title: 'Smiling Face' },
 	{ character: '☹️', title: 'Frowning Face' },
-	{ character: '☀️', title: 'Sun' },
+	{ character: '☀️', title: 'Sun' }
 ];
 
+/**
+ * Populate the special characters plugin with emojis.
+ */
+function SpecialCharactersEmoji( editor ) {
+	if ( !editor.plugins.get( 'SpecialCharacters' ) ) {
+		return;
+	}
+
+	// Make sure Emojis are last on the list.
+	this.afterInit = function() {
+		editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', EMOJIS_ARRAY );
+	};
+}
+
 ClassicEditor.create(
-	document.querySelector('#cke5-feature-rich-demo'),
+	document.querySelector( '#cke5-feature-rich-demo' ),
 	{
 		plugins: [
 			Alignment,
@@ -573,7 +584,7 @@ ClassicEditor.create(
 
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
 			...( CKBOX_TOKEN_URL ? [
-				CKBox,
+				CKBox
 			] : [] ),
 
 			// Include premium features only if the license key is not GPL.
@@ -586,13 +597,13 @@ ClassicEditor.create(
 				MultiLevelList,
 				SlashCommand,
 				TableOfContents,
-				Template,
-			] : []),
+				Template
+			] : [] ),
 
 			// Include WebSpellChecker plugin only if the WEB_SPELL_CHECKER_LICENSE_KEY is provided.
 			...( WEB_SPELL_CHECKER_LICENSE_KEY ? [
-				WProofreader,
-			] : [] ),
+				WProofreader
+			] : [] )
 		],
 		licenseKey: LICENSE_KEY,
 		toolbar: {
@@ -654,8 +665,8 @@ ClassicEditor.create(
 						'code',
 						'|',
 						'textPartLanguage',
-						'|',
-					],
+						'|'
+					]
 				},
 				'removeFormat',
 				'|',
@@ -671,11 +682,11 @@ ClassicEditor.create(
 				'todoList',
 				'|',
 				'outdent',
-				'indent',
-			],
+				'indent'
+			]
 		},
 		exportPdf: {
-			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
@@ -684,36 +695,36 @@ ClassicEditor.create(
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
 				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait',
+				page_orientation: 'portrait'
 			},
-			tokenUrl: false,
+			tokenUrl: false
 		},
 		exportWord: {
-			stylesheets: [coreStylesheets, premiumStylesheets, './content.css'],
+			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
 			fileName: 'export-word-demo.docx',
 			converterOptions: {
 				format: 'A4',
 				margin_top: exportVerticalSpace,
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace
 			},
-			tokenUrl: false,
+			tokenUrl: false
 		},
 		fontFamily: {
-			supportAllValues: true,
+			supportAllValues: true
 		},
 		fontSize: {
-			options: [10, 12, 14, 'default', 18, 20, 22],
-			supportAllValues: true,
+			options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+			supportAllValues: true
 		},
 		fontColor: {
 			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
+			colors: REDUCED_MATERIAL_COLORS
 		},
 		fontBackgroundColor: {
 			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
+			colors: REDUCED_MATERIAL_COLORS
 		},
 		heading: {
 			options: [
@@ -722,39 +733,39 @@ ClassicEditor.create(
 					model: 'heading1',
 					view: 'h1',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h2',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h3',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
+					class: 'ck-heading_heading3'
 				},
 				{
 					model: 'heading4',
 					view: 'h4',
 					title: 'Heading 4',
-					class: 'ck-heading_heading4',
+					class: 'ck-heading_heading4'
 				},
 				{
 					model: 'heading5',
 					view: 'h5',
 					title: 'Heading 5',
-					class: 'ck-heading_heading5',
+					class: 'ck-heading_heading5'
 				},
 				{
 					model: 'heading6',
 					view: 'h6',
 					title: 'Heading 6',
-					class: 'ck-heading_heading6',
-				},
-			],
+					class: 'ck-heading_heading6'
+				}
+			]
 		},
 		htmlSupport: {
 			allow: [
@@ -763,8 +774,8 @@ ClassicEditor.create(
 					name: /.*/,
 					attributes: true,
 					classes: true,
-					styles: true,
-				},
+					styles: true
+				}
 			],
 			disallow: [
 				{
@@ -772,31 +783,31 @@ ClassicEditor.create(
 						{ key: /^on(.*)/i, value: true },
 						{
 							key: /.*/,
-							value: /(\b)(on\S+)(\s*)=|javascript:|(<\s*)(\/*)script/i,
+							value: /(\b)(on\S+)(\s*)=|javascript:|(<\s*)(\/*)script/i
 						},
-						{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
-					],
+						{ key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i }
+					]
 				},
-				{ name: 'script' },
-			],
+				{ name: 'script' }
+			]
 		},
 		image: {
 			resizeOptions: [
 				{
 					name: 'resizeImage:original',
 					label: 'Default image width',
-					value: null,
+					value: null
 				},
 				{
 					name: 'resizeImage:50',
 					label: '50% page width',
-					value: '50',
+					value: '50'
 				},
 				{
 					name: 'resizeImage:75',
 					label: '75% page width',
-					value: '75',
-				},
+					value: '75'
+				}
 			],
 			toolbar: [
 				'imageTextAlternative',
@@ -806,18 +817,18 @@ ClassicEditor.create(
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
 				'|',
-				'resizeImage',
+				'resizeImage'
 			],
 			insert: {
-				integrations: ['url'],
-			},
+				integrations: [ 'url' ]
+			}
 		},
 		list: {
 			properties: {
 				styles: true,
 				startIndex: true,
-				reversed: true,
-			},
+				reversed: true
+			}
 		},
 		link: {
 			decorators: {
@@ -825,12 +836,12 @@ ClassicEditor.create(
 					mode: 'manual',
 					label: 'Downloadable',
 					attributes: {
-						download: 'file',
-					},
-				},
+						download: 'file'
+					}
+				}
 			},
 			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
+			defaultProtocol: 'https://'
 		},
 		mention: {
 			feeds: [
@@ -866,10 +877,10 @@ ClassicEditor.create(
 						{ id: '@bzappaterra', avatar: 'w_12', name: 'Beatrice Zappaterra' },
 						{ id: '@zquigley', avatar: 'w_13', name: 'Zoe Quigley' },
 						{ id: '@pfabozzi', avatar: 'w_14', name: 'Patrizia Fabozzi' },
-						{ id: '@vquimby', avatar: 'w_15', name: 'Victoria Quimby' },
+						{ id: '@vquimby', avatar: 'w_15', name: 'Victoria Quimby' }
 					],
 					minimumCharacters: 1,
-					itemRenderer: customMentionUserItemRenderer,
+					itemRenderer: customMentionUserItemRenderer
 				},
 				{
 					marker: '#',
@@ -933,10 +944,10 @@ ClassicEditor.create(
 						'#vegetarian',
 						'#vietnamese',
 						'#yum',
-						'#yummy',
-					],
-				},
-			],
+						'#yummy'
+					]
+				}
+			]
 		},
 		placeholder: 'Type or paste your content here!',
 		style: {
@@ -944,49 +955,49 @@ ClassicEditor.create(
 				{
 					name: 'Title',
 					element: 'h1',
-					classes: ['document-title'],
+					classes: [ 'document-title' ]
 				},
 				{
 					name: 'Subtitle',
 					element: 'h2',
-					classes: ['document-subtitle'],
+					classes: [ 'document-subtitle' ]
 				},
 				{
 					name: 'Callout',
 					element: 'p',
-					classes: ['callout'],
+					classes: [ 'callout' ]
 				},
 				{
 					name: 'Side quote',
 					element: 'blockquote',
-					classes: ['side-quote'],
+					classes: [ 'side-quote' ]
 				},
 				{
 					name: 'Needs clarification',
 					element: 'span',
-					classes: ['needs-clarification'],
+					classes: [ 'needs-clarification' ]
 				},
 				{
 					name: 'Wide spacing',
 					element: 'span',
-					classes: ['wide-spacing'],
+					classes: [ 'wide-spacing' ]
 				},
 				{
 					name: 'Small caps',
 					element: 'span',
-					classes: ['small-caps'],
+					classes: [ 'small-caps' ]
 				},
 				{
 					name: 'Code (dark)',
 					element: 'pre',
-					classes: ['stylish-code', 'stylish-code-dark'],
+					classes: [ 'stylish-code', 'stylish-code-dark' ]
 				},
 				{
 					name: 'Code (bright)',
 					element: 'pre',
-					classes: ['stylish-code', 'stylish-code-bright'],
-				},
-			],
+					classes: [ 'stylish-code', 'stylish-code-bright' ]
+				}
+			]
 		},
 		table: {
 			contentToolbar: [
@@ -995,59 +1006,59 @@ ClassicEditor.create(
 				'mergeTableCells',
 				'tableProperties',
 				'tableCellProperties',
-				'toggleTableCaption',
-			],
+				'toggleTableCaption'
+			]
 		},
 		wproofreader: {
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
 			lang: 'auto',
 			srcUrl:
 				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-			autoStartup: false,
+			autoStartup: false
 		},
 		ckbox: {
-			tokenUrl: CKBOX_TOKEN_URL,
+			tokenUrl: CKBOX_TOKEN_URL
 		},
 		template: {
-			definitions: TEMPLATE_DEFINITIONS,
+			definitions: TEMPLATE_DEFINITIONS
 		},
 		menuBar: {
 			isVisible: true
 		}
 	}
 )
-.then((editor) => {
-	document
-		.querySelector('.ck.ck-editor__main')
-		.appendChild(editor.plugins.get('WordCount').wordCountContainer);
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		document
+			.querySelector( '.ck.ck-editor__main' )
+			.appendChild( editor.plugins.get( 'WordCount' ).wordCountContainer );
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );
 
 /*
  * Customizes the way the list of user suggestions is displayed.
  * Each user has an @id, a name and an avatar.
  */
-function customMentionUserItemRenderer(item) {
-	const itemElement = document.createElement('span');
-	const avatar = document.createElement('img');
-	const userNameElement = document.createElement('span');
-	const fullNameElement = document.createElement('span');
+function customMentionUserItemRenderer( item ) {
+	const itemElement = document.createElement( 'span' );
+	const avatar = document.createElement( 'img' );
+	const userNameElement = document.createElement( 'span' );
+	const fullNameElement = document.createElement( 'span' );
 
-	itemElement.classList.add('mention__item');
+	itemElement.classList.add( 'mention__item' );
 
-	avatar.src = `/assets/images/avatars/${item.avatar}.jpg`;
+	avatar.src = `/assets/images/avatars/${ item.avatar }.jpg`;
 
-	userNameElement.classList.add('mention__item__user-name');
+	userNameElement.classList.add( 'mention__item__user-name' );
 	userNameElement.textContent = item.id;
 
-	fullNameElement.classList.add('mention__item__full-name');
+	fullNameElement.classList.add( 'mention__item__full-name' );
 	fullNameElement.textContent = item.name;
 
-	itemElement.appendChild(avatar);
-	itemElement.appendChild(userNameElement);
-	itemElement.appendChild(fullNameElement);
+	itemElement.appendChild( avatar );
+	itemElement.appendChild( userNameElement );
+	itemElement.appendChild( fullNameElement );
 
 	return itemElement;
 }

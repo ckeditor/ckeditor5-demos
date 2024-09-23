@@ -18,6 +18,9 @@ jobs:
             dpkg -i google-chrome.deb
             sed -i 's|HERE/chrome"|HERE/chrome" --no-sandbox|g' /opt/google/chrome/google-chrome
       - run:
+          name: Lint
+          command: yarn lint
+      - run:
           name: Test each demo
           command: bash ./build-and-test-demos.sh
 

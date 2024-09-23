@@ -1,13 +1,13 @@
 /**
  * CKEditor 5 requires a license key.
- * 
+ *
  * The "GPL" license key used below only allows you to use the open-source features.
  * To use the premium features, replace it with your commercial license key.
  * If you don't have one, you can get a trial license key from https://ckeditor.com/pricing/.
  */
 const LICENSE_KEY = 'GPL';
 
-if (LICENSE_KEY === 'GPL') {
+if ( LICENSE_KEY === 'GPL' ) {
 	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
@@ -38,7 +38,7 @@ import {
 	Table,
 	TableToolbar,
 	TextTransformation,
-	BlockToolbar,
+	BlockToolbar
 } from 'ckeditor5';
 
 import {
@@ -49,7 +49,7 @@ import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 BalloonEditor.create(
-	document.querySelector('#cke5-user-interface-balloon-block-demo'),
+	document.querySelector( '#cke5-user-interface-balloon-block-demo' ),
 	{
 		plugins: [
 			Autoformat,
@@ -81,8 +81,8 @@ BalloonEditor.create(
 
 			// Include premium features only if the license key is not GPL.
 			...( LICENSE_KEY !== 'GPL' ? [
-				SlashCommand,
-			] : [] ),
+				SlashCommand
+			] : [] )
 		],
 		licenseKey: LICENSE_KEY,
 		blockToolbar: [
@@ -99,43 +99,43 @@ BalloonEditor.create(
 			'bulletedList',
 			'numberedList',
 			'outdent',
-			'indent',
+			'indent'
 		],
 		toolbar: {
-			items: ['bold', 'italic', 'link'],
+			items: [ 'bold', 'italic', 'link' ]
 		},
 		heading: {
 			options: [
 				{
 					model: 'paragraph',
 					title: 'Paragraph',
-					class: 'ck-heading_paragraph',
+					class: 'ck-heading_paragraph'
 				},
 				{
 					model: 'heading1',
 					view: 'h1',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h2',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h3',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
+					class: 'ck-heading_heading3'
 				},
 				{
 					model: 'heading4',
 					view: 'h4',
 					title: 'Heading 4',
-					class: 'ck-heading_heading4',
-				},
-			],
+					class: 'ck-heading_heading4'
+				}
+			]
 		},
 		image: {
 			toolbar: [
@@ -143,21 +143,21 @@ BalloonEditor.create(
 				'imageStyle:block',
 				'|',
 				'toggleImageCaption',
-				'imageTextAlternative',
-			],
+				'imageTextAlternative'
+			]
 		},
 		link: {
 			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
+			defaultProtocol: 'https://'
 		},
 		table: {
-			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
-		},
+			contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+		}
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );

@@ -5,7 +5,7 @@
  */
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
-if (!WEB_SPELL_CHECKER_LICENSE_KEY) {
+if ( !WEB_SPELL_CHECKER_LICENSE_KEY ) {
 	alert(
 		'Web Spell Checker Features included in this demo require a license key.\n' +
 		'Check the index.js file for more information.'
@@ -34,7 +34,7 @@ import {
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	TodoList,
+	TodoList
 } from 'ckeditor5';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -43,7 +43,7 @@ import 'ckeditor5/ckeditor5.css';
 import '@webspellchecker/wproofreader-ckeditor5/index.css';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-spellchecker-demo'),
+	document.querySelector( '#cke5-spellchecker-demo' ),
 	{
 		plugins: [
 			// Open-source plugins
@@ -70,7 +70,7 @@ ClassicEditor.create(
 			TodoList,
 
 			// Include WebSpellChecker plugin only if the WEB_SPELL_CHECKER_LICENSE_KEY is provided.
-			WProofreader,
+			WProofreader
 		],
 		toolbar: {
 			items: [
@@ -91,12 +91,12 @@ ClassicEditor.create(
 				'mediaEmbed',
 				'undo',
 				'redo',
-				'wproofreader',
-			],
+				'wproofreader'
+			]
 		},
 		indentBlock: {
 			offset: 1,
-			unit: 'em',
+			unit: 'em'
 		},
 		table: {
 			contentToolbar: [
@@ -104,8 +104,8 @@ ClassicEditor.create(
 				'tableRow',
 				'mergeTableCells',
 				'tableProperties',
-				'tableCellProperties',
-			],
+				'tableCellProperties'
+			]
 		},
 		wproofreader: {
 			autoSearch: true,
@@ -113,13 +113,13 @@ ClassicEditor.create(
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
 			lang: 'auto',
 			srcUrl:
-				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-		},
+				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
+		}
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );

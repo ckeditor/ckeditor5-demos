@@ -24,7 +24,7 @@ import {
 	TableProperties,
 	TableToolbar,
 	TableColumnResize,
-	Underline,
+	Underline
 } from 'ckeditor5';
 
 import MathType from '@wiris/mathtype-ckeditor5/dist/index.js';
@@ -32,7 +32,7 @@ import MathType from '@wiris/mathtype-ckeditor5/dist/index.js';
 import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-mathtype-demo'),
+	document.querySelector( '#cke5-mathtype-demo' ),
 	{
 		plugins: [
 			CloudServices,
@@ -60,7 +60,7 @@ ClassicEditor.create(
 			TableProperties,
 			TableToolbar,
 			TableColumnResize,
-			Underline,
+			Underline
 		],
 		toolbar: {
 			items: [
@@ -85,8 +85,8 @@ ClassicEditor.create(
 				'|',
 				'insertTable',
 				'undo',
-				'redo',
-			],
+				'redo'
+			]
 		},
 		table: {
 			contentToolbar: [
@@ -95,15 +95,15 @@ ClassicEditor.create(
 				'mergeTableCells',
 				'tableProperties',
 				'tableCellProperties',
-				'toggleTableCaption',
+				'toggleTableCaption'
 			],
-			tableToolbar: ['bold', 'italic'],
-		},
-}
+			tableToolbar: [ 'bold', 'italic' ]
+		}
+	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );

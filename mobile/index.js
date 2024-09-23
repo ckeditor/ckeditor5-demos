@@ -29,13 +29,13 @@ import {
 	Table,
 	TableToolbar,
 	TodoList,
-	Underline,
+	Underline
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-mobile-demo'),
+	document.querySelector( '#cke5-mobile-demo' ),
 	{
 		plugins: [
 			Alignment,
@@ -67,7 +67,7 @@ ClassicEditor.create(
 			Superscript,
 			Table,
 			TodoList,
-			Underline,
+			Underline
 		],
 		toolbar: [
 			'heading',
@@ -86,7 +86,7 @@ ClassicEditor.create(
 			'insertTable',
 			'|',
 			'undo',
-			'redo',
+			'redo'
 		],
 		heading: {
 			options: [
@@ -95,21 +95,21 @@ ClassicEditor.create(
 					model: 'heading1',
 					view: 'h1',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h2',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h3',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
-				},
-			],
+					class: 'ck-heading_heading3'
+				}
+			]
 		},
 		image: {
 			toolbar: [
@@ -117,24 +117,24 @@ ClassicEditor.create(
 				'|',
 				'imageStyle:inline',
 				'imageStyle:wrapText',
-				'imageStyle:breakText',
-			],
+				'imageStyle:breakText'
+			]
 		},
 		list: {
 			properties: {
 				styles: true,
 				startIndex: true,
-				reversed: true,
-			},
+				reversed: true
+			}
 		},
 		table: {
-			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
-		},
+			contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+		}
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );

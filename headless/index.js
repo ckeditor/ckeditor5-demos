@@ -27,7 +27,7 @@ import {
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Underline,
+	Underline
 } from 'ckeditor5';
 
 import 'ckeditor5/ckeditor5.css';
@@ -62,7 +62,7 @@ HeadlessEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	Underline,
+	Underline
 ];
 
 HeadlessEditor.defaultConfig = {
@@ -71,8 +71,8 @@ HeadlessEditor.defaultConfig = {
 			{ language: 'css', label: 'CSS' },
 			{ language: 'html', label: 'HTML' },
 			{ language: 'javascript', label: 'JavaScript' },
-			{ language: 'php', label: 'PHP' },
-		],
+			{ language: 'php', label: 'PHP' }
+		]
 	},
 	image: {
 		resizeUnit: 'px',
@@ -82,13 +82,13 @@ HeadlessEditor.defaultConfig = {
 			'imageStyle:breakText',
 			'|',
 			'toggleImageCaption',
-			'imageTextAlternative',
-		],
+			'imageTextAlternative'
+		]
 	},
 	table: {
-		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
 	},
-	language: 'en',
+	language: 'en'
 };
 
 export default HeadlessEditor;
