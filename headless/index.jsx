@@ -4,7 +4,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import HeadlessEditor from './index.js';
 
 function App() {
-	const [editor, setEditor] = useState(null);
+	const [ editor, setEditor ] = useState( null );
 
 	return (
 		<div className="App">
@@ -16,7 +16,9 @@ function App() {
 						Build a dynamite UI from scratch 🧨
 					</h2>
 					<p>
-						CKEditor&nbsp;5 comes with a rich, customizable UI that you can easily adapt to your needs. But it’s an option, not a must! If your app requires a completely new look, you can ditch the UI altogether and <strong>use CKEditor&nbsp;5 as a headless editor</strong>.
+						CKEditor&nbsp;5 comes with a rich, customizable UI that you can easily adapt to your needs.
+						But it’s an option, not a must! If your app requires a completely new look, you can ditch
+						the UI altogether and <strong>use CKEditor&nbsp;5 as a headless editor</strong>.
 					</p>
 					<h3>
 						Work with React, Vue, Angular, or any other framework
@@ -25,13 +27,17 @@ function App() {
 						If you take the headless route, the sky is the limit.
 					</p>
 					<p>
-						This demo has an interface developed with <a target='_blank' rel='noopener noreferrer' href='https://ckeditor.com/ckeditor-5/react/'>React</a>, but that’s just an example. With the headless approach, you can develop your perfect UI in <strong>any framework you want</strong>.
+						This demo has an interface developed with
+						<a target='_blank' rel='noopener noreferrer' href='https://ckeditor.com/ckeditor-5/react/'>React</a>,
+						but that’s just an example. With the headless approach, you can develop your perfect UI
+						in <strong>any framework you want</strong>.
 					</p>
 					<h3>
 						Use an existing UI framework or your own design system
 					</h3>
 					<p>
-						A headless editor seamlessly blends with your existing design. This ensures a <strong>consistent user experience</strong>, no matter which UI framework you use.
+						A headless editor seamlessly blends with your existing design.
+						This ensures a <strong>consistent user experience</strong>, no matter which UI framework you use.
 					</p>
 					<p>
 						You can easily integrate CKEditor with any solution, including:
@@ -51,8 +57,8 @@ function App() {
 						</li>
 					</ul>
 				"
-				onReady={(editor) => {
-					setEditor(editor);
+				onReady={editor => {
+					setEditor( editor );
 
 					window.editor = editor;
 				}}
@@ -61,7 +67,7 @@ function App() {
 	);
 }
 
-function EditorToolbar({ editor }) {
+function EditorToolbar( { editor } ) {
 	return (
 		<div className="editor-toolbar">
 			<EditorToolbarButton
@@ -135,61 +141,61 @@ function EditorToolbar({ editor }) {
 	);
 }
 
-function EditorToolbarButton({
+function EditorToolbarButton( {
 	label,
 	editor,
 	commandName,
-	commandValue,
-}) {
-	const command = editor ? editor.commands.get(commandName) : null;
-	const [isOn, setIsOn] = useState(false);
-	const [isEnabled, setIsEnabled] = useState(true);
+	commandValue
+} ) {
+	const command = editor ? editor.commands.get( commandName ) : null;
+	const [ isOn, setIsOn ] = useState( false );
+	const [ isEnabled, setIsEnabled ] = useState( true );
 
-	useEffect(() => {
-		if (!command) {
+	useEffect( () => {
+		if ( !command ) {
 			return;
 		}
 
 		function handleValueChange() {
-			if (typeof command.value === 'boolean') {
-				setIsOn(!!command.value);
+			if ( typeof command.value === 'boolean' ) {
+				setIsOn( !!command.value );
 			} else {
-				setIsOn(commandValue === command.value);
+				setIsOn( commandValue === command.value );
 			}
 		}
 
 		function handleIsEnabledChange() {
-			setIsEnabled(command.isEnabled);
+			setIsEnabled( command.isEnabled );
 		}
 
-		command.on('change:value', handleValueChange);
-		command.on('change:isEnabled', handleIsEnabledChange);
+		command.on( 'change:value', handleValueChange );
+		command.on( 'change:isEnabled', handleIsEnabledChange );
 
 		handleValueChange();
 		handleIsEnabledChange();
 
 		return function cleanup() {
-			command.off('change:value', handleValueChange);
-			command.off('change:isEnabled', handleIsEnabledChange);
+			command.off( 'change:value', handleValueChange );
+			command.off( 'change:isEnabled', handleIsEnabledChange );
 		};
-	}, [command]);
+	}, [ command ] );
 
-	const classNames = ['custom-editor-button'];
+	const classNames = [ 'custom-editor-button' ];
 
-	if (isEnabled) {
-		classNames.push(isOn ? 'custom-editor-button--fill' : '');
+	if ( isEnabled ) {
+		classNames.push( isOn ? 'custom-editor-button--fill' : '' );
 	} else {
-		classNames.push('custom-editor-button--disabled');
+		classNames.push( 'custom-editor-button--disabled' );
 	}
 
 	return (
 		<button
-			className={classNames.join(' ')}
+			className={classNames.join( ' ' )}
 			onClick={() => {
-				if (commandValue) {
-					editor.execute(commandName, { value: commandValue });
+				if ( commandValue ) {
+					editor.execute( commandName, { value: commandValue } );
 				} else {
-					editor.execute(commandName);
+					editor.execute( commandName );
 				}
 
 				editor.editing.view.focus();
@@ -200,8 +206,8 @@ function EditorToolbarButton({
 	);
 }
 
-const rootElement = document.getElementById('cke5-headless');
-const root = createRoot(rootElement);
+const rootElement = document.getElementById( 'cke5-headless' );
+const root = createRoot( rootElement );
 
 root.render(
 	<StrictMode>

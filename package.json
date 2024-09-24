@@ -5,7 +5,8 @@
   "author": "CKSource (http://cksource.com/)",
   "license": "GPL-2.0-or-later",
   "scripts": {
-    "lint": "eslint \"**/*.{js,ts}\"",
+    "prepare": "husky",
+    "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
     "build": "yarn workspaces run build",
     "start": "http-server ./builds --port 9001 --silent -c-1",
     "cy:open": "cypress open",
@@ -13,11 +14,12 @@
   },
   "devDependencies": {
     "cypress": "^13.2.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.57.1",
     "eslint-config-ckeditor5": "^7.1.0",
+    "eslint-plugin-react": "^7.36.1",
     "http-server": "^14.1.1",
-    "husky": "^8.0.2",
-    "lint-staged": "^10.2.11"
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10"
   },
   "workspaces": [
     "*"
@@ -29,7 +31,7 @@
     "**/node_modules"
   ],
   "lint-staged": {
-    "**/*.{js,ts}": [
+    "**/*.{js,ts,jsx,tsx}": [
       "eslint --quiet"
     ]
   }
