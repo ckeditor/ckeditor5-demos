@@ -3,7 +3,7 @@
  *
  * The "GPL" license key used below only allows you to use the open-source features.
  * To use the premium features, replace it with your commercial license key.
- * If you don't have one, you can get a trial license key from https://ckeditor.com/pricing/.
+ * If you don't have one, you can get a trial license key from https://portal.ckeditor.com/checkout?plan=free.
  */
 const LICENSE_KEY = 'GPL';
 
