@@ -1,23 +1,22 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+ * CKEditor 5 requires a license key.
+ *
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://portal.ckeditor.com/checkout?plan=free.
  */
+const LICENSE_KEY = 'GPL';
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
-const LICENSE_KEY = '';
-
-if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+if ( LICENSE_KEY === 'GPL' ) {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
-// CKBox plugin requires a valid token URL in order to use the CKBox application.
-// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+/**
+ * CKBox plugin requires a valid token URL in order to use the CKBox application.
+ *
+ * After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+ * https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+ */
 const CKBOX_TOKEN_URL = '';
 
 import {
@@ -75,7 +74,6 @@ import {
 
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
-
 
 const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Red 50', color: '#ffebee' },
@@ -197,22 +195,8 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Amber 900', color: '#ff6f00' },
 	{ label: 'Orange 900', color: '#e65100' },
 	{ label: 'Grey 900', color: '#212121' },
-	{ label: 'Blue grey 900', color: '#263238' },
+	{ label: 'Blue grey 900', color: '#263238' }
 ];
-
-/**
- * Enrich the special characters plugin with emojis.
- */
-function SpecialCharactersEmoji(editor) {
-	if (!editor.plugins.get('SpecialCharacters')) {
-		return;
-	}
-
-	// Make sure Emojis are last on the list.
-	this.afterInit = function () {
-		editor.plugins.get('SpecialCharacters').addItems('Emoji', EMOJIS_ARRAY);
-	};
-}
 
 const EMOJIS_ARRAY = [
 	{ character: '🙈', title: 'See-No-Evil Monkey' },
@@ -246,7 +230,7 @@ const EMOJIS_ARRAY = [
 	{ character: '😇', title: 'Smiling Face with Halo' },
 	{
 		character: '😆',
-		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes',
+		title: 'Smiling Face with Open Mouth and Tightly-Closed Eyes'
 	},
 	{ character: '😅', title: 'Smiling Face with Open Mouth and Cold Sweat' },
 	{ character: '😄', title: 'Smiling Face with Open Mouth and Smiling Eyes' },
@@ -316,18 +300,31 @@ const EMOJIS_ARRAY = [
 	{ character: '♥️', title: 'Heart Suit' },
 	{ character: '☺️', title: 'Smiling Face' },
 	{ character: '☹️', title: 'Frowning Face' },
-	{ character: '☀️', title: 'Sun' },
+	{ character: '☀️', title: 'Sun' }
 ];
 
+/**
+ * Populate the special characters plugin with emojis.
+ */
+function SpecialCharactersEmoji( editor ) {
+	if ( !editor.plugins.get( 'SpecialCharacters' ) ) {
+		return;
+	}
+
+	// Make sure Emojis are last on the list.
+	this.afterInit = function() {
+		editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', EMOJIS_ARRAY );
+	};
+}
+
 ClassicEditor.create(
-	document.querySelector('#cke5-user-interface-classic-with-menu-bar-demo'),
+	document.querySelector( '#cke5-user-interface-classic-with-menu-bar-demo' ),
 	{
 		plugins: [
 			Alignment,
 			Autoformat,
 			BlockQuote,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			CloudServices,
 			Essentials,
 			FindAndReplace,
@@ -366,12 +363,19 @@ ClassicEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
-			...(LICENSE_KEY ? [
+
+			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
+			...( CKBOX_TOKEN_URL ? [
+				CKBox
+			] : [] ),
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
 				CaseChange,
 				FormatPainter,
 				SlashCommand,
 				MultiLevelList
-			] : []),
+			] : [] )
 		],
 		licenseKey: LICENSE_KEY,
 		toolbar: [
@@ -398,7 +402,7 @@ ClassicEditor.create(
 			'multilevelList',
 			'|',
 			'outdent',
-			'indent',
+			'indent'
 		],
 		menuBar: {
 			isVisible: true
@@ -408,51 +412,51 @@ ClassicEditor.create(
 				{
 					model: 'paragraph',
 					title: 'Paragraph',
-					class: 'ck-heading_paragraph',
+					class: 'ck-heading_paragraph'
 				},
 				{
 					model: 'heading1',
 					view: 'h1',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h2',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h3',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
+					class: 'ck-heading_heading3'
 				},
 				{
 					model: 'heading4',
 					view: 'h4',
 					title: 'Heading 4',
-					class: 'ck-heading_heading4',
-				},
-			],
+					class: 'ck-heading_heading4'
+				}
+			]
 		},
 		image: {
 			resizeOptions: [
 				{
 					name: 'resizeImage:original',
 					label: 'Default image width',
-					value: null,
+					value: null
 				},
 				{
 					name: 'resizeImage:50',
 					label: '50% page width',
-					value: '50',
+					value: '50'
 				},
 				{
 					name: 'resizeImage:75',
 					label: '75% page width',
-					value: '75',
-				},
+					value: '75'
+				}
 			],
 			toolbar: [
 				'imageTextAlternative',
@@ -462,39 +466,39 @@ ClassicEditor.create(
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
 				'|',
-				'resizeImage',
-			],
+				'resizeImage'
+			]
 		},
 		link: {
 			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
+			defaultProtocol: 'https://'
 		},
 		table: {
-			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+			contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
 		},
 		ckbox: {
-			tokenUrl: CKBOX_TOKEN_URL,
+			tokenUrl: CKBOX_TOKEN_URL
 		},
 		fontFamily: {
-			supportAllValues: true,
+			supportAllValues: true
 		},
 		fontSize: {
-			options: [10, 12, 14, 'default', 18, 20, 22],
-			supportAllValues: true,
+			options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+			supportAllValues: true
 		},
 		fontColor: {
 			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
+			colors: REDUCED_MATERIAL_COLORS
 		},
 		fontBackgroundColor: {
 			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
-		},
+			colors: REDUCED_MATERIAL_COLORS
+		}
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );

@@ -10,3 +10,5 @@ yarn.lock
 # Dependencies and build directories.
 **/node_modules
 **/dist
+**/builds
+cypress/screenshots

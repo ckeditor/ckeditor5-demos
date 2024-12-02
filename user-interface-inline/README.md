@@ -20,7 +20,9 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/user-interface-inline && yarn
 ```
 
-3. Start the demo:
+3. Open the `user-interface-inline/index.js` file and update the values of the `LICENSE_KEY` variable. Without this, the premium features will not be enabled.
+
+4. Start the demo:
 
 ```shell
 yarn dev

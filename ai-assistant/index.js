@@ -1,34 +1,33 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+ * CKEditor 5 requires a license key.
+ *
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://portal.ckeditor.com/checkout?plan=free.
  */
+const LICENSE_KEY = 'GPL';
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
-const LICENSE_KEY = '';
-
-if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+if ( LICENSE_KEY === 'GPL' ) {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
-// AI Assistant requires additional configuration.
-// See https://ckeditor.com/docs/ckeditor5/latest/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
+/**
+ * AI Assistant requires additional configuration.
+ *
+ * See https://ckeditor.com/docs/ckeditor5/latest/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
+ */
 const AI_API_URL = '';
 
-if (!AI_API_URL) {
-	alert(
-		'CKEditor AI Assistant included in this demo requires additional configuration.\n' +
-		'Check the index.js file for more information.'
-	);
+if ( !AI_API_URL ) {
+	alert( 'AI Assistant requires additional configuration. Check the index.js file for more information.' );
 }
 
-// CKBox plugin requires a valid token URL in order to use the CKBox application.
-// After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
-// https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+/**
+ * CKBox plugin requires a valid token URL in order to use the CKBox application.
+ *
+ * After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
+ * https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
+ */
 const CKBOX_TOKEN_URL = '';
 
 import {
@@ -79,17 +78,17 @@ import {
 	TableCellProperties,
 	TableProperties,
 	TableToolbar,
-	TableColumnResize,
+	TableColumnResize
 } from 'ckeditor5';
 
 import {
+	AIAssistant,
 	ExportPdf,
 	ExportWord,
 	ImportWord,
-	AIAssistant,
 	OpenAITextAdapter,
 	SlashCommand,
-	PasteFromOfficeEnhanced,
+	PasteFromOfficeEnhanced
 } from 'ckeditor5-premium-features';
 
 import 'ckeditor5/ckeditor5.css';
@@ -99,24 +98,19 @@ import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
 
 ClassicEditor.create(
-	document.querySelector('#cke5-ai-assistant-demo'),
+	document.querySelector( '#cke5-ai-assistant-demo' ),
 	{
 		plugins: [
-			AIAssistant,
 			Alignment,
 			AutoImage,
 			BlockQuote,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			PictureEditing,
 			Code,
 			CodeBlock,
 			CloudServices,
 			EasyImage,
 			Essentials,
-			ExportPdf,
-			ExportWord,
-			ImportWord,
 			FindAndReplace,
 			FontBackgroundColor,
 			FontColor,
@@ -137,12 +131,9 @@ ClassicEditor.create(
 			List,
 			ListProperties,
 			Mention,
-			OpenAITextAdapter,
 			Paragraph,
 			PasteFromOffice,
-			PasteFromOfficeEnhanced,
 			RemoveFormat,
-			SlashCommand,
 			SpecialCharacters,
 			SpecialCharactersEssentials,
 			Strikethrough,
@@ -156,6 +147,26 @@ ClassicEditor.create(
 			TableColumnResize,
 			Underline,
 			CloudServicesUploadAdapter,
+
+			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
+			...( CKBOX_TOKEN_URL ? [
+				CKBox
+			] : [] ),
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
+				ExportPdf,
+				ExportWord,
+				ImportWord,
+				OpenAITextAdapter,
+				PasteFromOfficeEnhanced,
+				SlashCommand,
+
+				// Include AI Assistant only if the AI_API_URL is provided.
+				...( AI_API_URL ? [
+					AIAssistant
+				] : [] )
+			] : [] )
 		],
 		toolbar: {
 			items: [
@@ -197,8 +208,8 @@ ClassicEditor.create(
 				'|',
 				'exportPdf',
 				'exportWord',
-				'importWord',
-			],
+				'importWord'
+			]
 		},
 		link: {
 			decorators: {
@@ -207,60 +218,60 @@ ClassicEditor.create(
 					label: 'Open in a new tab',
 					attributes: {
 						target: '_blank',
-						rel: 'noopener noreferrer',
-					},
+						rel: 'noopener noreferrer'
+					}
 				},
 				isDownloadable: {
 					mode: 'manual',
 					label: 'Downloadable',
 					attributes: {
-						download: 'download',
-					},
+						download: 'download'
+					}
 				},
 				isGallery: {
 					mode: 'manual',
 					label: 'Gallery link',
-					classes: 'gallery',
-				},
-			},
+					classes: 'gallery'
+				}
+			}
 		},
 		ckbox: {
-			tokenUrl: CKBOX_TOKEN_URL,
+			tokenUrl: CKBOX_TOKEN_URL
 		},
 		list: {
 			properties: {
 				styles: true,
 				startIndex: true,
-				reversed: true,
-			},
+				reversed: true
+			}
 		},
 		image: {
 			resizeOptions: [
 				{
 					name: 'resizeImage:original',
 					label: 'Original size',
-					value: null,
+					value: null
 				},
 				{
 					name: 'resizeImage:50',
 					label: '50%',
-					value: '50',
+					value: '50'
 				},
 				{
 					name: 'resizeImage:75',
 					label: '75%',
-					value: '75',
-				},
+					value: '75'
+				}
 			],
 			toolbar: [
 				'imageTextAlternative',
 				'toggleImageCaption',
 				'|',
-				'resizeImage',
+				'resizeImage'
 			],
 			insert: {
-				integrations: ['upload', 'assetManager', 'url'],
-			},
+				integrations: [ 'upload', 'assetManager', 'url' ]
+			}
 		},
 		table: {
 			contentToolbar: [
@@ -269,81 +280,80 @@ ClassicEditor.create(
 				'mergeTableCells',
 				'tableProperties',
 				'tableCellProperties',
-				'toggleTableCaption',
+				'toggleTableCaption'
 			],
-			tableToolbar: ['bold', 'italic'],
+			tableToolbar: [ 'bold', 'italic' ]
 		},
 		heading: {
 			options: [
 				{
 					model: 'paragraph',
 					title: 'Paragraph',
-					class: 'ck-heading_paragraph',
+					class: 'ck-heading_paragraph'
 				},
 				{
 					model: 'heading1',
 					view: 'h1',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h2',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h3',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
-				},
-			],
+					class: 'ck-heading_heading3'
+				}
+			]
 		},
 		exportPdf: {
-			dataCallback: (editor) =>
-				editor.getData({
-					showSuggestionHighlights: true,
-				}),
-			stylesheets: [coreStylesheets, premiumStylesheets],
+			dataCallback: editor =>
+				editor.getData( {
+					showSuggestionHighlights: true
+				} ),
+			stylesheets: [ coreStylesheets, premiumStylesheets ],
 			converterOptions: {
 				format: 'A4',
 				margin_top: '20mm',
 				margin_bottom: '20mm',
 				margin_right: '12mm',
 				margin_left: '12mm',
-				page_orientation: 'portrait',
+				page_orientation: 'portrait'
 			},
-			tokenUrl: false,
+			tokenUrl: false
 		},
 		exportWord: {
-			dataCallback: (editor) =>
-				editor.getData({
-					showSuggestionHighlights: true,
-				}),
-			stylesheets: [coreStylesheets, premiumStylesheets],
+			dataCallback: editor =>
+				editor.getData( {
+					showSuggestionHighlights: true
+				} ),
+			stylesheets: [ coreStylesheets, premiumStylesheets ],
 			converterOptions: {
 				format: 'A4',
 				margin_top: '20mm',
 				margin_bottom: '20mm',
 				margin_right: '12mm',
 				margin_left: '12mm',
-				orientation: 'portrait',
+				orientation: 'portrait'
 			},
-			tokenUrl: false,
+			tokenUrl: false
 		},
-		// AI configuration will land here:
 		ai: {
 			openAI: {
-				apiUrl: AI_API_URL,
-			},
+				apiUrl: AI_API_URL
+			}
 		},
-		licenseKey: LICENSE_KEY,
+		licenseKey: LICENSE_KEY
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );

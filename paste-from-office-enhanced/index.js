@@ -1,21 +1,16 @@
 /**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+ * CKEditor 5 requires a license key.
+ *
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://portal.ckeditor.com/checkout?plan=free.
  */
+const LICENSE_KEY = 'GPL';
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
-const LICENSE_KEY = '';
-
-if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+if ( LICENSE_KEY === 'GPL' ) {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
-// Editor creators
 import {
 	ClassicEditor,
 	Alignment,
@@ -51,7 +46,7 @@ import {
 	TableCellProperties,
 	TableProperties,
 	TableToolbar,
-	Underline,
+	Underline
 } from 'ckeditor5';
 
 import {
@@ -181,11 +176,11 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Amber 900', color: '#ff6f00' },
 	{ label: 'Orange 900', color: '#e65100' },
 	{ label: 'Grey 900', color: '#212121' },
-	{ label: 'Blue grey 900', color: '#263238' },
+	{ label: 'Blue grey 900', color: '#263238' }
 ];
 
 ClassicEditor.create(
-	document.querySelector('#cke5-paste-from-office-enhanced-demo'),
+	document.querySelector( '#cke5-paste-from-office-enhanced-demo' ),
 	{
 		plugins: [
 			Alignment,
@@ -215,7 +210,6 @@ ClassicEditor.create(
 			MediaEmbed,
 			Paragraph,
 			PasteFromOffice,
-			PasteFromOfficeEnhanced,
 			Strikethrough,
 			Table,
 			TableCaption,
@@ -223,6 +217,11 @@ ClassicEditor.create(
 			TableProperties,
 			TableToolbar,
 			Underline,
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
+				PasteFromOfficeEnhanced
+			] : [] )
 		],
 		toolbar: {
 			items: [
@@ -253,15 +252,15 @@ ClassicEditor.create(
 						'alignment:left',
 						'alignment:right',
 						'alignment:center',
-						'alignment:justify',
-					],
+						'alignment:justify'
+					]
 				},
 				'|',
 				'bulletedList',
 				'numberedList',
 				'outdent',
-				'indent',
-			],
+				'indent'
+			]
 		},
 		licenseKey: LICENSE_KEY,
 		heading: {
@@ -269,54 +268,54 @@ ClassicEditor.create(
 				{
 					model: 'paragraph',
 					title: 'Paragraph',
-					class: 'ck-heading_paragraph',
+					class: 'ck-heading_paragraph'
 				},
 				{
 					model: 'heading1',
 					view: 'h2',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h3',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h4',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
+					class: 'ck-heading_heading3'
 				},
 				{
 					model: 'heading4',
 					view: 'h5',
 					title: 'Heading 4',
-					class: 'ck-heading_heading4',
+					class: 'ck-heading_heading4'
 				},
 				{
 					model: 'heading5',
 					view: 'h6',
 					title: 'Heading 5',
-					class: 'ck-heading_heading5',
-				},
-			],
+					class: 'ck-heading_heading5'
+				}
+			]
 		},
 		fontFamily: {
-			supportAllValues: true,
+			supportAllValues: true
 		},
 		fontSize: {
-			options: [10, 12, 14, 'default', 18, 20, 22],
-			supportAllValues: true,
+			options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+			supportAllValues: true
 		},
 		fontColor: {
 			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
+			colors: REDUCED_MATERIAL_COLORS
 		},
 		fontBackgroundColor: {
 			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS,
+			colors: REDUCED_MATERIAL_COLORS
 		},
 		htmlSupport: {
 			allow: [
@@ -324,9 +323,9 @@ ClassicEditor.create(
 					name: /^.*$/u,
 					styles: true,
 					classes: true,
-					attributes: true,
-				},
-			],
+					attributes: true
+				}
+			]
 		},
 		image: {
 			toolbar: [
@@ -335,25 +334,25 @@ ClassicEditor.create(
 				'|',
 				'imageStyle:inline',
 				'imageStyle:wrapText',
-				'imageStyle:breakText',
-			],
+				'imageStyle:breakText'
+			]
 		},
 		link: {
 			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
+			defaultProtocol: 'https://'
 		},
 		list: {
 			properties: {
 				styles: true,
 				startIndex: true,
-				reversed: true,
-			},
-		},
+				reversed: true
+			}
+		}
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );
