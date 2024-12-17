@@ -8,6 +8,7 @@ This repository holds the source code for CKEditor 5 demos that can be found at 
 
 - [AI Assistant](ai-assistant)
 - [Feature-rich editor](feature-rich)
+- [Merge fields editor](merge-fields)
 - [Editor with internationalization](internationalization)
 - [Markdown editor](markdown)
 - [Editor with "MathType"](mathtype)

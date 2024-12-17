@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+-->
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Editor with Merge Fields</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="demo.css" />
+	<link rel="stylesheet" href="content.css" />
+</head>
+
+<body>
+	<div class="header-wrapper">
+		<h1>Editor with Merge Fields</h1>
+	</div>
+	<div class="editor-wrapper">
+		<div id="cke5-merge-fields-demo" class="cke5-merge-fields-demo__wrappper">
+			<div class="cke5-merge-fields-demo__content-container">
+				<div class="cke5-merge-fields-demo__content">
+					<figure class="image image_resized" style="width:50%;">
+						<img
+							src="assets/images/serenity-springs.png"
+							alt="Serenity Springs Resort logo." />
+					</figure>
+					<p>{{guestTitle}} {{guestLastName}},</p>
+					<p>Your upcoming stay at Serenity Springs Resort is the perfect opportunity to unwind and rejuvenate. To make your visit even more special, we’re pleased to offer you exclusive perks for our luxurious spa services.</p>
+					<p><b>Spa Highlights:</b></p>
+					<ul>
+					<li><b>Complimentary {{complimentaryDuration}} Massage:</b> Relax and let your stress melt away.</li>
+					<li><b>{{discount}}  Off Any Spa Package:</b> Indulge in our full range of treatments, from facials to body wraps.</li>
+					</ul>
+					{{additionalValueProposition}}
+					<p><b>Reminder:</b> Our spa is popular, so we recommend booking your treatments in advance to secure your preferred time.</p>
+					<p>To book your spa experience, simply call us at {{resortPhone}}. We look forward to pampering you during your stay!</p>
+		
+					<p>
+						<i>Warm regards,<br />
+						The Serenity Springs Resort Team</i>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.ckbox.io/CKBox/2.0.0/ckbox.js"></script>
+	<script type="module" src="index.js"></script>
+</body>
+
+</html>

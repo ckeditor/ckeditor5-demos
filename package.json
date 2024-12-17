@@ -5,7 +5,7 @@
   "author": "CKSource (http://cksource.com/)",
   "license": "GPL-2.0-or-later",
   "scripts": {
-    "prepare": "husky",
+    "prepare": "npx husky",
     "lint": "eslint \"**/*.{js,ts,jsx,tsx}\"",
     "build": "yarn workspaces run build",
     "start": "http-server ./builds --port 9001 --silent -c-1",

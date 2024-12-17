@@ -35,11 +35,11 @@
 						<h3 id="ed76c5ea34c3889d44261eed6b40c5058">Financial Highlights</h3>
 						<ul>
 							<li>
-								Revenue: Our total revenue for the year was $10 million, a 15%
+								Revenue: Our total revenue for the year was ${{revenueAmount}} million, a {{revenueChange}}%
 								increase from the previous year.
 							</li>
 							<li>
-								Net Profit: We achieved a net profit of $2 million, up by 20%
+								Net Profit: We achieved a net profit of ${{netProfitAmount}} million, up by {{netProfitChange}}%
 								compared to the previous year.
 							</li>
 							<li>
@@ -48,47 +48,11 @@
 								growth opportunities.
 							</li>
 							<li>
-								Return on Investment (ROI): Our ROI was 15%, indicating the
+								Return on Investment (ROI): Our ROI was {{roi}}%, indicating the
 								efficiency of our investments.
 							</li>
 						</ul>
-						<figure class="table">
-							<table>
-								<tbody>
-									<tr>
-										<th>&nbsp;</th>
-										<th>FY 2022</th>
-										<th>FY 2023</th>
-										<th>Change (%)</th>
-									</tr>
-									<tr>
-										<td>Revenue ($M)</td>
-										<td>8.7</td>
-										<td>10</td>
-										<td>15</td>
-									</tr>
-									<tr>
-										<td>Net Profit ($M)</td>
-										<td>1.7</td>
-										<td>2</td>
-										<td>20</td>
-									</tr>
-									<tr>
-										<td>Cash Flow ($M)</td>
-										<td>1.5</td>
-										<td>2.2</td>
-										<td>47</td>
-									</tr>
-									<tr>
-										<td>ROI (%)</td>
-										<td>10</td>
-										<td>15</td>
-										<td>50</td>
-									</tr>
-								</tbody>
-							</table>
-							<figcaption>Table 1: Financial Summary</figcaption>
-						</figure>
+						{{financialSummary}}
 						<h3 id="ef73d9271f3212f9009433865d7f6d49e">
 							Detailed Financial Analysis
 						</h3>
@@ -109,7 +73,6 @@
 							administrative costs steady while investing more in product
 							development and marketing to drive growth.
 						</p>
-						<p>&nbsp;</p>
 						<figure class="table" style="width: 66%">
 							<table class="ck-table-resized">
 								<colgroup>
