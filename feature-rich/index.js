@@ -403,7 +403,6 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' }
 ];
 
-<<<<<<< HEAD
 const MERGE_FIELDS_DEFINITIONS = [
 	{
 		groupId: 'authorInformation',
@@ -613,20 +612,6 @@ const EMOJIS_ARRAY = [
 	{ character: '☹️', title: 'Frowning Face' },
 	{ character: '☀️', title: 'Sun' }
 ];
-
-/**
- * Populate the special characters plugin with emojis.
- */
-function SpecialCharactersEmoji( editor ) {
-	if ( !editor.plugins.get( 'SpecialCharacters' ) ) {
-		return;
-	}
-
-	// Make sure Emojis are last on the list.
-	this.afterInit = function() {
-		editor.plugins.get( 'SpecialCharacters' ).addItems( 'Emoji', EMOJIS_ARRAY );
-	};
-}
 
 ClassicEditor.create(
 	document.querySelector( '#cke5-feature-rich-demo' ),
