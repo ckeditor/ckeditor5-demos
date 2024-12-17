@@ -763,9 +763,3 @@ ClassicEditor.create(
 	.catch( error => {
 		console.error( error.stack );
 	} );
-
-// --------- Just exports ------------------------------------------------------------------------
-'val';
-export default {
-	ClassicEditor
-};

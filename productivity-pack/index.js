@@ -570,8 +570,7 @@ const MERGE_FIELDS_DATASETS = [
 							</table>
 							<figcaption>Table 1: Financial Summary</figcaption>
 						</figure>
-		`,
-
+		`
 		}
 	}
 ];
