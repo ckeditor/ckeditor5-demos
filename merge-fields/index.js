@@ -3,16 +3,17 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-// CKEditor Commercial Features require a license key to work properly.
-// * You can get a trial license key: https://orders.ckeditor.com/trial/premium-features.
-// * Or you can comment out (disable) the plugins imported from the "ckeditor5-premium-features" package.
-const LICENSE_KEY = '';
+/**
+ * CKEditor 5 requires a license key.
+ *
+ * The "GPL" license key used below only allows you to use the open-source features.
+ * To use the premium features, replace it with your commercial license key.
+ * If you don't have one, you can get a trial license key from https://portal.ckeditor.com/checkout?plan=free.
+ */
+const LICENSE_KEY = 'GPL';
 
-if (!LICENSE_KEY) {
-	alert(
-		'CKEditor Commercial Features included in this demo require a license key.\n' +
-		'Check the index.js file for more information.'
-	);
+if ( LICENSE_KEY === 'GPL' ) {
+	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
 // CKBox plugin requires a valid token URL in order to use the CKBox application.
@@ -73,7 +74,7 @@ import {
 	TableToolbar,
 	TextTransformation,
 	TodoList,
-	Underline,
+	Underline
 } from 'ckeditor5';
 
 import {
@@ -96,6 +97,7 @@ import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
 
+/* eslint-disable max-len */
 const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'Reservation confirmation',
@@ -114,8 +116,8 @@ const TEMPLATE_DEFINITIONS = [
 					your first Spa treatment.
 				</i></p>
 		`,
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
-		description: 'Reservation confirmation with basic information.',
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z\'/><path fill=\'#fff\' d=\'M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'8.944\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'6.667\' height=\'.667\' x=\'6.278\' y=\'10.722\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'12.5\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'14.278\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'7.111\' height=\'.667\' x=\'6.278\' y=\'16.055\' fill=\'#743CCD\' rx=\'.333\'/><circle cx=\'7.611\' cy=\'6.278\' r=\'1.333\' fill=\'#C9FE43\'/><rect width=\'4\' height=\'.667\' x=\'9.833\' y=\'6.278\' fill=\'#743CCD\' rx=\'.333\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.5 .5)\'/></clipPath></defs></svg>',
+		description: 'Reservation confirmation with basic information.'
 	},
 	{
 		title: 'Reservation reminder',
@@ -126,11 +128,12 @@ const TEMPLATE_DEFINITIONS = [
 					alt="Serenity Springs Resort logo." />
 			</figure>
 			<p>Dear {{guestName}},</p>
-
+			// eslint-disable-next-line max-len
 			<p>We’re excited to welcome you to Serenity Springs Resort in just two days! Your relaxing getaway is just around the corner.</p>
 
 			{{reservationDetails}}
 
+			// eslint-disable-next-line max-len
 			<p>If you have any special requests or need assistance before your arrival, please don’t hesitate to contact us. We want to ensure your stay is as comfortable and enjoyable as possible.</p>
 
 			<p>We look forward to your arrival!</p>
@@ -140,8 +143,8 @@ const TEMPLATE_DEFINITIONS = [
 					The Serenity Springs Resort Team</i>
 				</p>
 			`,
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
-		description: 'Detailed reservation information.',
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z\'/><path fill=\'#fff\' d=\'M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'8.944\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'6.667\' height=\'.667\' x=\'6.278\' y=\'10.722\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'12.5\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'14.278\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'7.111\' height=\'.667\' x=\'6.278\' y=\'16.055\' fill=\'#743CCD\' rx=\'.333\'/><circle cx=\'7.611\' cy=\'6.278\' r=\'1.333\' fill=\'#C9FE43\'/><rect width=\'4\' height=\'.667\' x=\'9.833\' y=\'6.278\' fill=\'#743CCD\' rx=\'.333\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.5 .5)\'/></clipPath></defs></svg>',
+		description: 'Detailed reservation information.'
 	},
 	{
 		title: 'Spa booking reminder',
@@ -167,12 +170,12 @@ const TEMPLATE_DEFINITIONS = [
 				The Serenity Springs Resort Team</i>
 			</p>
 		`,
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
-		description: 'Information about booked Spa session.',
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z\'/><path fill=\'#fff\' d=\'M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'8.944\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'6.667\' height=\'.667\' x=\'6.278\' y=\'10.722\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'12.5\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'14.278\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'7.111\' height=\'.667\' x=\'6.278\' y=\'16.055\' fill=\'#743CCD\' rx=\'.333\'/><circle cx=\'7.611\' cy=\'6.278\' r=\'1.333\' fill=\'#C9FE43\'/><rect width=\'4\' height=\'.667\' x=\'9.833\' y=\'6.278\' fill=\'#743CCD\' rx=\'.333\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.5 .5)\'/></clipPath></defs></svg>',
+		description: 'Information about booked Spa session.'
 	},
 	{
 		title: 'Feedback request',
-		icon: `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 21 21'><g clip-path='url(#a)'><path fill='#E8DFF7' d='M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z'/><path fill='#fff' d='M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z'/><path stroke='#743CCD' stroke-width='.667' d='M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z'/><rect width='4.889' height='.667' x='6.278' y='8.944' fill='#743CCD' rx='.333'/><rect width='6.667' height='.667' x='6.278' y='10.722' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='12.5' fill='#743CCD' rx='.333'/><rect width='4.889' height='.667' x='6.278' y='14.278' fill='#743CCD' rx='.333'/><rect width='7.111' height='.667' x='6.278' y='16.055' fill='#743CCD' rx='.333'/><circle cx='7.611' cy='6.278' r='1.333' fill='#C9FE43'/><rect width='4' height='.667' x='9.833' y='6.278' fill='#743CCD' rx='.333'/></g><defs><clipPath id='a'><path fill='#fff' d='M0 0h20v20H0z' transform='translate(.5 .5)'/></clipPath></defs></svg>`,
+		icon: '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' fill=\'none\' viewBox=\'0 0 21 21\'><g clip-path=\'url(#a)\'><path fill=\'#E8DFF7\' d=\'M19.611.5H1.39a.889.889 0 0 0-.889.889V19.61c0 .491.398.889.889.889h18.22a.889.889 0 0 0 .889-.889V1.39a.889.889 0 0 0-.888-.89Z\'/><path fill=\'#fff\' d=\'M4.5 17.167c0 .859.696 1.555 1.556 1.555h8.888c.86 0 1.556-.696 1.556-1.555V6.539c0-.448-.194-.875-.531-1.17l-2.585-2.262a1.555 1.555 0 0 0-1.024-.385H6.056c-.86 0-1.556.697-1.556 1.556v12.889Z\'/><path stroke=\'#743CCD\' stroke-width=\'.667\' d=\'M15.939 5.785c.145.127.228.31.228.502v11.435a.667.667 0 0 1-.667.667h-10a.667.667 0 0 1-.667-.667v-14c0-.368.299-.666.667-.666h7.069c.161 0 .317.058.439.165l2.93 2.564Z\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'8.944\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'6.667\' height=\'.667\' x=\'6.278\' y=\'10.722\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'12.5\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'4.889\' height=\'.667\' x=\'6.278\' y=\'14.278\' fill=\'#743CCD\' rx=\'.333\'/><rect width=\'7.111\' height=\'.667\' x=\'6.278\' y=\'16.055\' fill=\'#743CCD\' rx=\'.333\'/><circle cx=\'7.611\' cy=\'6.278\' r=\'1.333\' fill=\'#C9FE43\'/><rect width=\'4\' height=\'.667\' x=\'9.833\' y=\'6.278\' fill=\'#743CCD\' rx=\'.333\'/></g><defs><clipPath id=\'a\'><path fill=\'#fff\' d=\'M0 0h20v20H0z\' transform=\'translate(.5 .5)\'/></clipPath></defs></svg>',
 		data: `
 			<figure class="image image_resized" style="width:50%;">
 				<img
@@ -188,9 +191,10 @@ const TEMPLATE_DEFINITIONS = [
 				The Serenity Springs Resort Team</i>
 			</p>
 		`,
-		description: 'Feedback request with a link to the survey.',
-	},
+		description: 'Feedback request with a link to the survey.'
+	}
 ];
+/* eslint-enable max-len */
 
 const MERGE_FIELDS_DEFINITIONS = [
 	{
@@ -336,7 +340,7 @@ const MERGE_FIELDS_DEFINITIONS = [
 			},
 			{
 				id: 'feedbackSurvey',
-				label: "Feedback survey",
+				label: 'Feedback survey',
 				defaultValue: '<a href="#">Feedback survey</a>'
 			}
 		]
@@ -353,7 +357,7 @@ const MERGE_FIELDS_DATASETS = [
 			guestName: 'David',
 			guestLastName: 'Lee',
 			reservationNumber: 'Y2JKH5G1Z',
-			arrivalDate: new Date(2024,7,22).toLocaleDateString(),
+			arrivalDate: new Date( 2024, 7, 22 ).toLocaleDateString(),
 			numberOfGuests: '2',
 			numberOfNights: '6',
 			roomType: 'Double Room',
@@ -371,7 +375,7 @@ const MERGE_FIELDS_DATASETS = [
 									Check-In Date
 								</th>
 								<td style="padding:5px 10px;text-align:center;">
-									${new Date(2024, 7, 22).toLocaleDateString()}
+									${ new Date( 2024, 7, 22 ).toLocaleDateString() }
 								</td>
 							</tr>
 							<tr>
@@ -430,7 +434,7 @@ const MERGE_FIELDS_DATASETS = [
 			guestName: 'Kate',
 			guestLastName: 'Smith',
 			reservationNumber: 'GRJKCCG23',
-			arrivalDate: new Date(2024, 4, 12).toLocaleDateString(),
+			arrivalDate: new Date( 2024, 4, 12 ).toLocaleDateString(),
 			numberOfGuests: '3',
 			numberOfNights: '10',
 			roomType: 'Apartment',
@@ -448,7 +452,7 @@ const MERGE_FIELDS_DATASETS = [
 									Check-In Date
 								</th>
 								<td style="padding:5px 10px;text-align:center;">
-									${new Date(2024, 4, 12).toLocaleDateString()}
+									${ new Date( 2024, 4, 12 ).toLocaleDateString() }
 								</td>
 							</tr>
 							<tr>
@@ -505,7 +509,7 @@ const exportHorizontalSpace = '10mm';
 const exportVerticalSpace = '12mm';
 
 ClassicEditor.create(
-	document.querySelector('.cke5-merge-fields-demo__content'),
+	document.querySelector( '.cke5-merge-fields-demo__content' ),
 	{
 		plugins: [
 			AdjacentListsSupport,
@@ -514,7 +518,6 @@ ClassicEditor.create(
 			AutoLink,
 			BlockQuote,
 			Bold,
-			...(CKBOX_TOKEN_URL ? [CKBox] : []),
 			CloudServices,
 			Clipboard,
 			Code,
@@ -556,17 +559,30 @@ ClassicEditor.create(
 			TextTransformation,
 			TodoList,
 			Underline,
-			...(WEB_SPELL_CHECKER_LICENSE_KEY ? [WProofreader] : []),
-			...(LICENSE_KEY ? [
-				FormatPainter,
+
+			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
+			...( CKBOX_TOKEN_URL ? [
+				CKBox
+			] : [] ),
+
+			// Include premium features only if the license key is not GPL.
+			...( LICENSE_KEY !== 'GPL' ? [
 				CaseChange,
 				ExportPdf,
 				ExportWord,
+				FormatPainter,
 				ImportWord,
 				MergeFields,
+				MultiLevelList,
 				SlashCommand,
-				Template,
-			] : []),
+				Template
+			] : [] ),
+
+			// Include WebSpellChecker plugin only if the WEB_SPELL_CHECKER_LICENSE_KEY is provided.
+			...( WEB_SPELL_CHECKER_LICENSE_KEY ? [
+				WProofreader
+			] : [] )
+
 		],
 		licenseKey: LICENSE_KEY,
 		menuBar: {
@@ -596,9 +612,9 @@ ClassicEditor.create(
 						'fontSize',
 						'fontFamily',
 						'fontColor',
-						'fontBackgroundColor',
+						'fontBackgroundColor'
 
-					],
+					]
 				},
 				'removeFormat',
 				'|',
@@ -616,54 +632,54 @@ ClassicEditor.create(
 				'numberedList',
 				'|',
 				'outdent',
-				'indent',
-			],
+				'indent'
+			]
 		},
 		heading: {
 			options: [
 				{
 					model: 'paragraph',
 					title: 'Paragraph',
-					class: 'ck-heading_paragraph',
+					class: 'ck-heading_paragraph'
 				},
 				{
 					model: 'heading1',
 					view: 'h2',
 					title: 'Heading 1',
-					class: 'ck-heading_heading1',
+					class: 'ck-heading_heading1'
 				},
 				{
 					model: 'heading2',
 					view: 'h3',
 					title: 'Heading 2',
-					class: 'ck-heading_heading2',
+					class: 'ck-heading_heading2'
 				},
 				{
 					model: 'heading3',
 					view: 'h4',
 					title: 'Heading 3',
-					class: 'ck-heading_heading3',
+					class: 'ck-heading_heading3'
 				},
 				{
 					model: 'heading4',
 					view: 'h5',
 					title: 'Heading 4',
-					class: 'ck-heading_heading4',
+					class: 'ck-heading_heading4'
 				},
 				{
 					model: 'heading5',
 					view: 'h6',
 					title: 'Heading 5',
-					class: 'ck-heading_heading5',
-				},
-			],
+					class: 'ck-heading_heading5'
+				}
+			]
 		},
 		fontFamily: {
-			supportAllValues: true,
+			supportAllValues: true
 		},
 		fontSize: {
-			options: [10, 12, 14, 'default', 18, 20, 22],
-			supportAllValues: true,
+			options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+			supportAllValues: true
 		},
 		image: {
 			toolbar: [
@@ -674,19 +690,19 @@ ClassicEditor.create(
 				'imageStyle:wrapText',
 				'imageStyle:breakText',
 				'|',
-				'resizeImage',
+				'resizeImage'
 			]
 		},
 		link: {
 			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://',
+			defaultProtocol: 'https://'
 		},
 		list: {
 			properties: {
 				styles: true,
 				startIndex: true,
-				reversed: true,
-			},
+				reversed: true
+			}
 		},
 		table: {
 			contentToolbar: [
@@ -695,11 +711,11 @@ ClassicEditor.create(
 				'mergeTableCells',
 				'tableProperties',
 				'tableCellProperties',
-				'toggleTableCaption',
-			],
+				'toggleTableCaption'
+			]
 		},
 		exportPdf: {
-			stylesheets: [coreStylesheets,premiumStylesheets,'./content.css'],
+			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
@@ -708,25 +724,25 @@ ClassicEditor.create(
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
 				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait',
+				page_orientation: 'portrait'
 			},
-			tokenUrl: false,
+			tokenUrl: false
 		},
 		exportWord: {
-			stylesheets: [coreStylesheets,premiumStylesheets],
+			stylesheets: [ coreStylesheets, premiumStylesheets ],
 			fileName: 'export-word-demo.docx',
 			converterOptions: {
 				format: 'A4',
 				margin_top: exportVerticalSpace,
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
+				margin_left: exportHorizontalSpace
 			},
-			tokenUrl: false,
+			tokenUrl: false
 		},
 		mergeFields: {
 			previewHtmlValues: true,
-			sanitizeHtml: html => ({ html,hasChanged: false }),
+			sanitizeHtml: html => ( { html, hasChanged: false } ),
 			definitions: MERGE_FIELDS_DEFINITIONS,
 			dataSets: MERGE_FIELDS_DATASETS
 		},
@@ -735,21 +751,21 @@ ClassicEditor.create(
 			lang: 'auto',
 			srcUrl:
 				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-			ignoreClasses: ['image-inline'],
+			ignoreClasses: [ 'image-inline' ]
 		},
 		ckbox: {
-			tokenUrl: CKBOX_TOKEN_URL,
+			tokenUrl: CKBOX_TOKEN_URL
 		},
 		template: {
-			definitions: TEMPLATE_DEFINITIONS,
-		},
-	})
-	.catch((error) => {
-		console.error(error.stack);
-	});
+			definitions: TEMPLATE_DEFINITIONS
+		}
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );
 
 // --------- Just exports ------------------------------------------------------------------------
-'val'
+'val';
 export default {
-	ClassicEditor,
+	ClassicEditor
 };
