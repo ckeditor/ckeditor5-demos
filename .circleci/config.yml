@@ -9,9 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: |
-            cd tests && yarn
-            npm i -g http-server
+          command: yarn install
       - run:
           name: Install browser
           command: |
@@ -20,8 +18,11 @@ jobs:
             dpkg -i google-chrome.deb
             sed -i 's|HERE/chrome"|HERE/chrome" --no-sandbox|g' /opt/google/chrome/google-chrome
       - run:
+          name: Lint
+          command: yarn lint
+      - run:
           name: Test each demo
-          command: bash tests/scripts/build-and-test-demos.sh
+          command: bash ./build-and-test-demos.sh
 
 workflows:
   commit-workflow:

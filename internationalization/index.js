@@ -1,8 +1,3 @@
-/**
- * @license Copyright (c) 2003-2024, CKSource Holding sp. z o.o. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
-
 import {
 	ClassicEditor,
 	Alignment,
@@ -41,7 +36,7 @@ import {
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	Underline,
+	Underline
 } from 'ckeditor5';
 
 import deTranslations from 'ckeditor5/translations/de.js';
@@ -87,7 +82,7 @@ const plugins = [
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	Underline,
+	Underline
 ];
 
 /**
@@ -95,10 +90,10 @@ const plugins = [
  */
 
 ClassicEditor.create(
-	document.querySelector('#cke5-localized-de-demo'),
+	document.querySelector( '#cke5-localized-de-demo' ),
 	{
 		language: 'de',
-		plugins: plugins,
+		plugins,
 		placeholder: 'Tippen Sie Ihren Inhalt hier oder fügen Sie ihn ein!',
 		toolbar: [
 			'undo',
@@ -122,7 +117,7 @@ ClassicEditor.create(
 			{
 				label: 'Einfügen',
 				icon: 'plus',
-				items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
+				items: [ 'blockQuote', 'mediaEmbed', 'horizontalLine' ]
 			},
 			'|',
 			'alignment',
@@ -130,7 +125,7 @@ ClassicEditor.create(
 			'bulletedList',
 			'numberedList',
 			'outdent',
-			'indent',
+			'indent'
 		],
 		image: {
 			toolbar: [
@@ -139,11 +134,11 @@ ClassicEditor.create(
 				'|',
 				'imageStyle:inline',
 				'imageStyle:wrapText',
-				'imageStyle:breakText',
+				'imageStyle:breakText'
 			],
 			insert: {
-				integrations: ['url'],
-			},
+				integrations: [ 'url' ]
+			}
 		},
 		table: {
 			contentToolbar: [
@@ -151,24 +146,24 @@ ClassicEditor.create(
 				'tableRow',
 				'mergeTableCells',
 				'tableProperties',
-				'toggleTableCaption',
-			],
+				'toggleTableCaption'
+			]
 		},
-		translations: deTranslations,
+		translations: deTranslations
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );
 
 ClassicEditor.create(
-	document.querySelector('#cke5-localized-ar-demo'),
+	document.querySelector( '#cke5-localized-ar-demo' ),
 	{
 		language: 'ar',
-		plugins: plugins,
+		plugins,
 		placeholder: 'اكتب أو الصق المحتوى الخاص بك هنا!',
 		toolbar: [
 			'undo',
@@ -192,7 +187,7 @@ ClassicEditor.create(
 			{
 				label: 'إدراج',
 				icon: 'plus',
-				items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
+				items: [ 'blockQuote', 'mediaEmbed', 'horizontalLine' ]
 			},
 			'|',
 			'alignment',
@@ -200,7 +195,7 @@ ClassicEditor.create(
 			'bulletedList',
 			'numberedList',
 			'outdent',
-			'indent',
+			'indent'
 		],
 		image: {
 			toolbar: [
@@ -209,11 +204,11 @@ ClassicEditor.create(
 				'|',
 				'imageStyle:inline',
 				'imageStyle:wrapText',
-				'imageStyle:breakText',
+				'imageStyle:breakText'
 			],
 			insert: {
-				integrations: ['url'],
-			},
+				integrations: [ 'url' ]
+			}
 		},
 		table: {
 			contentToolbar: [
@@ -221,24 +216,24 @@ ClassicEditor.create(
 				'tableRow',
 				'mergeTableCells',
 				'tableProperties',
-				'toggleTableCaption',
-			],
+				'toggleTableCaption'
+			]
 		},
-		translations: arTranslations,
+		translations: arTranslations
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );
 
 ClassicEditor.create(
-	document.querySelector('#cke5-localized-ja-demo'),
+	document.querySelector( '#cke5-localized-ja-demo' ),
 	{
 		language: 'ja',
-		plugins: plugins,
+		plugins,
 		placeholder: 'こちらに内容を入力するか張り付けてください。',
 		toolbar: [
 			'undo',
@@ -262,7 +257,7 @@ ClassicEditor.create(
 			{
 				label: '挿入',
 				icon: 'plus',
-				items: ['blockQuote', 'mediaEmbed', 'horizontalLine'],
+				items: [ 'blockQuote', 'mediaEmbed', 'horizontalLine' ]
 			},
 			'|',
 			'alignment',
@@ -270,7 +265,7 @@ ClassicEditor.create(
 			'bulletedList',
 			'numberedList',
 			'outdent',
-			'indent',
+			'indent'
 		],
 		image: {
 			toolbar: [
@@ -279,11 +274,11 @@ ClassicEditor.create(
 				'|',
 				'imageStyle:inline',
 				'imageStyle:wrapText',
-				'imageStyle:breakText',
+				'imageStyle:breakText'
 			],
 			insert: {
-				integrations: ['url'],
-			},
+				integrations: [ 'url' ]
+			}
 		},
 		table: {
 			contentToolbar: [
@@ -291,15 +286,15 @@ ClassicEditor.create(
 				'tableRow',
 				'mergeTableCells',
 				'tableProperties',
-				'toggleTableCaption',
-			],
+				'toggleTableCaption'
+			]
 		},
-		translations: jaTranslations,
+		translations: jaTranslations
 	}
 )
-.then((editor) => {
-	window.editor = editor;
-})
-.catch((error) => {
-	console.error(error.stack);
-});
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( error => {
+		console.error( error.stack );
+	} );
