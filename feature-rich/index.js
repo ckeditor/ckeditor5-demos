@@ -92,6 +92,7 @@ import {
 	ExportWord,
 	FormatPainter,
 	ImportWord,
+	MergeFields,
 	MultiLevelList,
 	SlashCommand,
 	TableOfContents,
@@ -402,6 +403,99 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' }
 ];
 
+/* eslint-disable max-len */
+const MERGE_FIELDS_DEFINITIONS = [
+	{
+		groupId: 'authorInformation',
+		groupLabel: 'Author information',
+		definitions: [
+			{
+				id: 'mergeFieldExample',
+				label: 'Merge Field Example',
+				defaultValue: 'Merge fields are useful for personalizing email campaigns with recipient names or locations for a more targeted message.'
+			},
+			{
+				id: 'authorTitle',
+				label: 'Title',
+				defaultValue: 'Mr./Mrs.'
+			},
+			{
+				id: 'authorName',
+				label: 'Name',
+				defaultValue: 'John'
+			},
+			{
+				id: 'authorSurname',
+				label: 'Surname',
+				defaultvalue: 'Doe'
+			}
+		]
+	}
+];
+
+const MERGE_FIELDS_DATASETS = [
+	{
+		id: '78900',
+		label: 'David Lee',
+		values: {
+			mergeFieldExample: 'Merge fields are useful for automating the inclusion of product details like names, prices, and descriptions in marketing materials.',
+			authorTitle: 'Mr.',
+			authorName: 'David',
+			authorSurname: 'Lee'
+		}
+	},
+	{
+		id: '78901',
+		label: 'Kate Smith',
+		values: {
+			mergeFieldExample: 'Merge fields are useful for dynamically inserting dates and times in event invitations or reminders.',
+			authorTitle: 'Mrs.',
+			authorName: 'Kate',
+			authorSurname: 'Smith'
+		}
+	},
+	{
+		id: '78902',
+		label: 'John Azar',
+		values: {
+			mergeFieldExample: 'Merge fields are useful for creating tailored customer service responses by populating customer information into templates.',
+			authorTitle: 'Mr.',
+			authorName: 'John',
+			authorSurname: 'Azar'
+		}
+	},
+	{
+		id: '98765',
+		label: 'Emily Johnson',
+		values: {
+			mergeFieldExample: 'Merge fields are useful for embedding tables that display personalized data such as order summaries or product comparisons.',
+			authorTitle: 'Dr.',
+			authorName: 'Emily',
+			authorSurname: 'Johnson'
+		}
+	},
+	{
+		id: '43210',
+		label: 'David Brown',
+		values: {
+			mergeFieldExample: 'Merge fields are useful for dynamically generating reports with client-specific metrics or performance data in table format.',
+			authorTitle: 'Mr.',
+			authorName: 'David',
+			authorSurname: 'Brown'
+		}
+	},
+	{
+		id: '54321',
+		label: 'Sarah Miller',
+		values: {
+			mergeFieldExample: 'Merge fields are useful for inserting formatted blocks like invoices or shipping details into emails or documents based on individual transactions.',
+			authorName: 'Sarah',
+			authorSurname: 'Miller'
+		}
+	}
+];
+/* eslint-disable max-len */
+
 const EMOJIS_ARRAY = [
 	{ character: '🙈', title: 'See-No-Evil Monkey' },
 	{ character: '🙄', title: 'Face With Rolling Eyes' },
@@ -508,7 +602,7 @@ const EMOJIS_ARRAY = [
 ];
 
 /**
- * Populate the special characters plugin with emojis.
+ * Enrich the special characters plugin with emojis.
  */
 function SpecialCharactersEmoji( editor ) {
 	if ( !editor.plugins.get( 'SpecialCharacters' ) ) {
@@ -594,6 +688,7 @@ ClassicEditor.create(
 				ExportWord,
 				FormatPainter,
 				ImportWord,
+				MergeFields,
 				MultiLevelList,
 				SlashCommand,
 				TableOfContents,
@@ -612,6 +707,8 @@ ClassicEditor.create(
 				// --- Document-wide tools ----------------------------------------------------------------------
 				'undo',
 				'redo',
+				'|',
+				'insertMergeField', 'previewMergeFields',
 				'|',
 				'importWord',
 				'exportWord',
@@ -948,6 +1045,10 @@ ClassicEditor.create(
 					]
 				}
 			]
+		},
+		mergeFields: {
+			definitions: MERGE_FIELDS_DEFINITIONS,
+			dataSets: MERGE_FIELDS_DATASETS
 		},
 		placeholder: 'Type or paste your content here!',
 		style: {

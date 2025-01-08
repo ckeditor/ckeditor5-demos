@@ -77,6 +77,7 @@ import {
 	ExportPdf,
 	ExportWord,
 	ImportWord,
+	MergeFields,
 	MultiLevelList,
 	Pagination,
 	Template,
@@ -387,6 +388,193 @@ const REDUCED_MATERIAL_COLORS = [
 	{ label: 'Blue grey 900', color: '#263238' }
 ];
 
+const MERGE_FIELDS_DEFINITIONS = [
+	{
+		id: 'financialSummary',
+		label: 'Financial summary',
+		defaultValue: `
+						<figure class="table">
+							<table>
+								<tbody>
+									<tr>
+										<th>&nbsp;</th>
+										<th>FY 2022</th>
+										<th>FY 2023</th>
+										<th>Change (%)</th>
+									</tr>
+									<tr>
+										<td>Revenue ($M)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+									<tr>
+										<td>Net Profit ($M)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+									<tr>
+										<td>Cash Flow ($M)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+									<tr>
+										<td>ROI (%)</td>
+										<td>0.00</td>
+										<td>0.00</td>
+										<td>0.00</td>
+									</tr>
+								</tbody>
+							</table>
+							<figcaption>Table 1: Financial Summary</figcaption>
+						</figure>
+		`,
+		type: 'block'
+	},
+	{
+		groupId: 'financialHighlights',
+		groupLabel: 'Financial highlights',
+		definitions: [
+			{
+				id: 'revenueAmount',
+				label: 'Revenue ($M)',
+				defaultValue: '0.00',
+				type: 'block'
+			},
+			{
+				id: 'revenueChange',
+				label: 'Revenue % change',
+				defaultValue: '0.00'
+			},
+			{
+				id: 'netProfitAmount',
+				label: 'Net profit ($M)',
+				defaultValue: '0.00'
+			},
+			{
+				id: 'netProfitChange',
+				label: 'Net profit % change',
+				defaultValue: '0.00'
+			},
+			{
+				id: 'cashFlow',
+				label: 'Cash flow ($M)',
+				defaultValue: '0.00'
+			},
+			{
+				id: 'roi',
+				label: 'ROI (%)',
+				defaultValue: '0'
+			}
+		]
+	}
+];
+
+const MERGE_FIELDS_DATASETS = [
+	{
+		id: '2331',
+		label: 'Forecast #1',
+		values: {
+			revenueAmount: '10',
+			revenueChange: '15',
+			netProfitAmount: '2',
+			netProfitChange: '20',
+			roi: '15',
+			financialSummary: `
+						<figure class="table">
+							<table>
+								<tbody>
+									<tr>
+										<th>&nbsp;</th>
+										<th>FY 2022</th>
+										<th>FY 2023</th>
+										<th>Change (%)</th>
+									</tr>
+									<tr>
+										<td>Revenue ($M)</td>
+										<td>8.7</td>
+										<td>10</td>
+										<td>15</td>
+									</tr>
+									<tr>
+										<td>Net Profit ($M)</td>
+										<td>1.7</td>
+										<td>2</td>
+										<td>20</td>
+									</tr>
+									<tr>
+										<td>Cash Flow ($M)</td>
+										<td>1.5</td>
+										<td>2.2</td>
+										<td>47</td>
+									</tr>
+									<tr>
+										<td>ROI (%)</td>
+										<td>10</td>
+										<td>15</td>
+										<td>50</td>
+									</tr>
+								</tbody>
+							</table>
+							<figcaption>Table 1: Financial Summary</figcaption>
+						</figure>
+		`
+		}
+	},
+	{
+		id: '2332',
+		label: 'Forecast #2',
+		values: {
+			revenueAmount: '9.57',
+			revenueChange: '10',
+			netProfitAmount: '1.87',
+			netProfitChange: '10',
+			roi: '12',
+			financialSummary: `
+						<figure class="table">
+							<table>
+								<tbody>
+									<tr>
+										<th>&nbsp;</th>
+										<th>FY 2022</th>
+										<th>FY 2023</th>
+										<th>Change (%)</th>
+									</tr>
+									<tr>
+										<td>Revenue ($M)</td>
+										<td>8.7</td>
+										<td>9.57</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>Net Profit ($M)</td>
+										<td>1.7</td>
+										<td>1.87</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>Cash Flow ($M)</td>
+										<td>1.5</td>
+										<td>2.2</td>
+										<td>47</td>
+									</tr>
+									<tr>
+										<td>ROI (%)</td>
+										<td>10</td>
+										<td>12</td>
+										<td>20</td>
+									</tr>
+								</tbody>
+							</table>
+							<figcaption>Table 1: Financial Summary</figcaption>
+						</figure>
+		`
+		}
+	}
+];
+
 const exportHorizontalSpace = '10mm';
 const exportVerticalSpace = '12mm';
 
@@ -559,6 +747,7 @@ DecoupledEditor.create(
 				ExportPdf,
 				ExportWord,
 				ImportWord,
+				MergeFields,
 				MultiLevelList,
 				SlashCommand,
 				Template,
@@ -590,6 +779,8 @@ DecoupledEditor.create(
 				'findAndReplace',
 				'selectAll',
 				'wproofreader',
+				'|',
+				'insertMergeField', 'previewMergeFields',
 				'|',
 				'importWord',
 				'exportWord',
@@ -746,6 +937,12 @@ DecoupledEditor.create(
 				margin_left: exportHorizontalSpace
 			},
 			tokenUrl: false
+		},
+		mergeFields: {
+			definitions: MERGE_FIELDS_DEFINITIONS,
+			dataSets: MERGE_FIELDS_DATASETS,
+			previewHtmlValues: true,
+			sanitizeHtml: html => ( { html, hasChanged: false } )
 		},
 		pagination: {
 			// A4
