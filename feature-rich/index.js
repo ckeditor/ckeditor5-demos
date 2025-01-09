@@ -31,6 +31,7 @@ import {
 	Alignment,
 	Autoformat,
 	Bold,
+	Bookmark,
 	CKBox,
 	Code,
 	Italic,
@@ -625,6 +626,7 @@ ClassicEditor.create(
 			AutoLink,
 			BlockQuote,
 			Bold,
+			Bookmark,
 			CloudServices,
 			Code,
 			CodeBlock,
@@ -727,6 +729,7 @@ ClassicEditor.create(
 				// --- "Insertables" ----------------------------------------------------------------------------
 
 				'link',
+				'bookmark',
 				'insertImage',
 				'ckbox',
 				'insertTable',
