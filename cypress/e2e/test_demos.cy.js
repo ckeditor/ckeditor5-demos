@@ -11,7 +11,7 @@ describe( 'Test CKEditor 5 demo', () => {
 		'mathtype',
 		'mobile',
 		'paste-from-office-enhanced',
-		'productivity-pack',
+		'productivity',
 		'source-code-editing',
 		'user-interface-balloon',
 		'user-interface-balloon-block',
