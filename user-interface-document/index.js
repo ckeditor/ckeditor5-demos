@@ -31,6 +31,7 @@ import {
 	Alignment,
 	Autoformat,
 	Bold,
+	Bookmark,
 	Italic,
 	Strikethrough,
 	Subscript,
@@ -635,6 +636,7 @@ DecoupledEditor.create(
 			Autoformat,
 			BlockQuote,
 			Bold,
+			Bookmark,
 			CloudServices,
 			Essentials,
 			ExportPdf,
@@ -731,6 +733,7 @@ DecoupledEditor.create(
 				// --- "Insertables" ----------------------------------------------------------------------------
 
 				'link',
+				'bookmark',
 				'insertImage',
 				'ckbox',
 				'insertTable',
