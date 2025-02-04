@@ -16,6 +16,7 @@ This repository holds the source code for CKEditor 5 demos that can be found at 
 - [Productivity Pack](productivity-pack)
 - [Editor with source code editing and HTML support](source-code-editing)
 - [Editor with "WProofreader"](wproofreader)
+- [Editor with "Uploadcare"](uploadcare)
 
 ### User interface (UI) examples
 

@@ -13,6 +13,7 @@ describe( 'Test CKEditor 5 demo', () => {
 		'paste-from-office-enhanced',
 		'productivity',
 		'source-code-editing',
+		'uploadcare',
 		'user-interface-balloon',
 		'user-interface-balloon-block',
 		'user-interface-bottom-toolbar',
