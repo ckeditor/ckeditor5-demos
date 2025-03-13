@@ -1,0 +1,236 @@
+@charset "UTF-8";
+/* ---- Cross-editor content styles. --------------------------------------------------------------- */
+.ck.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable) {
+  /* Make sure all content containers have some min height to make them easier to locate. */
+  min-height: 300px;
+  padding: 1em 1.5em;
+}
+
+/* Make sure all content containers are distinguishable on a web page even of not focused. */
+.ck.ck-content:not(:focus) {
+  border: 1px solid var(--ck-color-base-border);
+}
+
+/* Fix for editor styles overflowing into comment reply fields */
+.ck-comment__input .ck.ck-content {
+  min-height: unset;
+  border: 0;
+  padding: 0;
+}
+
+/* Font sizes and vertical rhythm for common elements (headings, lists, paragraphs, etc.) */
+.ck-content h1 {
+  font-size: 2.3em;
+}
+.ck-content h2 {
+  font-size: 1.84em;
+}
+.ck-content h3 {
+  font-size: 1.48em;
+}
+.ck-content h4 {
+  font-size: 1.22em;
+}
+.ck-content h5 {
+  font-size: 1.06em;
+}
+.ck-content h6 {
+  font-size: 1em;
+}
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6 {
+  line-height: 1.2em;
+  padding-top: 0.8em;
+  margin-bottom: 0.4em;
+}
+.ck-content blockquote,
+.ck-content ol,
+.ck-content p,
+.ck-content ul {
+  font-size: 1em;
+  line-height: 1.6em;
+  padding-top: 0.2em;
+  margin-bottom: var(--ck-spacing-large);
+}
+
+/* ---- Style feature content styles ------------------------------------------------------ */
+.ck-content {
+  --ck-georgia-serif-font-stack: Georgia,Times,Times New Roman,serif;
+}
+
+.ck-content h1.document-title {
+  font-family: var(--ck-georgia-serif-font-stack);
+  font-size: 50px;
+  font-weight: bold;
+  border: 0;
+}
+
+.ck-content h2.document-subtitle {
+  font-family: var(--ck-georgia-serif-font-stack);
+  font-size: 20px;
+  font-weight: bold;
+  color: #d1d1d1;
+  letter-spacing: 10px;
+}
+
+.ck-content p.callout {
+  --border-color: #e91e1e;
+  padding: 1.2em 2em;
+  border: 1px solid var(--border-color);
+  border-left: 10px solid var(--border-color);
+  background: #fff9fb;
+  border-radius: 5px;
+  margin: 1.5em 2em;
+  box-shadow: 5px 5px 0 #ffe6ef;
+}
+
+.ck-content blockquote.side-quote {
+  font-family: var(--ck-georgia-serif-font-stack);
+  font-style: normal;
+  float: right;
+  width: 35%;
+  position: relative;
+  border: 0;
+  overflow: visible;
+  z-index: 1;
+  margin-left: 1em;
+}
+
+.ck-content blockquote.side-quote::before {
+  content: "“";
+  position: absolute;
+  top: -37px;
+  left: -10px;
+  display: block;
+  font-size: 200px;
+  color: #e7e7e7;
+  z-index: -1;
+  line-height: 1;
+}
+
+.ck-content blockquote.side-quote p {
+  font-size: 2em;
+  line-height: 1;
+}
+
+.ck-content blockquote.side-quote p:last-child:not(:first-child) {
+  font-size: 1.3em;
+  text-align: right;
+  color: #555;
+}
+
+.ck-content span.needs-clarification {
+  outline: 1px dashed #c8a24b;
+  background: #ffe19c;
+  border-radius: 2px;
+  position: relative;
+}
+
+.ck-content span.needs-clarification::after {
+  content: "?";
+  display: inline-block;
+  color: #fff;
+  background: #3b3b3b;
+  font-size: 12px;
+  vertical-align: super;
+  width: 12px;
+  height: 12px;
+  line-height: 12px;
+  border-radius: 10px;
+  text-align: center;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  font-weight: bold;
+  letter-spacing: initial;
+}
+
+.ck-content span.wide-spacing {
+  letter-spacing: 0.3em;
+}
+
+.ck-content span.small-caps {
+  font-variant: small-caps;
+}
+
+.ck-content span.spoiler {
+  background: #000;
+  color: #000;
+}
+
+.ck-content span.spoiler:hover {
+  background: #000;
+  color: #fff;
+}
+
+.ck-content pre.stylish-code {
+  border-color: transparent;
+  margin-left: 2em;
+  margin-right: 2em;
+  border-radius: 10px;
+}
+
+.ck-content pre.stylish-code::before {
+  --ck-stylish-code-disc-radius: 6px;
+  content: "";
+  display: block;
+  height: calc(var(--ck-stylish-code-disc-radius) * 2);
+  background-image: radial-gradient(circle, #f16b5d var(--ck-stylish-code-disc-radius), rgba(0, 0, 0, 0) var(--ck-stylish-code-disc-radius)), radial-gradient(circle, #f5be4d var(--ck-stylish-code-disc-radius), rgba(0, 0, 0, 0) var(--ck-stylish-code-disc-radius)), radial-gradient(circle, #56c452 var(--ck-stylish-code-disc-radius), rgba(0, 0, 0, 0) var(--ck-stylish-code-disc-radius));
+  background-size: calc(var(--ck-stylish-code-disc-radius) * 2) calc(var(--ck-stylish-code-disc-radius) * 2);
+  background-position: 0 0, calc(var(--ck-stylish-code-disc-radius) * 3) 0, calc(var(--ck-stylish-code-disc-radius) * 6) 0;
+  margin-bottom: 8px;
+  background-repeat: no-repeat;
+}
+
+.ck-content pre.stylish-code-dark,
+.ck-content pre.stylish-code-bright {
+  padding: 1em;
+}
+
+.ck-content pre.stylish-code-dark {
+  background: #272822;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1215686275);
+  color: white;
+}
+
+.ck-content pre.stylish-code-dark code {
+  color: white;
+}
+
+.ck-content pre.stylish-code-bright {
+  background: #dddfe0;
+  color: #000;
+  box-shadow: 5px 5px 0 #b3b3b3;
+}
+
+.ck-content pre.stylish-code-bright code {
+  color: #222;
+}
+
+/* ---- Styles specific to the source code demo content ------------------------------------------------------ */
+/* Custom styles for colums in the content. */
+.ck-content .columns {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.ck-content .column {
+  flex: 33.33%;
+}
+
+/* Using "@media not print" to exclude this responsive from export to PDF. */
+@media not print {
+  @media all and (max-width: 768px) {
+    .ck-content .columns {
+      flex-wrap: wrap;
+    }
+    .ck-content .column {
+      flex: 100%;
+    }
+  }
+}

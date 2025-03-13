@@ -1,0 +1,64 @@
+/* ---- Customizations to the color grid palettes (font and background color) ------------------------------------------------------ */
+.ck.ck-color-ui-dropdown {
+  --ck-color-grid-tile-size: 20px;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid {
+  grid-gap: 1px;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid .ck-button {
+  border-radius: 0;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:hover:not(.ck-disabled),
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:focus:not(.ck-disabled) {
+  z-index: 1;
+  transform: scale(1.3);
+}
+
+/* ---- Mention list styles --------------------------------------------------------------- */
+.ck-mentions .mention__item {
+  display: flex;
+  align-items: center;
+}
+.ck-mentions .mention__item img {
+  border-radius: 100%;
+  height: 30px;
+}
+.ck-mentions .mention__item span {
+  margin-left: 0.5em;
+}
+.ck-mentions .mention__item.ck-on span {
+  color: var(--ck-color-base-background);
+}
+.ck-mentions .mention__item .mention__item__full-name {
+  color: hsl(0, 0%, 45%);
+}
+.ck-mentions .mention__item:hover:not(.ck-on) .mention__item__full-name {
+  color: hsl(0, 0%, 40%);
+}
+
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.ck.ck-content.ck-editor__editable_inline > :first-child {
+  margin-top: 0;
+}
+
+/* ---- Styles of the demo page ------------------------------------------------------ */
+.editor-wrapper {
+  max-width: 66rem;
+  margin: 0 auto 2rem auto;
+}
+
+.header-wrapper {
+  padding: 1rem 2rem;
+}
