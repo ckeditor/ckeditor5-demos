@@ -68,7 +68,6 @@ import {
 	PictureEditing,
 	RemoveFormat,
 	ShowBlocks,
-	SourceEditing,
 	SpecialCharacters,
 	SpecialCharactersEssentials,
 	Strikethrough,
@@ -94,7 +93,8 @@ import {
 	Template,
 	SlashCommand,
 	Uploadcare,
-	UploadcareImageEdit
+	UploadcareImageEdit,
+	SourceEditingEnhanced
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -152,7 +152,7 @@ ClassicEditor.create(
 			PictureEditing,
 			RemoveFormat,
 			ShowBlocks,
-			SourceEditing,
+			SourceEditingEnhanced,
 			SpecialCharacters,
 			SpecialCharactersEssentials,
 			Strikethrough,
@@ -242,7 +242,7 @@ ClassicEditor.create(
 				'|',
 				'textPartLanguage',
 				'|',
-				'sourceEditing'
+				'sourceEditingEnhanced'
 			]
 		},
 		list: {
@@ -303,6 +303,14 @@ ClassicEditor.create(
 					'onedrive'
 				]
 			}
+		},
+		wproofreader: {
+			autoSearch: true,
+			enableGrammar: true,
+			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
+			lang: 'auto',
+			srcUrl:
+				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
 		}
 	}
 )
