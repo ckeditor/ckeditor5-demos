@@ -68,7 +68,6 @@ import {
 	PictureEditing,
 	RemoveFormat,
 	ShowBlocks,
-	SourceEditing,
 	Strikethrough,
 	Style,
 	Subscript,
@@ -90,7 +89,8 @@ import {
 	ExportWord,
 	ImportWord,
 	Template,
-	SlashCommand
+	SlashCommand,
+	SourceEditingEnhanced
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -572,7 +572,7 @@ ClassicEditor.create(
 			PictureEditing,
 			RemoveFormat,
 			ShowBlocks,
-			SourceEditing,
+			SourceEditingEnhanced,
 			Strikethrough,
 			Style,
 			Subscript,
@@ -615,7 +615,7 @@ ClassicEditor.create(
 				'undo',
 				'redo',
 				'|',
-				'sourceEditing',
+				'sourceEditingEnhanced',
 				'showBlocks',
 				'|',
 				'importWord',

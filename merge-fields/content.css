@@ -1,183 +1,75 @@
-/* SPA Reservation fonts */
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+3:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
-
+@charset "UTF-8";
 /* ---- Cross-editor content styles. --------------------------------------------------------------- */
-.ck.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable) {
-  /* Make sure all content containers have some min height to make them easier to locate. */
-  min-height: 300px;
-  padding: 1em 1.5em;
-}
-
 /* Make sure all content containers are distinguishable on a web page even of not focused. */
 .ck.ck-content:not(:focus) {
-  border: 1px solid var(--ck-color-base-border);
+	border: 1px solid var(--ck-color-base-border);
 }
 
 /* Fix for editor styles overflowing into comment reply fields */
 .ck-comment__input .ck.ck-content {
-  min-height: unset;
-  border: 0;
-  padding: 0;
+	border: 0;
+	padding: 0;
+	min-height: unset;
+}
+
+.ck.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable) {
+	padding: 1em 1.5em;
+	/* Make sure all content containers have some min height to make them easier to locate. */
+	min-height: 300px;
 }
 
 /* Font sizes and vertical rhythm for common elements (headings, lists, paragraphs, etc.) */
 .ck-content h1 {
-  font-size: 2.3em;
+	font-size: 2.3em;
 }
+
 .ck-content h2 {
-  font-size: 1.84em;
+	font-size: 1.84em;
 }
+
 .ck-content h3 {
-  font-size: 1.48em;
+	font-size: 1.48em;
 }
+
 .ck-content h4 {
-  font-size: 1.22em;
+	font-size: 1.22em;
 }
+
 .ck-content h5 {
-  font-size: 1.06em;
+	font-size: 1.06em;
 }
+
 .ck-content h6 {
-  font-size: 1em;
+	font-size: 1em;
 }
+
 .ck-content h1,
 .ck-content h2,
 .ck-content h3,
 .ck-content h4,
 .ck-content h5,
 .ck-content h6 {
-  line-height: 1.2em;
-  padding-top: 0.8em;
-  margin-bottom: 0.4em;
+	margin-bottom: 0.4em;
+	padding-top: 0.8em;
+	line-height: 1.2em;
 }
+
 .ck-content blockquote,
 .ck-content ol,
 .ck-content p,
 .ck-content ul {
-  font-size: 1em;
-  line-height: 1.6em;
-  padding-top: 0.2em;
-  margin-bottom: var(--ck-spacing-large);
+	padding-top: 0.2em;
+	font-size: 1em;
+	line-height: 1.6em;
 }
 
-.ck-content {
-  font-family: "Times New Roman", Time, serif;
-  line-height: 1.4;
+.ck-content blockquote,
+.ck-content p,
+.ck-content ol li:last-child,
+.ck-content ul li:last-child {
+	margin-bottom: var(--ck-spacing-large);
 }
 
-/* SPA Reservation styles */
-
-.ck.ck-content .avp {
-	max-width: 735px;
-	margin: 0 auto;
-}
-
-.ck.ck-content .avp-header {
-	background: #EBE8E1;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-	padding: 30px 0;
-	width: 100%;
-	border-bottom: 5px solid #fff;
-	position: relative;
-	overflow: hidden;
-}
-
-.ck.ck-content .avp-header__left-edge {
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 0;
-}
-
-.ck.ck-content .avp-header__right-edge {
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 0;
-}
-
-.ck.ck-content .avp-header__text {
-	max-width: 365px;
-
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 26px;
-	line-height: 32px;
-	text-align: right;
-	margin: 0;
-	padding: 0;
-	z-index: 1;
-}
-
-.ck.ck-content .avp-header__text--discount {
-	display: inline-block;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-}
-
-
-.ck.ck-content .avp-content {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-column-gap: 5px;
-	grid-row-gap: 0px;
-}
-
-.ck.ck-content .avp-offer {
-	background: #DDD8CD;
-	color: #2F2F2F;
-	display: grid;
-	justify-content: space-between;
-	padding: 16px;
-
-	font-family: "Source Sans 3", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 13px;
-	line-height: 16px;
-
-	position: relative;
-}
-
-.ck.ck-content .avp-offer__header {
-	font-family: "Source Serif 4", serif;
-	font-optical-sizing: auto;
-	font-weight: 700;
-	font-style: normal;
-	font-size: 18px;
-	line-height: 22.5px;
-	padding-top: 0;
-	margin-bottom: 10px;
-}
-
-.ck.ck-content .avp-offer p {
-	min-height: 45px;
+blockquote p:last-child {
 	margin-bottom: 0;
-	z-index: 1;
-}
-
-.ck.ck-content .avp-offer__left-blob {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	z-index: 0;
-}
-
-.ck.ck-content .avp-offer__right-blob {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	z-index: 0;
-}
-
-.ck.ck-content .avp-offer__dots {
-	position: absolute;
-	left: -27px;
-	top: 50%;
-	z-index: 0;
 }

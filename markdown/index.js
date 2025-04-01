@@ -32,7 +32,6 @@ import {
 	Markdown,
 	Mention,
 	Paragraph,
-	SourceEditing,
 	SpecialCharacters,
 	SpecialCharactersEssentials,
 	Strikethrough,
@@ -43,7 +42,8 @@ import {
 } from 'ckeditor5';
 
 import {
-	SlashCommand
+	SlashCommand,
+	SourceEditingEnhanced
 } from 'ckeditor5-premium-features';
 
 import 'ckeditor5/ckeditor5.css';
@@ -191,7 +191,7 @@ ClassicEditor.create(
 			Markdown,
 			Mention,
 			Paragraph,
-			SourceEditing,
+			SourceEditingEnhanced,
 			SpecialCharacters,
 			SpecialCharactersEmoji,
 			SpecialCharactersEssentials,
@@ -212,7 +212,7 @@ ClassicEditor.create(
 			'undo',
 			'redo',
 			'|',
-			'sourceEditing',
+			'sourceEditingEnhanced',
 			'|',
 			'heading',
 			'|',
