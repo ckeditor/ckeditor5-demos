@@ -40,6 +40,7 @@ import {
 	FontColor,
 	FontFamily,
 	FontSize,
+	Fullscreen,
 	Heading,
 	Image,
 	ImageCaption,
@@ -705,6 +706,7 @@ DecoupledEditor.create(
 			FontColor,
 			FontFamily,
 			FontSize,
+			Fullscreen,
 			Heading,
 			Image,
 			ImageCaption,
@@ -824,7 +826,9 @@ DecoupledEditor.create(
 				'multilevelList',
 				'|',
 				'outdent',
-				'indent'
+				'indent',
+				'|',
+				'fullscreen'
 			]
 		},
 		heading: {
