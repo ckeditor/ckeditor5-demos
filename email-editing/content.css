@@ -3,114 +3,114 @@
 
 /* Make sure all content containers are distinguishable on a web page even of not focused. */
 .ck {
-  &.ck-content:not(:focus) {
-    border: 1px solid var(--ck-color-base-border);
-  }
+	&.ck-content:not(:focus) {
+		border: 1px solid var(--ck-color-base-border);
+	}
 }
 
 /* Fix for editor styles overflowing into comment reply fields */
 .ck-comment__input {
-  & .ck.ck-content {
-    border: 0;
-    padding: 0;
-    min-height: unset;
-  }
+	& .ck.ck-content {
+		border: 0;
+		padding: 0;
+		min-height: unset;
+	}
 }
 
 .ck {
-  &.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable) {
-    padding: 1em 1.5em;
-    /* Make sure all content containers have some min height to make them easier to locate. */
-    min-height: 300px;
-  }
+	&.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable) {
+		padding: 1em 1.5em;
+		/* Make sure all content containers have some min height to make them easier to locate. */
+		min-height: 300px;
+	}
 }
 
 /* Font sizes and vertical rhythm for common elements (headings, lists, paragraphs, etc.) */
 .ck-content {
-  & h1 {
-    font-size: 2.3em;
-  }
+	& h1 {
+		font-size: 2.3em;
+	}
 
-  & h2 {
-    font-size: 1.84em;
-  }
+	& h2 {
+		font-size: 1.84em;
+	}
 
-  & h3 {
-    font-size: 1.48em;
-  }
+	& h3 {
+		font-size: 1.48em;
+	}
 
-  & h4 {
-    font-size: 1.22em;
-  }
+	& h4 {
+		font-size: 1.22em;
+	}
 
-  & h5 {
-    font-size: 1.06em;
-  }
+	& h5 {
+		font-size: 1.06em;
+	}
 
-  & h6 {
-    font-size: 1em;
-  }
+	& h6 {
+		font-size: 1em;
+	}
 
-  & h1,
-  & h2,
-  & h3,
-  & h4,
-  & h5,
-  & h6 {
-    margin-bottom: 0.4em;
-    padding-top: 0.8em;
-    line-height: 1.2em;
-  }
+	& h1,
+	& h2,
+	& h3,
+	& h4,
+	& h5,
+	& h6 {
+		margin-bottom: 0.4em;
+		padding-top: 0.8em;
+		line-height: 1.2em;
+	}
 
-  & blockquote,
-  & ol,
-  & p,
-  & ul {
-    padding-top: 0.2em;
-    font-size: 1em;
-    line-height: 1.6em;
-  }
+	& blockquote,
+	& ol,
+	& p,
+	& ul {
+		padding-top: 0.2em;
+		font-size: 1em;
+		line-height: 1.6em;
+	}
 
-  & blockquote,
-  & p,
-  & ol li:last-child,
-  & ul li:last-child {
-    margin-bottom: var(--ck-spacing-large);
-  }
+	& blockquote,
+	& p,
+	& ol li:last-child,
+	& ul li:last-child {
+		margin-bottom: var(--ck-spacing-large);
+	}
 }
 
 blockquote {
-  & p:last-child {
-    margin-bottom: 0;
-  }
+	& p:last-child {
+		margin-bottom: 0;
+	}
 }
 
 /* E-mail template CSS styling */
 .ck-content {
-  font-family: Mulish;
+	font-family: Mulish;
 
-  & h1, & h2, & h3, & h4, & h5, & h6 {
-    line-height: 1.35em;
-  }
+	& h1, & h2, & h3, & h4, & h5, & h6 {
+		line-height: 1.35em;
+	}
 
-  & td {
-    & .image-inline, & img {
-      vertical-align: middle;
-    }
-  }
+	& td {
+		& .image-inline, & img {
+			vertical-align: middle;
+		}
+	}
 
-  & .button {
-    display: inline-block;
-    width: 260px;
-    border-radius: 8px;
-    margin: 0 auto;
-    padding: 12px;
-    color: #FFFFFF;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    text-decoration: none;
-  }
+	& .button {
+		display: inline-block;
+		width: 260px;
+		border-radius: 8px;
+		margin: 0 auto;
+		padding: 12px;
+		color: #FFFFFF;
+		font-size: 24px;
+		font-weight: 700;
+		text-align: center;
+		text-decoration: none;
+	}
 
 	& .button--green {
 		background-color: #406B1E;
@@ -122,17 +122,17 @@ blockquote {
 }
 
 .ck {
-  &.ck-content {
-    & .button {
-      display: inline-block;
-      width: 260px;
-      border-radius: 8px;
-      margin: 0 auto;
-      padding: 12px;
-      color: #FFFFFF;
-      font-size: 24px;
-      font-weight: 700;
-      text-align: center;
-    }
-  }
+	&.ck-content {
+		& .button {
+			display: inline-block;
+			width: 260px;
+			border-radius: 8px;
+			margin: 0 auto;
+			padding: 12px;
+			color: #FFFFFF;
+			font-size: 24px;
+			font-weight: 700;
+			text-align: center;
+		}
+	}
 }
