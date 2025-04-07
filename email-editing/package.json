@@ -1,5 +1,5 @@
 {
-	"name": "internationalization",
+	"name": "email-editing",
 	"version": "0.1.0",
 	"repository": "https://github.com/ckeditor/ckeditor5-demos",
 	"author": "CKSource (http://cksource.com/)",
@@ -15,7 +15,9 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@webspellchecker/wproofreader-ckeditor5": "^3.0.0",
 		"ckeditor5": "^45.0.0-alpha.9",
+		"ckeditor5-premium-features": "^45.0.0-alpha.9",
 		"vite": "^5.0.0"
 	}
 }
