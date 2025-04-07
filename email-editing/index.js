@@ -50,7 +50,6 @@ import {
 	GeneralHtmlSupport,
 	Heading,
 	HorizontalLine,
-	Image,
 	ImageCaption,
 	ImageResize,
 	ImageStyle,
@@ -62,7 +61,6 @@ import {
 	Link,
 	List,
 	ListProperties,
-	MediaEmbed,
 	Mention,
 	Paragraph,
 	PasteFromOffice,
@@ -79,8 +77,8 @@ import {
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	TodoList,
-	Underline
+	Underline,
+	ImageInline
 } from 'ckeditor5';
 
 import {
@@ -94,7 +92,6 @@ import {
 	MergeFields,
 	Template,
 	SlashCommand,
-	MultiLevelList,
 	SourceEditingEnhanced
 } from 'ckeditor5-premium-features';
 
@@ -328,7 +325,7 @@ ClassicEditor.create(
 			GeneralHtmlSupport,
 			Heading,
 			HorizontalLine,
-			Image,
+			ImageInline,
 			ImageCaption,
 			ImageResize,
 			ImageStyle,
@@ -340,7 +337,6 @@ ClassicEditor.create(
 			Link,
 			List,
 			ListProperties,
-			MediaEmbed,
 			Mention,
 			Paragraph,
 			PasteFromOffice,
@@ -357,7 +353,6 @@ ClassicEditor.create(
 			TableProperties,
 			TableToolbar,
 			TextTransformation,
-			TodoList,
 			Underline,
 
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
@@ -376,7 +371,6 @@ ClassicEditor.create(
 				FormatPainter,
 				ImportWord,
 				MergeFields,
-				MultiLevelList,
 				SlashCommand,
 				SourceEditingEnhanced,
 				Template
@@ -509,9 +503,7 @@ ClassicEditor.create(
 				'resizeImage:60',
 				'resizeImage:100',
 				'|',
-				'imageStyle:inline',
-				'imageStyle:wrapText',
-				'imageStyle:breakText'
+				'imageStyle:inline'
 			],
 			resizeOptions: [
 				{
@@ -542,7 +534,7 @@ ClassicEditor.create(
 			properties: {
 				styles: true,
 				startIndex: true,
-				reversed: true
+				reversed: false
 			}
 		},
 		table: {
