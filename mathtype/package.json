@@ -15,7 +15,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"ckeditor5": "^45.0.0-alpha.9",
+		"ckeditor5": "^45.0.0",
 		"@wiris/mathtype-ckeditor5": "^8.10.0",
 		"vite": "^5.0.0"
 	}
