@@ -86,9 +86,6 @@ import {
 	EmailConfigurationHelper,
 	ExportInlineStyles,
 	FormatPainter,
-	ExportPdf,
-	ExportWord,
-	ImportWord,
 	MergeFields,
 	Template,
 	SlashCommand,
@@ -100,11 +97,11 @@ import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
-import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
+import coreRawStylesheet from 'ckeditor5/ckeditor5.css?raw';
+import premiumRawStylesheet from 'ckeditor5-premium-features/ckeditor5-premium-features.css?raw';
+import contentRawStylesheet from './content.css?raw';
 
-const exportHorizontalSpace = '19.25mm';
-const exportVerticalSpace = '16mm';
+import formatHtml from './format-html.js';
 
 const DEFAULT_HEX_COLORS = [
 	{
@@ -171,6 +168,22 @@ const DEFAULT_HEX_COLORS = [
 ];
 
 /* eslint-disable max-len */
+const BASIC_EMAIL_TRANSFORMATIONS = [
+	function convertImageUrlToAbsolute( element ) {
+		if ( element.tagName !== 'IMG' ) {
+			return;
+		}
+
+		const src = element.getAttribute( 'src' );
+
+		if ( !src || src.startsWith( 'data:' ) ) {
+			return;
+		}
+
+		element.setAttribute( 'src', makeAbsoluteUrl( src ) );
+	}
+];
+
 const TEMPLATE_DEFINITIONS = [
 	{
 		title: 'Two column layout table',
@@ -366,10 +379,7 @@ ClassicEditor.create(
 				CaseChange,
 				EmailConfigurationHelper,
 				ExportInlineStyles,
-				ExportPdf,
-				ExportWord,
 				FormatPainter,
-				ImportWord,
 				MergeFields,
 				SlashCommand,
 				SourceEditingEnhanced,
@@ -394,10 +404,6 @@ ClassicEditor.create(
 				'|',
 				'insertMergeField',
 				'previewMergeFields',
-				'|',
-				'importWord',
-				'exportWord',
-				'exportPdf',
 				'|',
 				'insertTemplate',
 				'|',
@@ -580,32 +586,6 @@ ClassicEditor.create(
 				}
 			]
 		},
-		exportPdf: {
-			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
-			fileName: 'export-pdf-demo.pdf',
-			appID: 'cke5-demos',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait'
-			},
-			tokenUrl: false
-		},
-		exportWord: {
-			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
-			fileName: 'export-word-demo.docx',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace
-			},
-			tokenUrl: false
-		},
 		mergeFields: {
 			previewModes: [ '$labels', '$defaultValues' ],
 			initialPreviewMode: '$labels',
@@ -613,6 +593,11 @@ ClassicEditor.create(
 			sanitizeHtml: html => ( { html, hasChanged: false } ),
 			definitions: MERGE_FIELDS_DEFINITIONS,
 			dataSets: MERGE_FIELDS_DATASETS
+		},
+		exportInlineStyles: {
+			stripCssClasses: true,
+			transformations: BASIC_EMAIL_TRANSFORMATIONS,
+			inlineCss: [ coreRawStylesheet, premiumRawStylesheet, contentRawStylesheet ].join( '\n' )
 		},
 		wproofreader: {
 			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
@@ -632,6 +617,106 @@ ClassicEditor.create(
 			definitions: TEMPLATE_DEFINITIONS
 		}
 	} )
+	.then( editor => {
+		window.editor = editor;
+		initCopyHtmlButton( editor );
+	} )
 	.catch( error => {
 		console.error( error.stack );
 	} );
+
+/**
+ * Initializes the copy HTML button functionality.
+ */
+function initCopyHtmlButton( editor ) {
+	const copyButton = document.getElementById( 'copy-html-button' );
+
+	if ( !copyButton ) {
+		return;
+	}
+
+	// Set initial state.
+	copyButton.setAttribute( 'data-status', 'idle' );
+
+	if ( LICENSE_KEY === 'GPL' ) {
+		copyButton.setAttribute( 'disabled', '' );
+	}
+
+	copyButton.addEventListener( 'click', async () => {
+		updateButtonStatus( 'copying' );
+
+		// Delay exporting to update UI
+		await new Promise( resolve => setTimeout( resolve, 100 ) );
+
+		try {
+			// Get editor data.
+			const html = await editor.commands.execute( 'exportInlineStyles', {
+				dataControllerDowncastOptions: {
+					mergeFieldsData: {
+						clientName: 'Mr. Smith',
+						discountValue: '20%',
+						benefit1: 'Boosts energy',
+						benefit2: 'Antioxidants',
+						benefit3: 'Immune support'
+					}
+				}
+			} );
+
+			/* eslint-disable max-len */
+			const formattedHtml = formatHtml(
+				'<!DOCTYPE html>' +
+				'<html lang="en">' +
+					'<head>' +
+						'<meta charset="UTF-8">' +
+						'<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+						'<title>Email Content</title>' +
+						'<link rel="preconnect" href="https://fonts.googleapis.com">' +
+						'<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+						'<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">' +
+					'</head>' +
+					'<body style="background-color: #fafafa;">' +
+					html +
+					'</body>' +
+				'</html>'
+			);
+			/* eslint-enable max-len */
+
+			// Copy to clipboard.
+			await navigator.clipboard.writeText( formattedHtml );
+
+			updateButtonStatus( 'copied' );
+		} catch ( error ) {
+			console.error( 'Failed to copy HTML:', error );
+			updateButtonStatus( 'error' );
+		}
+
+		// Reset button after delay
+		setTimeout( () => {
+			updateButtonStatus( 'idle' );
+		}, 2000 );
+	} );
+
+	/**
+	 * Updates the copy button status.
+	 */
+	function updateButtonStatus( status ) {
+		copyButton.setAttribute( 'data-status', status );
+
+		if ( status !== 'idle' ) {
+			copyButton.setAttribute( 'disabled', '' );
+		} else {
+			copyButton.removeAttribute( 'disabled' );
+		}
+	}
+}
+
+/**
+ * Creates an absolute URL from a given path.
+ */
+function makeAbsoluteUrl( path ) {
+	if ( !path || path.startsWith( 'http://' ) || path.startsWith( 'https://' ) ) {
+		return path;
+	}
+
+	return new URL( path, window.location.origin ).href;
+}

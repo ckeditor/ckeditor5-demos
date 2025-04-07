@@ -47,3 +47,90 @@ html {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 }
+
+/* ---- Copy HTML button styles ------------------------------------------------------ */
+.copy-html-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+}
+
+.copy-html-button {
+	background-color: #fff;
+	border: 1px solid #c1c1c1;
+	border-radius: 4px;
+	color: #333;
+	cursor: pointer;
+	font-family: var(--ck-font-face);
+	font-size: 0.9em;
+	font-weight: 600;
+	padding: 8px 16px;
+	transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+	position: relative;
+	overflow: hidden;
+	display: inline-flex;
+	align-items: center;
+	height: 40px;
+	width: 160px;
+
+	&:hover {
+		background-color: #f5f5f5;
+		border-color: #999;
+	}
+
+	&:active {
+		background-color: #e8e8e8;
+		box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1);
+	}
+
+	&:disabled {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.7;
+	}
+
+	&[data-status="copied"] {
+		background-color: #e7f6e7;
+		border-color: #5db75d;
+		color: #2c7c2c;
+	}
+
+	&[data-status="error"] {
+		background-color: #fde8e8;
+		border-color: #e75c5c;
+		color: #c92a2a;
+	}
+
+	& .copy-html-button__content {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: opacity 0.2s, transform 0.2s;
+		opacity: 0;
+		transform: translateY(100%);
+	}
+
+	& .copy-html-button__content--idle {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	&[data-status="copying"] .copy-html-button__content--copying,
+	&[data-status="copied"] .copy-html-button__content--copied,
+	&[data-status="error"] .copy-html-button__content--error {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	&[data-status="copying"] .copy-html-button__content--idle,
+	&[data-status="copied"] .copy-html-button__content--idle,
+	&[data-status="error"] .copy-html-button__content--idle {
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+}
