@@ -791,6 +791,11 @@ ClassicEditor.create(
 				'fullscreen'
 			]
 		},
+		fullscreen: {
+			onEnterCallback: () => {
+				document.querySelector( '.ck-fullscreen__editable' ).setAttribute( 'data-demo-type', 'feature-rich' );
+			}
+		},
 		exportPdf: {
 			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
 			fileName: 'export-pdf-demo.pdf',

@@ -831,6 +831,11 @@ DecoupledEditor.create(
 				'fullscreen'
 			]
 		},
+		fullscreen: {
+			onEnterCallback: () => {
+				document.querySelector( '.ck-fullscreen__editable' ).setAttribute( 'data-demo-type', 'productivity' );
+			}
+		},
 		heading: {
 			options: [
 				{
