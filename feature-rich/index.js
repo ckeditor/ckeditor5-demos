@@ -84,7 +84,8 @@ import {
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	WordCount
+	WordCount,
+	Fullscreen
 } from 'ckeditor5';
 
 import {
@@ -633,6 +634,7 @@ ClassicEditor.create(
 			Essentials,
 			FindAndReplace,
 			Font,
+			Fullscreen,
 			GeneralHtmlSupport,
 			Heading,
 			Highlight,
@@ -782,8 +784,17 @@ ClassicEditor.create(
 				'todoList',
 				'|',
 				'outdent',
-				'indent'
+				'indent',
+				'|',
+
+				// --- Fullscreen mode --------------------------------------------------------------------
+				'fullscreen'
 			]
+		},
+		fullscreen: {
+			onEnterCallback: () => {
+				document.querySelector( '.ck-fullscreen__editable' ).setAttribute( 'data-demo-type', 'feature-rich' );
+			}
 		},
 		exportPdf: {
 			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],

@@ -40,6 +40,7 @@ import {
 	FontColor,
 	FontFamily,
 	FontSize,
+	Fullscreen,
 	Heading,
 	Image,
 	ImageCaption,
@@ -705,6 +706,7 @@ DecoupledEditor.create(
 			FontColor,
 			FontFamily,
 			FontSize,
+			Fullscreen,
 			Heading,
 			Image,
 			ImageCaption,
@@ -824,8 +826,15 @@ DecoupledEditor.create(
 				'multilevelList',
 				'|',
 				'outdent',
-				'indent'
+				'indent',
+				'|',
+				'fullscreen'
 			]
+		},
+		fullscreen: {
+			onEnterCallback: () => {
+				document.querySelector( '.ck-fullscreen__editable' ).setAttribute( 'data-demo-type', 'productivity' );
+			}
 		},
 		heading: {
 			options: [
