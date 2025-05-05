@@ -96,6 +96,8 @@ import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
 import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
+import demoStylesheets from './demo.css?url';
+import contentStylesheets from './content.css?url';
 
 /* eslint-disable max-len */
 const TEMPLATE_DEFINITIONS = [
@@ -309,8 +311,8 @@ const MERGE_FIELDS_DEFINITIONS = [
 				id: 'additionalValueProposition',
 				label: 'Spa recommendations box',
 				defaultValue: `
-					<figure class="table">
-						<table style="border-width:0;background:#ebe8e1;text-wrap: balance;width:clamp(45.9375rem, 27.8492rem + 39.3759vw, 62.5rem);">
+					<figure style="width:100%;display:flex;">
+						<table style="border-width:0;background:#ebe8e1;text-wrap: balance;width:100%;">
 							<colgroup>
 								<col style="width:11.12%"></col>
 								<col style="width:11.12%"></col>
@@ -428,8 +430,8 @@ const MERGE_FIELDS_DATASETS = [
 					</table>
 			</figure>`,
 			additionalValueProposition: `
-				<figure class="table">
-					<table style="border-width:0;background:#ebe8e1;text-wrap: balance;width:clamp(45.9375rem, 27.8492rem + 39.3759vw, 62.5rem);">
+				<figure style="width:100%;display:flex;">
+					<table style="border-width:0;background:#ebe8e1;text-wrap: balance;width:100%;">
 						<colgroup>
 							<col style="width:11.12%"></col>
 							<col style="width:11.12%"></col>
@@ -525,8 +527,8 @@ const MERGE_FIELDS_DATASETS = [
 					</table>
 				</figure>`,
 			additionalValueProposition: `
-				<figure class="table">
-					<table style="border-width:0;background:#ebe8e1;text-wrap: balance;width:clamp(45.9375rem, 27.8492rem + 39.3759vw, 62.5rem);">
+				<figure style="width:100%;display:flex;">
+					<table style="border-width:0;background:#ebe8e1;text-wrap: balance;width:100%;">
 						<colgroup>
 							<col style="width:11.12%"></col>
 							<col style="width:11.12%"></col>
@@ -784,7 +786,7 @@ ClassicEditor.create(
 			]
 		},
 		exportPdf: {
-			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
+			stylesheets: [ coreStylesheets, premiumStylesheets, demoStylesheets, contentStylesheets ],
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
@@ -798,7 +800,7 @@ ClassicEditor.create(
 			tokenUrl: false
 		},
 		exportWord: {
-			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
+			stylesheets: [ coreStylesheets, premiumStylesheets, demoStylesheets, contentStylesheets ],
 			fileName: 'export-word-demo.docx',
 			converterOptions: {
 				format: 'A4',
