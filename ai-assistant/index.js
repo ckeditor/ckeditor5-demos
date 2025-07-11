@@ -88,7 +88,8 @@ import {
 	ImportWord,
 	OpenAITextAdapter,
 	SlashCommand,
-	PasteFromOfficeEnhanced
+	PasteFromOfficeEnhanced,
+	LineHeight
 } from 'ckeditor5-premium-features';
 
 import 'ckeditor5/ckeditor5.css';
@@ -147,6 +148,7 @@ ClassicEditor.create(
 			TableColumnResize,
 			Underline,
 			CloudServicesUploadAdapter,
+			LineHeight,
 
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
 			...( CKBOX_TOKEN_URL ? [
@@ -195,6 +197,7 @@ ClassicEditor.create(
 				'link',
 				'|',
 				'alignment',
+				'lineHeight',
 				'|',
 				'bulletedList',
 				'numberedList',

@@ -43,7 +43,6 @@
 .ck-content h4,
 .ck-content h5,
 .ck-content h6 {
-  line-height: 1.2em;
   padding-top: 0.8em;
   margin-bottom: 0.4em;
 }
@@ -51,8 +50,6 @@
 .ck-content ol,
 .ck-content p,
 .ck-content ul {
-  font-size: 1em;
-  line-height: 1.6em;
   padding-top: 0.2em;
   margin-bottom: var(--ck-spacing-large);
 }

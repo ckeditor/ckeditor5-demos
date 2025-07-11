@@ -98,7 +98,8 @@ import {
 	MultiLevelList,
 	SlashCommand,
 	TableOfContents,
-	Template
+	Template,
+	LineHeight
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -679,6 +680,7 @@ ClassicEditor.create(
 			TodoList,
 			Underline,
 			WordCount,
+			LineHeight,
 
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
 			...( CKBOX_TOKEN_URL ? [
@@ -775,6 +777,7 @@ ClassicEditor.create(
 
 				// --- Text alignment ---------------------------------------------------------------------------
 				'alignment',
+				'lineHeight',
 				'|',
 
 				// --- Lists and indentation --------------------------------------------------------------------

@@ -357,7 +357,6 @@ h6 {
 .ck-content h6 {
 	margin-bottom: 0.4em;
 	padding-top: 0.8em;
-	line-height: 1.2em;
 }
 
 .ck-content blockquote,
@@ -365,8 +364,6 @@ h6 {
 .ck-content p,
 .ck-content ul {
 	padding-top: 0.2em;
-	font-size: 1em;
-	line-height: 1.6em;
 }
 
 .ck-content blockquote,

@@ -59,7 +59,6 @@
 	& h6 {
 		margin-bottom: 0.4em;
 		padding-top: 0.8em;
-		line-height: 1.2em;
 	}
 
 	& blockquote,
@@ -67,8 +66,6 @@
 	& p,
 	& ul {
 		padding-top: 0.2em;
-		font-size: 1em;
-		line-height: 1.6em;
 	}
 
 	& blockquote,

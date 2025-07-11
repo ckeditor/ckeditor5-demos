@@ -92,6 +92,7 @@ const plugins = [
 ClassicEditor.create(
 	document.querySelector( '#cke5-localized-de-demo' ),
 	{
+		licenseKey: 'GPL',
 		language: 'de',
 		plugins,
 		placeholder: 'Tippen Sie Ihren Inhalt hier oder fügen Sie ihn ein!',

@@ -90,7 +90,8 @@ import {
 	ImportWord,
 	Template,
 	SlashCommand,
-	SourceEditingEnhanced
+	SourceEditingEnhanced,
+	LineHeight
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -587,6 +588,8 @@ ClassicEditor.create(
 			TextTransformation,
 			TodoList,
 			Underline,
+			LineHeight,
+
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
 			...( CKBOX_TOKEN_URL ? [
 				CKBox
@@ -672,6 +675,7 @@ ClassicEditor.create(
 
 				// --- Text alignment ---------------------------------------------------------------------------
 				'alignment',
+				'lineHeight',
 				'|',
 
 				// --- Lists and indentation --------------------------------------------------------------------
