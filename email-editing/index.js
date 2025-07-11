@@ -89,7 +89,8 @@ import {
 	MergeFields,
 	Template,
 	SlashCommand,
-	SourceEditingEnhanced
+	SourceEditingEnhanced,
+	LineHeight
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -367,6 +368,7 @@ ClassicEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
+			LineHeight,
 
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
 			...( CKBOX_TOKEN_URL ? [
@@ -432,6 +434,7 @@ ClassicEditor.create(
 				'insertTableLayout',
 				'|',
 				'alignment',
+				'lineHeight',
 				'|',
 				'bulletedList',
 				'numberedList',
