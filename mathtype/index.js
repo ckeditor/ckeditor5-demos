@@ -34,6 +34,7 @@ import 'ckeditor5/ckeditor5.css';
 ClassicEditor.create(
 	document.querySelector( '#cke5-mathtype-demo' ),
 	{
+		licenseKey: 'GPL',
 		plugins: [
 			CloudServices,
 			MathType,
