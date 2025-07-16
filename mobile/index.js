@@ -37,6 +37,7 @@ import 'ckeditor5/ckeditor5.css';
 ClassicEditor.create(
 	document.querySelector( '#cke5-mobile-demo' ),
 	{
+		licenseKey: 'GPL',
 		plugins: [
 			Alignment,
 			BlockQuote,

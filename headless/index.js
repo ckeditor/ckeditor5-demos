@@ -66,6 +66,7 @@ HeadlessEditor.builtinPlugins = [
 ];
 
 HeadlessEditor.defaultConfig = {
+	licenseKey: 'GPL',
 	codeBlock: {
 		languages: [
 			{ language: 'css', label: 'CSS' },

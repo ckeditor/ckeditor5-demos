@@ -85,7 +85,8 @@ import {
 	TableOfContents,
 	DocumentOutline,
 	FormatPainter,
-	SlashCommand
+	SlashCommand,
+	LineHeight
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
@@ -737,6 +738,7 @@ DecoupledEditor.create(
 			TableToolbar,
 			TextTransformation,
 			Underline,
+			LineHeight,
 
 			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
 			...( CKBOX_TOKEN_URL ? [
@@ -820,6 +822,7 @@ DecoupledEditor.create(
 						'alignment:justify'
 					]
 				},
+				'lineHeight',
 				'|',
 				'numberedList',
 				'bulletedList',
