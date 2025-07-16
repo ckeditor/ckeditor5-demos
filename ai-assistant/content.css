@@ -52,8 +52,3 @@
   padding-top: 0.2em;
   margin-bottom: var(--ck-spacing-large);
 }
-
-.ck-content {
-  font-family: var(--font-family), sans-serif;
-  line-height: 1.4;
-}

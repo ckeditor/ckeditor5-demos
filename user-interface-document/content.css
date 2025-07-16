@@ -54,6 +54,6 @@
 }
 
 .ck-content {
-  font-family: "Times New Roman", Time, serif;
-  line-height: 1.4;
+  --ck-content-font-family: "Times New Roman", Time, serif;
+  --ck-content-line-height: 1.4;
 }
