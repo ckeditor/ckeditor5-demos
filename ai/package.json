@@ -1,5 +1,5 @@
 {
-	"name": "mathtype",
+	"name": "ai",
 	"version": "0.1.0",
 	"repository": "https://github.com/ckeditor/ckeditor5-demos",
 	"author": "CKSource (http://cksource.com/)",
@@ -16,7 +16,7 @@
 	},
 	"devDependencies": {
 		"ckeditor5": "47.0.0-alpha.5",
-		"@wiris/mathtype-ckeditor5": "^8.10.0",
+		"ckeditor5-premium-features": "47.0.0-alpha.5",
 		"vite": "^5.0.0"
 	}
 }
