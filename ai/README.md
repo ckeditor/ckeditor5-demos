@@ -1,4 +1,4 @@
-# AI Assistant editor
+# AI editor
 
 CKEditor AI is an AI-powered writing assistant that integrates directly into our rich-text editor, CKEditor 5, providing instant text rewriting, summarization, correction, and contextual chat help based on internal style guides. The platform includes automated review tools and enterprise-ready functionality that plugs into existing systems without requiring custom infrastructure.
 
@@ -20,7 +20,7 @@ git clone git@github.com:ckeditor/ckeditor5-demos.git
 cd ckeditor5-demos/ai && yarn
 ```
 
-1. Open the `ai/index.js` file and update the values of the `LICENSE_KEY`, `AI_OPENAI_API_URL`, `AI_OPENAI_TOKEN`, `AI_OPENAI_MODEL` and `CKBOX_TOKEN_URL` variables. Without this, the CKBox, AIAssistant and other premium features will not be enabled.
+1. Open the `ai/index.js` file and update the values of the `LICENSE_KEY`, `CS_CONFIG` and `CKBOX_TOKEN_URL` variables. Without this, the CKBox, AIAssistant and other premium features will not be enabled.
 
 2. Start the demo:
 
