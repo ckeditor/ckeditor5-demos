@@ -16,9 +16,11 @@ if ( LICENSE_KEY === 'GPL' ) {
  *
  * See https://ckeditor.com/docs/ckeditor5/latest/features/ai-assistant/ai-assistant-integration.html#integrating-with-the-proxy-endpoint
  */
-const AI_API_URL = '';
+const AI_OPENAI_API_URL = '';
+const AI_OPENAI_TOKEN = '';
+const AI_OPENAI_MODEL = 'gpt-4o';
 
-if ( !AI_API_URL ) {
+if ( !AI_OPENAI_API_URL || !AI_OPENAI_TOKEN || !AI_OPENAI_MODEL ) {
 	alert( 'AI Assistant requires additional configuration. Check the index.js file for more information.' );
 }
 
@@ -165,7 +167,7 @@ ClassicEditor.create(
 				SlashCommand,
 
 				// Include AI Assistant only if the AI_API_URL is provided.
-				...( AI_API_URL ? [
+				...( AI_OPENAI_API_URL ? [
 					AIAssistant
 				] : [] )
 			] : [] )
@@ -347,8 +349,20 @@ ClassicEditor.create(
 			tokenUrl: false
 		},
 		ai: {
-			openAI: {
-				apiUrl: AI_API_URL
+			assistant: {
+				adapter: {
+					openAI: {
+						apiUrl: AI_OPENAI_API_URL,
+						requestHeaders: {
+							Authorization: AI_OPENAI_TOKEN
+						},
+						requestParameters: {
+							model: AI_OPENAI_MODEL,
+							max_tokens: 4000,
+							stream: true
+						}
+					}
+				}
 			}
 		},
 		licenseKey: LICENSE_KEY

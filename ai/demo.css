@@ -1,0 +1,157 @@
+/* ---- Customizations to the color grid palettes (font and background color) ------------------------------------------------------ */
+.ck.ck-color-ui-dropdown {
+  --ck-color-grid-tile-size: 20px;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid {
+  grid-gap: 1px;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid .ck-button {
+  border-radius: 0;
+}
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:hover:not(.ck-disabled),
+.ck.ck-color-ui-dropdown .ck-color-grid__tile:focus:not(.ck-disabled) {
+  z-index: 1;
+  transform: scale(1.3);
+}
+
+/* ---- Basic CSS reset ------------------------------------------------------ */
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.ck.ck-content.ck-editor__editable_inline > :first-child {
+  margin-top: 0;
+}
+
+/* ---- Styles of the demo page ------------------------------------------------------ */
+.editor-wrapper {
+  max-width: 90rem;
+  margin: 0 auto 2rem auto;
+}
+
+.header-wrapper {
+  padding: 1rem 2rem;
+}
+
+/* ---- Document editor demo styles ------------------------------------------------------------------- */
+.ai-integration {
+  /* Demo container dimensions */
+  --ai-demo-container-width: clamp( 1100px, calc( 100vw - 40px ), 1500px );
+  --ai-demo-container-min-height: 500px;
+  --ai-demo-container-max-height: min(80vh, 800px);
+
+  /* Layout spacing */
+  --ai-demo-spacing-large: calc(2 * var(--ck-spacing-large));
+  --ai-editor-padding: 20mm 12mm;
+
+  /* Editor dimensions */
+  --ai-editor-max-width: 210mm;
+  --ai-editor-min-height: 300px;
+
+  /* Sidebar dimensions */
+  --ai-sidebar-width: 500px;
+
+  /* Colors and shadows */
+  --ai-shadow-light: 0 2px 3px hsla(0, 0%, 0%, 0.078);
+  --ai-shadow-medium: 0 2px 8px hsla(0, 0%, 0%, 0.08);
+  --ai-border-color: hsl(0, 0%, 88%);
+  --ai-content-bg: hsl(0, 0%, 100%);
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  position: relative;
+  width: 100%;
+}
+
+.ai-integration__content {
+  display: grid;
+  grid-template: [toolbar] 'Toolbar' auto [content] 'Content' 1fr / 1fr;
+  gap: 0;
+  border: 1px solid var(--ck-color-base-border);
+  background: var(--ck-color-base-foreground);
+  width: 100%;
+  max-width: none;
+  min-height: var(--ai-demo-container-min-height);
+
+  & .ai-integration__toolbar-container {
+    position: relative;
+    grid-area: Toolbar;
+    box-shadow: var(--ai-shadow-light);
+
+    & > .ck.ck-toolbar {
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-radius: 0 0 0 0;
+    }
+  }
+
+  & .ai-integration__content-wrapper {
+    display: flex;
+    grid-area: Content;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+    max-height: var(--ai-demo-container-max-height);
+    overflow-y: auto;
+  }
+}
+
+.ai-integration__sidebar {
+  position: relative;
+  width: var(--ai-sidebar-width);
+  height: 100%;
+  min-height: var(--ai-demo-container-min-height);
+
+  & .ai-integration__sidebar-content {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: var(--ai-demo-container-min-height);
+
+    & .ck.ck-tabs {
+      border-left: none;
+
+      &.ck-tabs_right {
+        flex: 1;
+        min-height: inherit;
+      }
+    }
+  }
+}
+
+#snippet-ckeditor-ai.ck.ck-content {
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  margin: var(--ai-demo-spacing-large);
+  box-shadow: var(--ai-shadow-medium);
+  border: 1px solid var(--ai-border-color);
+  background: var(--ai-content-bg);
+  padding: var(--ai-editor-padding);
+  max-width: var(--ai-editor-max-width);
+  height: auto;
+  min-height: var(--ai-demo-container-min-height);
+  overflow: hidden;
+  overflow-wrap: break-word;
+
+  &.ck-focused {
+    box-shadow: var(--ai-shadow-medium);
+    border: 1px solid var(--ai-border-color);
+  }
+
+  &.ck.ck-editor__editable_inline > :first-child {
+    margin-top: 0;
+  }
+}
