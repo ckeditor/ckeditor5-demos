@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test-demos:
     docker:
-      - image: cimg/node:18.17.1
+      - image: cimg/node:24.13.0
         user: root
     steps:
       - checkout
@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Install browser
           command: |
-            apt-get update -y && apt-get install lsb-release libappindicator3-1 fonts-liberation libasound2 libdrm2 libgbm1 libnspr4 libnss3 libu2f-udev libvulkan1 xdg-utils xvfb
+            apt-get update -y && apt-get install lsb-release libappindicator3-1 fonts-liberation libasound2t64 libdrm2 libgbm1 libnspr4 libnss3 libu2f-udev libvulkan1 xdg-utils xvfb
             curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             dpkg -i google-chrome.deb
             sed -i 's|HERE/chrome"|HERE/chrome" --no-sandbox|g' /opt/google/chrome/google-chrome
