@@ -26,21 +26,34 @@ const CKBOX_TOKEN_URL = '';
  */
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
+/**
+ * Cloud Services configuration.
+ */
+const CS_CONFIG = {
+	tokenUrl: '',
+	uploadUrl: '',
+	webSocketUrl: ''
+};
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
+
 import {
 	DecoupledEditor,
+	AdjacentListsSupport,
 	Alignment,
 	Autoformat,
 	Bold,
 	CKBox,
+	CKBoxImageEdit,
 	CloudServices,
 	EasyImage,
+	Emoji,
 	Essentials,
 	FindAndReplace,
 	FontBackgroundColor,
 	FontColor,
 	FontFamily,
 	FontSize,
-	Fullscreen,
 	Heading,
 	Image,
 	ImageCaption,
@@ -49,7 +62,6 @@ import {
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
-	Base64UploadAdapter,
 	Indent,
 	IndentBlock,
 	Italic,
@@ -70,32 +82,161 @@ import {
 	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	Underline
+	Underline,
+	SimpleUploadAdapter,
+	Fullscreen,
+	BalloonToolbar
 } from 'ckeditor5';
 
 import {
+	AIChat,
+	AIEditorIntegration,
+	AIQuickActions,
+	AIReviewMode,
+	AITranslate,
+	AIChatShortcuts,
 	CaseChange,
+	DocumentOutline,
 	ExportPdf,
 	ExportWord,
+	FormatPainter,
 	ImportWord,
 	MergeFields,
 	MultiLevelList,
-	Pagination,
-	Template,
-	TableOfContents,
-	DocumentOutline,
-	FormatPainter,
+	PasteFromOfficeEnhanced,
 	SlashCommand,
-	LineHeight
+	TableOfContents,
+	Template,
+	LineHeight,
+	Footnotes
 } from 'ckeditor5-premium-features';
 
 import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
 
-import 'ckeditor5/ckeditor5.css';
-import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
+const CKBOX_IMAGE_EDIT_FORMATS = /.+([jpg|jpeg|webp|png|bmp|tiff|gif])/;
 
-import coreStylesheets from 'ckeditor5/ckeditor5.css?url';
-import premiumStylesheets from 'ckeditor5-premium-features/ckeditor5-premium-features.css?url';
+const REDUCED_MATERIAL_COLORS = [
+	{ label: 'Red 50', color: '#ffebee' },
+	{ label: 'Purple 50', color: '#f3e5f5' },
+	{ label: 'Indigo 50', color: '#e8eaf6' },
+	{ label: 'Blue 50', color: '#e3f2fd' },
+	{ label: 'Cyan 50', color: '#e0f7fa' },
+	{ label: 'Teal 50', color: '#e0f2f1' },
+	{ label: 'Light green 50', color: '#f1f8e9' },
+	{ label: 'Lime 50', color: '#f9fbe7' },
+	{ label: 'Amber 50', color: '#fff8e1' },
+	{ label: 'Orange 50', color: '#fff3e0' },
+	{ label: 'Grey 50', color: '#fafafa' },
+	{ label: 'Blue grey 50', color: '#eceff1' },
+	{ label: 'Red 100', color: '#ffcdd2' },
+	{ label: 'Purple 100', color: '#e1bee7' },
+	{ label: 'Indigo 100', color: '#c5cae9' },
+	{ label: 'Blue 100', color: '#bbdefb' },
+	{ label: 'Cyan 100', color: '#b2ebf2' },
+	{ label: 'Teal 100', color: '#b2dfdb' },
+	{ label: 'Light green 100', color: '#dcedc8' },
+	{ label: 'Lime 100', color: '#f0f4c3' },
+	{ label: 'Amber 100', color: '#ffecb3' },
+	{ label: 'Orange 100', color: '#ffe0b2' },
+	{ label: 'Grey 100', color: '#f5f5f5' },
+	{ label: 'Blue grey 100', color: '#cfd8dc' },
+	{ label: 'Red 200', color: '#ef9a9a' },
+	{ label: 'Purple 200', color: '#ce93d8' },
+	{ label: 'Indigo 200', color: '#9fa8da' },
+	{ label: 'Blue 200', color: '#90caf9' },
+	{ label: 'Cyan 200', color: '#80deea' },
+	{ label: 'Teal 200', color: '#80cbc4' },
+	{ label: 'Light green 200', color: '#c5e1a5' },
+	{ label: 'Lime 200', color: '#e6ee9c' },
+	{ label: 'Amber 200', color: '#ffe082' },
+	{ label: 'Orange 200', color: '#ffcc80' },
+	{ label: 'Grey 200', color: '#eeeeee' },
+	{ label: 'Blue grey 200', color: '#b0bec5' },
+	{ label: 'Red 300', color: '#e57373' },
+	{ label: 'Purple 300', color: '#ba68c8' },
+	{ label: 'Indigo 300', color: '#7986cb' },
+	{ label: 'Blue 300', color: '#64b5f6' },
+	{ label: 'Cyan 300', color: '#4dd0e1' },
+	{ label: 'Teal 300', color: '#4db6ac' },
+	{ label: 'Light green 300', color: '#aed581' },
+	{ label: 'Lime 300', color: '#dce775' },
+	{ label: 'Amber 300', color: '#ffd54f' },
+	{ label: 'Orange 300', color: '#ffb74d' },
+	{ label: 'Grey 300', color: '#e0e0e0' },
+	{ label: 'Blue grey 300', color: '#90a4ae' },
+	{ label: 'Red 400', color: '#ef5350' },
+	{ label: 'Purple 400', color: '#ab47bc' },
+	{ label: 'Indigo 400', color: '#5c6bc0' },
+	{ label: 'Blue 400', color: '#42a5f5' },
+	{ label: 'Cyan 400', color: '#26c6da' },
+	{ label: 'Teal 400', color: '#26a69a' },
+	{ label: 'Light green 400', color: '#9ccc65' },
+	{ label: 'Lime 400', color: '#d4e157' },
+	{ label: 'Amber 400', color: '#ffca28' },
+	{ label: 'Orange 400', color: '#ffa726' },
+	{ label: 'Grey 400', color: '#bdbdbd' },
+	{ label: 'Blue grey 400', color: '#78909c' },
+	{ label: 'Red 500', color: '#f44336' },
+	{ label: 'Purple 500', color: '#9c27b0' },
+	{ label: 'Indigo 500', color: '#3f51b5' },
+	{ label: 'Blue 500', color: '#2196f3' },
+	{ label: 'Cyan 500', color: '#00bcd4' },
+	{ label: 'Teal 500', color: '#009688' },
+	{ label: 'Light green 500', color: '#8bc34a' },
+	{ label: 'Lime 500', color: '#cddc39' },
+	{ label: 'Amber 500', color: '#ffc107' },
+	{ label: 'Orange 500', color: '#ff9800' },
+	{ label: 'Grey 500', color: '#9e9e9e' },
+	{ label: 'Blue grey 500', color: '#607d8b' },
+	{ label: 'Red 600', color: '#e53935' },
+	{ label: 'Purple 600', color: '#8e24aa' },
+	{ label: 'Indigo 600', color: '#3949ab' },
+	{ label: 'Blue 600', color: '#1e88e5' },
+	{ label: 'Cyan 600', color: '#00acc1' },
+	{ label: 'Teal 600', color: '#00897b' },
+	{ label: 'Light green 600', color: '#7cb342' },
+	{ label: 'Lime 600', color: '#c0ca33' },
+	{ label: 'Amber 600', color: '#ffb300' },
+	{ label: 'Orange 600', color: '#fb8c00' },
+	{ label: 'Grey 600', color: '#757575' },
+	{ label: 'Blue grey 600', color: '#546e7a' },
+	{ label: 'Red 700', color: '#d32f2f' },
+	{ label: 'Purple 700', color: '#7b1fa2' },
+	{ label: 'Indigo 700', color: '#303f9f' },
+	{ label: 'Blue 700', color: '#1976d2' },
+	{ label: 'Cyan 700', color: '#0097a7' },
+	{ label: 'Teal 700', color: '#00796b' },
+	{ label: 'Light green 700', color: '#689f38' },
+	{ label: 'Lime 700', color: '#afb42b' },
+	{ label: 'Amber 700', color: '#ffa000' },
+	{ label: 'Orange 700', color: '#f57c00' },
+	{ label: 'Grey 700', color: '#616161' },
+	{ label: 'Blue grey 700', color: '#455a64' },
+	{ label: 'Red 800', color: '#c62828' },
+	{ label: 'Purple 800', color: '#6a1b9a' },
+	{ label: 'Indigo 800', color: '#283593' },
+	{ label: 'Blue 800', color: '#1565c0' },
+	{ label: 'Cyan 800', color: '#00838f' },
+	{ label: 'Teal 800', color: '#00695c' },
+	{ label: 'Light green 800', color: '#558b2f' },
+	{ label: 'Lime 800', color: '#9e9d24' },
+	{ label: 'Amber 800', color: '#ff8f00' },
+	{ label: 'Orange 800', color: '#ef6c00' },
+	{ label: 'Grey 800', color: '#424242' },
+	{ label: 'Blue grey 800', color: '#37474f' },
+	{ label: 'Red 900', color: '#b71c1c' },
+	{ label: 'Purple 900', color: '#4a148c' },
+	{ label: 'Indigo 900', color: '#1a237e' },
+	{ label: 'Blue 900', color: '#0d47a1' },
+	{ label: 'Cyan 900', color: '#006064' },
+	{ label: 'Teal 900', color: '#004d40' },
+	{ label: 'Light green 900', color: '#33691e' },
+	{ label: 'Lime 900', color: '#827717' },
+	{ label: 'Amber 900', color: '#ff6f00' },
+	{ label: 'Orange 900', color: '#e65100' },
+	{ label: 'Grey 900', color: '#212121' },
+	{ label: 'Blue grey 900', color: '#263238' }
+];
 
 const TEMPLATE_DEFINITIONS = [
 	{
@@ -267,130 +408,7 @@ const TEMPLATE_DEFINITIONS = [
 	}
 ];
 
-const REDUCED_MATERIAL_COLORS = [
-	{ label: 'Red 50', color: '#ffebee' },
-	{ label: 'Purple 50', color: '#f3e5f5' },
-	{ label: 'Indigo 50', color: '#e8eaf6' },
-	{ label: 'Blue 50', color: '#e3f2fd' },
-	{ label: 'Cyan 50', color: '#e0f7fa' },
-	{ label: 'Teal 50', color: '#e0f2f1' },
-	{ label: 'Light green 50', color: '#f1f8e9' },
-	{ label: 'Lime 50', color: '#f9fbe7' },
-	{ label: 'Amber 50', color: '#fff8e1' },
-	{ label: 'Orange 50', color: '#fff3e0' },
-	{ label: 'Grey 50', color: '#fafafa' },
-	{ label: 'Blue grey 50', color: '#eceff1' },
-	{ label: 'Red 100', color: '#ffcdd2' },
-	{ label: 'Purple 100', color: '#e1bee7' },
-	{ label: 'Indigo 100', color: '#c5cae9' },
-	{ label: 'Blue 100', color: '#bbdefb' },
-	{ label: 'Cyan 100', color: '#b2ebf2' },
-	{ label: 'Teal 100', color: '#b2dfdb' },
-	{ label: 'Light green 100', color: '#dcedc8' },
-	{ label: 'Lime 100', color: '#f0f4c3' },
-	{ label: 'Amber 100', color: '#ffecb3' },
-	{ label: 'Orange 100', color: '#ffe0b2' },
-	{ label: 'Grey 100', color: '#f5f5f5' },
-	{ label: 'Blue grey 100', color: '#cfd8dc' },
-	{ label: 'Red 200', color: '#ef9a9a' },
-	{ label: 'Purple 200', color: '#ce93d8' },
-	{ label: 'Indigo 200', color: '#9fa8da' },
-	{ label: 'Blue 200', color: '#90caf9' },
-	{ label: 'Cyan 200', color: '#80deea' },
-	{ label: 'Teal 200', color: '#80cbc4' },
-	{ label: 'Light green 200', color: '#c5e1a5' },
-	{ label: 'Lime 200', color: '#e6ee9c' },
-	{ label: 'Amber 200', color: '#ffe082' },
-	{ label: 'Orange 200', color: '#ffcc80' },
-	{ label: 'Grey 200', color: '#eeeeee' },
-	{ label: 'Blue grey 200', color: '#b0bec5' },
-	{ label: 'Red 300', color: '#e57373' },
-	{ label: 'Purple 300', color: '#ba68c8' },
-	{ label: 'Indigo 300', color: '#7986cb' },
-	{ label: 'Blue 300', color: '#64b5f6' },
-	{ label: 'Cyan 300', color: '#4dd0e1' },
-	{ label: 'Teal 300', color: '#4db6ac' },
-	{ label: 'Light green 300', color: '#aed581' },
-	{ label: 'Lime 300', color: '#dce775' },
-	{ label: 'Amber 300', color: '#ffd54f' },
-	{ label: 'Orange 300', color: '#ffb74d' },
-	{ label: 'Grey 300', color: '#e0e0e0' },
-	{ label: 'Blue grey 300', color: '#90a4ae' },
-	{ label: 'Red 400', color: '#ef5350' },
-	{ label: 'Purple 400', color: '#ab47bc' },
-	{ label: 'Indigo 400', color: '#5c6bc0' },
-	{ label: 'Blue 400', color: '#42a5f5' },
-	{ label: 'Cyan 400', color: '#26c6da' },
-	{ label: 'Teal 400', color: '#26a69a' },
-	{ label: 'Light green 400', color: '#9ccc65' },
-	{ label: 'Lime 400', color: '#d4e157' },
-	{ label: 'Amber 400', color: '#ffca28' },
-	{ label: 'Orange 400', color: '#ffa726' },
-	{ label: 'Grey 400', color: '#bdbdbd' },
-	{ label: 'Blue grey 400', color: '#78909c' },
-	{ label: 'Red 500', color: '#f44336' },
-	{ label: 'Purple 500', color: '#9c27b0' },
-	{ label: 'Indigo 500', color: '#3f51b5' },
-	{ label: 'Blue 500', color: '#2196f3' },
-	{ label: 'Cyan 500', color: '#00bcd4' },
-	{ label: 'Teal 500', color: '#009688' },
-	{ label: 'Light green 500', color: '#8bc34a' },
-	{ label: 'Lime 500', color: '#cddc39' },
-	{ label: 'Amber 500', color: '#ffc107' },
-	{ label: 'Orange 500', color: '#ff9800' },
-	{ label: 'Grey 500', color: '#9e9e9e' },
-	{ label: 'Blue grey 500', color: '#607d8b' },
-	{ label: 'Red 600', color: '#e53935' },
-	{ label: 'Purple 600', color: '#8e24aa' },
-	{ label: 'Indigo 600', color: '#3949ab' },
-	{ label: 'Blue 600', color: '#1e88e5' },
-	{ label: 'Cyan 600', color: '#00acc1' },
-	{ label: 'Teal 600', color: '#00897b' },
-	{ label: 'Light green 600', color: '#7cb342' },
-	{ label: 'Lime 600', color: '#c0ca33' },
-	{ label: 'Amber 600', color: '#ffb300' },
-	{ label: 'Orange 600', color: '#fb8c00' },
-	{ label: 'Grey 600', color: '#757575' },
-	{ label: 'Blue grey 600', color: '#546e7a' },
-	{ label: 'Red 700', color: '#d32f2f' },
-	{ label: 'Purple 700', color: '#7b1fa2' },
-	{ label: 'Indigo 700', color: '#303f9f' },
-	{ label: 'Blue 700', color: '#1976d2' },
-	{ label: 'Cyan 700', color: '#0097a7' },
-	{ label: 'Teal 700', color: '#00796b' },
-	{ label: 'Light green 700', color: '#689f38' },
-	{ label: 'Lime 700', color: '#afb42b' },
-	{ label: 'Amber 700', color: '#ffa000' },
-	{ label: 'Orange 700', color: '#f57c00' },
-	{ label: 'Grey 700', color: '#616161' },
-	{ label: 'Blue grey 700', color: '#455a64' },
-	{ label: 'Red 800', color: '#c62828' },
-	{ label: 'Purple 800', color: '#6a1b9a' },
-	{ label: 'Indigo 800', color: '#283593' },
-	{ label: 'Blue 800', color: '#1565c0' },
-	{ label: 'Cyan 800', color: '#00838f' },
-	{ label: 'Teal 800', color: '#00695c' },
-	{ label: 'Light green 800', color: '#558b2f' },
-	{ label: 'Lime 800', color: '#9e9d24' },
-	{ label: 'Amber 800', color: '#ff8f00' },
-	{ label: 'Orange 800', color: '#ef6c00' },
-	{ label: 'Grey 800', color: '#424242' },
-	{ label: 'Blue grey 800', color: '#37474f' },
-	{ label: 'Red 900', color: '#b71c1c' },
-	{ label: 'Purple 900', color: '#4a148c' },
-	{ label: 'Indigo 900', color: '#1a237e' },
-	{ label: 'Blue 900', color: '#0d47a1' },
-	{ label: 'Cyan 900', color: '#006064' },
-	{ label: 'Teal 900', color: '#004d40' },
-	{ label: 'Light green 900', color: '#33691e' },
-	{ label: 'Lime 900', color: '#827717' },
-	{ label: 'Amber 900', color: '#ff6f00' },
-	{ label: 'Orange 900', color: '#e65100' },
-	{ label: 'Grey 900', color: '#212121' },
-	{ label: 'Blue grey 900', color: '#263238' }
-];
-
-const MERGE_FIELDS_DEFINITIONS = [
+const MERGE_FIELDS_PP_DEFINITIONS = [
 	{
 		id: 'financialSummary',
 		label: 'Financial summary',
@@ -474,7 +492,7 @@ const MERGE_FIELDS_DEFINITIONS = [
 	}
 ];
 
-const MERGE_FIELDS_DATASETS = [
+const MERGE_FIELDS_PP_DATASETS = [
 	{
 		id: '2331',
 		label: 'Forecast #1',
@@ -577,20 +595,58 @@ const MERGE_FIELDS_DATASETS = [
 	}
 ];
 
-const exportHorizontalSpace = '10mm';
-const exportVerticalSpace = '12mm';
+function makeAbsoluteUrl( path ) {
+	if ( !path || path.startsWith( 'http://' ) || path.startsWith( 'https://' ) ) {
+		return path;
+	}
 
-// eslint-disable-next-line max-len
-const DOCUMENT_OUTLINE_ICON = '<svg viewBox=\'0 0 20 20\' width=\'20\' height=\'20\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M5 9.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 8H3.5a.5.5 0 0 0-.5.5V9a.5.5 0 0 0 .5.5H5Z\'/><path d=\'M5.5 12a.5.5 0 0 1-.5.5H3.5A.5.5 0 0 1 3 12v-.5a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5v.5Z\'/><path d=\'M5 6.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 5H3.5a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5H5Z\'/><path clip-rule=\'evenodd\' d=\'M2 19a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2Zm6-1.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H8v15Zm-1.5-15H2a.5.5 0 0 0-.5.5v14a.5.5 0 0 0 .5.5h4.5v-15Z\'/></svg>';
+	return new URL( path, window.location.origin ).href;
+}
 
+/**
+ * Generic function to handle URL parameters - gets parameter from URL or generates one if missing.
+ * Updates the URL state with the parameter.
+ *
+ * @param paramName - The name of the URL parameter (e.g., 'channelId', 'userId')
+ * @returns The parameter value from URL or newly generated
+ */
+function handleIDUrlParameter( paramName ) {
+	// Get parameter from URL.
+	const paramMatch = location.search.match( new RegExp( `${ paramName }=([^&]+)` ) );
+	let paramValue = paramMatch ? decodeURIComponent( paramMatch[ 1 ] ) : null;
+
+	if ( !paramValue ) {
+		// Generate new parameter value using a simple UUID-like generator
+		paramValue = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace( /[xy]/g, c => {
+			const r = Math.random() * 16 | 0;
+			const v = c === 'x' ? r : ( r & 0x3 | 0x8 );
+			return v.toString( 16 );
+		} );
+
+		// Update URL with the new parameter.
+		const url = new URL( window.location.href );
+		url.searchParams.set( paramName, paramValue );
+		window.history.replaceState( {}, document.title, url.toString() );
+	}
+
+	return paramValue;
+}
+
+const exportHorizontalSpace = '12mm';
+const exportVerticalSpace = '20mm';
+
+// Document outline toggle icons
 // eslint-disable-next-line max-len
-const COLLAPSE_OUTLINE_ICON = '<svg viewBox=\'0 0 20 20\' width=\'20\' height=\'20\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M11.463 5.187a.888.888 0 1 1 1.254 1.255L9.16 10l3.557 3.557a.888.888 0 1 1-1.254 1.255L7.26 10.61a.888.888 0 0 1 .16-1.382l4.043-4.042z\'/></svg>';
+const DOCUMENT_OUTLINE_ICON = '<svg viewBox="0 0 20 20" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M5 9.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 8H3.5a.5.5 0 0 0-.5.5V9a.5.5 0 0 0 .5.5H5Z"/><path d="M5.5 12a.5.5 0 0 1-.5.5H3.5A.5.5 0 0 1 3 12v-.5a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5v.5Z"/><path d="M5 6.5a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 5 5H3.5a.5.5 0 0 0-.5.5V6a.5.5 0 0 0 .5.5H5Z"/><path clip-rule="evenodd" d="M2 19a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2Zm6-1.5h10a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H8v15Zm-1.5-15H2a.5.5 0 0 0-.5.5v14a.5.5 0 0 0 .5.5h4.5v-15Z"/></svg>';
+// eslint-disable-next-line max-len
+const COLLAPSE_OUTLINE_ICON = '<svg viewBox="0 0 20 20" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M11.463 5.187a.888.888 0 1 1 1.254 1.255L9.16 10l3.557 3.557a.888.888 0 1 1-1.254 1.255L7.26 10.61a.888.888 0 0 1 .16-1.382l4.043-4.042z"/></svg>';
 
 function bttnCreator( config ) {
 	return config.parent.appendChild(
 		bttnUpdater( config, document.createElement( config.node ) )
 	);
 }
+
 function bttnUpdater( config, btn ) {
 	elementAttributter( btn, config.attributes );
 
@@ -626,7 +682,7 @@ function DocumentOutlineToggler( editor ) {
 	);
 
 	const demoContainer = documentOutlineContainer.closest(
-		'#cke5-productivity-pack-demo'
+		'#cke5-productivity-demo'
 	);
 
 	const outlineButtonDataClosed = {
@@ -688,304 +744,496 @@ function DocumentOutlineToggler( editor ) {
 	}
 }
 
-DecoupledEditor.create(
-	document.querySelector( '.cke5-productivity-pack-demo__content' ),
-	{
-		extraPlugins: [ DocumentOutlineToggler ], // Plugin for Document Outline toggling
-		documentOutline: {
-			container: document.querySelector( '[class*=\'__outline\']' )
-		},
-		plugins: [
-			Alignment,
-			Autoformat,
-			Bold,
-			CloudServices,
-			EasyImage,
-			Essentials,
-			FindAndReplace,
-			FontBackgroundColor,
-			FontColor,
-			FontFamily,
-			FontSize,
-			Fullscreen,
-			Heading,
-			Image,
-			ImageCaption,
-			ImageInsert,
-			ImageResize,
-			ImageStyle,
-			ImageToolbar,
-			ImageUpload,
-			Base64UploadAdapter,
-			Indent,
-			IndentBlock,
-			Italic,
-			Link,
-			List,
-			ListProperties,
-			MediaEmbed,
-			Mention,
-			PageBreak,
-			Paragraph,
-			PasteFromOffice,
-			PictureEditing,
-			RemoveFormat,
-			Table,
-			TableCaption,
-			TableCellProperties,
-			TableColumnResize,
-			TableProperties,
-			TableToolbar,
-			TextTransformation,
-			Underline,
-			LineHeight,
+// --------- Document ------------------------------------------------------------------------
 
-			// Include CKBox plugin only if the CKBOX_TOKEN_URL is provided.
-			...( CKBOX_TOKEN_URL ? [
-				CKBox
-			] : [] ),
+class DocumentProductivityEditor extends DecoupledEditor {}
 
-			// Include premium features only if the license key is not GPL.
-			...( LICENSE_KEY !== 'GPL' ? [
-				CaseChange,
-				ExportPdf,
-				ExportWord,
-				ImportWord,
-				MergeFields,
-				MultiLevelList,
-				SlashCommand,
-				Template,
-				FormatPainter,
-				TableOfContents,
-				DocumentOutline,
-				Pagination
-			] : [] ),
+DocumentProductivityEditor.builtinPlugins = [
+	AdjacentListsSupport,
+	Alignment,
+	AIChat,
+	AIReviewMode,
+	AITranslate,
+	AIEditorIntegration,
+	AIQuickActions,
+	AIChatShortcuts,
+	Autoformat,
+	Bold,
+	BalloonToolbar,
+	CaseChange,
+	CKBox,
+	CKBoxImageEdit,
+	CloudServices,
+	EasyImage,
+	Essentials,
+	Emoji,
+	ExportPdf,
+	ExportWord,
+	FindAndReplace,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+	Fullscreen,
+	Heading,
+	Image,
+	ImageCaption,
+	ImageInsert,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	ImportWord,
+	Indent,
+	IndentBlock,
+	Italic,
+	Link,
+	List,
+	ListProperties,
+	MediaEmbed,
+	Mention,
+	MergeFields,
+	MultiLevelList,
+	PageBreak,
+	Paragraph,
+	PasteFromOffice,
+	PasteFromOfficeEnhanced,
+	PictureEditing,
+	RemoveFormat,
+	Table,
+	TableCaption,
+	TableCellProperties,
+	TableColumnResize,
+	TableProperties,
+	TableToolbar,
+	TextTransformation,
+	Underline,
+	SimpleUploadAdapter,
+	WProofreader,
+	SlashCommand,
+	Template,
+	FormatPainter,
+	DocumentOutline,
+	TableOfContents,
+	LineHeight,
+	Footnotes
+];
 
-			// Include WebSpellChecker plugin only if the WEB_SPELL_CHECKER_LICENSE_KEY is provided.
-			...( WEB_SPELL_CHECKER_LICENSE_KEY ? [
-				WProofreader
-			] : [] )
+DocumentProductivityEditor.defaultConfig = {
+	cloudServices: CS_CONFIG,
+	licenseKey: LICENSE_KEY,
+	balloonToolbar: [
+		'bold',
+		'italic',
+		'link',
+		'aiQuickActions'
+	],
+	emoji: {
+		definitionsUrl: 'cdn'
+	},
+	toolbar: {
+		shouldNotGroupWhenFull: true,
+		items: [
+			'undo',
+			'redo',
+			'|',
+			'formatPainter',
+			'caseChange',
+			'findAndReplace',
+			'selectAll',
+			'wproofreader',
+			'|',
+			'insertMergeField',
+			'previewMergeFields',
+			'|',
+			'toggleAi',
+			'aiQuickActions',
+			'|',
+			'importWord',
+			'exportWord',
+			'exportPdf',
+			'|',
+			'insertTemplate',
+			'tableOfContents',
+			'|',
+			'link',
+			'insertFootnote',
+			'insertImage',
+			'ckbox',
+			'insertTable',
+			'emoji',
+
+			'-',
+
+			'heading',
+			'|',
+			'fontfamily',
+			'fontsize',
+			'fontColor',
+			'fontBackgroundColor',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'removeFormat',
+			'|',
+			{
+				label: 'Alignment',
+				icon: 'alignLeft',
+				items: [
+					'alignment:left',
+					'alignment:right',
+					'alignment:center',
+					'alignment:justify'
+				]
+			},
+			'lineHeight',
+			'|',
+			'numberedList',
+			'bulletedList',
+			'multiLevelList',
+			'|',
+			'outdent',
+			'indent',
+			'|',
+			'fullscreen'
+		]
+	},
+	fullscreen: {
+		onEnterCallback: () => {
+			document.querySelector( '.ck-fullscreen__editable' ).setAttribute( 'data-demo-type', 'productivity' );
+			document.querySelector( '.ck-fullscreen__document-outline-wrapper' ).setAttribute( 'data-demo-type', 'productivity' );
+		}
+	},
+	heading: {
+		options: [
+			{
+				model: 'paragraph',
+				title: 'Paragraph',
+				class: 'ck-heading_paragraph'
+			},
+			{
+				model: 'heading1',
+				view: 'h2',
+				title: 'Heading 1',
+				class: 'ck-heading_heading1'
+			},
+			{
+				model: 'heading2',
+				view: 'h3',
+				title: 'Heading 2',
+				class: 'ck-heading_heading2'
+			},
+			{
+				model: 'heading3',
+				view: 'h4',
+				title: 'Heading 3',
+				class: 'ck-heading_heading3'
+			},
+			{
+				model: 'heading4',
+				view: 'h5',
+				title: 'Heading 4',
+				class: 'ck-heading_heading4'
+			},
+			{
+				model: 'heading5',
+				view: 'h6',
+				title: 'Heading 5',
+				class: 'ck-heading_heading5'
+			}
+		]
+	},
+	fontFamily: {
+		supportAllValues: true
+	},
+	fontSize: {
+		options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+		supportAllValues: true
+	},
+	fontColor: {
+		columns: 12,
+		colors: REDUCED_MATERIAL_COLORS
+	},
+	fontBackgroundColor: {
+		columns: 12,
+		colors: REDUCED_MATERIAL_COLORS
+	},
+	image: {
+		styles: [ 'alignCenter', 'alignLeft', 'alignRight' ],
+		toolbar: [
+			'imageTextAlternative',
+			'toggleImageCaption',
+			'|',
+			'imageStyle:inline',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
+			'ckboxImageEdit'
+		]
+	},
+	importWord: {
+		tokenUrl: false,
+		formatting: {
+			resets: 'none',
+			defaults: 'inline',
+			styles: 'inline',
+			comments: 'none'
+		}
+	},
+	link: {
+		addTargetToExternalLinks: true,
+		defaultProtocol: 'https://'
+	},
+	list: {
+		properties: {
+			styles: true,
+			startIndex: true,
+			reversed: true
+		}
+	},
+	table: {
+		contentToolbar: [
+			'tableColumn',
+			'tableRow',
+			'mergeTableCells',
+			'tableProperties',
+			'tableCellProperties',
+			'toggleTableCaption'
+		]
+	},
+	exportPdf: {
+		stylesheets: [
+			'EDITOR_STYLES',
+			makeAbsoluteUrl( '/assets/styles/demos/productivity/content.css' )
 		],
-		licenseKey: LICENSE_KEY,
-		toolbar: {
-			shouldNotGroupWhenFull: true,
-			items: [
-				'undo',
-				'redo',
-				'|',
-				'previousPage',
-				'nextPage',
-				'pageNavigation',
-				'pageBreak',
-				'|',
-				'formatPainter',
-				'caseChange',
-				'findAndReplace',
-				'selectAll',
-				'wproofreader',
-				'|',
-				'insertMergeField', 'previewMergeFields',
-				'|',
-				'importWord',
-				'exportWord',
-				'exportPdf',
-				'|',
-				'insertTemplate',
-				'tableOfContents',
-				'|',
-				'link',
-				'insertImage',
-				'ckbox',
-				'insertTable',
-
-				'-',
-
-				'heading',
-				'|',
-				'fontfamily',
-				'fontsize',
-				'fontColor',
-				'fontBackgroundColor',
-				'|',
-				'bold',
-				'italic',
-				'underline',
-				'removeFormat',
-				'|',
-				{
-					label: 'Alignment',
-					icon: 'alignLeft',
-					items: [
-						'alignment:left',
-						'alignment:right',
-						'alignment:center',
-						'alignment:justify'
-					]
-				},
-				'lineHeight',
-				'|',
-				'numberedList',
-				'bulletedList',
-				'multilevelList',
-				'|',
-				'outdent',
-				'indent',
-				'|',
-				'fullscreen'
-			]
+		fileName: 'export-pdf-demo.pdf',
+		appID: 'cke5-demos',
+		converterOptions: {
+			format: 'A4',
+			margin_top: exportVerticalSpace,
+			margin_bottom: exportVerticalSpace,
+			margin_right: exportHorizontalSpace,
+			margin_left: exportHorizontalSpace,
+			page_orientation: 'portrait'
 		},
-		fullscreen: {
-			onEnterCallback: () => {
-				document.querySelector( '.ck-fullscreen__editable' ).setAttribute( 'data-demo-type', 'productivity' );
+		tokenUrl: false
+	},
+	exportWord: {
+		version: 2,
+		stylesheets: [
+			'EDITOR_STYLES',
+			makeAbsoluteUrl( '/assets/styles/demos/productivity/content.css' )
+		],
+		fileName: 'export-word-demo.docx',
+		appID: 'cke5-demos',
+		converterOptions: {
+			document: {
+				size: 'A4',
+				orientation: 'portrait',
+				margins: {
+					top: exportVerticalSpace,
+					bottom: exportVerticalSpace,
+					right: exportHorizontalSpace,
+					left: exportHorizontalSpace
+				}
 			}
 		},
-		heading: {
-			options: [
+		tokenUrl: false
+	},
+	pagination: {
+		// A4
+		pageWidth: '21cm',
+		pageHeight: '29.7cm',
+
+		pageMargins: {
+			top: exportVerticalSpace,
+			bottom: exportVerticalSpace,
+			right: exportHorizontalSpace,
+			left: exportHorizontalSpace
+		}
+	},
+	mergeFields: {
+		definitions: MERGE_FIELDS_PP_DEFINITIONS,
+		dataSets: MERGE_FIELDS_PP_DATASETS,
+		previewHtmlValues: true,
+		sanitizeHtml: html => ( { html, hasChanged: false } )
+	},
+	wproofreader: {
+		serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
+		lang: 'auto',
+		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
+		ignoreClasses: [ 'image-inline' ]
+	},
+	ckbox: {
+		allowExternalImagesEditing: image => {
+			return !!image.match( CKBOX_IMAGE_EDIT_FORMATS );
+		},
+		forceDemoLabel: true,
+		tokenUrl: CKBOX_TOKEN_URL || 'https://api.ckbox.io/token/demo'
+	},
+	template: {
+		definitions: TEMPLATE_DEFINITIONS
+	},
+	caseChange: {
+		titleCase: {
+			excludeWords: [
+				'a',
+				'an',
+				'and',
+				'as',
+				'at',
+				'but',
+				'by',
+				'en',
+				'for',
+				'if',
+				'in',
+				'nor',
+				'of',
+				'on',
+				'or',
+				'per',
+				'the',
+				'to',
+				'vs',
+				'vs.',
+				'via'
+			]
+		}
+	},
+	ai: {
+		serviceUrl: 'https://ai.cke-cs.com/v1',
+		container: {
+			type: 'sidebar',
+			element: document.querySelector( '.cke5-productivity-demo__editor-wrapper' ),
+			showResizeButton: false,
+			visibleByDefault: false
+		},
+		chat: {
+			context: {
+				document: {
+					enabled: true
+				},
+				urls: {
+					enabled: true
+				},
+				files: {
+					enabled: true
+				}
+			},
+			shortcuts: [
 				{
-					model: 'paragraph',
-					title: 'Paragraph',
-					class: 'ck-heading_paragraph'
+					id: 'summarize-document',
+					type: 'chat',
+					label: 'Summarize the document',
+					prompt: 'Summarize the following document in 5-7 sentences. Focus on the main ideas and essential details. ' +
+						'Exclude examples, repetition, and minor points. Do not introduce new information.'
 				},
 				{
-					model: 'heading1',
-					view: 'h2',
-					title: 'Heading 1',
-					class: 'ck-heading_heading1'
+					id: 'continue-writing',
+					type: 'chat',
+					label: 'Continue writing',
+					prompt: 'Continue writing this document. Match the existing tone, vocabulary level, and formatting. ' +
+						'Do not repeat or summarize earlier sections. Ensure logical flow and progression of ideas.' +
+						'Add approximately 3 paragraphs.',
+					useReasoning: true,
+					useWebSearch: true
 				},
 				{
-					model: 'heading2',
-					view: 'h3',
-					title: 'Heading 2',
-					class: 'ck-heading_heading2'
+					id: 'rewrite-document',
+					type: 'chat',
+					label: 'Rewrite the document',
+					prompt: `Rewrite the document below for the following audience:
+
+Audience: [e.g. Product / Engineering /Leadership]
+Primary concern: [e.g., escalations, integrations, customer sentiment]
+Context: [e.g. Internal performance review]
+
+Guidelines:
+
+- Emphasize sections most relevant to this audience
+- De-emphasize or condense less relevant details
+- Adjust terminology to match how this team thinks and speaks
+- Keep metrics accurate and unchanged
+
+Tone: [e.g. Clear, practical, collaborative]`,
+					useReasoning: true,
+					draftMode: true
 				},
 				{
-					model: 'heading3',
-					view: 'h4',
-					title: 'Heading 3',
-					class: 'ck-heading_heading3'
+					id: 'fix-grammar-and-spelling',
+					type: 'review',
+					label: 'Fix grammar and spelling',
+					check: 'correctness'
 				},
 				{
-					model: 'heading4',
-					view: 'h5',
-					title: 'Heading 4',
-					class: 'ck-heading_heading4'
+					id: 'review-document',
+					type: 'review',
+					label: 'Review document'
 				},
 				{
-					model: 'heading5',
-					view: 'h6',
-					title: 'Heading 5',
-					class: 'ck-heading_heading5'
+					id: 'translate-document',
+					type: 'translate',
+					label: 'Translate document'
 				}
 			]
 		},
-		fontFamily: {
-			supportAllValues: true
-		},
-		fontSize: {
-			options: [ 10, 12, 14, 'default', 18, 20, 22 ],
-			supportAllValues: true
-		},
-		fontColor: {
-			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS
-		},
-		fontBackgroundColor: {
-			columns: 12,
-			colors: REDUCED_MATERIAL_COLORS
-		},
-		image: {
-			toolbar: [
-				'imageTextAlternative',
-				'toggleImageCaption',
-				'|',
-				'imageStyle:inline',
-				'imageStyle:wrapText',
-				'imageStyle:breakText'
+		review: {
+			extraCommands: [
+				{
+					id: 'company-style-guide',
+					label: 'Company style guide',
+					description: 'Apply the company writing style guide to ensure consistent, professional language.',
+					prompt: 'Apply the following company style guide rules to the text. For each violation, suggest a concrete rewrite. ' +
+						'Replace hedging phrases (e.g., "may require", "could positively impact", ' +
+						'"should be treated as") with direct, confident statements. ' +
+						'Convert passive voice to active voice where the actor is known or implied. ' +
+						'Remove filler words and redundant qualifiers (e.g., "overall", "generally", "in terms of"). ' +
+						'Replace vague language with precise wording (e.g., "minor improvement" → state the actual change). ' +
+						'Keep all data, metrics, and factual content unchanged.'
+				}
 			]
-		},
-		link: {
-			addTargetToExternalLinks: true,
-			defaultProtocol: 'https://'
-		},
-		list: {
-			properties: {
-				styles: true,
-				startIndex: true,
-				reversed: true
-			}
-		},
-		table: {
-			contentToolbar: [
-				'tableColumn',
-				'tableRow',
-				'mergeTableCells',
-				'tableProperties',
-				'tableCellProperties',
-				'toggleTableCaption'
-			]
+		}
+	},
+	documentOutline: {
+		container: document.querySelector( '.cke5-productivity-demo__outline' )
+	}
+};
+
+// Initialize the editor
+// Get or generate channelId for AI Chat (required even without full collaboration)
+const channelId = handleIDUrlParameter( 'channelId' );
+
+DocumentProductivityEditor.create(
+	document.querySelector( '.cke5-productivity-demo__content' ),
+	{
+		...DocumentProductivityEditor.defaultConfig,
+		extraPlugins: [ DocumentOutlineToggler ],
+		collaboration: {
+			channelId
 		},
 		exportPdf: {
-			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
-			fileName: 'export-pdf-demo.pdf',
-			appID: 'cke5-demos',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait'
-			},
-			tokenUrl: false
+			...DocumentProductivityEditor.defaultConfig.exportPdf,
+			stylesheets: [
+				'EDITOR_STYLES',
+				makeAbsoluteUrl( './content.css' )
+			]
 		},
 		exportWord: {
-			stylesheets: [ coreStylesheets, premiumStylesheets ],
-			fileName: 'export-word-demo.docx',
-			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace
-			},
-			tokenUrl: false
-		},
-		mergeFields: {
-			definitions: MERGE_FIELDS_DEFINITIONS,
-			dataSets: MERGE_FIELDS_DATASETS,
-			previewHtmlValues: true,
-			sanitizeHtml: html => ( { html, hasChanged: false } )
-		},
-		pagination: {
-			// A4
-			pageWidth: '21cm',
-			pageHeight: '29.7cm',
-			pageMargins: {
-				top: exportVerticalSpace,
-				bottom: exportVerticalSpace,
-				right: exportHorizontalSpace,
-				left: exportHorizontalSpace
-			}
-		},
-		wproofreader: {
-			serviceId: WEB_SPELL_CHECKER_LICENSE_KEY,
-			lang: 'auto',
-			srcUrl:
-				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js',
-			ignoreClasses: [ 'image-inline' ]
-		},
-		ckbox: {
-			tokenUrl: CKBOX_TOKEN_URL
-		},
-		template: {
-			definitions: TEMPLATE_DEFINITIONS
+			...DocumentProductivityEditor.defaultConfig.exportWord,
+			stylesheets: [
+				'EDITOR_STYLES',
+				makeAbsoluteUrl( './content.css' )
+			]
 		}
 	}
 )
 	.then( editor => {
 		document
-			.querySelector( '[class$=\'__toolbar-container\']' )
+			.querySelector( '.cke5-productivity-demo__toolbar-container' )
 			.appendChild( editor.ui.view.toolbar.element );
+
+		window.editor = editor;
 	} )
 	.catch( error => {
 		console.error( error.stack );
@@ -994,5 +1242,5 @@ DecoupledEditor.create(
 // --------- Just exports ------------------------------------------------------------------------
 
 export default {
-	DecoupledEditor
+	DocumentProductivityEditor
 };

@@ -33,7 +33,6 @@ html {
 
 /* ---- Styles of the demo page ------------------------------------------------------ */
 .editor-wrapper {
-  max-width: 90rem;
   margin: 0 auto 2rem auto;
 }
 
@@ -44,9 +43,11 @@ html {
 /* ---- Document editor demo styles ------------------------------------------------------------------- */
 .ai-integration {
   /* Demo container dimensions */
-  --ai-demo-container-width: clamp( 1100px, calc( 100vw - 40px ), 1500px );
-  --ai-demo-container-min-height: 500px;
-  --ai-demo-container-max-height: min(80vh, 800px);
+  --ai-demo-container-width: clamp( 1100px, calc( 100vw - 30px ), 1600px );
+  --ai-demo-container-min-height: 700px;
+  --ai-demo-container-max-height: clamp(500px, calc(100dvh - 190px), 850px);
+  --ai-content-height: clamp(501.93px, calc(100dvh - 188.07px), 851.93px);
+  --ai-revision-history-height: clamp(574.19px, calc(100dvh - 115.81px), 924.19px);
 
   /* Layout spacing */
   --ai-demo-spacing-large: calc(2 * var(--ck-spacing-large));
@@ -58,6 +59,7 @@ html {
 
   /* Sidebar dimensions */
   --ai-sidebar-width: 500px;
+  --ai-sidebar-width-maximized: 800px;
 
   /* Colors and shadows */
   --ai-shadow-light: 0 2px 3px hsla(0, 0%, 0%, 0.078);
@@ -65,74 +67,199 @@ html {
   --ai-border-color: hsl(0, 0%, 88%);
   --ai-content-bg: hsl(0, 0%, 100%);
 
+  position: relative;
+  margin: 20px auto;
+  width: var(--ai-demo-container-width);
   display: grid;
   grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "toolbar toolbar"
+    "content sidebar";
+  border: 1px solid var(--ck-color-base-border);
+  border-radius: 0;
+}
+
+@media screen and (max-width: 1100px) {
+  .ai-integration {
+    margin: 0;
+    width: 100%;
+    min-width: 1000px;
+  }
+}
+
+.ai-integration__toolbar-container {
+  grid-area: toolbar;
   position: relative;
-  width: 100%;
+  border-bottom: 1px solid var(--ck-color-base-border);
+  box-shadow: var(--ai-shadow-light);
+  z-index: 1;
+  background: var(--ck-color-base-foreground);
+}
+
+.ai-integration__toolbar-container > .ck.ck-toolbar {
+  border-bottom: none;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0 0 0 0;
 }
 
 .ai-integration__content {
-  display: grid;
-  grid-template: [toolbar] 'Toolbar' auto [content] 'Content' 1fr / 1fr;
-  gap: 0;
-  border: 1px solid var(--ck-color-base-border);
+  grid-area: content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   background: var(--ck-color-base-foreground);
-  width: 100%;
-  max-width: none;
-  min-height: var(--ai-demo-container-min-height);
+  height: var(--ai-content-height);
+  position: relative;
+}
 
-  & .ai-integration__toolbar-container {
-    position: relative;
-    grid-area: Toolbar;
-    box-shadow: var(--ai-shadow-light);
+.ai-integration__content-wrapper {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  overscroll-behavior: contain;
+  overflow-anchor: none;
+}
 
-    & > .ck.ck-toolbar {
-      border-top: 0;
-      border-right: 0;
-      border-left: 0;
-      border-radius: 0 0 0 0;
-    }
+@media screen and (max-width: 1444px) {
+  .ai-integration__content-wrapper {
+    padding-right: 19px;
   }
+}
 
-  & .ai-integration__content-wrapper {
-    display: flex;
-    grid-area: Content;
-    flex: 1;
-    justify-content: center;
-    align-items: flex-start;
-    max-height: var(--ai-demo-container-max-height);
-    overflow-y: auto;
-  }
+.ai-integration__content-wrapper #editor-annotations {
+  height: 100%;
+  z-index: 1;
+  min-width: 65px;
+  flex-shrink: 0;
+  margin-top: var(--ai-demo-spacing-large);
+}
+
+.ai-integration__content-wrapper #editor-annotations .ck-sidebar--wide {
+  width: 300px;
+  margin-right: 20px;
 }
 
 .ai-integration__sidebar {
+  grid-area: sidebar;
+  transition: width 0.3s ease-in-out;
+  background: var(--ck-color-base-foreground);
+  height: var(--ai-content-height);
   position: relative;
   width: var(--ai-sidebar-width);
-  height: 100%;
-  min-height: var(--ai-demo-container-min-height);
+}
 
-  & .ai-integration__sidebar-content {
-    display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    min-height: var(--ai-demo-container-min-height);
+.ai-integration__sidebar .ck.ck-tabs,
+.ai-integration__sidebar .ck.ck-ai-tabs {
+  border: none;
+  border-left: 1px solid var(--ck-color-base-border);
+  width: var(--ai-sidebar-width);
+}
 
-    & .ck.ck-tabs {
-      border-left: none;
+.ai-integration__sidebar-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: var(--ai-content-height);
+}
 
-      &.ck-tabs_right {
-        flex: 1;
-        min-height: inherit;
-      }
-    }
-  }
+.ai-integration__sidebar-content .ck.ck-tabs {
+  height: var(--ai-content-height);
+}
+
+.ai-integration__sidebar-content .ck.ck-tabs.ck-tabs_right {
+  flex: 1;
+  min-height: inherit;
+}
+
+/* Maximized state - increase sidebar width */
+.ai-integration__sidebar:has(.ck-ai-tabs_maximized) {
+  width: var(--ai-sidebar-width-maximized);
+}
+
+.ai-integration__sidebar:has(.ck-ai-tabs_maximized) .ck-tabs {
+  width: var(--ai-sidebar-width-maximized);
 }
 
 #snippet-ckeditor-ai.ck.ck-content {
+  flex: 1 1 0;
+  box-sizing: border-box;
+  margin: var(--ai-demo-spacing-large);
+  box-shadow: var(--ai-shadow-medium);
+  border: 1px solid var(--ai-border-color);
+  background: var(--ai-content-bg);
+  padding: var(--ai-editor-padding);
+  max-width: var(--ai-editor-max-width);
+  min-width: 0;
+  height: auto;
+  min-height: var(--ai-demo-container-min-height);
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+#snippet-ckeditor-ai.ck.ck-content.ck-focused {
+  box-shadow: var(--ai-shadow-medium);
+  border: 1px solid var(--ai-border-color);
+}
+
+#snippet-ckeditor-ai.ck.ck-content.ck.ck-editor__editable_inline > :first-child {
+  margin-top: 0;
+}
+
+#editor-revision-history {
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--ai-revision-history-height);
+  overflow: hidden;
+  border-width: 0 1px 1px;
+  border-style: solid;
+  border-color: var(--ck-color-base-border);
+  display: none;
+  grid-template-columns: 1fr 20rem;
+  grid-template-rows: auto 1fr;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10;
+
+}
+
+#editor-revision-history.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  display: grid;
+}
+
+#editor-revision-history #editor-revision-history-toolbar .ck.ck-toolbar {
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+}
+
+#editor-revision-history .editor-revision-history-editor-wrapper {
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--ck-color-base-foreground);
+  grid-row: 2;
+  min-height: 0;
+  max-height: 100%;
+  overflow-x: hidden;
+}
+
+#editor-revision-history #editor-revision-history-editor {
   flex: 1 1 auto;
   box-sizing: border-box;
   margin: var(--ai-demo-spacing-large);
@@ -145,13 +272,30 @@ html {
   min-height: var(--ai-demo-container-min-height);
   overflow: hidden;
   overflow-wrap: break-word;
+  position: relative;
+}
 
-  &.ck-focused {
-    box-shadow: var(--ai-shadow-medium);
-    border: 1px solid var(--ai-border-color);
-  }
+#editor-revision-history #editor-revision-history-editor .ck.ck-content {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  min-height: auto;
+}
 
-  &.ck.ck-editor__editable_inline > :first-child {
-    margin-top: 0;
-  }
+#editor-revision-history #editor-revision-history-sidebar {
+  grid-row: span 2;
+  padding-top: 1px;
+  height: 100%;
+  border-top: 1px solid var(--ck-color-base-border);
+  border-left: 1px solid var(--ck-color-base-border);
+}
+
+#editor-revision-history #editor-revision-history-sidebar .ck-revision-history-sidebar {
+  height: 100%;
+}
+
+#editor-revision-history #editor-revision-history-sidebar .ck.ck-revision-history-sidebar__header {
+  --header-height: 39.55px;
 }
