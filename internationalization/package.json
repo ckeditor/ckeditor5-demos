@@ -15,7 +15,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"ckeditor5": "^47.6.0",
+		"ckeditor5": "^47.6.1",
 		"vite": "^5.0.0"
 	}
 }
