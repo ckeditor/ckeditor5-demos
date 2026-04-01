@@ -257,12 +257,16 @@ ClassicEditor.create(
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
-				format: 'Tabloid',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait'
+				document: {
+					size: 'Tabloid',
+					orientation: 'portrait',
+					margins: {
+						top: exportVerticalSpace,
+						bottom: exportVerticalSpace,
+						right: exportHorizontalSpace,
+						left: exportHorizontalSpace
+					}
+				}
 			},
 			tokenUrl: false
 		},
