@@ -323,12 +323,16 @@ ClassicEditor.create(
 				} ),
 			stylesheets: [ coreStylesheets, premiumStylesheets ],
 			converterOptions: {
-				format: 'A4',
-				margin_top: '20mm',
-				margin_bottom: '20mm',
-				margin_right: '12mm',
-				margin_left: '12mm',
-				page_orientation: 'portrait'
+				document: {
+					size: 'A4',
+					orientation: 'portrait',
+					margins: {
+						top: '20mm',
+						bottom: '20mm',
+						right: '12mm',
+						left: '12mm'
+					}
+				}
 			},
 			tokenUrl: false
 		},

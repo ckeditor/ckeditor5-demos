@@ -885,12 +885,16 @@ DecoupledEditor.create(
 			fileName: 'export-pdf-demo.pdf',
 			appID: 'cke5-demos',
 			converterOptions: {
-				format: 'A4',
-				margin_top: exportVerticalSpace,
-				margin_bottom: exportVerticalSpace,
-				margin_right: exportHorizontalSpace,
-				margin_left: exportHorizontalSpace,
-				page_orientation: 'portrait'
+				document: {
+					size: 'A4',
+					orientation: 'portrait',
+					margins: {
+						top: exportVerticalSpace,
+						bottom: exportVerticalSpace,
+						right: exportHorizontalSpace,
+						left: exportHorizontalSpace
+					}
+				}
 			},
 			tokenUrl: false
 		},
