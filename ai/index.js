@@ -156,7 +156,10 @@ class UsersIntegration extends Plugin {
 }
 
 DecoupledEditor
-	.create( document.querySelector( '#snippet-ckeditor-ai' ), {
+	.create( {
+		root: {
+			element: document.querySelector( '#snippet-ckeditor-ai' )
+		},
 		licenseKey: LICENSE_KEY,
 		placeholder: 'Type or paste your content here!',
 		plugins: [
