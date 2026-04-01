@@ -60,8 +60,8 @@ import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-user-interface-classic-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-user-interface-classic-demo' ),
 		plugins: [
 			Autoformat,
 			BlockQuote,

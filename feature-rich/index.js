@@ -619,8 +619,8 @@ function SpecialCharactersEmoji( editor ) {
 }
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-feature-rich-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-feature-rich-demo' ),
 		plugins: [
 			Alignment,
 			Autoformat,

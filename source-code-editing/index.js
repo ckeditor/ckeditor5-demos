@@ -531,8 +531,8 @@ function customMentionUserItemRenderer( item ) {
 }
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-source-code-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-source-code-demo' ),
 		plugins: [
 			Alignment,
 			Autoformat,

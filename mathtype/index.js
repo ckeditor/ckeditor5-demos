@@ -32,8 +32,8 @@ import MathType from '@wiris/mathtype-ckeditor5/dist/index.js';
 import 'ckeditor5/ckeditor5.css';
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-mathtype-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-mathtype-demo' ),
 		licenseKey: 'GPL',
 		plugins: [
 			CloudServices,

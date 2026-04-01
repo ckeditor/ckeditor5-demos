@@ -626,8 +626,10 @@ function DocumentOutlineToggler( editor ) {
 }
 
 DecoupledEditor.create(
-	document.querySelector( '.cke5-editor-types-demo-document__content' ),
 	{
+		root: {
+			element: document.querySelector( '.cke5-editor-types-demo-document__content' )
+		},
 		extraPlugins: [ DocumentOutlineToggler ], // Plugin for Document Outline toggling
 		documentOutline: {
 			container: document.querySelector( '[class*=\'__outline\']' )

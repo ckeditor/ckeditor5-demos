@@ -580,8 +580,8 @@ const exportHorizontalSpace = '19.25mm';
 const exportVerticalSpace = '16mm';
 
 ClassicEditor.create(
-	document.querySelector( '.cke5-merge-fields-demo__content' ),
 	{
+		attachTo: document.querySelector( '.cke5-merge-fields-demo__content' ),
 		plugins: [
 			AdjacentListsSupport,
 			Alignment,

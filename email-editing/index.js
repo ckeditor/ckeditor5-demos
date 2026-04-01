@@ -315,8 +315,8 @@ const MERGE_FIELDS_DATASETS = [
 /* eslint-enable max-len */
 
 ClassicEditor.create(
-	document.getElementById( 'email-editor-demo' ),
 	{
+		attachTo: document.getElementById( 'email-editor-demo' ),
 		plugins: [
 			AdjacentListsSupport,
 			Alignment,

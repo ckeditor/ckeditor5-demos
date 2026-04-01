@@ -180,8 +180,8 @@ const REDUCED_MATERIAL_COLORS = [
 ];
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-paste-from-office-enhanced-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-paste-from-office-enhanced-demo' ),
 		plugins: [
 			Alignment,
 			Autoformat,
