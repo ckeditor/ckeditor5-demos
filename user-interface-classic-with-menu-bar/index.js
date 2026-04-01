@@ -318,8 +318,8 @@ function SpecialCharactersEmoji( editor ) {
 }
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-user-interface-classic-with-menu-bar-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-user-interface-classic-with-menu-bar-demo' ),
 		plugins: [
 			Alignment,
 			Autoformat,

@@ -109,8 +109,8 @@ const exportHorizontalSpace = '10mm';
 const exportVerticalSpace = '12mm';
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-uploadcare-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-uploadcare-demo' ),
 		plugins: [
 			Alignment,
 			Autoformat,

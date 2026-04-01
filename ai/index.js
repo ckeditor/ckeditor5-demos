@@ -455,7 +455,12 @@ DecoupledEditor
 					'AIReviewMode',
 					'AIChatShortcuts' );
 
-				return DecoupledEditor.create( createElement(), config );
+				return DecoupledEditor.create( {
+					...config,
+					root: {
+						element: createElement()
+					}
+				} );
 			}
 		},
 		revisionHistory: {
@@ -479,7 +484,12 @@ DecoupledEditor
 
 				viewerContainer.classList.add( 'is-visible' );
 
-				return DecoupledEditor.create( viewerElement, config ).then( viewerEditor => {
+				return DecoupledEditor.create( {
+					...config,
+					root: {
+						element: viewerElement
+					}
+				} ).then( viewerEditor => {
 					const toolbarContainer = document.querySelector( '#editor-revision-history-toolbar' );
 
 					if (

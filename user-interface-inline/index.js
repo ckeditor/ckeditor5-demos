@@ -198,8 +198,12 @@ inlineElementsIds.forEach( id => {
 	}
 
 	InlineEditor.create(
-		element,
-		id === 'inline-header' ? headerConfig : defaultConfig
+		{
+			...id === 'inline-header' ? headerConfig : defaultConfig,
+			root: {
+				element
+			}
+		}
 	)
 		.then( editor => {
 			window.editor = editor;

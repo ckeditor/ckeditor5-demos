@@ -169,8 +169,8 @@ function SpecialCharactersEmoji( editor ) {
 }
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-markdown-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-markdown-demo' ),
 		plugins: [
 			Autoformat,
 			BlockQuote,

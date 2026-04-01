@@ -43,8 +43,8 @@ import 'ckeditor5/ckeditor5.css';
 import '@webspellchecker/wproofreader-ckeditor5/index.css';
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-spellchecker-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-spellchecker-demo' ),
 		licenseKey: 'GPL',
 		plugins: [
 			// Open-source plugins

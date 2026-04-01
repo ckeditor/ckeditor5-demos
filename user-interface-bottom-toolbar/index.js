@@ -240,8 +240,10 @@ class BottomToolbarCustomizations extends Plugin {
 }
 
 DecoupledEditor.create(
-	document.querySelector( '#cke5-user-interface-bottom-toolbar-demo-content' ),
 	{
+		root: {
+			element: document.querySelector( '#cke5-user-interface-bottom-toolbar-demo-content' )
+		},
 		plugins: [
 			Alignment,
 			Autoformat,

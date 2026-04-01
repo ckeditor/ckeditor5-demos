@@ -48,8 +48,10 @@ import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
 BalloonEditor.create(
-	document.querySelector( '#cke5-user-interface-balloon-demo' ),
 	{
+		root: {
+			element: document.querySelector( '#cke5-user-interface-balloon-demo' )
+		},
 		plugins: [
 			Autoformat,
 			BlockQuote,

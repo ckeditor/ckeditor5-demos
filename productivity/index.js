@@ -1205,9 +1205,12 @@ Tone: [e.g. Clear, practical, collaborative]`,
 const channelId = handleIDUrlParameter( 'channelId' );
 
 DocumentProductivityEditor.create(
-	document.querySelector( '.cke5-productivity-demo__content' ),
 	{
 		...DocumentProductivityEditor.defaultConfig,
+		root: {
+			...DocumentProductivityEditor.defaultConfig.root,
+			element: document.querySelector( '.cke5-productivity-demo__content' )
+		},
 		extraPlugins: [ DocumentOutlineToggler ],
 		collaboration: {
 			channelId

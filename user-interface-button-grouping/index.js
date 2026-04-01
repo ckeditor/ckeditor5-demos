@@ -179,8 +179,8 @@ function SpecialCharactersEmoji( editor ) {
 }
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-user-interface-button-grouping-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-user-interface-button-grouping-demo' ),
 		plugins: [
 			Autoformat,
 			BlockQuote,

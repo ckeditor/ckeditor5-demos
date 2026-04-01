@@ -90,8 +90,8 @@ const plugins = [
  */
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-localized-de-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-localized-de-demo' ),
 		licenseKey: 'GPL',
 		language: 'de',
 		plugins,
@@ -161,8 +161,8 @@ ClassicEditor.create(
 	} );
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-localized-ar-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-localized-ar-demo' ),
 		language: 'ar',
 		plugins,
 		placeholder: 'اكتب أو الصق المحتوى الخاص بك هنا!',
@@ -231,8 +231,8 @@ ClassicEditor.create(
 	} );
 
 ClassicEditor.create(
-	document.querySelector( '#cke5-localized-ja-demo' ),
 	{
+		attachTo: document.querySelector( '#cke5-localized-ja-demo' ),
 		language: 'ja',
 		plugins,
 		placeholder: 'こちらに内容を入力するか張り付けてください。',
