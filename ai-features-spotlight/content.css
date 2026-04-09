@@ -1,0 +1,73 @@
+/* From nova: ckeditor5-private-demos/src/css/content-styles.scss */
+
+.ck.ck-content:not(.ck-style-grid__button__preview):not(.ck-editor__nested-editable):not(.ck-ai-review-mode__check-run-result-response):not(.ck-ai-suggestion__body):not(.ck-ai-suggestion__body__content-part__content):not(.ck-ai-suggestion-streamable-content):not(.ck-ai_review__check-run-result-response):not([aria-label="Comment editor"]) {
+  min-height: 300px;
+  padding: 1em 1.5em;
+}
+
+.ck.ck-content:not(:focus):not(.ck-editor__nested-editable):not(.ck-ai-review-mode__check-run-result-response):not(.ck-ai-suggestion__body):not(.ck-ai-suggestion__body__content-part__content):not(.ck-ai-suggestion-streamable-content):not(.ck-ai_review__check-run-result-response):not([aria-label="Comment editor"]) {
+  border: 1px solid var(--ck-color-base-border);
+}
+
+.ck-comment__input .ck.ck-content {
+  border: 0;
+  padding: 0;
+  min-height: unset;
+}
+
+.ck-ai-chat__feed__ai-reply-container h1,
+.ck.ck-ai-balloon .ck.ck-content h1,
+.ck-ai_review__check-run-result .ck.ck-content h1,
+.ck-content:not(.ck-ai-review-mode) h1 {
+  font-size: 2.3em;
+}
+
+.ck-ai-chat__feed__ai-reply-container h2,
+.ck.ck-ai-balloon .ck.ck-content h2,
+.ck-ai_review__check-run-result .ck.ck-content h2,
+.ck-content:not(.ck-ai-review-mode) h2 {
+  font-size: 1.84em;
+}
+
+.ck-ai-chat__feed__ai-reply-container h3,
+.ck.ck-ai-balloon .ck.ck-content h3,
+.ck-ai_review__check-run-result .ck.ck-content h3,
+.ck-content:not(.ck-ai-review-mode) h3 {
+  font-size: 1.48em;
+}
+
+.ck-ai-chat__feed__ai-reply-container h4,
+.ck.ck-ai-balloon .ck.ck-content h4,
+.ck-ai_review__check-run-result .ck.ck-content h4,
+.ck-content:not(.ck-ai-review-mode) h4 {
+  font-size: 1.22em;
+}
+
+.ck-ai-chat__feed__ai-reply-container h5,
+.ck.ck-ai-balloon .ck.ck-content h5,
+.ck-ai_review__check-run-result .ck.ck-content h5,
+.ck-content:not(.ck-ai-review-mode) h5 {
+  font-size: 1.06em;
+}
+
+.ck-ai-chat__feed__ai-reply-container h6,
+.ck.ck-ai-balloon .ck.ck-content h6,
+.ck-ai_review__check-run-result .ck.ck-content h6,
+.ck-content:not(.ck-ai-review-mode) h6 {
+  font-size: 1em;
+}
+
+.ck-content:not(.ck-ai-review-mode):not(.ck-ai-suggestion-streamable-content) h1,
+.ck-content:not(.ck-ai-review-mode):not(.ck-ai-suggestion-streamable-content) h2,
+.ck-content:not(.ck-ai-review-mode):not(.ck-ai-suggestion-streamable-content) h3,
+.ck-content:not(.ck-ai-review-mode):not(.ck-ai-suggestion-streamable-content) h4,
+.ck-content:not(.ck-ai-review-mode):not(.ck-ai-suggestion-streamable-content) h5,
+.ck-content:not(.ck-ai-review-mode):not(.ck-ai-suggestion-streamable-content) h6 {
+  line-height: inherit;
+}
+
+/* From nova: ai-demo-types/content.scss */
+.ck-content {
+  --ck-content-font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif);
+  --ck-content-line-height: 1.4;
+}
