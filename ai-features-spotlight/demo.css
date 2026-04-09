@@ -98,21 +98,18 @@ html {
   50% { opacity: 1; transform: scale(1); }
 }
 
-/* ---- Demo panels: stay in flow (no horizontal scroll from breakout layout) ---- */
 .demo-panels {
   width: 100%;
   min-width: 0;
   overflow-x: visible;
 }
 
-/* ---- From nova: ai-demo-types/demo.scss (.ai-demo-types-integration), adapted for fluid width ---- */
 .ai-demo-types-integration {
   --ai-demo-container-max-height: clamp(400px, calc(100dvh - 180px), 924px);
   --ai-demo-types-annotations-width-wide: 270px;
   --ai-demo-types-annotations-width-narrow: 38px;
 }
 
-/* Full width of .editor-wrapper; flex children share space instead of forcing 1100px+ min */
 .ai-demo-types-integration--classic {
   position: relative;
   margin: 20px 0;
@@ -249,7 +246,6 @@ html {
   background: transparent;
 }
 
-/* From nova: review + translate sidebar width & hide tab buttons */
 #cke5-ai-demo-types-review .ai-demo-types-integration__sidebar,
 #cke5-ai-demo-types-translate .ai-demo-types-integration__sidebar {
   flex-basis: 455px;

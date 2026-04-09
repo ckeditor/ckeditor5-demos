@@ -59,7 +59,6 @@ import { CKBox, CKBoxImageEdit } from '@ckeditor/ckeditor5-ckbox';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Comments } from '@ckeditor/ckeditor5-comments';
 import { TableOfContents } from '@ckeditor/ckeditor5-document-outline';
-import { BalloonEditor } from '@ckeditor/ckeditor5-editor-balloon';
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import { EasyImage } from '@ckeditor/ckeditor5-easy-image';
 import { Emoji } from '@ckeditor/ckeditor5-emoji';
@@ -1873,135 +1872,10 @@ Tone: [e.g. Clear, practical, collaborative]`,
 	cloudServices: CS_CONFIG
 };
 
-// --------- Balloon AI Editor ------------------------------------------------------------------------
-
-class BalloonAiEditor extends BalloonEditor {}
-
-BalloonAiEditor.builtinPlugins = [
-	Autoformat,
-	BlockQuote,
-	Bold,
-	CKBox,
-	CloudServices,
-	EasyImage,
-	Emoji,
-	Essentials,
-	Heading,
-	Image,
-	ImageCaption,
-	ImageStyle,
-	ImageToolbar,
-	ImageUpload,
-	Indent,
-	IndentBlock,
-	Italic,
-	Link,
-	List,
-	MediaEmbed,
-	Mention,
-	Paragraph,
-	PasteFromOffice,
-	PasteFromOfficeEnhanced,
-	PictureEditing,
-	Table,
-	TableToolbar,
-	TextTransformation,
-	SimpleUploadAdapter,
-	SlashCommand
-];
-
-BalloonAiEditor.defaultConfig = {
-	licenseKey: LICENSE_KEY,
-	cloudServices: CS_CONFIG,
-	toolbar: [
-		'undo',
-		'redo',
-		'|',
-		'heading',
-		'|',
-		'bold',
-		'italic',
-		'|',
-		'link',
-		'uploadImage',
-		'insertTable',
-		'blockQuote',
-		'mediaEmbed',
-		'emoji',
-		'|',
-		'bulletedList',
-		'numberedList',
-		'outdent',
-		'indent'
-	],
-	emoji: {
-		definitionsUrl: 'cdn'
-	},
-	heading: {
-		options: [
-			{
-				model: 'paragraph',
-				title: 'Paragraph',
-				class: 'ck-heading_paragraph'
-			},
-			{
-				model: 'heading1',
-				view: 'h1',
-				title: 'Heading 1',
-				class: 'ck-heading_heading1'
-			},
-			{
-				model: 'heading2',
-				view: 'h2',
-				title: 'Heading 2',
-				class: 'ck-heading_heading2'
-			},
-			{
-				model: 'heading3',
-				view: 'h3',
-				title: 'Heading 3',
-				class: 'ck-heading_heading3'
-			},
-			{
-				model: 'heading4',
-				view: 'h4',
-				title: 'Heading 4',
-				class: 'ck-heading_heading4'
-			}
-		]
-	},
-	image: {
-		styles: [ 'alignCenter', 'alignLeft', 'alignRight' ],
-		toolbar: [
-			'imageStyle:wrapText',
-			'imageStyle:inline',
-			'imageStyle:block',
-			'|',
-			'toggleImageCaption',
-			'imageTextAlternative'
-		]
-	},
-	link: {
-		addTargetToExternalLinks: true,
-		defaultProtocol: 'https://'
-	},
-	table: {
-		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-	},
-	ckbox: {
-		allowExternalImagesEditing: image => {
-			return !!image.match( CKBOX_IMAGE_EDIT_FORMATS );
-		},
-		forceDemoLabel: true,
-		tokenUrl: CKBOX_TOKEN_URL
-	}
-};
-
 // --------- Editor bundle ------------------------------------------------------------------------
 
 const AiSpotlightEditors = {
 	ClassicAiEditor,
-	BalloonAiEditor,
 	AiChatEditor,
 	AiQuickActionsEditor,
 	AiReviewEditor,
