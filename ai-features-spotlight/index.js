@@ -1946,12 +1946,11 @@ function startViewportTopOffsetUpdater( editor ) {
 }
 
 function handleIDUrlParameter( paramName ) {
-	const paramMatch = location.search.match( new RegExp( `${ paramName }=([^&]+)` ) );
-	let paramValue = paramMatch ? decodeURIComponent( paramMatch[ 1 ] ) : null;
+	const url = new URL( window.location.href );
+	let paramValue = url.searchParams.get( paramName );
 
 	if ( !paramValue ) {
 		paramValue = uid();
-		const url = new URL( window.location.href );
 		url.searchParams.set( paramName, paramValue );
 		window.history.replaceState( {}, document.title, url.toString() );
 	}
@@ -1968,15 +1967,18 @@ function getRandomUserName() {
 }
 
 function buildUserTokenUrl( baseUrl, user ) {
-	return `${ baseUrl }?` + Object.keys( user )
-		.filter( key => user[ key ] )
-		.map( key => {
-			if ( key === 'role' ) {
-				return `${ key }=${ user[ key ] }`;
-			}
-			return `user.${ key }=${ user[ key ] }`;
-		} )
-		.join( '&' );
+	const url = new URL( baseUrl );
+
+	for ( const key of Object.keys( user ) ) {
+		if ( !user[ key ] ) {
+			continue;
+		}
+
+		const paramName = key === 'role' ? key : `user.${ key }`;
+		url.searchParams.set( paramName, user[ key ] );
+	}
+
+	return url.toString();
 }
 
 function createUsersIntegrationEditor( userId ) {
