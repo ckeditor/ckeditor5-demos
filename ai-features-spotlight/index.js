@@ -700,7 +700,7 @@ AiChatEditor.defaultConfig = {
 							}
 						] ),
 						getData: async () => {
-							const pdfUrl = 'https://prev5.ckeditor.com/files/CKEditor_-_State_of_Collaborative_Editing_report_2025.pdf';
+							const pdfUrl = 'https://ckeditor.com/files/CKEditor_-_State_of_Collaborative_Editing_report_2025.pdf';
 							const response = await fetch( pdfUrl );
 							const blob = await response.blob();
 							return new File( [ blob ], 'CKEditor - State of Collaborative Editing report 2025.pdf', {
