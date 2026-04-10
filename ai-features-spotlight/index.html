@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>AI features spotlight</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="demo.css" />
+		<link rel="stylesheet" href="content.css" />
+	</head>
+	<body>
+		<header class="header-wrapper demo-page-header">
+			<h1>AI features spotlight</h1>
+		</header>
+
+		<div class="editor-wrapper">
+			<nav class="demo-tabs" role="tablist" aria-label="AI demo variants">
+				<button type="button" class="demo-tabs__btn is-active" role="tab" aria-selected="true" data-demo-tab-target="classic">Classic Editor with AI</button>
+				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="chat">AI Chat</button>
+				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="quick-actions">AI Quick Actions</button>
+				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="review">AI Review</button>
+				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="translate">AI Translate</button>
+			</nav>
+
+		<div class="demo-panels">
+		<section class="demo-panel is-active" data-demo-panel="classic">
+			<div class="js-spinner-holder-ai-classic demo-spinner" role="status"><span class="demo-spinner__dot"></span> Loading editor…</div>
+			<div class="js-editor-wrapper-ai-classic u-gone" data-demo-type="ai-classic">
+<div id="cke5-ai-demo-types-classic" class="ai-demo-types-integration ai-demo-types-integration--classic">
+					<div id="editor-annotations-classic" class="ai-demo-types-integration__annotations"></div>
+					<div class="ai-demo-types-integration__content-wrapper">
+						<div id="cke5-ai-demo-types-classic-content">
+<h1>Customer Support Metrics Report</h1>
+
+<p><strong>Operational Summary – Second Half of 2025</strong></p>
+
+<h2>Overview</h2>
+
+<p>This report summarizes customer support performance during the second half of 2025. It focuses on ticket volumes, response efficiency and common issue categories, based on internal operational data across all support channels.</p>
+
+<p>The information below should be treated as an overview of observed trends rather than a detailed performance evaluation.</p>
+
+<h2>Support Process Overview</h2>
+
+<p>The diagram outlines our internal customer support process, showing how incoming requests are handled across multiple support tiers based on complexity.</p>
+
+<p>Customer inquiries are initially managed by <strong>Tier 1: Frontline Support</strong>, which is responsible for triage and resolution of common issues. More complex cases are escalated to <strong>Tier 2: Technical Support</strong>, where deeper technical investigation is performed.</p>
+
+<p>High-impact or unresolved issues are handled by <strong>Tier 3: Escalation Team</strong>, which coordinates with internal experts as required. <strong>Specialist Teams</strong> support Tier 2 and Tier 3 by providing domain-specific expertise, while typically remaining non-customer-facing.</p>
+
+<p>The process is designed to allow flexible movement between tiers, supporting efficient resolution and appropriate escalation when needed.</p>
+
+<figure class="image">
+	<img src="https://ckeditor.com/assets/images/ckdemo/ai/Customer%20Support%20Metrics%20Report%20Image.png" alt="Internal support workflow">
+	<figcaption>Figure 1. Internal support workflow across frontline, technical and escalation teams.</figcaption>
+</figure>
+
+<h2>Ticket Volume</h2>
+
+<p>During the reporting period, the support team processed <strong>184,600 tickets</strong>, representing an increase of <strong>11%</strong> compared to the previous period. Ticket volume peaked in September and gradually stabilized towards the end of the year.</p>
+
+<p>The increase was primarily driven by onboarding-related questions and product configuration requests.</p>
+
+<h2>Channel Distribution</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Channel</th>
+			<th>Share of Tickets</th>
+			<th>Change vs. Previous Period</th>
+			<th>Avg. First Response Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Email</td>
+			<td>54%</td>
+			<td>-3%</td>
+			<td>3.1 hours</td>
+		</tr>
+		<tr>
+			<td>Live Chat</td>
+			<td>31%</td>
+			<td>+5%</td>
+			<td>1.2 hours</td>
+		</tr>
+		<tr>
+			<td>In-App Support</td>
+			<td>15%</td>
+			<td>-2%</td>
+			<td>2.4 hours</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Email remained the dominant support channel, although live chat usage continued to increase, particularly among larger accounts.</p>
+
+<h2>Resolution Efficiency</h2>
+
+<p>Average response and resolution times showed minor improvement compared to earlier in the year.</p>
+
+<ul>
+	<li>Average first response time: <strong>2.4 hours</strong></li>
+	<li>Average resolution time: <strong>18.7 hours</strong></li>
+	<li>Tickets resolved within 24 hours: <strong>68%</strong></li>
+</ul>
+
+<p>More complex cases, especially those related to integrations, required additional follow-up and were not consistently resolved within standard timeframes. While faster response times were generally appreciated, qualitative feedback indicates that communication consistency played an equally important role in overall customer perception.</p>
+
+<blockquote>
+	<p>"Faster responses were helpful, but consistency in follow-up communication had a bigger impact on our overall experience."</p>
+	<p><strong>— Enterprise customer, post-resolution survey</strong></p>
+</blockquote>
+
+<h2>Common Issue Categories</h2>
+
+<p>The most frequently reported issues were:</p>
+
+<ol>
+	<li>Account access and authentication</li>
+	<li>Billing and invoice related questions</li>
+	<li>Feature usage clarification</li>
+	<li>Integration setup</li>
+	<li>Performance-related concerns</li>
+</ol>
+
+<p>Billing-related requests declined slightly, while integration-related inquiries increased towards the end of the period.</p>
+
+<h2>Customer Satisfaction</h2>
+
+<p>Customer satisfaction was measured through post-resolution surveys. The overall response rate remained stable throughout the reporting period.</p>
+
+<ul>
+	<li>Average CSAT score: <strong>4.2 / 5</strong></li>
+	<li>Survey response rate: <strong>27%</strong></li>
+</ul>
+
+<p>Feedback most often referenced response time and clarity of follow-up communication as areas for improvement, particularly in cases involving multiple handovers or escalations.</p>
+
+<h2>Identified Bottlenecks</h2>
+
+<p>Internal review identified several operational areas that may require further attention:</p>
+
+<ul>
+	<li>Delays in ticket reassignment for escalated cases</li>
+	<li>Inconsistent categorization of incoming requests</li>
+	<li>Limited coverage during selected regional peak hours</li>
+</ul>
+
+<p>While these issues did not materially impact aggregate performance metrics, they were visible in individual case handling and customer feedback.</p>
+
+<blockquote>
+	<p>"The issue was eventually resolved, although it was not always clear who was responsible for the case during escalation."</p>
+	<p><strong>— Key account feedback, quarterly review</strong></p>
+</blockquote>
+
+<h2>Summary</h2>
+
+<p>Overall support performance remained within expected operational ranges. Most key indicators were stable, with moderate improvements observed in response efficiency. At the same time, the data suggests that further improvements in communication clarity and escalation handling could positively impact customer experience in future reporting periods.</p>
+
+						</div>
+					</div>
+					<div class="ai-demo-types-integration__sidebar">
+						<div class="ai-demo-types-integration__sidebar-content" id="ai-sidebar-container-classic"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="demo-panel" data-demo-panel="chat" hidden>
+			<div class="js-spinner-holder-ai-chat demo-spinner" role="status"><span class="demo-spinner__dot"></span> Loading editor…</div>
+			<div class="js-editor-wrapper-ai-chat u-gone" data-demo-type="ai-chat">
+<div id="cke5-ai-demo-types-chat" class="ai-demo-types-integration ai-demo-types-integration--classic">
+					<div id="editor-annotations-chat" class="ai-demo-types-integration__annotations"></div>
+					<div class="ai-demo-types-integration__content-wrapper">
+						<div id="cke5-ai-demo-types-chat-content">
+<h2>Report Summary</h2>
+
+<h3>[Title]</h3>
+
+<p><em>A clear, customer-oriented headline based on the report</em></p>
+
+<h3>[Subtitle]</h3>
+
+<p><em>A short sentence explaining what this summary covers</em></p>
+
+<hr>
+
+<h3>1. What This Report Is About</h3>
+
+<p>A short overview of the topic covered in the report and the main areas it focuses on.</p>
+
+<hr>
+
+<h3>2. Key Takeaways</h3>
+
+<ul>
+	<li><strong>Key takeaway #1:</strong> [Main insight expressed clearly]</li>
+	<li><strong>Key takeaway #2:</strong> [Important trend or finding]</li>
+	<li><strong>Key takeaway #3:</strong> [Insight with practical relevance]</li>
+</ul>
+
+<hr>
+
+<h3>3. What the Data Shows</h3>
+
+<ul>
+	<li><strong>[Data point #1]:</strong> [Value] — [Short interpretation]</li>
+	<li><strong>[Data point #2]:</strong> [Value] — [Why it matters]</li>
+	<li><strong>[Data point #3]:</strong> [Value] — [Practical implication]</li>
+</ul>
+
+<hr>
+
+<h3>4. What This Means for Companies</h3>
+
+<p>A short section explaining how these findings affect companies, teams, organizations, or customers in practice.</p>
+
+<hr>
+
+<h3>5. Looking Ahead</h3>
+
+<p>A brief forward-looking paragraph based on the report’s insights and observed trends.</p>
+
+<hr>
+
+<h3>6. About the Report</h3>
+
+<p>A short description of the source report and what it explores.</p>
+
+						</div>
+					</div>
+					<div class="ai-demo-types-integration__sidebar">
+						<div class="ai-demo-types-integration__sidebar-content" id="ai-sidebar-container-chat"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="demo-panel" data-demo-panel="quick-actions" hidden>
+			<div class="js-spinner-holder-ai-quick-actions demo-spinner" role="status"><span class="demo-spinner__dot"></span> Loading editor…</div>
+			<div class="js-editor-wrapper-ai-quick-actions u-gone" data-demo-type="ai-quick-actions">
+<div id="cke5-ai-demo-types-quick-actions" class="ai-demo-types-integration ai-demo-types-integration--classic ai-demo-types-integration--quick-actions">
+					<div class="ai-demo-types-integration__content-wrapper">
+						<div id="cke5-ai-demo-types-quick-actions-content">
+<h1>QA: <strong>From Hype to Everyday Reality</strong></h1>
+
+<h2>From Hype to Everyday Reality: How AI Has Evolved in Recent Years</h2>
+
+<p><span style="color: rgb(56, 125, 201);">👉 <strong>Hint:</strong> This paragraph is too short. Select it and use <em>AI Quick Actions: Adjust length → Make longer</em></span></p>
+
+<h3><strong>1. The Acceleration Moment</strong></h3>
+
+<p>AI grew fast. Very fast.</p>
+
+<hr>
+
+<p><span style="color: rgb(56, 125, 201);">👉 <strong>Hint:</strong> This paragraph has many grammar and spelling mistakes. Select it and use <em>AI Quick Actions: Fix grammar &amp; spelling</em></span></p>
+
+<h3><strong>2. From Narrow Tools to Versatile Assistants</strong></h3>
+
+<p>Early AI system was design for one task only and they does not work very good. Today model are more better and can do many thing at same time like writing, image make, data analyze and talk with people which is not always accurate and sometime confusing and peoples use it anyway without thinking.</p>
+
+<hr>
+
+<p><span style="color: rgb(56, 125, 201);">👉 <strong>Hint:</strong> This paragraph sounds unfriendly. Select it and use <em>AI Quick Actions: Change tone → More friendly</em></span></p>
+
+<h3><strong>3. AI Enters Everyday Life</strong></h3>
+
+<p>AI is now embedded everywhere and users are expected to adapt to it whether they like it or not. Businesses implement AI tools primarily for efficiency, often with little regard for learning curves or individual comfort, making interaction feel more like obligation than support.</p>
+
+<hr>
+
+<p><span style="color: rgb(56, 125, 201);">👉 <strong>Hint:</strong> This paragraph is not in English. Select it and use <em>AI Quick Actions: Translate → English</em></span></p>
+
+<h3><strong>4. New Questions and New Responsibilities</strong></h3>
+
+<p>En los últimos años, la discusión sobre la inteligencia artificial ha cambiado mucho. Ya no se trata solo de innovación, sino también de ética, privacidad y control, y muchas personas no confían plenamente en cómo se está utilizando esta tecnología.</p>
+
+<hr>
+
+<p><span style="color: rgb(56, 125, 201);">👉 <strong>Hint:</strong> This paragraph contains many items in a long sentence. Select it and use <em>AI Quick Actions: Other → Convert to bullet points</em></span></p>
+
+<h3><strong>5. AI Across Industries</strong></h3>
+
+<p>AI is reshaping healthcare, education, finance, marketing, customer service, logistics, entertainment, scientific research, software development, cybersecurity, manufacturing, and public administration, showing that its influence is no longer limited to experimental labs or tech companies but is becoming part of nearly every sector of modern life.</p>
+
+<hr>
+
+<p><span style="color: rgb(56, 125, 201);">👉 <strong>Hint:</strong> This paragraph is unfinished. Select it and use <em>AI Quick Actions: Continue writing</em></span></p>
+
+<h3><strong>6. Looking Ahead</strong></h3>
+
+<p>The future of AI will certainly continue to evolve in unpredictable ways and it will probably lead to changes that we cannot fully understand yet because the pace of development is so fast that many experts believe</p>
+
+						</div>
+					</div>
+					<div id="editor-annotations-quick-actions" class="ai-demo-types-integration__annotations"></div>
+				</div>
+			</div>
+		</section>
+		<section class="demo-panel" data-demo-panel="review" hidden>
+			<div class="js-spinner-holder-ai-review demo-spinner" role="status"><span class="demo-spinner__dot"></span> Loading editor…</div>
+			<div class="js-editor-wrapper-ai-review u-gone" data-demo-type="ai-review">
+<div id="cke5-ai-demo-types-review" class="ai-demo-types-integration ai-demo-types-integration--classic">
+					<div id="editor-annotations-review" class="ai-demo-types-integration__annotations"></div>
+					<div class="ai-demo-types-integration__content-wrapper">
+						<div id="cke5-ai-demo-types-review-content">
+<h1>FIX ERRORS: Executive Summary</h1>
+
+<h2>Executive Summary — Quarterly Business Update</h2>
+
+<p>This is a first draft of a quarterly executive summary, written under time pressure.</p>
+
+<p>Review the text below and improve its grammar, clarity, and flow, while keeping a concise, executive-level tone.</p>
+
+<p><strong>Use AI Review to improve wording and correct mistakes.</strong></p>
+
+<hr>
+
+<p><strong>Executive Summary (Draft)</strong></p>
+
+<p>Overall, this quarter can be described as rather positive for the company, even though not all areas performed according to what we was initially expecting when the quarter started. The general direction is good, but there are several points that require more attention going forward.</p>
+
+<p>Revenue was higher than in previous quarter, mainly driven by existing customers who expanded their contracts, as well as few new enterprise deals which was signed close to the end of the quarter. However, this growth was partially offset by increased costs, especially in hiring and infrastructure, which ended up being higher then planned.</p>
+
+<p>From the customer perspective, retention remains on a good level and churn did not increased significantly. At the same time, we are seeing early signs of decreasing engagement in some customer segments, especially among mid-sized clients. This is something that could become an issue in next quarters if not addressed on time.</p>
+
+<p>Product development made solid progress, although some initiatives was delayed due to resource constraints and shifting priorities during the quarter. This impacted delivery timelines and required additional coordination across teams, which also had impact on productivity.</p>
+
+<p>In summary, the quarter results are acceptable and show that the business is moving in the right direction. That said, the outlook for the next quarter is more uncertain, mostly due to external market conditions and increased pressure on margins. Our ability to execute on planned initiatives and control costs will be critical to achieve the expected results.</p>
+
+<hr>
+
+<p><em>Curious how this would sound written differently? Ask AI.</em></p>
+
+						</div>
+					</div>
+					<div class="ai-demo-types-integration__sidebar">
+						<div class="ai-demo-types-integration__sidebar-content" id="ai-sidebar-container-review"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="demo-panel" data-demo-panel="translate" hidden>
+			<div class="js-spinner-holder-ai-translate demo-spinner" role="status"><span class="demo-spinner__dot"></span> Loading editor…</div>
+			<div class="js-editor-wrapper-ai-translate u-gone" data-demo-type="ai-translate">
+<div id="cke5-ai-demo-types-translate" class="ai-demo-types-integration ai-demo-types-integration--classic">
+					<div id="editor-annotations-translate" class="ai-demo-types-integration__annotations"></div>
+					<div class="ai-demo-types-integration__content-wrapper">
+						<div id="cke5-ai-demo-types-translate-content">
+<h1>Customer Support Metrics Report</h1>
+
+<p><strong>Operational Summary – Second Half of 2025</strong></p>
+
+<h2>Overview</h2>
+
+<p>This report summarizes customer support performance during the second half of 2025. It focuses on ticket volumes, response efficiency and common issue categories, based on internal operational data across all support channels.</p>
+
+<p>The information below should be treated as an overview of observed trends rather than a detailed performance evaluation.</p>
+
+<h2>Support Process Overview</h2>
+
+<p>The diagram outlines our internal customer support process, showing how incoming requests are handled across multiple support tiers based on complexity.</p>
+
+<p>Customer inquiries are initially managed by <strong>Tier 1: Frontline Support</strong>, which is responsible for triage and resolution of common issues. More complex cases are escalated to <strong>Tier 2: Technical Support</strong>, where deeper technical investigation is performed.</p>
+
+<p>High-impact or unresolved issues are handled by <strong>Tier 3: Escalation Team</strong>, which coordinates with internal experts as required. <strong>Specialist Teams</strong> support Tier 2 and Tier 3 by providing domain-specific expertise, while typically remaining non-customer-facing.</p>
+
+<p>The process is designed to allow flexible movement between tiers, supporting efficient resolution and appropriate escalation when needed.</p>
+
+<figure class="image">
+	<img src="https://ckeditor.com/assets/images/ckdemo/ai/Customer%20Support%20Metrics%20Report%20Image.png" alt="Internal support workflow">
+	<figcaption>Figure 1. Internal support workflow across frontline, technical and escalation teams.</figcaption>
+</figure>
+
+<h2>Ticket Volume</h2>
+
+<p>During the reporting period, the support team processed <strong>184,600 tickets</strong>, representing an increase of <strong>11%</strong> compared to the previous period. Ticket volume peaked in September and gradually stabilized towards the end of the year.</p>
+
+<p>The increase was primarily driven by onboarding-related questions and product configuration requests.</p>
+
+<h2>Channel Distribution</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Channel</th>
+			<th>Share of Tickets</th>
+			<th>Change vs. Previous Period</th>
+			<th>Avg. First Response Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Email</td>
+			<td>54%</td>
+			<td>-3%</td>
+			<td>3.1 hours</td>
+		</tr>
+		<tr>
+			<td>Live Chat</td>
+			<td>31%</td>
+			<td>+5%</td>
+			<td>1.2 hours</td>
+		</tr>
+		<tr>
+			<td>In-App Support</td>
+			<td>15%</td>
+			<td>-2%</td>
+			<td>2.4 hours</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Email remained the dominant support channel, although live chat usage continued to increase, particularly among larger accounts.</p>
+
+<h2>Resolution Efficiency</h2>
+
+<p>Average response and resolution times showed minor improvement compared to earlier in the year.</p>
+
+<ul>
+	<li>Average first response time: <strong>2.4 hours</strong></li>
+	<li>Average resolution time: <strong>18.7 hours</strong></li>
+	<li>Tickets resolved within 24 hours: <strong>68%</strong></li>
+</ul>
+
+<p>More complex cases, especially those related to integrations, required additional follow-up and were not consistently resolved within standard timeframes. While faster response times were generally appreciated, qualitative feedback indicates that communication consistency played an equally important role in overall customer perception.</p>
+
+<blockquote>
+	<p>"Faster responses were helpful, but consistency in follow-up communication had a bigger impact on our overall experience."</p>
+	<p><strong>— Enterprise customer, post-resolution survey</strong></p>
+</blockquote>
+
+<h2>Common Issue Categories</h2>
+
+<p>The most frequently reported issues were:</p>
+
+<ol>
+	<li>Account access and authentication</li>
+	<li>Billing and invoice related questions</li>
+	<li>Feature usage clarification</li>
+	<li>Integration setup</li>
+	<li>Performance-related concerns</li>
+</ol>
+
+<p>Billing-related requests declined slightly, while integration-related inquiries increased towards the end of the period.</p>
+
+<h2>Customer Satisfaction</h2>
+
+<p>Customer satisfaction was measured through post-resolution surveys. The overall response rate remained stable throughout the reporting period.</p>
+
+<ul>
+	<li>Average CSAT score: <strong>4.2 / 5</strong></li>
+	<li>Survey response rate: <strong>27%</strong></li>
+</ul>
+
+<p>Feedback most often referenced response time and clarity of follow-up communication as areas for improvement, particularly in cases involving multiple handovers or escalations.</p>
+
+<h2>Identified Bottlenecks</h2>
+
+<p>Internal review identified several operational areas that may require further attention:</p>
+
+<ul>
+	<li>Delays in ticket reassignment for escalated cases</li>
+	<li>Inconsistent categorization of incoming requests</li>
+	<li>Limited coverage during selected regional peak hours</li>
+</ul>
+
+<p>While these issues did not materially impact aggregate performance metrics, they were visible in individual case handling and customer feedback.</p>
+
+<blockquote>
+	<p>"The issue was eventually resolved, although it was not always clear who was responsible for the case during escalation."</p>
+	<p><strong>— Key account feedback, quarterly review</strong></p>
+</blockquote>
+
+<h2>Summary</h2>
+
+<p>Overall support performance remained within expected operational ranges. Most key indicators were stable, with moderate improvements observed in response efficiency. At the same time, the data suggests that further improvements in communication clarity and escalation handling could positively impact customer experience in future reporting periods.</p>
+
+
+						</div>
+					</div>
+					<div class="ai-demo-types-integration__sidebar">
+						<div class="ai-demo-types-integration__sidebar-content" id="ai-sidebar-container-translate"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		</div>
+		</div>
+
+		<script src="https://cdn.ckbox.io/ckbox/2.11.0/ckbox.js"></script>
+		<script type="module" src="index.js"></script>
+	</body>
+</html>
