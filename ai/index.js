@@ -619,7 +619,7 @@ Tone: [e.g. Clear, practical, collaborative]`,
 						id: 'fix-grammar-and-spelling',
 						type: 'review',
 						label: 'Fix grammar and spelling',
-						check: 'correctness'
+						commandId: 'correctness'
 					},
 					{
 						id: 'review-document',
