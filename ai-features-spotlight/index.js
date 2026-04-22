@@ -133,14 +133,22 @@ import {
 	TrackChangesPreview
 } from '@ckeditor/ckeditor5-track-changes';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { BalloonToolbar } from '@ckeditor/ckeditor5-ui';
+import { BalloonToolbar, BlockToolbar } from '@ckeditor/ckeditor5-ui';
+import { BalloonEditor } from '@ckeditor/ckeditor5-editor-balloon';
 import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { uid } from '@ckeditor/ckeditor5-utils';
 
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
-import { CHAT_COMMENTS_DATA, createComments } from './ai-comments.js';
+import { BALLOON_COMMENTS_DATA, CHAT_COMMENTS_DATA, createComments } from './ai-comments.js';
+
+/* eslint-disable max-len */
+const minimizeIcon = '<svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+	'<path d="M2.98004 11.6211C2.98004 11.0688 3.42776 10.6211 3.98004 10.6211H11.98C12.5323 10.6211 12.98 11.0688 12.98 11.6211C12.98 12.1734 12.5323 12.6211 11.98 12.6211H3.98004C3.42776 12.6211 2.98004 12.1734 2.98004 11.6211Z" fill="currentColor"/>' +
+	'<path fill-rule="evenodd" clip-rule="evenodd" d="M14 0C15.1046 0 16 0.895431 16 2V14C16 15.1046 15.1046 16 14 16H2C0.895431 16 0 15.1046 0 14V2C0 0.895431 0.895431 0 2 0H14ZM2.5 1.49805C1.94772 1.49805 1.5 1.94576 1.5 2.49805V13.498C1.5 14.0503 1.94772 14.498 2.5 14.498H13.5C14.0523 14.498 14.5 14.0503 14.5 13.498V2.49805C14.5 1.94576 14.0523 1.49805 13.5 1.49805H2.5Z" fill="currentColor"/>' +
+	'</svg>';
+/* eslint-enable max-len */
 
 const AI_DEMO_TOOLBAR_ITEMS = [
 	'undo',
@@ -1872,6 +1880,237 @@ Tone: [e.g. Clear, practical, collaborative]`,
 	cloudServices: CS_CONFIG
 };
 
+// --------- Balloon AI Editor — Custom AI interface --------
+
+class BalloonAiEditor extends BalloonEditor {}
+
+BalloonAiEditor.builtinPlugins = [
+	AIChat,
+	AIEditorIntegration,
+	AIQuickActions,
+	AIReviewMode,
+	AITranslate,
+	AIChatShortcuts,
+	Autoformat,
+	BlockQuote,
+	BlockToolbar,
+	Bold,
+	CKBox,
+	CloudServices,
+	Comments,
+	EasyImage,
+	Emoji,
+	Essentials,
+	Heading,
+	Image,
+	ImageCaption,
+	ImageInsert,
+	ImageResize,
+	ImageStyle,
+	ImageToolbar,
+	ImageUpload,
+	Indent,
+	IndentBlock,
+	Italic,
+	Link,
+	List,
+	MediaEmbed,
+	Mention,
+	Paragraph,
+	PasteFromOffice,
+	PasteFromOfficeEnhanced,
+	PictureEditing,
+	Table,
+	TableToolbar,
+	TextTransformation,
+	TrackChanges,
+	TrackChangesData,
+	SimpleUploadAdapter,
+	SlashCommand,
+	BalloonToolbar,
+	Underline
+];
+
+BalloonAiEditor.defaultConfig = {
+	licenseKey: LICENSE_KEY,
+	cloudServices: CS_CONFIG,
+	blockToolbar: [
+		'undo',
+		'redo',
+		'|',
+		'heading',
+		'|',
+		'uploadImage',
+		'insertTable',
+		'blockQuote',
+		'mediaEmbed',
+		'|',
+		'bulletedList',
+		'numberedList',
+		'|',
+		'outdent',
+		'indent'
+	],
+	toolbar: {
+		items: [
+			'comment',
+			'|',
+			'aiQuickActions',
+			'ask-ai',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'|',
+			'link'
+		]
+	},
+	emoji: {
+		definitionsUrl: 'cdn'
+	},
+	heading: {
+		options: [
+			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+		]
+	},
+	image: {
+		styles: [ 'alignCenter', 'alignLeft', 'alignRight' ],
+		resizeOptions: [
+			{ name: 'resizeImage:original', label: 'Default image width', value: null },
+			{ name: 'resizeImage:50', label: '50% page width', value: '50' },
+			{ name: 'resizeImage:75', label: '75% page width', value: '75' }
+		],
+		toolbar: [
+			'imageTextAlternative',
+			'toggleImageCaption',
+			'|',
+			'imageStyle:inline',
+			'imageStyle:wrapText',
+			'imageStyle:breakText',
+			'|',
+			'resizeImage'
+		]
+	},
+	link: {
+		addTargetToExternalLinks: true,
+		defaultProtocol: 'https://'
+	},
+	table: {
+		contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+	},
+	ckbox: {
+		allowExternalImagesEditing: image => !!image.match( CKBOX_IMAGE_EDIT_FORMATS ),
+		forceDemoLabel: true,
+		tokenUrl: CKBOX_TOKEN_URL
+	},
+	comments: {
+		editorConfig: {
+			extraPlugins: [ Autoformat, Bold, Italic, List, Mention ],
+			mention: {
+				feeds: [ { marker: '@', feed: [] } ]
+			}
+		}
+	},
+	trackChangesData: {
+		editorCreator: ( config, createElement ) => {
+			if ( !config.removePlugins ) {
+				config.removePlugins = [];
+			}
+			config.removePlugins.push(
+				'AIChat',
+				'AIEditorIntegration',
+				'AIQuickActions',
+				'AIReviewMode',
+				'AITranslate'
+			);
+			if ( !config.attachTo ) {
+				config.attachTo = createElement();
+			}
+			return BalloonAiEditor.create( config );
+		}
+	},
+	ai: {
+		serviceUrl: 'https://ai.cke-cs.com/v1',
+		chat: {
+			shortcuts: [
+				{
+					id: 'summarize-document',
+					type: 'chat',
+					label: 'Summarize the document',
+					prompt: 'Summarize the following document in 5-7 sentences. Focus on the main ideas and essential details. ' +
+						'Exclude examples, repetition, and minor points. Do not introduce new information.'
+				},
+				{
+					id: 'continue-writing',
+					type: 'chat',
+					label: 'Continue writing',
+					prompt: 'Continue writing this document. Match the existing tone, vocabulary level, and formatting. ' +
+						// eslint-disable-next-line max-len
+						'Do not repeat or summarize earlier sections. Ensure logical flow and progression of ideas. Add approximately 3 paragraphs.',
+					useReasoning: true,
+					useWebSearch: true
+				},
+				{
+					id: 'rewrite-document',
+					type: 'chat',
+					label: 'Rewrite the document',
+					prompt: `Rewrite the document below for the following audience:
+
+Audience: [e.g. Product / Engineering /Leadership]
+Primary concern: [e.g., escalations, integrations, customer sentiment]
+Context: [e.g. Internal performance review]
+
+Guidelines:
+
+- Emphasize sections most relevant to this audience
+- De-emphasize or condense less relevant details
+- Adjust terminology to match how this team thinks and speaks
+- Keep metrics accurate and unchanged
+
+Tone: [e.g. Clear, practical, collaborative]`,
+					useReasoning: true,
+					draftMode: true
+				},
+				{
+					id: 'fix-grammar-and-spelling',
+					type: 'review',
+					label: 'Fix grammar and spelling',
+					commandId: 'correctness'
+				},
+				{
+					id: 'review-document',
+					type: 'review',
+					label: 'Review document'
+				},
+				{
+					id: 'translate-document',
+					type: 'translate',
+					label: 'Translate document'
+				}
+			]
+		},
+		review: {
+			extraCommands: [
+				{
+					id: 'company-style-guide',
+					label: 'Company style guide',
+					description: 'Apply the company writing style guide to ensure consistent, professional language.',
+					prompt: 'Apply the following company style guide rules to the text. For each violation, suggest a concrete rewrite. ' +
+						'Replace hedging phrases with direct, confident statements. ' +
+						'Convert passive voice to active voice where the actor is known or implied. ' +
+						'Remove filler words and redundant qualifiers. ' +
+						'Replace vague language with precise wording. ' +
+						'Keep all data, metrics, and factual content unchanged.'
+				}
+			]
+		}
+	}
+};
+
 // --------- Editor bundle ------------------------------------------------------------------------
 
 const AiSpotlightEditors = {
@@ -1879,14 +2118,16 @@ const AiSpotlightEditors = {
 	AiChatEditor,
 	AiQuickActionsEditor,
 	AiReviewEditor,
-	AiTranslateEditor
+	AiTranslateEditor,
+	BalloonAiEditor
 };
 const AI_DEMO_TYPE_TO_EDITOR_KEY = {
 	'ai-classic': 'aiClassic',
 	'ai-chat': 'aiChat',
 	'ai-quick-actions': 'aiQuickActions',
 	'ai-review': 'aiReview',
-	'ai-translate': 'aiTranslate'
+	'ai-translate': 'aiTranslate',
+	'ai-balloon': 'aiBalloon'
 };
 
 function getMatchMediaQuery( breakpoint ) {
@@ -2021,6 +2262,11 @@ function setupAiDisplayMode( editor, options = {} ) {
 	const fullscreenCommand = editor.commands.get( 'toggleFullscreen' );
 	const aiTabs = editor.plugins.has( 'AITabs' ) ? editor.plugins.get( 'AITabs' ) : false;
 
+	// Cache the last applied mode to avoid re-rendering the annotations sidebar
+	// when the target mode hasn't changed (e.g. toggling the balloon AI panel on
+	// wide screens where both breakpoints resolve to the same mode).
+	let lastAppliedMode = null;
+
 	function isAiSidebarOpen() {
 		if ( !aiTabs || !aiTabs.view ) {
 			return false;
@@ -2036,20 +2282,18 @@ function setupAiDisplayMode( editor, options = {} ) {
 			return;
 		}
 		const aiOpen = isAiSidebarOpen();
+		// eslint-disable-next-line max-len
+		const targetMode = ( aiOpen ? getMatchMediaQuery( wideSidebarBreakpointWhenAiOpen ) : getMatchMediaQuery( wideSidebarBreakpointWhenAiClosed ) ) ?
+			'wideSidebar' :
+			'narrowSidebar';
+
+		if ( targetMode === lastAppliedMode ) {
+			return;
+		}
+
 		try {
-			if ( aiOpen ) {
-				if ( getMatchMediaQuery( wideSidebarBreakpointWhenAiOpen ) ) {
-					annotationsUIs.switchTo( 'wideSidebar' );
-				} else {
-					annotationsUIs.switchTo( 'narrowSidebar' );
-				}
-			} else {
-				if ( getMatchMediaQuery( wideSidebarBreakpointWhenAiClosed ) ) {
-					annotationsUIs.switchTo( 'wideSidebar' );
-				} else {
-					annotationsUIs.switchTo( 'narrowSidebar' );
-				}
-			}
+			annotationsUIs.switchTo( targetMode );
+			lastAppliedMode = targetMode;
 		} catch ( error ) {
 			console.warn( 'Annotations UI not ready yet:', error );
 		}
@@ -2405,9 +2649,180 @@ function initAiTranslateEditor() {
 		.catch( error => console.error( error.stack ) );
 }
 
+function initAiBalloonEditor() {
+	const editorElement = document.querySelector( '#cke5-ai-demo-types-balloon-content' );
+	const annotationsContainer = document.querySelector( '#editor-annotations-balloon' );
+	const aiPanelContent = document.querySelector( '#ai-balloon-panel-content' );
+	const aiPanel = document.querySelector( '#ai-balloon-panel' );
+	const aiTrigger = document.querySelector( '#ai-balloon-trigger' );
+
+	if ( !editorElement || !aiPanelContent ) {
+		return;
+	}
+
+	const userId = handleIDUrlParameter( 'userId' );
+	const channelId = handleIDUrlParameter( 'channelIdBalloon' );
+	const { USER_DATA, UsersIntegration } = createUsersIntegrationEditor( userId );
+
+	const editorConfig = {
+		extraPlugins: [ UsersIntegration ],
+		collaboration: { channelId },
+		cloudServices: {
+			...CS_CONFIG,
+			tokenUrl: buildUserTokenUrl( CS_CONFIG.tokenUrl, USER_DATA )
+		},
+		sidebar: { container: annotationsContainer },
+		ai: {
+			container: {
+				type: 'custom',
+				showResizeButton: false,
+				visibleByDefault: false
+			}
+		}
+	};
+
+	AiSpotlightEditors.BalloonAiEditor.create( editorElement, editorConfig )
+		.then( editor => {
+			window.editors.aiBalloon = editor;
+
+			createComments( editor, USER_DATA, BALLOON_COMMENTS_DATA );
+			setupAiDisplayMode( editor, {
+				wideSidebarBreakpointWhenAiOpen: 'extraMedium',
+				wideSidebarBreakpointWhenAiClosed: 'extraMedium'
+			} );
+			setupAnnotationsScrollRefresh( editor );
+			setupScrollPrevention( editor );
+
+			const aiTabs = editor.plugins.has( 'AITabs' ) ?
+				editor.plugins.get( 'AITabs' ) :
+				null;
+
+			if ( aiTabs ) {
+				buildCustomAiTabs( aiTabs, aiPanelContent, editor );
+			}
+
+			function updatePanelVisibility() {
+				const isOpen = !!( aiTabs?.view?.isRendered && aiTabs?.view?.isVisible );
+				aiPanel.classList.toggle( 'ai-balloon-panel--open', isOpen );
+				aiTrigger.classList.toggle( 'ai-balloon-trigger--active', isOpen );
+
+				if ( isOpen ) {
+					adjustPanelHorizontalShift();
+
+					// Force a CKEditor UI update after the panel becomes visible so the
+					// add-context button (position:absolute with JS-calculated left via
+					// getBoundingClientRect) is repositioned with the real element width.
+					// eslint-disable-next-line no-void
+					void aiPanel.offsetHeight;
+					requestAnimationFrame( () => editor.ui.update() );
+				}
+			}
+
+			function adjustPanelHorizontalShift() {
+				if ( !aiPanel || !aiPanel.classList.contains( 'ai-balloon-panel--open' ) ) {
+					return;
+				}
+
+				const dock = aiPanel.parentElement;
+				if ( !dock ) {
+					return;
+				}
+
+				const dockRect = dock.getBoundingClientRect();
+				if ( dockRect.width === 0 ) {
+					return;
+				}
+
+				const panelWidth = 454;
+				const viewportWidth = window.innerWidth;
+				const rightMargin = 18;
+
+				const panelNaturalRight = dockRect.left + panelWidth;
+				const overflow = ( panelNaturalRight + rightMargin ) - viewportWidth;
+				const leftOffset = overflow > 0 ? -overflow : 0;
+
+				aiPanel.style.left = leftOffset + 'px';
+			}
+
+			window.addEventListener( 'resize', adjustPanelHorizontalShift );
+
+			if ( aiTabs?.view ) {
+				aiTabs.view.on( 'change:isVisible', updatePanelVisibility );
+				aiTabs.view.on( 'change:isRendered', updatePanelVisibility );
+			}
+
+			if ( aiTrigger ) {
+				aiTrigger.addEventListener( 'click', () => {
+					editor.execute( 'toggleAi' );
+				} );
+			}
+
+			removeLoader( { loaderClass: '.js-spinner-holder-ai-balloon' } );
+			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-balloon', classToRemove: 'u-gone' } );
+			startViewportTopOffsetUpdater( editor );
+		} )
+		.catch( error => console.error( error.stack ) );
+}
+
+// Builds the custom AI tab UI: panels wrapper (top) → buttons bar → disclaimer (bottom).
+// Tab panels are nested inside CKEditor class wrappers so internal theme CSS applies.
+function buildCustomAiTabs( aiTabs, container, editor ) {
+	const panelsWrapper = document.createElement( 'div' );
+	panelsWrapper.className = 'ai-balloon-panels';
+
+	const tabsOuterWrapper = document.createElement( 'div' );
+	tabsOuterWrapper.className = 'ck ck-reset ck-tabs ck-tabs_right ck-ai-tabs ck-ai-tabs__sidebar';
+
+	const panelsContainer = document.createElement( 'div' );
+	panelsContainer.className = 'ck ck-tabs__panels-container ck-tabs__panels-container_right';
+
+	tabsOuterWrapper.appendChild( panelsContainer );
+	panelsWrapper.appendChild( tabsOuterWrapper );
+
+	const buttonsBar = document.createElement( 'div' );
+	buttonsBar.className = 'ai-balloon-buttons';
+
+	for ( const id of aiTabs.view.getTabIds() ) {
+		const tab = aiTabs.view.getTab( id );
+
+		buttonsBar.appendChild( tab.button.element );
+		panelsContainer.appendChild( tab.panel.element );
+	}
+
+	container.appendChild( panelsWrapper );
+	container.appendChild( buttonsBar );
+
+	const disclaimer = document.createElement( 'div' );
+	disclaimer.className = 'ai-balloon-disclaimer';
+	disclaimer.textContent = 'AI can make mistakes. Please double-check responses.';
+	container.appendChild( disclaimer );
+
+	// Tab panel content renders lazily — use MutationObserver to inject minimize buttons.
+	const injectMinimizeButtons = () => {
+		container.querySelectorAll( '.ck-ai-header' ).forEach( header => {
+			if ( header.querySelector( '.ai-balloon-minimize' ) ) {
+				return;
+			}
+
+			const minimizeBtn = document.createElement( 'button' );
+			minimizeBtn.className = 'ck ck-button ck-ai-button-tertiary ck-off ai-balloon-minimize';
+			minimizeBtn.type = 'button';
+			minimizeBtn.title = 'Minimize AI';
+			minimizeBtn.innerHTML = minimizeIcon;
+			header.appendChild( minimizeBtn );
+
+			minimizeBtn.addEventListener( 'click', () => editor.execute( 'toggleAi' ) );
+		} );
+	};
+
+	new MutationObserver( injectMinimizeButtons ).observe( container, { childList: true, subtree: true } );
+	injectMinimizeButtons();
+}
+
 setupDemoTabButtons();
 initAiClassicEditor();
 initAiChatEditor();
 initAiQuickActionsEditor();
 initAiReviewEditor();
 initAiTranslateEditor();
+initAiBalloonEditor();

@@ -190,12 +190,17 @@ html {
 }
 
 .ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-classic-content,
+.ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-balloon-content,
 .ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-chat-content,
 .ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-quick-actions-content,
 .ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-review-content,
 .ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-translate-content {
   flex: 1;
   overflow-y: auto;
+}
+
+.ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper #cke5-ai-demo-types-balloon-content.ck.ck-content {
+  border: none !important;
 }
 
 .ai-demo-types-integration--classic .ai-demo-types-integration__content-wrapper .ck.ck-editor__top {
@@ -256,4 +261,276 @@ html {
 #cke5-ai-demo-types-review .ai-demo-types-integration__sidebar .ck.ck-tabs .ck.ck-tabs__buttons-container,
 #cke5-ai-demo-types-translate .ai-demo-types-integration__sidebar .ck.ck-tabs .ck.ck-tabs__buttons-container {
   display: none;
+}
+
+/* --------- Balloon AI panel --------- */
+
+/* Extra spacing so comments sidebar and block toolbar don't overlap */
+#cke5-ai-demo-types-balloon {
+  overflow: visible;
+}
+
+#cke5-ai-demo-types-balloon .ck-annotations-sidebar,
+#cke5-ai-demo-types-balloon .ck-sidebar {
+  margin-right: 10px;
+}
+
+#cke5-ai-demo-types-balloon .ai-demo-types-integration__annotations {
+  height: auto;
+  overflow: visible;
+}
+
+/* Block toolbar handle offset so it doesn't overlap content */
+#cke5-ai-demo-types-balloon .ck.ck-block-toolbar-button {
+  transform: translateX(22px);
+}
+
+/* Sticky dock: flex item pinned to the bottom-right of the editor's vertical range */
+.ai-balloon-dock {
+  position: sticky;
+  bottom: 16px;
+  align-self: flex-end;
+  margin-left: 16px;
+  margin-right: 0;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+@media (width >= 1630px) {
+  .ai-balloon-dock {
+    transform: translateX(100px);
+  }
+}
+
+/* Circular trigger button */
+.ai-balloon-trigger {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  color: #743ccd;
+  border: 1px solid var(--ck-color-base-border, #c4c4c4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+  transition: box-shadow 0.15s, transform 0.15s;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ai-balloon-trigger:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  transform: scale(1.06);
+}
+
+.ai-balloon-trigger:active {
+  transform: scale(0.96);
+}
+
+.ai-balloon-trigger--active {
+  border-color: #743ccd;
+}
+
+/* Overlay panel — opens above-right of the trigger; JS shifts left if viewport overflow */
+.ai-balloon-panel {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  right: auto;
+  width: 454px;
+  height: 650px;
+  background: #fff;
+  border: 1px solid #ccced1;
+  border-radius: 2px;
+  box-shadow: none;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.ai-balloon-panel--open {
+  display: flex;
+  animation: aiPanelSlideIn 0.18s ease-out both;
+}
+
+.ai-balloon-panel__body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes aiPanelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------- Custom AI Tabs --------- */
+
+.ai-balloon-panels {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+  position: relative;
+}
+
+.ai-balloon-panels .ck.ck-tabs {
+  border: none !important;
+  height: 100%;
+}
+
+.ai-balloon-panels .ck-tab-panel {
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.ai-balloon-panels .ck-ai-chat {
+  height: 100%;
+}
+
+.ai-balloon-panels .ck-ai-chat-history {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ai-balloon-panels .ck-ai-review-mode {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ai-balloon-panels .ck-ai-review-mode .ck-ai-header {
+  flex-shrink: 0;
+}
+
+.ai-balloon-panels .ck-ai-review-mode .ck-ai-review-mode__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.ai-balloon-panels .ck-ai-translate {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ai-balloon-panels .ck-ai-translate .ck-ai-header {
+  flex-shrink: 0;
+}
+
+.ai-balloon-panels .ck-ai-translate .ck-ai-translate__check-list-header {
+  display: none !important;
+}
+
+.ai-balloon-panels .ck-ai-translate .ck-ai-translate__body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+/* Tab buttons bar — `!important` needed to override CKEditor theme rules on .ck-button */
+.ai-balloon-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: #fafafa !important;
+  flex-shrink: 0;
+  gap: 0 !important;
+  border: none !important;
+}
+
+.ai-balloon-buttons .ck-button {
+  flex: 1 1 0% !important;
+  gap: 5px !important;
+  padding: 5px 6px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  height: auto !important;
+  min-width: 0 !important;
+  color: #333 !important;
+  font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif !important;
+  background: transparent !important;
+  display: flex !important;
+}
+
+.ai-balloon-buttons .ck-button.ck-on {
+  background: #f0f0f0 !important;
+  border-top: 2px solid #743ccd !important;
+  color: #743ccd !important;
+}
+
+.ai-balloon-buttons .ck-button.ck-off {
+  background: transparent !important;
+  border-top: 1px solid #ccced1 !important;
+  margin-top: 1px;
+}
+
+.ai-balloon-buttons .ck-button .ck-button__label {
+  display: inline !important;
+  overflow: visible !important;
+  width: auto !important;
+  clip: auto !important;
+  clip-path: none !important;
+  white-space: nowrap !important;
+  font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 24px !important;
+}
+
+.ai-balloon-buttons .ck-button .ck-icon {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: inherit !important;
+}
+
+#ai-balloon-panel .ai-balloon-disclaimer {
+  font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif;
+  font-size: 9.75px;
+  color: #707070;
+  text-align: center;
+  padding: 6px 16px;
+  background: #fafafa;
+  border-top: 1px solid #ccced1;
+  border-radius: 0;
+}
+
+/* Hide CKEditor's built-in disclaimer (we render our own below the buttons bar) */
+#ai-balloon-panel .ck-ai-disclaimer {
+  display: none !important;
+}
+
+/* Minimize button injected into each tab header */
+#ai-balloon-panel .ai-balloon-minimize {
+  margin-left: 10px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
