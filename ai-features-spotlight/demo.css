@@ -335,6 +335,22 @@ html {
   border-color: #743ccd;
 }
 
+/* --------- Readonly mode visual states --------- */
+
+/* Show the AI trigger button as disabled in readonly mode. */
+.ai-balloon-trigger--readonly {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Show all injected minimize buttons as disabled when the dock is in readonly mode. */
+.ai-balloon-dock--readonly .ai-balloon-minimize {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Overlay panel — opens above-right of the trigger; JS shifts left if viewport overflow */
 .ai-balloon-panel {
   position: absolute;

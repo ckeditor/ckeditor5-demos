@@ -2757,6 +2757,25 @@ function initAiBalloonEditor() {
 				} );
 			}
 
+			// Reflect readonly state on the trigger button and its dock so CSS can
+			// style the trigger and all injected minimize buttons as disabled.
+			const aiDock = aiTrigger?.closest( '.ai-balloon-dock' );
+
+			function updateReadonlyButtonState() {
+				const isReadOnly = editor.isReadOnly;
+
+				if ( aiTrigger ) {
+					aiTrigger.classList.toggle( 'ai-balloon-trigger--readonly', isReadOnly );
+				}
+
+				if ( aiDock ) {
+					aiDock.classList.toggle( 'ai-balloon-dock--readonly', isReadOnly );
+				}
+			}
+
+			editor.on( 'change:isReadOnly', updateReadonlyButtonState );
+			updateReadonlyButtonState();
+
 			removeLoader( { loaderClass: '.js-spinner-holder-ai-balloon' } );
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-balloon', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
