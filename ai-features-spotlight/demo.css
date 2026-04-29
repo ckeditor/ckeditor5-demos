@@ -280,6 +280,12 @@ html {
   overflow: visible;
 }
 
+#cke5-ai-demo-types-balloon.ai-demo-types-integration--classic {
+  @media screen and (max-width: 1100px) {
+    min-width: 0;
+  }
+}
+
 /* Block toolbar handle offset so it doesn't overlap content */
 #cke5-ai-demo-types-balloon .ck.ck-block-toolbar-button {
   transform: translateX(22px);
@@ -295,7 +301,7 @@ html {
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-  z-index: 100;
+  z-index: calc(var(--ck-z-panel, 999) + 1);
 }
 
 @media (width >= 1630px) {
@@ -358,7 +364,7 @@ html {
   left: 0;
   right: auto;
   width: 454px;
-  height: 650px;
+  height: min(650px, calc(100dvh - 170px));
   background: #fff;
   border: 1px solid #ccced1;
   border-radius: 2px;
@@ -366,7 +372,7 @@ html {
   display: none;
   flex-direction: column;
   overflow: hidden;
-  z-index: 100;
+  z-index: calc(var(--ck-z-panel, 999) + 1);
 }
 
 .ai-balloon-panel--open {
@@ -390,6 +396,11 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.ck-ai-chat-controls .ck-ai-chat-controls__model-selection .ck-dropdown__panel.ck-dropdown__panel_ne {
+	max-height: min(549px, calc(100dvh - 271px));
+	overflow-y: auto;
 }
 
 /* --------- Custom AI Tabs --------- */
