@@ -1,6 +1,6 @@
 # AI features spotlight
 
-This demo mirrors the multi-tab AI experience from the CKEditor website: **Classic Editor with AI**, **AI Chat**, **AI Quick Actions**, **AI Review**, and **AI Translate**. Use the buttons above the editor to switch variants.
+This demo mirrors the multi-tab AI experience from the CKEditor website: **Classic Editor with AI**, **AI Chat**, **AI Quick Actions**, **AI Review**, **AI Translate**, and **Custom AI interface**. Use the buttons above the editor to switch variants.
 
 ## Files (same layout as the `ai` demo)
 

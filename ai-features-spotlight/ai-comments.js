@@ -97,6 +97,15 @@ export const CHAT_COMMENTS_DATA = [
 	}
 ];
 
+export const BALLOON_COMMENTS_DATA = [
+	{
+		threadId: 'b7a6f591e8420c1d2e3f4a5b6c7d8e9f0',
+		searchText: '2030',
+		commentContent: '<p>Isn\'t 2028 more likely?</p>',
+		exactMatch: true
+	}
+];
+
 function addComment( editor, commentsRepo, root, commentData, userId ) {
 	let startParagraph, endParagraph;
 
