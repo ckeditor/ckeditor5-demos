@@ -19,6 +19,17 @@ if ( LICENSE_KEY === 'GPL' ) {
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 /**
+ * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ *
+ * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
+ */
+const CLOUD_SERVICES_TOKEN_URL = '';
+
+if ( !CLOUD_SERVICES_TOKEN_URL ) {
+	alert( 'A Cloud Services Token URL must be provided to use the Export to PDF and Import from Word plugins.' );
+}
+
+/**
  * Uploadcare plugin require a license key to work properly.
  *
  * For more info how to get the key, see
@@ -267,8 +278,7 @@ ClassicEditor.create(
 						left: exportHorizontalSpace
 					}
 				}
-			},
-			tokenUrl: false
+			}
 		},
 		exportWord: {
 			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
@@ -279,8 +289,7 @@ ClassicEditor.create(
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
 				margin_left: exportHorizontalSpace
-			},
-			tokenUrl: false
+			}
 		},
 		image: {
 			toolbar: [
@@ -315,6 +324,9 @@ ClassicEditor.create(
 			lang: 'auto',
 			srcUrl:
 				'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
+		},
+		cloudServices: {
+			tokenUrl: CLOUD_SERVICES_TOKEN_URL
 		}
 	}
 )

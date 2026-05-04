@@ -20,20 +20,23 @@ if ( LICENSE_KEY === 'GPL' ) {
 const CKBOX_TOKEN_URL = '';
 
 /**
+ * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ *
+ * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
+ */
+const CLOUD_SERVICES_TOKEN_URL = '';
+
+if ( !CLOUD_SERVICES_TOKEN_URL ) {
+	alert( 'A Cloud Services Token URL must be provided to use the Export to PDF and Import from Word plugins.' );
+}
+
+/**
  * WProofreader plugin require a license key to work properly.
  *
  * For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
  */
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
-/**
- * Cloud Services configuration.
- */
-const CS_CONFIG = {
-	tokenUrl: '',
-	uploadUrl: '',
-	webSocketUrl: ''
-};
 import 'ckeditor5/ckeditor5.css';
 import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 
@@ -820,7 +823,9 @@ DocumentProductivityEditor.builtinPlugins = [
 ];
 
 DocumentProductivityEditor.defaultConfig = {
-	cloudServices: CS_CONFIG,
+	cloudServices: {
+		tokenUrl: CLOUD_SERVICES_TOKEN_URL
+	},
 	licenseKey: LICENSE_KEY,
 	balloonToolbar: [
 		'bold',
@@ -972,7 +977,6 @@ DocumentProductivityEditor.defaultConfig = {
 		]
 	},
 	importWord: {
-		tokenUrl: false,
 		formatting: {
 			resets: 'none',
 			defaults: 'inline',
@@ -1019,8 +1023,7 @@ DocumentProductivityEditor.defaultConfig = {
 					left: exportHorizontalSpace
 				}
 			}
-		},
-		tokenUrl: false
+		}
 	},
 	exportWord: {
 		version: 2,
@@ -1041,8 +1044,7 @@ DocumentProductivityEditor.defaultConfig = {
 					left: exportHorizontalSpace
 				}
 			}
-		},
-		tokenUrl: false
+		}
 	},
 	pagination: {
 		// A4

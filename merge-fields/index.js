@@ -16,6 +16,17 @@ if ( LICENSE_KEY === 'GPL' ) {
 	alert( 'Premium features are disabled, because they require a commercial license key. Check the index.js file for more information.' );
 }
 
+/**
+ * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ *
+ * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
+ */
+const CLOUD_SERVICES_TOKEN_URL = '';
+
+if ( !CLOUD_SERVICES_TOKEN_URL ) {
+	alert( 'A Cloud Services Token URL must be provided to use the Export to PDF and Import from Word plugins.' );
+}
+
 // CKBox plugin requires a valid token URL in order to use the CKBox application.
 // After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
 // https://ckeditor.com/docs/ckbox/latest/guides/configuration/authentication.html#token-endpoint
@@ -800,8 +811,7 @@ ClassicEditor.create(
 						left: exportHorizontalSpace
 					}
 				}
-			},
-			tokenUrl: false
+			}
 		},
 		exportWord: {
 			stylesheets: [ coreStylesheets, premiumStylesheets, demoStylesheets, contentStylesheets ],
@@ -812,8 +822,7 @@ ClassicEditor.create(
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
 				margin_left: exportHorizontalSpace
-			},
-			tokenUrl: false
+			}
 		},
 		mergeFields: {
 			previewHtmlValues: true,
@@ -833,6 +842,9 @@ ClassicEditor.create(
 		},
 		template: {
 			definitions: TEMPLATE_DEFINITIONS
+		},
+		cloudServices: {
+			tokenUrl: CLOUD_SERVICES_TOKEN_URL
 		}
 	} )
 	.catch( error => {

@@ -25,6 +25,17 @@ if ( !AI_OPENAI_API_URL || !AI_OPENAI_TOKEN || !AI_OPENAI_MODEL ) {
 }
 
 /**
+ * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ *
+ * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
+ */
+const CLOUD_SERVICES_TOKEN_URL = '';
+
+if ( !CLOUD_SERVICES_TOKEN_URL ) {
+	alert( 'A Cloud Services Token URL must be provided to use the Export to PDF and Import from Word plugins.' );
+}
+
+/**
  * CKBox plugin requires a valid token URL in order to use the CKBox application.
  *
  * After registering to CKBox, the fastest way to try out CKBox is to use the development token endpoint:
@@ -333,8 +344,7 @@ ClassicEditor.create(
 						left: '12mm'
 					}
 				}
-			},
-			tokenUrl: false
+			}
 		},
 		exportWord: {
 			dataCallback: editor =>
@@ -349,8 +359,7 @@ ClassicEditor.create(
 				margin_right: '12mm',
 				margin_left: '12mm',
 				orientation: 'portrait'
-			},
-			tokenUrl: false
+			}
 		},
 		ai: {
 			assistant: {
@@ -369,7 +378,10 @@ ClassicEditor.create(
 				}
 			}
 		},
-		licenseKey: LICENSE_KEY
+		licenseKey: LICENSE_KEY,
+		cloudServices: {
+			tokenUrl: CLOUD_SERVICES_TOKEN_URL
+		}
 	}
 )
 	.then( editor => {
