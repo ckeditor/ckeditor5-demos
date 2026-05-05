@@ -20,6 +20,17 @@ if ( LICENSE_KEY === 'GPL' ) {
 const CKBOX_TOKEN_URL = '';
 
 /**
+ * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ *
+ * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
+ */
+const CLOUD_SERVICES_TOKEN_URL = '';
+
+if ( !CLOUD_SERVICES_TOKEN_URL ) {
+	alert( 'A Cloud Services Token URL must be provided to use the Export to PDF and Import from Word plugins.' );
+}
+
+/**
  * WProofreader plugin require a license key to work properly.
  *
  * For more info how to get the key, see https://ckeditor.com/docs/ckeditor5/latest/features/spelling-and-grammar-checking.html.
@@ -702,8 +713,7 @@ ClassicEditor.create(
 						left: exportHorizontalSpace
 					}
 				}
-			},
-			tokenUrl: false
+			}
 		},
 		exportWord: {
 			stylesheets: [ coreStylesheets, premiumStylesheets, './content.css' ],
@@ -714,8 +724,7 @@ ClassicEditor.create(
 				margin_bottom: exportVerticalSpace,
 				margin_right: exportHorizontalSpace,
 				margin_left: exportHorizontalSpace
-			},
-			tokenUrl: false
+			}
 		},
 		fontFamily: {
 			supportAllValues: true
@@ -921,6 +930,9 @@ ClassicEditor.create(
 		},
 		template: {
 			definitions: TEMPLATE_DEFINITIONS
+		},
+		cloudServices: {
+			tokenUrl: CLOUD_SERVICES_TOKEN_URL
 		}
 	}
 )
