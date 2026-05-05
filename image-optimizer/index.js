@@ -19,7 +19,7 @@ if ( LICENSE_KEY === 'GPL' ) {
 const WEB_SPELL_CHECKER_LICENSE_KEY = '';
 
 /**
- * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ * Cloud Services token endpoint URL used by the Export PDF and Import from Word plugins.
  *
  * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
  */

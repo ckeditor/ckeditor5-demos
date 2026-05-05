@@ -20,7 +20,7 @@ if ( LICENSE_KEY === 'GPL' ) {
 const CKBOX_TOKEN_URL = '';
 
 /**
- * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ * Cloud Services token endpoint URL used by the Export PDF and Import from Word plugins.
  *
  * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
  */

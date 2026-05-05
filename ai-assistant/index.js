@@ -25,7 +25,7 @@ if ( !AI_OPENAI_API_URL || !AI_OPENAI_TOKEN || !AI_OPENAI_MODEL ) {
 }
 
 /**
- * Cloud Services WebSocket URL used by the Export PDF and Import from Word plugins.
+ * Cloud Services token endpoint URL used by the Export PDF and Import from Word plugins.
  *
  * See: https://ckeditor.com/docs/cs/latest/developer-resources/security/token-endpoint.html
  */
