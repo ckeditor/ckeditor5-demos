@@ -19,6 +19,7 @@
 				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="quick-actions">AI Quick Actions</button>
 				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="review">AI Review</button>
 				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="translate">AI Translate</button>
+				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="mcp">CKEditor AI with MCP</button>
 				<button type="button" class="demo-tabs__btn" role="tab" aria-selected="false" data-demo-tab-target="balloon">Custom AI interface</button>
 			</nav>
 
@@ -482,6 +483,54 @@
 					</div>
 					<div class="ai-demo-types-integration__sidebar">
 						<div class="ai-demo-types-integration__sidebar-content" id="ai-sidebar-container-translate"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="demo-panel" data-demo-panel="mcp" hidden>
+			<div class="js-spinner-holder-ai-mcp demo-spinner" role="status"><span class="demo-spinner__dot"></span> Loading editor…</div>
+			<div class="js-editor-wrapper-ai-mcp u-gone" data-demo-type="ai-mcp">
+<div id="cke5-ai-demo-types-mcp" class="ai-demo-types-integration ai-demo-types-integration--classic">
+					<div id="editor-annotations-mcp" class="ai-demo-types-integration__annotations"></div>
+					<div class="ai-demo-types-integration__content-wrapper">
+						<div id="cke5-ai-demo-types-mcp-content">
+<h1>[Company name]</h1>
+
+<p><em>A concise internal summary of the target company based on Airtable records.</em></p>
+
+<h2>1. Executive summary</h2>
+
+<p><em>A short overview of the company, what it does, and why it may be relevant as an acquisition target.</em></p>
+
+<h2>2. Company profile</h2>
+
+<ul>
+	<li>Industry: [Industry]</li>
+	<li>Location: [Location]</li>
+	<li>Founded: [Founded date]</li>
+	<li>Employees: [Employee count]</li>
+	<li>Ownership structure: [Ownership structure]</li>
+	<li>Status: [Company status]</li>
+</ul>
+
+<h2>3. Financial snapshot</h2>
+
+<ul>
+	<li>Annual revenue: [Annual revenue]</li>
+	<li>Key financials: [Key financials]</li>
+</ul>
+
+<h2>4. Strategic rationale</h2>
+
+<p><em>Explain why this company may be an attractive target based on its sector, scale, market position, and business profile.</em></p>
+
+<h2>5. Key contacts and supporting materials</h2>
+
+<p><em>Summarize which people may be most relevant for the next step in diligence.</em></p>
+						</div>
+					</div>
+					<div class="ai-demo-types-integration__sidebar">
+						<div class="ai-demo-types-integration__sidebar-content" id="ai-sidebar-container-mcp"></div>
 					</div>
 				</div>
 			</div>
