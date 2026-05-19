@@ -20,6 +20,12 @@ const CS_CONFIG = {
 	webSocketUrl: ''
 };
 
+const CS_CONFIG_MCP = {
+	tokenUrl: '',
+	uploadUrl: '',
+	webSocketUrl: ''
+};
+
 /**
  * CKBox plugin requires a valid token URL in order to use the CKBox application.
  *
@@ -481,6 +487,65 @@ Tone: [e.g. Clear, practical, collaborative]`,
 						'Remove filler words and redundant qualifiers (e.g., "overall", "generally", "in terms of"). ' +
 						'Replace vague language with precise wording (e.g., "minor improvement" → state the actual change). ' +
 						'Keep all data, metrics, and factual content unchanged.'
+				}
+			]
+		}
+	}
+};
+
+// --------- Classic AI MCP Editor ------------------------------------------------------------------------
+
+class ClassicAiMcpEditor extends ClassicEditor {}
+
+ClassicAiMcpEditor.builtinPlugins = ClassicAiEditor.builtinPlugins;
+
+ClassicAiMcpEditor.defaultConfig = {
+	...ClassicAiEditor.defaultConfig,
+	ai: {
+		...ClassicAiEditor.defaultConfig.ai,
+		models: {
+			defaultModelId: 'claude-4-6-sonnet',
+			displayedModels: [ 'claude-4-6-sonnet' ],
+			showModelSelector: false
+		},
+		chat: {
+			...ClassicAiEditor.defaultConfig.ai.chat,
+			context: {
+				document: { enabled: true },
+				urls: { enabled: true },
+				files: { enabled: true }
+			},
+			shortcuts: [
+				{
+					id: 'fill-bluepeak-brief',
+					type: 'chat',
+					label: 'Fill this brief with BluePeak Technologies data',
+					prompt: 'Pull the BluePeak Technologies record from Airtable and fill in all the placeholder fields in this document.',
+					model: 'claude-4-6-sonnet'
+				},
+				{
+					id: 'compare-bluepeak-urbangrid',
+					type: 'chat',
+					label: 'Compare BluePeak Technologies and UrbanGrid Energy as acquisition targets',
+					prompt: 'Look up BluePeak Technologies and UrbanGrid Energy in Airtable and write a structured comparison of both as' +
+						' acquisition targets. Duplicate the structure for both companies, and at the end provide an executive summary.',
+					model: 'claude-4-6-sonnet'
+				},
+				{
+					id: 'summarize-medcore',
+					type: 'chat',
+					label: 'Summarize MedCore Diagnostics data',
+					prompt: 'Pull the MedCore Diagnostics record from Airtable and summarize it in chat: industry, location, status,' +
+					' employees, ownership, revenue, and a one-sentence note on why it could be an acquisition target.',
+					draftMode: true,
+					model: 'claude-4-6-sonnet'
+				},
+				{
+					id: 'greensprout-risk-summary',
+					type: 'chat',
+					label: 'Draft a risk-focused acquisition summary for GreenSprout Foods',
+					prompt: 'Look up GreenSprout Foods in Airtable and draft an acquisition summary focused on potential risks.',
+					model: 'claude-4-6-sonnet'
 				}
 			]
 		}
@@ -2115,6 +2180,7 @@ Tone: [e.g. Clear, practical, collaborative]`,
 
 const AiSpotlightEditors = {
 	ClassicAiEditor,
+	ClassicAiMcpEditor,
 	AiChatEditor,
 	AiQuickActionsEditor,
 	AiReviewEditor,
@@ -2127,6 +2193,7 @@ const AI_DEMO_TYPE_TO_EDITOR_KEY = {
 	'ai-quick-actions': 'aiQuickActions',
 	'ai-review': 'aiReview',
 	'ai-translate': 'aiTranslate',
+	'ai-mcp': 'aiMcp',
 	'ai-balloon': 'aiBalloon'
 };
 
@@ -2649,6 +2716,127 @@ function initAiTranslateEditor() {
 		.catch( error => console.error( error.stack ) );
 }
 
+const MCP_STATUS_MESSAGES = {
+	'airtable-search_bases': 'Looking up Airtable workspace…',
+	'airtable-list_bases': 'Connecting to Airtable workspace…',
+	'airtable-list_tables_for_base': 'Reading Airtable schema…',
+	'airtable-search_records': 'Searching Airtable records…',
+	'airtable-list_records_for_table': 'Fetching records from Airtable…',
+	'airtable-get_record': 'Reading Airtable record…',
+	'airtable-create_record': 'Creating Airtable record…',
+	'airtable-update_record': 'Updating Airtable record…',
+	'airtable-delete_record': 'Deleting Airtable record…'
+};
+
+function mcpStatusMessageForTool( toolName ) {
+	if ( !toolName ) {
+		return null;
+	}
+
+	if ( MCP_STATUS_MESSAGES[ toolName ] ) {
+		return MCP_STATUS_MESSAGES[ toolName ];
+	}
+
+	if ( toolName.startsWith( 'airtable-' ) ) {
+		return 'Querying Airtable…';
+	}
+
+	return null;
+}
+
+function initAiMcpEditor() {
+	const editorElement = document.querySelector( '#cke5-ai-demo-types-mcp-content' );
+	const annotationsContainer = document.querySelector( '#editor-annotations-mcp' );
+	const sidebarContainer = document.querySelector( '#ai-sidebar-container-mcp' );
+
+	if ( !editorElement ) {
+		return;
+	}
+
+	const channelId = handleIDUrlParameter( 'channelIdMcp' );
+
+	const USER_DATA = {
+		name: getRandomUserName(),
+		id: handleIDUrlParameter( 'userId' ),
+		role: 'writer'
+	};
+
+	class UsersIntegration {
+		constructor( editor ) {
+			this.editor = editor;
+		}
+
+		static get pluginName() {
+			return 'UsersIntegration';
+		}
+
+		static get requires() {
+			return [ 'Users' ];
+		}
+
+		init() {
+			const users = this.editor.plugins.get( 'Users' );
+			users.addUser( USER_DATA );
+			users.defineMe( USER_DATA.id );
+		}
+	}
+
+	const editorConfig = {
+		extraPlugins: [ UsersIntegration ],
+		collaboration: { channelId },
+		cloudServices: {
+			...CS_CONFIG_MCP,
+			tokenUrl: buildUserTokenUrl( CS_CONFIG_MCP.tokenUrl, USER_DATA )
+		},
+		sidebar: { container: annotationsContainer },
+		ai: {
+			container: {
+				type: 'sidebar',
+				element: sidebarContainer,
+				showResizeButton: false,
+				visibleByDefault: true
+			}
+		}
+	};
+
+	AiSpotlightEditors.ClassicAiMcpEditor.create( editorElement, editorConfig )
+		.then( editor => {
+			window.editors.aiMcp = editor;
+
+			const aiChatController = editor.plugins.get( 'AIChatController' );
+			aiChatController.registerToolDataCallback( ( toolData, api ) => {
+				if ( toolData.type === 'notification' ) {
+					api.setLoadingMessage( toolData.data.message );
+					return;
+				}
+
+				if ( toolData.type !== 'result' ) {
+					return;
+				}
+
+				const message = mcpStatusMessageForTool( toolData.toolName );
+				if ( message ) {
+					api.setLoadingMessage( message );
+				}
+			} );
+
+			disableStickyHeader( editor );
+			createComments( editor, USER_DATA );
+			setupAiDisplayMode( editor, {
+				wideSidebarBreakpointWhenAiOpen: 'large',
+				wideSidebarBreakpointWhenAiClosed: 'extraMedium'
+			} );
+			setupAnnotationsScrollRefresh( editor );
+			setupScrollPrevention( editor );
+			setupAiSidebarVisibility( editor, sidebarContainer.closest( '.ai-demo-types-integration__sidebar' ) );
+
+			removeLoader( { loaderClass: '.js-spinner-holder-ai-mcp' } );
+			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-mcp', classToRemove: 'u-gone' } );
+			startViewportTopOffsetUpdater( editor );
+		} )
+		.catch( error => console.error( error.stack ) );
+}
+
 function initAiBalloonEditor() {
 	const editorElement = document.querySelector( '#cke5-ai-demo-types-balloon-content' );
 	const annotationsContainer = document.querySelector( '#editor-annotations-balloon' );
@@ -2844,4 +3032,5 @@ initAiChatEditor();
 initAiQuickActionsEditor();
 initAiReviewEditor();
 initAiTranslateEditor();
+initAiMcpEditor();
 initAiBalloonEditor();
