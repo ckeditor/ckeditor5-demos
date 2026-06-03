@@ -388,5 +388,6 @@ ClassicEditor.create(
 		window.editor = editor;
 	} )
 	.catch( error => {
+		window.Sentry?.captureException( error );
 		console.error( error.stack );
 	} );

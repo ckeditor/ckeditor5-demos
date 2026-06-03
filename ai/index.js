@@ -772,6 +772,7 @@ Tone: [e.g. Clear, practical, collaborative]`,
 		return editor;
 	} )
 	.catch( err => {
+		window.Sentry?.captureException( err );
 		console.error( err );
 	} );
 

@@ -2537,7 +2537,10 @@ function initAiClassicEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-classic', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 function initAiChatEditor() {
@@ -2582,7 +2585,10 @@ function initAiChatEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-chat', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 function initAiQuickActionsEditor() {
@@ -2617,7 +2623,10 @@ function initAiQuickActionsEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-quick-actions', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 function initAiReviewEditor() {
@@ -2665,7 +2674,10 @@ function initAiReviewEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-review', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 function initAiTranslateEditor() {
@@ -2713,7 +2725,10 @@ function initAiTranslateEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-translate', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 const MCP_STATUS_MESSAGES = {
@@ -2834,7 +2849,10 @@ function initAiMcpEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-mcp', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 function initAiBalloonEditor() {
@@ -2968,7 +2986,10 @@ function initAiBalloonEditor() {
 			showEditorWrapper( { editorWrapperClass: '.js-editor-wrapper-ai-balloon', classToRemove: 'u-gone' } );
 			startViewportTopOffsetUpdater( editor );
 		} )
-		.catch( error => console.error( error.stack ) );
+		.catch( error => {
+			window.Sentry?.captureException( error );
+			console.error( error.stack );
+		} );
 }
 
 // Builds the custom AI tab UI: panels wrapper (top) → buttons bar → disclaimer (bottom).
