@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hearts</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./java.js" defer></script>
+</head>
+<body>
+<button id="button">Apagar</button>
+        <div class="snowflakes" aria-hidden="true" id="maindiv">
+        <div class="snowflake">
+            <div class="inner">
+                <img
+                width="45"
+                height="45"
+                src="https://i.ibb.co/x8qqJ4mc/image.png" alt="">
+            </div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">🧡</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❤️</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">
+                <img
+                width="115"
+                height="115"
+                src="https://i.ibb.co/x8qqJ4mc/image.png" alt="">
+            </div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">
+                <img
+                width="45"
+                height="45"
+                src="https://i.ibb.co/x8qqJ4mc/image.png" alt="">
+            </div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">
+                <img
+                width="85"
+                height="85"
+                src="https://i.ibb.co/x8qqJ4mc/image.png" alt="">
+            </div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">💖</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">
+                <img
+                width="65"
+                height="65"
+                src="https://i.ibb.co/x8qqJ4mc/image.png" alt="">
+            </div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">🧡</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❤️</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">💖</div>
+        </div>
+        <div class="snowflake">
+            <div class="inner">❤️</div>
+        </div>
+        </div>
+        
+</body>
+</html>
