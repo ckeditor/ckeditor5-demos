@@ -76,7 +76,7 @@ html {
 }
 
 .ck.ck-word-count .ck-word-count__words {
-  margin-right: var(--ck-spacing-standard);
+  margin-right: var(--ck-spacing-base);
 }
 
 .ck.ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
