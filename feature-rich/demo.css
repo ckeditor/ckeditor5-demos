@@ -66,12 +66,12 @@ html {
 /* ---- Styles specific to the feature rich demo ------------------------------------------------------ */
 .ck.ck-word-count {
   display: flex;
-  justify-content: flex-end;
-  background: var(--ck-color-toolbar-background);
-  padding: var(--ck-spacing-small) var(--ck-spacing-standard);
-  border: 1px solid var(--ck-color-toolbar-border);
-  border-top-width: 0;
-  border-radius: 0 0 var(--ck-border-radius);
+	justify-content: flex-end;
+	background: var(--ck-color-surface-container);
+	padding: var(--ck-spacing-padding-compact) var(--ck-spacing-padding);
+	border: 1px solid var(--ck-color-border-container);
+	border-top-width: 0;
+	border-radius: 0 0 var(--ck-border-radius-surface) var(--ck-border-radius-surface);
   font: normal normal normal var(--ck-font-size-base)/var(--ck-line-height-base) var(--ck-font-face);
 }
 
