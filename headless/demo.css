@@ -37,11 +37,11 @@ html {
 
 .ck {
   --ck-color-base-border: hsl(210, 22%, 91%);
-  --ck-border-radius: var(--ck-demo-space-2xs);
+  --ck-editor-outer-radius: var(--ck-demo-space-2xs);
 }
 
 .ck.ck-content.ck-editor__editable_inline {
-  --ck-border-radius: var(--ck-demo-space-xs);
+  --ck-editor-outer-radius: var(--ck-demo-space-xs);
 }
 
 .ck.ck-content.ck-editor__editable_inline:not(:focus) {

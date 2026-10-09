@@ -35,7 +35,7 @@ body.mobile-support-iframe {
 @media screen and (width: 395px) {
   .ck.ck-editor .ck-content {
     /* Match the radius of the frame */
-    --ck-border-radius: 0 0 38px 38px;
+    --ck-editor-outer-radius: 0 0 38px 38px;
   }
 }
 
