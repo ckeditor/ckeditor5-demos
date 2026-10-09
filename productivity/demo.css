@@ -66,7 +66,7 @@ html {
 	flex-direction: column;
 	position: relative;
 	border: 1px solid var(--ck-color-base-border);
-	border-radius: var(--ck-border-radius);
+	border-radius: var(--ck-editor-outer-radius);
 
 	/* Set vertical boundaries for the document editor. */
 	height: 80vh;
@@ -150,7 +150,7 @@ html {
 	/* The "page" should cast a slight shadow (3D illusion). */
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.07);
 	border-color: transparent;
-	border-radius: var(--ck-border-radius);
+	border-radius: var(--ck-editor-outer-radius);
 	background: white;
 	padding: 20mm 12mm;
 	width: 100%;
@@ -180,7 +180,7 @@ html {
 
 	.cke5-productivity-demo__outline [class*='-toggle'] {
 		opacity: 0.5;
-		padding: var(--ck-spacing-small);
+		padding: var(--ck-spacing-base);
 	}
 
 	.cke5-productivity-demo__outline [class*='-toggle']:hover {
